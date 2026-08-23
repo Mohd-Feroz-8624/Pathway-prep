@@ -52,3 +52,23 @@ export type Topic = Prisma.TopicModel
  * 
  */
 export type Note = Prisma.NoteModel
+/**
+ * Model Course
+ * 
+ */
+export type Course = Prisma.CourseModel
+/**
+ * Model Roadmap
+ * 
+ */
+export type Roadmap = Prisma.RoadmapModel
+/**
+ * Model RoadmapStage
+ * 
+ */
+export type RoadmapStage = Prisma.RoadmapStageModel
+/**
+ * Model RoadmapTask
+ * 
+ */
+export type RoadmapTask = Prisma.RoadmapTaskModel
