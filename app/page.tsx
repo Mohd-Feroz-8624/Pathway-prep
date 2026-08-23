@@ -1,13 +1,10 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 
 import { useEffect, useState } from "react";
 
-
 export default function Home() {
- 
-
   const platformLinks: string[] = [
     "Roadmaps",
     "DSA Prep",
@@ -44,9 +41,18 @@ export default function Home() {
         } border-b border-slate-200`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-3 text-xl font-bold tracking-tight text-slate-900">
-          <Image src="/icon.png" alt="Pathway Prep Logo" width={32} height={32} className="h-10 w-13" /> 
-          <span>
+          <Link
+            href="/"
+            className="flex items-center gap-3 text-xl font-bold tracking-tight text-slate-900"
+          >
+            <Image
+              src="/icon.png"
+              alt="Pathway Prep Logo"
+              width={32}
+              height={32}
+              className="h-10 w-13"
+            />
+            <span>
               PATHWAY <span className="text-blue-600">PREP</span>
             </span>
           </Link>
@@ -200,19 +206,26 @@ export default function Home() {
         </div>
       </section>
 
-      
-      <footer className=" border-t border-[#c7c5d4]/20 bg-[#d3e4fe] py-20 my-19">
+      <footer className=" border-b w-90% border-[#c7c5d4]/20 bg-[#d3e4fe] py-10 bottom-0">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-4">
           {/* BRAND */}
 
           <div className="flex flex-col gap-4">
-            <a
-              href="#"
-              className="flex w-fit items-center gap-2 text-xl font-bold text-[#15157d]"
+            <Link
+              href="/"
+              className="flex items-center gap-3 text-xl font-bold tracking-tight text-slate-900"
             >
-              <span className="material-symbols-outlined">rocket_launch</span>
-              CareerForge
-            </a>
+              <Image
+                src="/icon.png"
+                alt="Pathway Prep Logo"
+                width={30}
+                height={30}
+                className="h-15 w-15 rounded-full"
+              />
+              <span>
+                PATHWAY <span className="text-blue-600">PREP</span>
+              </span>
+            </Link>
 
             <p className="max-w-xs text-sm leading-relaxed text-[#464652]">
               Empowering ambitious students to bridge the gap between academic
@@ -225,7 +238,9 @@ export default function Home() {
                 aria-label="Share"
                 className="transition-colors hover:text-[#15157d]"
               >
-                <span className="material-symbols-outlined">share</span>
+                <span className="material-symbols-outlined">
+                  Linkedin logo
+                </span>
               </a>
 
               <a
@@ -233,7 +248,7 @@ export default function Home() {
                 aria-label="Website"
                 className="transition-colors hover:text-[#15157d]"
               >
-                <span className="material-symbols-outlined">public</span>
+                <span className="material-symbols-outlined">github logo</span>
               </a>
             </div>
           </div>
@@ -290,9 +305,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mx-auto mt-16 max-w-7xl border-t border-[#c7c5d4]/10 px-6 pt-8 text-center md:text-left">
-          <p className="text-sm text-[#464652]">
-            © 2026 CareerForge. Empowering future leaders.
+        <div className="mx-auto bottom-0 mt-8 flex justify-center  max-w-7xl border-t border-[#c7c5d4]/10 px-6 pt-8 text-center md:text-left">
+          <p className="text-sm text-[#464652] w-full text-center ">
+            © 2026 PathWay Prep . Step by step Success Ahead .All rights reserved.
           </p>
         </div>
       </footer>
