@@ -143,7 +143,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 py-10">
           <div className="mx-auto max-w-2xl text-center">
             <p className="mx-auto mb-6 inline-flex rounded-full px-4  text-5xl font-semibold text-blue-700">
-              Everything in one place
+              Everything in one place   
             </p>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
