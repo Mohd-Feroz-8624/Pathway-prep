@@ -9,6 +9,17 @@ const prisma = new PrismaClient({
   adapter,
 });
 
+type NoteSeed = {
+  title: string;
+  description?: string;
+  fileUrl?: string;
+};
+
+type TopicSeed = {
+  title: string;
+  notes?: NoteSeed[];
+};
+
 function createSlug(value: string) {
   return value
     .toLowerCase()
@@ -17,7 +28,19 @@ function createSlug(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-const semesterData = [
+const semesterData: {
+  number: number;
+  name: string;
+  subjects: {
+    name: string;
+    code: string;
+    units: {
+      number: number;
+      title: string;
+      topics: TopicSeed[];
+    }[];
+  }[];
+}[] = [
   {
     number: 1,
     name: "Semester 1",
@@ -30,20 +53,20 @@ const semesterData = [
             number: 1,
             title: "Programming Basics",
             topics: [
-              "Introduction to Programming",
-              "Algorithms and Flowcharts",
-              "Variables and Data Types",
-              "Operators and Expressions",
+              { title: "Introduction to Programming" },
+              { title: "Algorithms and Flowcharts" },
+              { title: "Variables and Data Types" },
+              { title: "Operators and Expressions" },
             ],
           },
           {
             number: 2,
             title: "Control Structures",
             topics: [
-              "Conditional Statements",
-              "Loops",
-              "Nested Loops",
-              "Pattern Programming",
+              { title: "Conditional Statements" },
+              { title: "Loops" },
+              { title: "Nested Loops" },
+              { title: "Pattern Programming" },
             ],
           },
         ],
@@ -55,7 +78,12 @@ const semesterData = [
           {
             number: 1,
             title: "Foundations",
-            topics: ["Sets", "Relations", "Functions", "Logic"],
+            topics: [
+              { title: "Sets" },
+              { title: "Relations" },
+              { title: "Functions" },
+              { title: "Logic" },
+            ],
           },
         ],
       },
@@ -67,10 +95,10 @@ const semesterData = [
             number: 1,
             title: "Digital Fundamentals",
             topics: [
-              "Number Systems",
-              "Boolean Algebra",
-              "Logic Gates",
-              "Combinational Circuits",
+              { title: "Number Systems" },
+              { title: "Boolean Algebra" },
+              { title: "Logic Gates" },
+              { title: "Combinational Circuits" },
             ],
           },
         ],
@@ -89,12 +117,22 @@ const semesterData = [
           {
             number: 1,
             title: "Linear Data Structures",
-            topics: ["Arrays", "Linked Lists", "Stacks", "Queues"],
+            topics: [
+              { title: "Arrays" },
+              { title: "Linked Lists" },
+              { title: "Stacks" },
+              { title: "Queues" },
+            ],
           },
           {
             number: 2,
             title: "Non-Linear Data Structures",
-            topics: ["Trees", "Binary Trees", "Binary Search Trees", "Graphs"],
+            topics: [
+              { title: "Trees" },
+              { title: "Binary Trees" },
+              { title: "Binary Search Trees" },
+              { title: "Graphs" },
+            ],
           },
         ],
       },
@@ -106,10 +144,10 @@ const semesterData = [
             number: 1,
             title: "OOP Fundamentals",
             topics: [
-              "Classes and Objects",
-              "Inheritance",
-              "Polymorphism",
-              "Encapsulation",
+              { title: "Classes and Objects" },
+              { title: "Inheritance" },
+              { title: "Polymorphism" },
+              { title: "Encapsulation" },
             ],
           },
         ],
@@ -129,20 +167,20 @@ const semesterData = [
             number: 1,
             title: "Database Fundamentals",
             topics: [
-              "Introduction to DBMS",
-              "ER Model",
-              "Relational Model",
-              "SQL",
+              { title: "Introduction to DBMS" },
+              { title: "ER Model" },
+              { title: "Relational Model" },
+              { title: "SQL" },
             ],
           },
           {
             number: 2,
             title: "Database Design",
             topics: [
-              "Functional Dependencies",
-              "Normalization",
-              "Transactions",
-              "Indexing",
+              { title: "Functional Dependencies" },
+              { title: "Normalization" },
+              { title: "Transactions" },
+              { title: "Indexing" },
             ],
           },
         ],
@@ -155,10 +193,10 @@ const semesterData = [
             number: 1,
             title: "Operating System Fundamentals",
             topics: [
-              "Introduction to Operating Systems",
-              "Processes",
-              "Threads",
-              "CPU Scheduling",
+              { title: "Introduction to Operating Systems" },
+              { title: "Processes" },
+              { title: "Threads" },
+              { title: "CPU Scheduling" },
             ],
           },
         ],
@@ -178,10 +216,10 @@ const semesterData = [
             number: 1,
             title: "Algorithm Fundamentals",
             topics: [
-              "Complexity Analysis",
-              "Asymptotic Notation",
-              "Divide and Conquer",
-              "Greedy Algorithms",
+              { title: "Complexity Analysis" },
+              { title: "Asymptotic Notation" },
+              { title: "Divide and Conquer" },
+              { title: "Greedy Algorithms" },
             ],
           },
         ],
@@ -194,10 +232,10 @@ const semesterData = [
             number: 1,
             title: "AI Fundamentals",
             topics: [
-              "Introduction to AI",
-              "Intelligent Agents",
-              "Problem Solving",
-              "Search Algorithms",
+              { title: "Introduction to AI" },
+              { title: "Intelligent Agents" },
+              { title: "Problem Solving" },
+              { title: "Search Algorithms" },
             ],
           },
         ],
@@ -217,10 +255,10 @@ const semesterData = [
             number: 1,
             title: "Advanced Algorithms",
             topics: [
-              "Dynamic Programming",
-              "Backtracking",
-              "Branch and Bound",
-              "Graph Algorithms",
+              { title: "Dynamic Programming" },
+              { title: "Backtracking" },
+              { title: "Branch and Bound" },
+              { title: "Graph Algorithms" },
             ],
           },
         ],
@@ -233,10 +271,10 @@ const semesterData = [
             number: 1,
             title: "Cloud Fundamentals",
             topics: [
-              "Cloud Computing Introduction",
-              "Service Models",
-              "Deployment Models",
-              "Virtualization",
+              { title: "Cloud Computing Introduction" },
+              { title: "Service Models" },
+              { title: "Deployment Models" },
+              { title: "Virtualization" },
             ],
           },
         ],
@@ -256,24 +294,25 @@ const semesterData = [
             number: 1,
             title: "Software Engineering Fundamentals",
             topics: [
-              "Introduction to Software Engineering",
-              "Software Process",
-              "SDLC",
-              "Software Development Models",
+              { title: "Introduction to Software Engineering" },
+              { title: "Software Process" },
+              { title: "SDLC" },
+              { title: "Software Development Models" },
             ],
           },
           {
             number: 2,
             title: "Requirements Engineering",
             topics: [
-              "Requirements Engineering",
-              "Functional Requirements",
-              "Non Functional Requirements",
-              "Requirement Analysis",
+              { title: "Requirements Engineering" },
+              { title: "Functional Requirements" },
+              { title: "Non Functional Requirements" },
+              { title: "Requirement Analysis" },
             ],
           },
         ],
       },
+
       {
         name: "Computer Networks",
         code: "CN",
@@ -282,19 +321,61 @@ const semesterData = [
             number: 1,
             title: "Network Fundamentals",
             topics: [
-              "Introduction to Computer Networks",
-              "Network Types",
-              "OSI Model",
-              "TCP/IP Model",
+              {
+                title: "Introduction to Computer Networks",
+                notes: [
+                  {
+                    title: "Computer Networks Introduction",
+                    description:
+                      "Basic concepts, characteristics, applications, and components of computer networks.",
+                  },
+                ],
+              },
+              {
+                title: "Network Types",
+                notes: [
+                  {
+                    title: "Network Types Notes",
+                    description:
+                      "Study material covering LAN, MAN, WAN, PAN, and other network types.",
+                  },
+                ],
+              },
+              {
+                title: "OSI Model",
+                notes: [
+                  {
+                    title: "OSI Model Notes",
+                    description:
+                      "Detailed overview of the seven layers of the OSI reference model.",
+                  },
+                ],
+              },
+              {
+                title: "TCP/IP Model",
+                notes: [
+                  {
+                    title: "TCP/IP Model Notes",
+                    description:
+                      "Overview of the TCP/IP architecture, layers, and protocols.",
+                  },
+                ],
+              },
             ],
           },
           {
             number: 2,
             title: "Network Layer",
-            topics: ["IP Addressing", "Subnetting", "Routing", "Network Layer"],
+            topics: [
+              { title: "IP Addressing" },
+              { title: "Subnetting" },
+              { title: "Routing" },
+              { title: "Network Layer" },
+            ],
           },
         ],
       },
+
       {
         name: "Artificial Intelligence",
         code: "AI",
@@ -303,14 +384,15 @@ const semesterData = [
             number: 1,
             title: "AI Fundamentals",
             topics: [
-              "Introduction to AI",
-              "Intelligent Agents",
-              "Problem Solving",
-              "Search Strategies",
+              { title: "Introduction to AI" },
+              { title: "Intelligent Agents" },
+              { title: "Problem Solving" },
+              { title: "Search Strategies" },
             ],
           },
         ],
       },
+
       {
         name: "Automata and Language Compilers",
         code: "ALC",
@@ -318,10 +400,16 @@ const semesterData = [
           {
             number: 1,
             title: "Automata Theory",
-            topics: ["Finite Automata", "DFA", "NFA", "Regular Languages"],
+            topics: [
+              { title: "Finite Automata" },
+              { title: "DFA" },
+              { title: "NFA" },
+              { title: "Regular Languages" },
+            ],
           },
         ],
       },
+
       {
         name: "Programming Paradigms and Languages",
         code: "PPL",
@@ -330,10 +418,10 @@ const semesterData = [
             number: 1,
             title: "Programming Paradigms",
             topics: [
-              "Programming Language Concepts",
-              "Imperative Programming",
-              "Functional Programming",
-              "Object Oriented Programming",
+              { title: "Programming Language Concepts" },
+              { title: "Imperative Programming" },
+              { title: "Functional Programming" },
+              { title: "Object Oriented Programming" },
             ],
           },
         ],
@@ -353,10 +441,10 @@ const semesterData = [
             number: 1,
             title: "Distributed Systems Fundamentals",
             topics: [
-              "Distributed System Concepts",
-              "Communication",
-              "Synchronization",
-              "Distributed Algorithms",
+              { title: "Distributed System Concepts" },
+              { title: "Communication" },
+              { title: "Synchronization" },
+              { title: "Distributed Algorithms" },
             ],
           },
         ],
@@ -369,10 +457,10 @@ const semesterData = [
             number: 1,
             title: "Project Development",
             topics: [
-              "Problem Identification",
-              "System Design",
-              "Implementation",
-              "Testing",
+              { title: "Problem Identification" },
+              { title: "System Design" },
+              { title: "Implementation" },
+              { title: "Testing" },
             ],
           },
         ],
@@ -392,10 +480,10 @@ const semesterData = [
             number: 1,
             title: "Final Project",
             topics: [
-              "Implementation",
-              "Testing",
-              "Documentation",
-              "Project Presentation",
+              { title: "Implementation" },
+              { title: "Testing" },
+              { title: "Documentation" },
+              { title: "Project Presentation" },
             ],
           },
         ],
@@ -408,10 +496,10 @@ const semesterData = [
             number: 1,
             title: "Career Preparation",
             topics: [
-              "Resume Preparation",
-              "Technical Interviews",
-              "Aptitude Preparation",
-              "HR Interviews",
+              { title: "Resume Preparation" },
+              { title: "Technical Interviews" },
+              { title: "Aptitude Preparation" },
+              { title: "HR Interviews" },
             ],
           },
         ],
@@ -477,20 +565,42 @@ async function main() {
           },
         });
 
-        for (const topicTitle of unitData.topics) {
-          await prisma.topic.upsert({
+        for (const topicData of unitData.topics) {
+          const topic = await prisma.topic.upsert({
             where: {
               unitId_title: {
                 unitId: unit.id,
-                title: topicTitle,
+                title: topicData.title,
               },
             },
             update: {},
             create: {
-              title: topicTitle,
+              title: topicData.title,
               unitId: unit.id,
             },
           });
+
+          if (topicData.notes) {
+            for (const noteData of topicData.notes) {
+              await prisma.note.upsert({
+                where: {
+                  id: `${topic.id}-${createSlug(noteData.title)}`,
+                },
+                update: {
+                  title: noteData.title,
+                  description: noteData.description,
+                  fileUrl: noteData.fileUrl,
+                },
+                create: {
+                  id: `${topic.id}-${createSlug(noteData.title)}`,
+                  title: noteData.title,
+                  description: noteData.description,
+                  fileUrl: noteData.fileUrl,
+                  topicId: topic.id,
+                },
+              });
+            }
+          }
         }
       }
     }

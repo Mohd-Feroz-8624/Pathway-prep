@@ -110,12 +110,21 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                 ) : (
                   <div className="mt-5 grid gap-3 sm:grid-cols-2">
                     {unit.topics.map((topic) => (
-                      <div
+                      <a
                         key={topic.id}
-                        className="rounded-xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700"
+                        href={`/semesters/${semesterNumber}/${subject}/${topic.id}`}
+                        className="group rounded-xl bg-slate-50 px-4 py-3 transition hover:bg-blue-50"
                       >
-                        {topic.title}
-                      </div>
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="text-sm font-medium text-slate-700 group-hover:text-blue-700">
+                            {topic.title}
+                          </span>
+
+                          <span className="text-sm font-semibold text-blue-600">
+                            View →
+                          </span>
+                        </div>
+                      </a>
                     ))}
                   </div>
                 )}
