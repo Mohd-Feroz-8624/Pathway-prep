@@ -8,18 +8,19 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(cuid())
-  clerkId        String   @unique
-  name           String?
-  email          String   @unique
-  college        String?
-  branch         String?
+  id              String   @id @default(cuid())
+  clerkId         String   @unique
+  name            String?
+  email           String   @unique
+  college         String?
+  branch          String?
   currentSemester Int?
-  careerGoal     String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  careerGoal      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-  profile        Profile?
+  profile         Profile?
+  roadmapProgress RoadmapTaskProgress[]
 }
 
 model Profile {
@@ -46,27 +47,27 @@ model Semester {
 }
 
 model Subject {
-  id         String    @id @default(cuid())
+  id         String   @id @default(cuid())
   name       String
   code       String?
   semesterId String
-  semester   Semester  @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   units      Unit[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@index([semesterId])
 }
 
 model Unit {
-  id        String    @id @default(cuid())
+  id        String   @id @default(cuid())
   number    Int
   title     String
   subjectId String
-  subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   topics    Topic[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([subjectId, number])
   @@index([subjectId])
@@ -95,4 +96,86 @@ model Note {
   updatedAt   DateTime @updatedAt
 
   @@index([topicId])
+}
+
+model Course {
+  id          String  @id @default(cuid())
+  title       String
+  slug        String  @unique
+  description String?
+  category    String?
+  level       String?
+  isPublished Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Roadmap {
+  id          String  @id @default(cuid())
+  title       String
+  slug        String  @unique
+  description String?
+  category    String?
+  duration    String?
+  isPublished Boolean @default(false)
+
+  stages RoadmapStage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoadmapStage {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  order       Int
+  roadmapId   String
+
+  roadmap Roadmap       @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  tasks   RoadmapTask[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([roadmapId, order])
+  @@index([roadmapId])
+}
+
+model RoadmapTask {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  order       Int
+  isRequired  Boolean @default(true)
+  resourceUrl String?
+  stageId     String
+
+  stage    RoadmapStage          @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  progress RoadmapTaskProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([stageId, order])
+  @@index([stageId])
+}
+
+model RoadmapTaskProgress {
+  id          String    @id @default(cuid())
+  userId      String
+  taskId      String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  user User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task RoadmapTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, taskId])
+  @@index([userId])
+  @@index([taskId])
 }
