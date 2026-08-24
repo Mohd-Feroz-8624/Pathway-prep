@@ -1,46 +1,65 @@
-import { PrismaClient } from "../app/generated/prisma/client";
+import "dotenv/config";
+
 import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../app/generated/prisma/client";
+
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("DATABASE_URL is not defined.");
+}
 
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
+  connectionString,
 });
 
 const prisma = new PrismaClient({
   adapter,
 });
 
-type NoteSeed = {
+type ResourceSeed = {
   title: string;
   description?: string;
-  fileUrl?: string;
+  type: "NOTE" | "PDF" | "VIDEO" | "ARTICLE" | "PRACTICE" | "EXTERNAL";
+  url?: string;
 };
 
 type TopicSeed = {
   title: string;
-  notes?: NoteSeed[];
+};
+
+type UnitSeed = {
+  number: number;
+  title: string;
+  description?: string;
+  difficulty?: "Beginner" | "Intermediate" | "Advanced";
+  duration?: string;
+  topics: TopicSeed[];
+  resources?: ResourceSeed[];
+};
+
+type SubjectSeed = {
+  name: string;
+  code: string;
+  units: UnitSeed[];
+};
+
+type SemesterSeed = {
+  number: number;
+  name: string;
+  subjects: SubjectSeed[];
 };
 
 function createSlug(value: string) {
   return value
     .toLowerCase()
+    .trim()
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
 
-const semesterData: {
-  number: number;
-  name: string;
-  subjects: {
-    name: string;
-    code: string;
-    units: {
-      number: number;
-      title: string;
-      topics: TopicSeed[];
-    }[];
-  }[];
-}[] = [
+const semesterData: SemesterSeed[] = [
   {
     number: 1,
     name: "Semester 1",
@@ -52,6 +71,10 @@ const semesterData: {
           {
             number: 1,
             title: "Programming Basics",
+            description:
+              "Learn the fundamental concepts required to understand programming and problem solving.",
+            difficulty: "Beginner",
+            duration: "5 hours",
             topics: [
               { title: "Introduction to Programming" },
               { title: "Algorithms and Flowcharts" },
@@ -62,6 +85,10 @@ const semesterData: {
           {
             number: 2,
             title: "Control Structures",
+            description:
+              "Learn how conditional statements, loops, nested structures, and pattern-based programming control program execution.",
+            difficulty: "Beginner",
+            duration: "5 hours",
             topics: [
               { title: "Conditional Statements" },
               { title: "Loops" },
@@ -78,6 +105,10 @@ const semesterData: {
           {
             number: 1,
             title: "Foundations",
+            description:
+              "Build a foundation in sets, relations, functions, and mathematical logic used throughout computer science.",
+            difficulty: "Beginner",
+            duration: "6 hours",
             topics: [
               { title: "Sets" },
               { title: "Relations" },
@@ -94,6 +125,10 @@ const semesterData: {
           {
             number: 1,
             title: "Digital Fundamentals",
+            description:
+              "Understand number systems, Boolean algebra, logic gates, and the fundamentals of digital circuit design.",
+            difficulty: "Beginner",
+            duration: "6 hours",
             topics: [
               { title: "Number Systems" },
               { title: "Boolean Algebra" },
@@ -117,6 +152,10 @@ const semesterData: {
           {
             number: 1,
             title: "Linear Data Structures",
+            description:
+              "Learn how arrays, linked lists, stacks, and queues organize data and support efficient problem solving.",
+            difficulty: "Intermediate",
+            duration: "7 hours",
             topics: [
               { title: "Arrays" },
               { title: "Linked Lists" },
@@ -127,6 +166,10 @@ const semesterData: {
           {
             number: 2,
             title: "Non-Linear Data Structures",
+            description:
+              "Understand hierarchical and network-based data structures including trees, binary search trees, and graphs.",
+            difficulty: "Intermediate",
+            duration: "8 hours",
             topics: [
               { title: "Trees" },
               { title: "Binary Trees" },
@@ -143,6 +186,10 @@ const semesterData: {
           {
             number: 1,
             title: "OOP Fundamentals",
+            description:
+              "Learn the core principles of object-oriented programming including classes, objects, inheritance, polymorphism, and encapsulation.",
+            difficulty: "Intermediate",
+            duration: "6 hours",
             topics: [
               { title: "Classes and Objects" },
               { title: "Inheritance" },
@@ -166,6 +213,10 @@ const semesterData: {
           {
             number: 1,
             title: "Database Fundamentals",
+            description:
+              "Learn the fundamental concepts of database management systems, data models, ER diagrams, relational databases, and SQL.",
+            difficulty: "Intermediate",
+            duration: "7 hours",
             topics: [
               { title: "Introduction to DBMS" },
               { title: "ER Model" },
@@ -176,6 +227,10 @@ const semesterData: {
           {
             number: 2,
             title: "Database Design",
+            description:
+              "Learn how to design efficient databases using functional dependencies, normalization, transactions, and indexing.",
+            difficulty: "Advanced",
+            duration: "8 hours",
             topics: [
               { title: "Functional Dependencies" },
               { title: "Normalization" },
@@ -192,6 +247,10 @@ const semesterData: {
           {
             number: 1,
             title: "Operating System Fundamentals",
+            description:
+              "Understand operating system concepts including processes, threads, CPU scheduling, and core system responsibilities.",
+            difficulty: "Intermediate",
+            duration: "7 hours",
             topics: [
               { title: "Introduction to Operating Systems" },
               { title: "Processes" },
@@ -215,6 +274,10 @@ const semesterData: {
           {
             number: 1,
             title: "Algorithm Fundamentals",
+            description:
+              "Learn algorithm analysis, asymptotic complexity, divide and conquer techniques, and greedy problem-solving strategies.",
+            difficulty: "Intermediate",
+            duration: "8 hours",
             topics: [
               { title: "Complexity Analysis" },
               { title: "Asymptotic Notation" },
@@ -231,6 +294,10 @@ const semesterData: {
           {
             number: 1,
             title: "AI Fundamentals",
+            description:
+              "Explore the foundations of artificial intelligence, intelligent agents, problem solving, and search algorithms.",
+            difficulty: "Intermediate",
+            duration: "7 hours",
             topics: [
               { title: "Introduction to AI" },
               { title: "Intelligent Agents" },
@@ -254,6 +321,10 @@ const semesterData: {
           {
             number: 1,
             title: "Advanced Algorithms",
+            description:
+              "Study advanced algorithmic techniques for solving complex computational problems efficiently.",
+            difficulty: "Advanced",
+            duration: "8 hours",
             topics: [
               { title: "Dynamic Programming" },
               { title: "Backtracking" },
@@ -270,6 +341,10 @@ const semesterData: {
           {
             number: 1,
             title: "Cloud Fundamentals",
+            description:
+              "Understand cloud computing concepts, service models, deployment models, and virtualization technologies.",
+            difficulty: "Intermediate",
+            duration: "6 hours",
             topics: [
               { title: "Cloud Computing Introduction" },
               { title: "Service Models" },
@@ -293,6 +368,10 @@ const semesterData: {
           {
             number: 1,
             title: "Software Engineering Fundamentals",
+            description:
+              "Understand software engineering principles, software processes, SDLC, and common software development models.",
+            difficulty: "Beginner",
+            duration: "6 hours",
             topics: [
               { title: "Introduction to Software Engineering" },
               { title: "Software Process" },
@@ -303,6 +382,10 @@ const semesterData: {
           {
             number: 2,
             title: "Requirements Engineering",
+            description:
+              "Learn how software requirements are identified, analyzed, documented, and validated throughout the development process.",
+            difficulty: "Intermediate",
+            duration: "6 hours",
             topics: [
               { title: "Requirements Engineering" },
               { title: "Functional Requirements" },
@@ -320,52 +403,63 @@ const semesterData: {
           {
             number: 1,
             title: "Network Fundamentals",
-            topics: [
+            description:
+              "Learn the fundamental concepts of computer networks, network types, communication models, and the OSI and TCP/IP architectures.",
+            difficulty: "Beginner",
+            duration: "5 hours",
+
+            resources: [
               {
-                title: "Introduction to Computer Networks",
-                notes: [
-                  {
-                    title: "Computer Networks Introduction",
-                    description:
-                      "Basic concepts, characteristics, applications, and components of computer networks.",
-                  },
-                ],
+                title: "Computer Networks Complete Notes",
+                description:
+                  "Complete study material covering the fundamental concepts of computer networks.",
+                type: "NOTE",
               },
               {
-                title: "Network Types",
-                notes: [
-                  {
-                    title: "Network Types Notes",
-                    description:
-                      "Study material covering LAN, MAN, WAN, PAN, and other network types.",
-                  },
-                ],
+                title: "Network Fundamentals Revision",
+                description:
+                  "Quick revision material covering the important concepts of this unit.",
+                type: "PDF",
               },
               {
-                title: "OSI Model",
-                notes: [
-                  {
-                    title: "OSI Model Notes",
-                    description:
-                      "Detailed overview of the seven layers of the OSI reference model.",
-                  },
-                ],
-              },
-              {
-                title: "TCP/IP Model",
-                notes: [
-                  {
-                    title: "TCP/IP Model Notes",
-                    description:
-                      "Overview of the TCP/IP architecture, layers, and protocols.",
-                  },
-                ],
+                title: "Network Fundamentals Practice",
+                description:
+                  "Practice questions to test your understanding of the unit.",
+                type: "PRACTICE",
               },
             ],
+
+            topics: [
+              { title: "Introduction to Computer Networks" },
+              { title: "Network Types" },
+              { title: "OSI Model" },
+              { title: "TCP/IP Model" },
+            ],
           },
+
           {
             number: 2,
             title: "Network Layer",
+            description:
+              "Understand IP addressing, subnetting, routing, and the fundamental responsibilities of the network layer.",
+            difficulty: "Intermediate",
+            duration: "6 hours",
+
+            resources: [
+              {
+                title: "Network Layer Complete Notes",
+                description:
+                  "Study material covering IP addressing, subnetting, routing, and network-layer concepts.",
+                type: "NOTE",
+              },
+              {
+                title: "Network Layer Practice",
+                description:
+                  "Practice questions covering IP addressing, subnetting, and routing.",
+                type: "PRACTICE",
+              },
+            ],
+
             topics: [
               { title: "IP Addressing" },
               { title: "Subnetting" },
@@ -383,6 +477,10 @@ const semesterData: {
           {
             number: 1,
             title: "AI Fundamentals",
+            description:
+              "Learn the fundamental concepts of artificial intelligence, intelligent agents, problem solving, and search strategies.",
+            difficulty: "Intermediate",
+            duration: "7 hours",
             topics: [
               { title: "Introduction to AI" },
               { title: "Intelligent Agents" },
@@ -400,6 +498,10 @@ const semesterData: {
           {
             number: 1,
             title: "Automata Theory",
+            description:
+              "Study finite automata, deterministic and nondeterministic machines, and the fundamentals of regular languages.",
+            difficulty: "Advanced",
+            duration: "7 hours",
             topics: [
               { title: "Finite Automata" },
               { title: "DFA" },
@@ -417,6 +519,10 @@ const semesterData: {
           {
             number: 1,
             title: "Programming Paradigms",
+            description:
+              "Explore major programming paradigms and understand the concepts behind imperative, functional, and object-oriented programming.",
+            difficulty: "Intermediate",
+            duration: "6 hours",
             topics: [
               { title: "Programming Language Concepts" },
               { title: "Imperative Programming" },
@@ -440,6 +546,10 @@ const semesterData: {
           {
             number: 1,
             title: "Distributed Systems Fundamentals",
+            description:
+              "Understand the fundamentals of distributed systems, communication, synchronization, and distributed algorithms.",
+            difficulty: "Advanced",
+            duration: "8 hours",
             topics: [
               { title: "Distributed System Concepts" },
               { title: "Communication" },
@@ -456,6 +566,10 @@ const semesterData: {
           {
             number: 1,
             title: "Project Development",
+            description:
+              "Learn the major stages involved in identifying, designing, implementing, and testing a software project.",
+            difficulty: "Advanced",
+            duration: "10 hours",
             topics: [
               { title: "Problem Identification" },
               { title: "System Design" },
@@ -479,6 +593,10 @@ const semesterData: {
           {
             number: 1,
             title: "Final Project",
+            description:
+              "Complete the final project through implementation, testing, documentation, and final project presentation.",
+            difficulty: "Advanced",
+            duration: "12 hours",
             topics: [
               { title: "Implementation" },
               { title: "Testing" },
@@ -495,6 +613,10 @@ const semesterData: {
           {
             number: 1,
             title: "Career Preparation",
+            description:
+              "Prepare for placements through resume building, technical interviews, aptitude practice, and HR interview preparation.",
+            difficulty: "Intermediate",
+            duration: "10 hours",
             topics: [
               { title: "Resume Preparation" },
               { title: "Technical Interviews" },
@@ -516,9 +638,11 @@ async function main() {
       where: {
         number: semesterDataItem.number,
       },
+
       update: {
         name: semesterDataItem.name,
       },
+
       create: {
         number: semesterDataItem.number,
         name: semesterDataItem.name,
@@ -526,23 +650,23 @@ async function main() {
     });
 
     for (const subjectData of semesterDataItem.subjects) {
-      const slug = createSlug(subjectData.name);
-
       const subject = await prisma.subject.upsert({
         where: {
           semesterId_slug: {
             semesterId: semester.id,
-            slug,
+            slug: createSlug(subjectData.name),
           },
         },
+
         update: {
           name: subjectData.name,
           code: subjectData.code,
         },
+
         create: {
           name: subjectData.name,
-          slug,
           code: subjectData.code,
+          slug: createSlug(subjectData.name),
           semesterId: semester.id,
         },
       });
@@ -555,48 +679,84 @@ async function main() {
               number: unitData.number,
             },
           },
+
           update: {
             title: unitData.title,
+            description: unitData.description,
+            difficulty: unitData.difficulty,
+            duration: unitData.duration,
           },
+
           create: {
             number: unitData.number,
             title: unitData.title,
+            description: unitData.description,
+            difficulty: unitData.difficulty,
+            duration: unitData.duration,
             subjectId: subject.id,
           },
         });
 
+        /*
+         * Keep topics in the database.
+         *
+         * Topics are currently an internal academic structure.
+         * They are not the primary student-facing navigation.
+         */
         for (const topicData of unitData.topics) {
-          const topic = await prisma.topic.upsert({
+          await prisma.topic.upsert({
             where: {
               unitId_title: {
                 unitId: unit.id,
                 title: topicData.title,
               },
             },
+
             update: {},
+
             create: {
               title: topicData.title,
               unitId: unit.id,
             },
           });
+        }
 
-          if (topicData.notes) {
-            for (const noteData of topicData.notes) {
-              await prisma.note.upsert({
+        /*
+         * Seed unit-level resources.
+         *
+         * URLs are optional because actual resources
+         * are not available yet.
+         */
+        if (unitData.resources) {
+          for (const resourceData of unitData.resources) {
+            const existingResource = await prisma.unitResource.findFirst({
+              where: {
+                unitId: unit.id,
+                title: resourceData.title,
+              },
+            });
+
+            if (existingResource) {
+              await prisma.unitResource.update({
                 where: {
-                  id: `${topic.id}-${createSlug(noteData.title)}`,
+                  id: existingResource.id,
                 },
-                update: {
-                  title: noteData.title,
-                  description: noteData.description,
-                  fileUrl: noteData.fileUrl,
+
+                data: {
+                  title: resourceData.title,
+                  description: resourceData.description,
+                  type: resourceData.type,
+                  url: resourceData.url,
                 },
-                create: {
-                  id: `${topic.id}-${createSlug(noteData.title)}`,
-                  title: noteData.title,
-                  description: noteData.description,
-                  fileUrl: noteData.fileUrl,
-                  topicId: topic.id,
+              });
+            } else {
+              await prisma.unitResource.create({
+                data: {
+                  title: resourceData.title,
+                  description: resourceData.description,
+                  type: resourceData.type,
+                  url: resourceData.url,
+                  unitId: unit.id,
                 },
               });
             }
@@ -611,7 +771,8 @@ async function main() {
 
 main()
   .catch((error) => {
-    console.error("❌ Seed failed:", error);
+    console.error("❌ Academic database seed failed.");
+    console.error(error);
     process.exit(1);
   })
   .finally(async () => {

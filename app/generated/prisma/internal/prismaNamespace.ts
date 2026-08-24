@@ -402,6 +402,7 @@ export const ModelName = {
   Semester: 'Semester',
   Subject: 'Subject',
   Unit: 'Unit',
+  UnitResource: 'UnitResource',
   Topic: 'Topic',
   Note: 'Note',
   Course: 'Course',
@@ -424,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -795,6 +796,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UnitCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UnitCountAggregateOutputType> | number
+        }
+      }
+    }
+    UnitResource: {
+      payload: Prisma.$UnitResourcePayload<ExtArgs>
+      fields: Prisma.UnitResourceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UnitResourceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UnitResourceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>
+        }
+        findFirst: {
+          args: Prisma.UnitResourceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UnitResourceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>
+        }
+        findMany: {
+          args: Prisma.UnitResourceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>[]
+        }
+        create: {
+          args: Prisma.UnitResourceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>
+        }
+        createMany: {
+          args: Prisma.UnitResourceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UnitResourceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>[]
+        }
+        delete: {
+          args: Prisma.UnitResourceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>
+        }
+        update: {
+          args: Prisma.UnitResourceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>
+        }
+        deleteMany: {
+          args: Prisma.UnitResourceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UnitResourceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UnitResourceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>[]
+        }
+        upsert: {
+          args: Prisma.UnitResourceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitResourcePayload>
+        }
+        aggregate: {
+          args: Prisma.UnitResourceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUnitResource>
+        }
+        groupBy: {
+          args: Prisma.UnitResourceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UnitResourceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UnitResourceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UnitResourceCountAggregateOutputType> | number
         }
       }
     }
@@ -1414,12 +1489,29 @@ export const UnitScalarFieldEnum = {
   id: 'id',
   number: 'number',
   title: 'title',
+  description: 'description',
+  difficulty: 'difficulty',
+  duration: 'duration',
   subjectId: 'subjectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UnitScalarFieldEnum = (typeof UnitScalarFieldEnum)[keyof typeof UnitScalarFieldEnum]
+
+
+export const UnitResourceScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  type: 'type',
+  url: 'url',
+  unitId: 'unitId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UnitResourceScalarFieldEnum = (typeof UnitResourceScalarFieldEnum)[keyof typeof UnitResourceScalarFieldEnum]
 
 
 export const TopicScalarFieldEnum = {
@@ -1765,6 +1857,7 @@ export type GlobalOmitConfig = {
   semester?: Prisma.SemesterOmit
   subject?: Prisma.SubjectOmit
   unit?: Prisma.UnitOmit
+  unitResource?: Prisma.UnitResourceOmit
   topic?: Prisma.TopicOmit
   note?: Prisma.NoteOmit
   course?: Prisma.CourseOmit

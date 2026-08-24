@@ -43,6 +43,11 @@ export type Subject = Prisma.SubjectModel
  */
 export type Unit = Prisma.UnitModel
 /**
+ * Model UnitResource
+ * 
+ */
+export type UnitResource = Prisma.UnitResourceModel
+/**
  * Model Topic
  * 
  */

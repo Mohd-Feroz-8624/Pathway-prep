@@ -56,6 +56,7 @@ export const ModelName = {
   Semester: 'Semester',
   Subject: 'Subject',
   Unit: 'Unit',
+  UnitResource: 'UnitResource',
   Topic: 'Topic',
   Note: 'Note',
   Course: 'Course',
@@ -140,12 +141,29 @@ export const UnitScalarFieldEnum = {
   id: 'id',
   number: 'number',
   title: 'title',
+  description: 'description',
+  difficulty: 'difficulty',
+  duration: 'duration',
   subjectId: 'subjectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UnitScalarFieldEnum = (typeof UnitScalarFieldEnum)[keyof typeof UnitScalarFieldEnum]
+
+
+export const UnitResourceScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  type: 'type',
+  url: 'url',
+  unitId: 'unitId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UnitResourceScalarFieldEnum = (typeof UnitResourceScalarFieldEnum)[keyof typeof UnitResourceScalarFieldEnum]
 
 
 export const TopicScalarFieldEnum = {
