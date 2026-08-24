@@ -198,6 +198,7 @@ export type TopicOrderByWithRelationInput = {
 
 export type TopicWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  unitId_title?: Prisma.TopicUnitIdTitleCompoundUniqueInput
   AND?: Prisma.TopicWhereInput | Prisma.TopicWhereInput[]
   OR?: Prisma.TopicWhereInput[]
   NOT?: Prisma.TopicWhereInput | Prisma.TopicWhereInput[]
@@ -207,7 +208,7 @@ export type TopicWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Topic"> | Date | string
   unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>
   notes?: Prisma.NoteListRelationFilter
-}, "id">
+}, "id" | "unitId_title">
 
 export type TopicOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -298,6 +299,11 @@ export type TopicListRelationFilter = {
 
 export type TopicOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type TopicUnitIdTitleCompoundUniqueInput = {
+  unitId: string
+  title: string
 }
 
 export type TopicCountOrderByAggregateInput = {

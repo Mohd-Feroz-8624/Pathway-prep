@@ -49,6 +49,7 @@ model Semester {
 model Subject {
   id         String   @id @default(cuid())
   name       String
+  slug       String
   code       String?
   semesterId String
   semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
@@ -56,8 +57,10 @@ model Subject {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
+  @@unique([semesterId, slug])
   @@index([semesterId])
 }
+
 
 model Unit {
   id        String   @id @default(cuid())
@@ -82,6 +85,7 @@ model Topic {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([unitId, title])
   @@index([unitId])
 }
 

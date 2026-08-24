@@ -1,0 +1,93 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+const navigation = [
+  { title: "Dashboard", href: "/dashboard" },
+  { title: "Roadmaps", href: "/roadmaps" },
+  { title: "Semesters", href: "/semesters" },
+  { title: "Notes", href: "/notes" },
+  { title: "DSA", href: "/dsa" },
+  { title: "Interview Practice", href: "/interview" },
+  { title: "Resume Builder", href: "/resume" },
+  { title: "Courses", href: "/courses" },
+];
+
+export default function DashboardHeaderBar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white lg:hidden">
+        <div className="flex h-16 items-center justify-between px-4">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="rounded-lg p-2 text-slate-700 hover:bg-slate-100"
+            aria-label="Open navigation"
+          >
+            ☰
+          </button>
+
+          <Link href="/dashboard" className="text-lg font-bold text-slate-950">
+            Pathway<span className="text-blue-600">Prep</span>
+          </Link>
+
+          <Link
+            href="/profile"
+            className="rounded-lg p-2 text-slate-700 hover:bg-slate-100"
+            aria-label="Profile"
+          >
+            ◉
+          </Link>
+        </div>
+      </header>
+
+      {open && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="absolute inset-0 bg-slate-950/40"
+            aria-label="Close navigation"
+          />
+
+          <aside className="relative h-full w-72 bg-white shadow-xl">
+            <div className="flex h-16 items-center justify-between border-b border-slate-200 px-5">
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="text-lg font-bold text-slate-950"
+              >
+                Pathway<span className="text-blue-600">Prep</span>
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+                aria-label="Close navigation"
+              >
+                ✕
+              </button>
+            </div>
+
+            <nav className="space-y-1 p-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+          </aside>
+        </div>
+      )}
+    </>
+  );
+}

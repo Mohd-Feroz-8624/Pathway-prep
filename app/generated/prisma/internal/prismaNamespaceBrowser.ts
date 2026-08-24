@@ -126,6 +126,7 @@ export type SemesterScalarFieldEnum = (typeof SemesterScalarFieldEnum)[keyof typ
 export const SubjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  slug: 'slug',
   code: 'code',
   semesterId: 'semesterId',
   createdAt: 'createdAt',
