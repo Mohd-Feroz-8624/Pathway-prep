@@ -407,7 +407,8 @@ export const ModelName = {
   Course: 'Course',
   Roadmap: 'Roadmap',
   RoadmapStage: 'RoadmapStage',
-  RoadmapTask: 'RoadmapTask'
+  RoadmapTask: 'RoadmapTask',
+  RoadmapTaskProgress: 'RoadmapTaskProgress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -423,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1241,6 +1242,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RoadmapTaskProgress: {
+      payload: Prisma.$RoadmapTaskProgressPayload<ExtArgs>
+      fields: Prisma.RoadmapTaskProgressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RoadmapTaskProgressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RoadmapTaskProgressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>
+        }
+        findFirst: {
+          args: Prisma.RoadmapTaskProgressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RoadmapTaskProgressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>
+        }
+        findMany: {
+          args: Prisma.RoadmapTaskProgressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>[]
+        }
+        create: {
+          args: Prisma.RoadmapTaskProgressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>
+        }
+        createMany: {
+          args: Prisma.RoadmapTaskProgressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RoadmapTaskProgressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>[]
+        }
+        delete: {
+          args: Prisma.RoadmapTaskProgressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>
+        }
+        update: {
+          args: Prisma.RoadmapTaskProgressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>
+        }
+        deleteMany: {
+          args: Prisma.RoadmapTaskProgressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RoadmapTaskProgressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RoadmapTaskProgressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>[]
+        }
+        upsert: {
+          args: Prisma.RoadmapTaskProgressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoadmapTaskProgressPayload>
+        }
+        aggregate: {
+          args: Prisma.RoadmapTaskProgressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoadmapTaskProgress>
+        }
+        groupBy: {
+          args: Prisma.RoadmapTaskProgressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoadmapTaskProgressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RoadmapTaskProgressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoadmapTaskProgressCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1426,6 +1501,19 @@ export const RoadmapTaskScalarFieldEnum = {
 } as const
 
 export type RoadmapTaskScalarFieldEnum = (typeof RoadmapTaskScalarFieldEnum)[keyof typeof RoadmapTaskScalarFieldEnum]
+
+
+export const RoadmapTaskProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  taskId: 'taskId',
+  completed: 'completed',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoadmapTaskProgressScalarFieldEnum = (typeof RoadmapTaskProgressScalarFieldEnum)[keyof typeof RoadmapTaskProgressScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1682,6 +1770,7 @@ export type GlobalOmitConfig = {
   roadmap?: Prisma.RoadmapOmit
   roadmapStage?: Prisma.RoadmapStageOmit
   roadmapTask?: Prisma.RoadmapTaskOmit
+  roadmapTaskProgress?: Prisma.RoadmapTaskProgressOmit
 }
 
 /* Types for Logging */

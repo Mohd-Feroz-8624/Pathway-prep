@@ -19,7 +19,8 @@ model User {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  profile Profile?
+  profile         Profile?
+  roadmapProgress RoadmapTaskProgress[]
 }
 
 model Profile {
@@ -151,11 +152,30 @@ model RoadmapTask {
   resourceUrl String?
   stageId     String
 
-  stage RoadmapStage @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  stage    RoadmapStage          @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  progress RoadmapTaskProgress[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([stageId, order])
   @@index([stageId])
+}
+
+model RoadmapTaskProgress {
+  id          String    @id @default(cuid())
+  userId      String
+  taskId      String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  user User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task RoadmapTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, taskId])
+  @@index([userId])
+  @@index([taskId])
 }

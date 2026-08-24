@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import SyncUser from "@/components/SyncUser";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
     default: "Pathway Prep",
     template: "%s | Pathway Prep",
-    
   },
-  
+
   description:
     "Your complete journey from Semester 1 to job ready — academics, DSA, projects, resumes, interviews and AI-powered career assistance.",
   keywords: [
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
     "mock interviews",
     "student career platform",
   ],
-
 };
 
 export default function RootLayout({
@@ -27,8 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" >
-      <body>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" data-scroll-behavior="smooth">
+        <body>
+          <SyncUser />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

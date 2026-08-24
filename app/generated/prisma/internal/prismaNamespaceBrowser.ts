@@ -61,7 +61,8 @@ export const ModelName = {
   Course: 'Course',
   Roadmap: 'Roadmap',
   RoadmapStage: 'RoadmapStage',
-  RoadmapTask: 'RoadmapTask'
+  RoadmapTask: 'RoadmapTask',
+  RoadmapTaskProgress: 'RoadmapTaskProgress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -226,6 +227,19 @@ export const RoadmapTaskScalarFieldEnum = {
 } as const
 
 export type RoadmapTaskScalarFieldEnum = (typeof RoadmapTaskScalarFieldEnum)[keyof typeof RoadmapTaskScalarFieldEnum]
+
+
+export const RoadmapTaskProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  taskId: 'taskId',
+  completed: 'completed',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoadmapTaskProgressScalarFieldEnum = (typeof RoadmapTaskProgressScalarFieldEnum)[keyof typeof RoadmapTaskProgressScalarFieldEnum]
 
 
 export const SortOrder = {

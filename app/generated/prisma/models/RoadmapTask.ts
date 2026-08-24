@@ -249,6 +249,7 @@ export type RoadmapTaskWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"RoadmapTask"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoadmapTask"> | Date | string
   stage?: Prisma.XOR<Prisma.RoadmapStageScalarRelationFilter, Prisma.RoadmapStageWhereInput>
+  progress?: Prisma.RoadmapTaskProgressListRelationFilter
 }
 
 export type RoadmapTaskOrderByWithRelationInput = {
@@ -262,6 +263,7 @@ export type RoadmapTaskOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   stage?: Prisma.RoadmapStageOrderByWithRelationInput
+  progress?: Prisma.RoadmapTaskProgressOrderByRelationAggregateInput
 }
 
 export type RoadmapTaskWhereUniqueInput = Prisma.AtLeast<{
@@ -279,6 +281,7 @@ export type RoadmapTaskWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"RoadmapTask"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoadmapTask"> | Date | string
   stage?: Prisma.XOR<Prisma.RoadmapStageScalarRelationFilter, Prisma.RoadmapStageWhereInput>
+  progress?: Prisma.RoadmapTaskProgressListRelationFilter
 }, "id" | "stageId_order">
 
 export type RoadmapTaskOrderByWithAggregationInput = {
@@ -323,6 +326,7 @@ export type RoadmapTaskCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   stage: Prisma.RoadmapStageCreateNestedOneWithoutTasksInput
+  progress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutTaskInput
 }
 
 export type RoadmapTaskUncheckedCreateInput = {
@@ -335,6 +339,7 @@ export type RoadmapTaskUncheckedCreateInput = {
   stageId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  progress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutTaskInput
 }
 
 export type RoadmapTaskUpdateInput = {
@@ -347,6 +352,7 @@ export type RoadmapTaskUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stage?: Prisma.RoadmapStageUpdateOneRequiredWithoutTasksNestedInput
+  progress?: Prisma.RoadmapTaskProgressUpdateManyWithoutTaskNestedInput
 }
 
 export type RoadmapTaskUncheckedUpdateInput = {
@@ -359,6 +365,7 @@ export type RoadmapTaskUncheckedUpdateInput = {
   stageId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutTaskNestedInput
 }
 
 export type RoadmapTaskCreateManyInput = {
@@ -455,6 +462,11 @@ export type RoadmapTaskSumOrderByAggregateInput = {
   order?: Prisma.SortOrder
 }
 
+export type RoadmapTaskScalarRelationFilter = {
+  is?: Prisma.RoadmapTaskWhereInput
+  isNot?: Prisma.RoadmapTaskWhereInput
+}
+
 export type RoadmapTaskCreateNestedManyWithoutStageInput = {
   create?: Prisma.XOR<Prisma.RoadmapTaskCreateWithoutStageInput, Prisma.RoadmapTaskUncheckedCreateWithoutStageInput> | Prisma.RoadmapTaskCreateWithoutStageInput[] | Prisma.RoadmapTaskUncheckedCreateWithoutStageInput[]
   connectOrCreate?: Prisma.RoadmapTaskCreateOrConnectWithoutStageInput | Prisma.RoadmapTaskCreateOrConnectWithoutStageInput[]
@@ -497,6 +509,20 @@ export type RoadmapTaskUncheckedUpdateManyWithoutStageNestedInput = {
   deleteMany?: Prisma.RoadmapTaskScalarWhereInput | Prisma.RoadmapTaskScalarWhereInput[]
 }
 
+export type RoadmapTaskCreateNestedOneWithoutProgressInput = {
+  create?: Prisma.XOR<Prisma.RoadmapTaskCreateWithoutProgressInput, Prisma.RoadmapTaskUncheckedCreateWithoutProgressInput>
+  connectOrCreate?: Prisma.RoadmapTaskCreateOrConnectWithoutProgressInput
+  connect?: Prisma.RoadmapTaskWhereUniqueInput
+}
+
+export type RoadmapTaskUpdateOneRequiredWithoutProgressNestedInput = {
+  create?: Prisma.XOR<Prisma.RoadmapTaskCreateWithoutProgressInput, Prisma.RoadmapTaskUncheckedCreateWithoutProgressInput>
+  connectOrCreate?: Prisma.RoadmapTaskCreateOrConnectWithoutProgressInput
+  upsert?: Prisma.RoadmapTaskUpsertWithoutProgressInput
+  connect?: Prisma.RoadmapTaskWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoadmapTaskUpdateToOneWithWhereWithoutProgressInput, Prisma.RoadmapTaskUpdateWithoutProgressInput>, Prisma.RoadmapTaskUncheckedUpdateWithoutProgressInput>
+}
+
 export type RoadmapTaskCreateWithoutStageInput = {
   id?: string
   title: string
@@ -506,6 +532,7 @@ export type RoadmapTaskCreateWithoutStageInput = {
   resourceUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  progress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutTaskInput
 }
 
 export type RoadmapTaskUncheckedCreateWithoutStageInput = {
@@ -517,6 +544,7 @@ export type RoadmapTaskUncheckedCreateWithoutStageInput = {
   resourceUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  progress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutTaskInput
 }
 
 export type RoadmapTaskCreateOrConnectWithoutStageInput = {
@@ -560,6 +588,70 @@ export type RoadmapTaskScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"RoadmapTask"> | Date | string
 }
 
+export type RoadmapTaskCreateWithoutProgressInput = {
+  id?: string
+  title: string
+  description?: string | null
+  order: number
+  isRequired?: boolean
+  resourceUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stage: Prisma.RoadmapStageCreateNestedOneWithoutTasksInput
+}
+
+export type RoadmapTaskUncheckedCreateWithoutProgressInput = {
+  id?: string
+  title: string
+  description?: string | null
+  order: number
+  isRequired?: boolean
+  resourceUrl?: string | null
+  stageId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RoadmapTaskCreateOrConnectWithoutProgressInput = {
+  where: Prisma.RoadmapTaskWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoadmapTaskCreateWithoutProgressInput, Prisma.RoadmapTaskUncheckedCreateWithoutProgressInput>
+}
+
+export type RoadmapTaskUpsertWithoutProgressInput = {
+  update: Prisma.XOR<Prisma.RoadmapTaskUpdateWithoutProgressInput, Prisma.RoadmapTaskUncheckedUpdateWithoutProgressInput>
+  create: Prisma.XOR<Prisma.RoadmapTaskCreateWithoutProgressInput, Prisma.RoadmapTaskUncheckedCreateWithoutProgressInput>
+  where?: Prisma.RoadmapTaskWhereInput
+}
+
+export type RoadmapTaskUpdateToOneWithWhereWithoutProgressInput = {
+  where?: Prisma.RoadmapTaskWhereInput
+  data: Prisma.XOR<Prisma.RoadmapTaskUpdateWithoutProgressInput, Prisma.RoadmapTaskUncheckedUpdateWithoutProgressInput>
+}
+
+export type RoadmapTaskUpdateWithoutProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stage?: Prisma.RoadmapStageUpdateOneRequiredWithoutTasksNestedInput
+}
+
+export type RoadmapTaskUncheckedUpdateWithoutProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type RoadmapTaskCreateManyStageInput = {
   id?: string
   title: string
@@ -580,6 +672,7 @@ export type RoadmapTaskUpdateWithoutStageInput = {
   resourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progress?: Prisma.RoadmapTaskProgressUpdateManyWithoutTaskNestedInput
 }
 
 export type RoadmapTaskUncheckedUpdateWithoutStageInput = {
@@ -591,6 +684,7 @@ export type RoadmapTaskUncheckedUpdateWithoutStageInput = {
   resourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutTaskNestedInput
 }
 
 export type RoadmapTaskUncheckedUpdateManyWithoutStageInput = {
@@ -605,6 +699,35 @@ export type RoadmapTaskUncheckedUpdateManyWithoutStageInput = {
 }
 
 
+/**
+ * Count Type RoadmapTaskCountOutputType
+ */
+
+export type RoadmapTaskCountOutputType = {
+  progress: number
+}
+
+export type RoadmapTaskCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  progress?: boolean | RoadmapTaskCountOutputTypeCountProgressArgs
+}
+
+/**
+ * RoadmapTaskCountOutputType without action
+ */
+export type RoadmapTaskCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoadmapTaskCountOutputType
+   */
+  select?: Prisma.RoadmapTaskCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RoadmapTaskCountOutputType without action
+ */
+export type RoadmapTaskCountOutputTypeCountProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoadmapTaskProgressWhereInput
+}
+
 
 export type RoadmapTaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -617,6 +740,8 @@ export type RoadmapTaskSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   stage?: boolean | Prisma.RoadmapStageDefaultArgs<ExtArgs>
+  progress?: boolean | Prisma.RoadmapTask$progressArgs<ExtArgs>
+  _count?: boolean | Prisma.RoadmapTaskCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roadmapTask"]>
 
 export type RoadmapTaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -660,6 +785,8 @@ export type RoadmapTaskSelectScalar = {
 export type RoadmapTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "order" | "isRequired" | "resourceUrl" | "stageId" | "createdAt" | "updatedAt", ExtArgs["result"]["roadmapTask"]>
 export type RoadmapTaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stage?: boolean | Prisma.RoadmapStageDefaultArgs<ExtArgs>
+  progress?: boolean | Prisma.RoadmapTask$progressArgs<ExtArgs>
+  _count?: boolean | Prisma.RoadmapTaskCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RoadmapTaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stage?: boolean | Prisma.RoadmapStageDefaultArgs<ExtArgs>
@@ -672,6 +799,7 @@ export type $RoadmapTaskPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "RoadmapTask"
   objects: {
     stage: Prisma.$RoadmapStagePayload<ExtArgs>
+    progress: Prisma.$RoadmapTaskProgressPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1078,6 +1206,7 @@ readonly fields: RoadmapTaskFieldRefs;
 export interface Prisma__RoadmapTaskClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   stage<T extends Prisma.RoadmapStageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoadmapStageDefaultArgs<ExtArgs>>): Prisma.Prisma__RoadmapStageClient<runtime.Types.Result.GetResult<Prisma.$RoadmapStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  progress<T extends Prisma.RoadmapTask$progressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoadmapTask$progressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoadmapTaskProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1514,6 +1643,30 @@ export type RoadmapTaskDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many RoadmapTasks to delete.
    */
   limit?: number
+}
+
+/**
+ * RoadmapTask.progress
+ */
+export type RoadmapTask$progressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoadmapTaskProgress
+   */
+  select?: Prisma.RoadmapTaskProgressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoadmapTaskProgress
+   */
+  omit?: Prisma.RoadmapTaskProgressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoadmapTaskProgressInclude<ExtArgs> | null
+  where?: Prisma.RoadmapTaskProgressWhereInput
+  orderBy?: Prisma.RoadmapTaskProgressOrderByWithRelationInput | Prisma.RoadmapTaskProgressOrderByWithRelationInput[]
+  cursor?: Prisma.RoadmapTaskProgressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoadmapTaskProgressScalarFieldEnum | Prisma.RoadmapTaskProgressScalarFieldEnum[]
 }
 
 /**

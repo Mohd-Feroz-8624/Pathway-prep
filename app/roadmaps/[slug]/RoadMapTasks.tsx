@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type RoadmapTask = {
   id: string;
@@ -20,21 +20,75 @@ type RoadmapStage = {
 };
 
 type RoadmapTasksProps = {
+  roadmapId: string;
   stages: RoadmapStage[];
 };
 
-export default function RoadmapTasks({ stages }: RoadmapTasksProps) {
+export default function RoadmapTasks({ roadmapId, stages }: RoadmapTasksProps) {
   const allTasks = stages.flatMap((stage) => stage.tasks);
 
   const [completedTasks, setCompletedTasks] = useState<string[]>([]);
+  useEffect(() => {
+    const loadProgress = async () => {
+      try {
+        const response = await fetch(
+          `/api/roadmap-progress?roadmapId=${roadmapId}`,
+        );
 
-  const toggleTask = (taskId: string) => {
+        if (!response.ok) {
+          return;
+        }
+
+        const data = await response.json();
+
+        const completed = data
+          .filter((item: { completed: boolean }) => item.completed)
+          .map((item: { taskId: string }) => item.taskId);
+
+        setCompletedTasks(completed);
+      } catch (error) {
+        console.error("Failed to load roadmap progress:", error);
+      }
+    };
+
+    loadProgress();
+  }, [roadmapId]);
+const toggleTask = async (taskId: string) => {
+  const isCurrentlyCompleted = completedTasks.includes(taskId);
+  const newCompletedState = !isCurrentlyCompleted;
+
+  setCompletedTasks((current) =>
+    newCompletedState
+      ? [...current, taskId]
+      : current.filter((id) => id !== taskId),
+  );
+
+  try {
+    const response = await fetch("/api/roadmap-progress", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        taskId,
+        completed: newCompletedState,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save progress");
+    }
+  } catch (error) {
+    console.error("Failed to save task progress:", error);
+
+    // Revert optimistic update if the API fails.
     setCompletedTasks((current) =>
-      current.includes(taskId)
+      newCompletedState
         ? current.filter((id) => id !== taskId)
         : [...current, taskId],
     );
-  };
+  }
+};
 
   const completedCount = completedTasks.length;
 

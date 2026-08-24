@@ -96,3 +96,8 @@ export type RoadmapStage = Prisma.RoadmapStageModel
  * 
  */
 export type RoadmapTask = Prisma.RoadmapTaskModel
+/**
+ * Model RoadmapTaskProgress
+ * 
+ */
+export type RoadmapTaskProgress = Prisma.RoadmapTaskProgressModel
