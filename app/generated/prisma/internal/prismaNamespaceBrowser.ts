@@ -57,7 +57,12 @@ export const ModelName = {
   Subject: 'Subject',
   Unit: 'Unit',
   Topic: 'Topic',
-  Note: 'Note'
+  Note: 'Note',
+  Course: 'Course',
+  Roadmap: 'Roadmap',
+  RoadmapStage: 'RoadmapStage',
+  RoadmapTask: 'RoadmapTask',
+  RoadmapTaskProgress: 'RoadmapTaskProgress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -164,6 +169,77 @@ export const NoteScalarFieldEnum = {
 } as const
 
 export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
+
+
+export const CourseScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  category: 'category',
+  level: 'level',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+export const RoadmapScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  category: 'category',
+  duration: 'duration',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoadmapScalarFieldEnum = (typeof RoadmapScalarFieldEnum)[keyof typeof RoadmapScalarFieldEnum]
+
+
+export const RoadmapStageScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  order: 'order',
+  roadmapId: 'roadmapId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoadmapStageScalarFieldEnum = (typeof RoadmapStageScalarFieldEnum)[keyof typeof RoadmapStageScalarFieldEnum]
+
+
+export const RoadmapTaskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  order: 'order',
+  isRequired: 'isRequired',
+  resourceUrl: 'resourceUrl',
+  stageId: 'stageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoadmapTaskScalarFieldEnum = (typeof RoadmapTaskScalarFieldEnum)[keyof typeof RoadmapTaskScalarFieldEnum]
+
+
+export const RoadmapTaskProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  taskId: 'taskId',
+  completed: 'completed',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoadmapTaskProgressScalarFieldEnum = (typeof RoadmapTaskProgressScalarFieldEnum)[keyof typeof RoadmapTaskProgressScalarFieldEnum]
 
 
 export const SortOrder = {
