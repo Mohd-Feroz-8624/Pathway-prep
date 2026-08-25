@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import UserAvatar from "@/components/dashboard/UserAvatar";
 
 const navigation = [
   {
@@ -27,7 +29,7 @@ const navigation = [
   },
   {
     title: "Resume Builder",
-    href: "/dashboard/resume",
+    href: "/resume",
     icon: "▱",
   },
   {
@@ -64,6 +66,7 @@ export default function DashboardSidebar({
       y: rect.top + rect.height / 2,
     });
   };
+  const { user } = useUser();
 
   return (
     <aside
@@ -168,9 +171,7 @@ export default function DashboardSidebar({
                 collapsed ? "justify-center px-3" : "gap-3 px-4"
               }`}
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center text-base">
-                ◉
-              </span>
+              <UserAvatar name={user?.fullName} size="sm" />
 
               {!collapsed && <span>Profile</span>}
             </Link>
