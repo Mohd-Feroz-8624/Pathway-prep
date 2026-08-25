@@ -1,6 +1,8 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const navigation = [
   {
@@ -9,19 +11,9 @@ const navigation = [
     icon: "⌂",
   },
   {
-    title: "Roadmaps",
-    href: "/roadmaps",
-    icon: "◈",
-  },
-  {
     title: "Semesters",
     href: "/semesters",
     icon: "▣",
-  },
-  {
-    title: "Notes",
-    href: "/notes",
-    icon: "▤",
   },
   {
     title: "DSA",
@@ -29,9 +21,9 @@ const navigation = [
     icon: "◇",
   },
   {
-    title: "Interview Practice",
-    href: "/interview",
-    icon: "◎ ",
+    title: "Roadmaps",
+    href: "/roadmaps",
+    icon: "◈",
   },
   {
     title: "Resume Builder",
@@ -39,72 +31,177 @@ const navigation = [
     icon: "▱",
   },
   {
-    title: "Courses",
-    href: "/dashboard/courses",
-    icon: "▰",
+    title: "Interview Practice",
+    href: "/interview",
+    icon: "◎",
   },
 ];
 
-export default function DashboardSidebar() {
+type DashboardSidebarProps = {
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function DashboardSidebar({
+  collapsed,
+  setCollapsed,
+}: DashboardSidebarProps) {
   const pathname = usePathname();
+  const [hoveredItem, setHoveredItem] = useState<{
+    title: string;
+    x: number;
+    y: number;
+  } | null>(null);
+
+  const showItemTooltip = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    title: string,
+  ) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setHoveredItem({
+      title,
+      x: rect.right + 12,
+      y: rect.top + rect.height / 2,
+    });
+  };
+
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-slate-200 bg-white lg:block">
-      <div className="flex h-full flex-col">
+    <aside
+      className={`fixed inset-y-0 left-0 z-40 hidden border-r border-slate-200 bg-white transition-all duration-300 lg:block ${
+        collapsed ? "w-20" : "w-64"
+      }`}
+    >
+      <div className="relative flex h-screen flex-col">
         {/* Logo */}
-        <div className="flex h-20 items-center border-b border-slate-200 px-6">
+        <div
+          className={`flex h-20 items-center border-b border-slate-200 ${
+            collapsed ? "justify-center px-3" : "px-6"
+          }`}
+        >
           <Link
             href="/dashboard"
             className="text-xl font-bold tracking-tight text-slate-950"
+            title={collapsed ? "Pathway Prep" : undefined}
           >
-            Pathway<span className="text-blue-600">Prep</span>
+            {collapsed ? (
+              <span className="text-blue-600">P</span>
+            ) : (
+              <>
+                Pathway<span className="text-blue-600">Prep</span>
+              </>
+            )}
           </Link>
         </div>
 
-        {/* Navigation */}
-        {navigation.map((item) => {
-          const isActive =
-            item.href === "/dashboard"
-              ? pathname === "/dashboard"
-              : pathname.startsWith(item.href);
+        {/* Collapse Button */}
+        <button
+          type="button"
+          onClick={() => setCollapsed((value) => !value)}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          className="group absolute -right-5 top-10 z-100 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-xl font-medium text-slate-700 shadow-md transition-all duration-200 hover:scale-105 hover:bg-slate-50 hover:text-slate-950"
+        >
+          <span
+            className={`transition-transform duration-300 ${
+              collapsed ? "rotate-180" : ""
+            }`}
+          >
+            ←
+          </span>
 
-          return (
+          {/* Premium hover tooltip */}
+          <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 translate-x-1 whitespace-nowrap rounded-md bg-slate-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 ">
+            {collapsed ? "Expand" : "Collapse"}
+
+            {/* Arrow on the left side */}
+            <span className="absolute right-full top-1/2 -translate-y-1/2 border-y-4 border-r-4 border-y-transparent border-r-slate-900 " />
+          </span>
+        </button>
+
+        {/* Main Navigation */}
+        <nav className="flex-1 overflow-y-auto px-3 py-6">
+          <div className="space-y-2">
+            {navigation.map((item) => {
+              const isActive =
+                item.href === "/dashboard"
+                  ? pathname === "/dashboard"
+                  : pathname.startsWith(item.href);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  title={collapsed ? item.title : undefined}
+                  onMouseEnter={(event) => {
+                    if (!collapsed) return;
+                    showItemTooltip(event, item.title);
+                  }}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  className={`flex items-center rounded-xl py-3 text-sm font-medium transition-all duration-200 ${
+                    collapsed ? "justify-center px-3" : "gap-3 px-4"
+                  } ${
+                    isActive
+                      ? "bg-blue-50 text-blue-700"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                  }`}
+                >
+                  <span className="relative flex h-6 shrink-0 text-base">
+                    {item.icon}
+                  </span>
+
+                  {!collapsed && (
+                    <span className="whitespace-nowrap">{item.title}</span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+
+        {/* Bottom Account Navigation */}
+        <div className="border-t border-slate-200 p-3">
+          <div className="space-y-2">
+            {/* Profile */}
             <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
-                isActive
-                  ? "bg-blue-50 text-blue-700"
-                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+              href="/profile"
+              title={collapsed ? "Profile" : undefined}
+              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
               }`}
             >
-              <span className="flex h-6 w-6 items-center justify-center text-base">
-                {item.icon}
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center text-base">
+                ◉
               </span>
 
-              <span>{item.title}</span>
+              {!collapsed && <span>Profile</span>}
             </Link>
-          );
-        })}
 
-        {/* Account */}
-        <div className="border-t border-slate-200 p-4">
-          <Link
-            href="/profile"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950"
-          >
-            <span>◉</span>
-            <span>Profile</span>
-          </Link>
+            {/* Settings */}
+            <Link
+              href="/settings"
+              title={collapsed ? "Settings" : undefined}
+              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
+            >
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center text-base">
+                ⚙
+              </span>
 
-          <Link
-            href="/settings"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950"
-          >
-            <span>⚙</span>
-            <span>Settings</span>
-          </Link>
+              {!collapsed && <span>Settings</span>}
+            </Link>
+          </div>
         </div>
       </div>
+
+      {collapsed && hoveredItem && (
+        <div
+          className="pointer-events-none fixed z-120 -translate-y-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-100 shadow-lg"
+          style={{ left: hoveredItem.x, top: hoveredItem.y }}
+        >
+          {hoveredItem.title}
+          <span className="absolute right-full top-1/2 -translate-y-1/2 border-y-4 border-r-4 border-y-transparent border-r-slate-900" />
+        </div>
+      )}
     </aside>
   );
 }

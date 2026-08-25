@@ -5,13 +5,13 @@ import Link from "next/link";
 
 const navigation = [
   { title: "Dashboard", href: "/dashboard" },
-  { title: "Roadmaps", href: "/roadmaps" },
   { title: "Semesters", href: "/semesters" },
-  { title: "Notes", href: "/notes" },
   { title: "DSA", href: "/dsa" },
-  { title: "Interview Practice", href: "/interview" },
+  { title: "Roadmaps", href: "/roadmaps" },
   { title: "Resume Builder", href: "/resume" },
-  { title: "Courses", href: "/courses" },
+  { title: "Interview Practice", href: "/interview" },
+
+  
 ];
 
 export default function DashboardHeaderBar() {
