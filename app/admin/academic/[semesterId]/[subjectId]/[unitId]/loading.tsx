@@ -12,7 +12,7 @@ export default function UnitLoading() {
 
             <div className="mt-3 h-10 w-80 rounded bg-slate-200" />
 
-            <div className="mt-4 h-5 w-[32rem] max-w-full rounded bg-slate-200" />
+            <div className="mt-4 h-5 w-lg max-w-full rounded bg-slate-200" />
           </div>
 
           {/* Add Resource button */}
