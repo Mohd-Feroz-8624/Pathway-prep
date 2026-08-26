@@ -82,3 +82,43 @@ export type RoadmapTask = Prisma.RoadmapTaskModel
  * 
  */
 export type RoadmapTaskProgress = Prisma.RoadmapTaskProgressModel
+/**
+ * Model ResumeTemplate
+ * 
+ */
+export type ResumeTemplate = Prisma.ResumeTemplateModel
+/**
+ * Model Resume
+ * 
+ */
+export type Resume = Prisma.ResumeModel
+/**
+ * Model ResumeEducation
+ * 
+ */
+export type ResumeEducation = Prisma.ResumeEducationModel
+/**
+ * Model ResumeExperience
+ * 
+ */
+export type ResumeExperience = Prisma.ResumeExperienceModel
+/**
+ * Model ResumeProject
+ * 
+ */
+export type ResumeProject = Prisma.ResumeProjectModel
+/**
+ * Model ResumeSkill
+ * 
+ */
+export type ResumeSkill = Prisma.ResumeSkillModel
+/**
+ * Model ResumeCertification
+ * 
+ */
+export type ResumeCertification = Prisma.ResumeCertificationModel
+/**
+ * Model ResumeAchievement
+ * 
+ */
+export type ResumeAchievement = Prisma.ResumeAchievementModel

@@ -186,7 +186,7 @@ export default function DashboardSidebar({
               className="flex w-full items-center  gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 cursor-pointer"
             >
               {/* <UserAvatar  /> */}
-              <LogOut className="h-6 w-6 ml-4 shrink-0 " size="sm" />
+              <LogOut className="h-6 w-6 ml-4 shrink-0 " />
               {!collapsed && <span>Logout</span>}
             </button>
           </div>

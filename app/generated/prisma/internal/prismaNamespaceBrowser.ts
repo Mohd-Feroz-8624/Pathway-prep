@@ -63,7 +63,15 @@ export const ModelName = {
   Roadmap: 'Roadmap',
   RoadmapStage: 'RoadmapStage',
   RoadmapTask: 'RoadmapTask',
-  RoadmapTaskProgress: 'RoadmapTaskProgress'
+  RoadmapTaskProgress: 'RoadmapTaskProgress',
+  ResumeTemplate: 'ResumeTemplate',
+  Resume: 'Resume',
+  ResumeEducation: 'ResumeEducation',
+  ResumeExperience: 'ResumeExperience',
+  ResumeProject: 'ResumeProject',
+  ResumeSkill: 'ResumeSkill',
+  ResumeCertification: 'ResumeCertification',
+  ResumeAchievement: 'ResumeAchievement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -260,6 +268,123 @@ export const RoadmapTaskProgressScalarFieldEnum = {
 } as const
 
 export type RoadmapTaskProgressScalarFieldEnum = (typeof RoadmapTaskProgressScalarFieldEnum)[keyof typeof RoadmapTaskProgressScalarFieldEnum]
+
+
+export const ResumeTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  previewUrl: 'previewUrl',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeTemplateScalarFieldEnum = (typeof ResumeTemplateScalarFieldEnum)[keyof typeof ResumeTemplateScalarFieldEnum]
+
+
+export const ResumeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  templateId: 'templateId',
+  title: 'title',
+  summary: 'summary',
+  phone: 'phone',
+  location: 'location',
+  linkedin: 'linkedin',
+  github: 'github',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
+
+
+export const ResumeEducationScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  institution: 'institution',
+  degree: 'degree',
+  field: 'field',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeEducationScalarFieldEnum = (typeof ResumeEducationScalarFieldEnum)[keyof typeof ResumeEducationScalarFieldEnum]
+
+
+export const ResumeExperienceScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  company: 'company',
+  position: 'position',
+  location: 'location',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeExperienceScalarFieldEnum = (typeof ResumeExperienceScalarFieldEnum)[keyof typeof ResumeExperienceScalarFieldEnum]
+
+
+export const ResumeProjectScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  title: 'title',
+  description: 'description',
+  technologies: 'technologies',
+  githubUrl: 'githubUrl',
+  liveUrl: 'liveUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeProjectScalarFieldEnum = (typeof ResumeProjectScalarFieldEnum)[keyof typeof ResumeProjectScalarFieldEnum]
+
+
+export const ResumeSkillScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  name: 'name',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeSkillScalarFieldEnum = (typeof ResumeSkillScalarFieldEnum)[keyof typeof ResumeSkillScalarFieldEnum]
+
+
+export const ResumeCertificationScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  name: 'name',
+  issuer: 'issuer',
+  issueDate: 'issueDate',
+  credentialUrl: 'credentialUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeCertificationScalarFieldEnum = (typeof ResumeCertificationScalarFieldEnum)[keyof typeof ResumeCertificationScalarFieldEnum]
+
+
+export const ResumeAchievementScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeAchievementScalarFieldEnum = (typeof ResumeAchievementScalarFieldEnum)[keyof typeof ResumeAchievementScalarFieldEnum]
 
 
 export const SortOrder = {

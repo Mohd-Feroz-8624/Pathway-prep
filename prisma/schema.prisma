@@ -28,6 +28,7 @@ model User {
 
   profile         Profile?
   roadmapProgress RoadmapTaskProgress[]
+  resumes         Resume[]
 }
 
 model Profile {
@@ -211,4 +212,151 @@ model RoadmapTaskProgress {
   @@unique([userId, taskId])
   @@index([userId])
   @@index([taskId])
+}
+
+model ResumeTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  previewUrl  String?
+  isPublished Boolean  @default(false)
+
+  resumes Resume[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Resume {
+  id         String @id @default(cuid())
+  userId     String
+  templateId String?
+
+  title      String  @default("My Resume")
+  summary    String?
+  phone      String?
+  location   String?
+  linkedin   String?
+  github     String?
+
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template ResumeTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+
+  education       ResumeEducation[]
+  experience      ResumeExperience[]
+  projects        ResumeProject[]
+  skills          ResumeSkill[]
+  certifications  ResumeCertification[]
+  achievements    ResumeAchievement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([templateId])
+}
+
+model ResumeEducation {
+  id        String @id @default(cuid())
+  resumeId  String
+
+  institution String
+  degree      String?
+  field       String?
+  startDate   String?
+  endDate     String?
+  description String?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+}
+
+model ResumeExperience {
+  id        String @id @default(cuid())
+  resumeId  String
+
+  company     String
+  position    String
+  location    String?
+  startDate   String?
+  endDate     String?
+  isCurrent   Boolean @default(false)
+  description String?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+}
+
+model ResumeProject {
+  id        String @id @default(cuid())
+  resumeId  String
+
+  title        String
+  description  String?
+  technologies String?
+  githubUrl   String?
+  liveUrl     String?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+}
+
+model ResumeSkill {
+  id       String @id @default(cuid())
+  resumeId String
+
+  name     String
+  category String?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+}
+
+model ResumeCertification {
+  id       String @id @default(cuid())
+  resumeId String
+
+  name          String
+  issuer        String?
+  issueDate     String?
+  credentialUrl String?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+}
+
+model ResumeAchievement {
+  id          String @id @default(cuid())
+  resumeId    String
+
+  title       String
+  description String?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
 }
