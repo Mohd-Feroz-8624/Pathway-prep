@@ -6,6 +6,10 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+enum UserRole {
+  STUDENT
+  ADMIN
+}
 
 model User {
   id              String   @id @default(cuid())
@@ -16,6 +20,9 @@ model User {
   branch          String?
   currentSemester Int?
   careerGoal      String?
+  
+  role            UserRole @default(STUDENT)
+
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 

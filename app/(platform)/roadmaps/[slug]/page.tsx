@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
+
 import RoadmapTasks from "./RoadMapTasks";
 
 type RoadmapPageProps = {
