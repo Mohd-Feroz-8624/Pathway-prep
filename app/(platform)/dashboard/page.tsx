@@ -2,10 +2,8 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/current-user";
 
 import { prisma } from "@/lib/prisma";
-
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import ProfileCard from "@/components/dashboard/ProfileCard";
-import ProgressCard from "@/components/dashboard/ProgressCard";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RoadmapProgress from "@/components/dashboard/RoadmapProgress";
 import ProfileCompleteness from "@/components/dashboard/ProfileCompleteness";
@@ -16,28 +14,7 @@ export default async function DashboardPage() {
   if (!user) {
     redirect("/sign-in");
   }
-  const totalTasks = await prisma.roadmapTask.count({
-    where: {
-      stage: {
-        roadmap: {
-          isPublished: true,
-        },
-      },
-    },
-  });
-  const completedTasks = await prisma.roadmapTaskProgress.count({
-    where: {
-      userId: user.id,
-      completed: true,
-      task: {
-        stage: {
-          roadmap: {
-            isPublished: true,
-          },
-        },
-      },
-    },
-  });
+ 
   const completedProgress = await prisma.roadmapTaskProgress.findMany({
     where: {
       userId: user.id,
@@ -119,7 +96,6 @@ export default async function DashboardPage() {
           linkedin={user.profile?.linkedin ?? null}
         />
 
-        <ProgressCard completedTasks={completedTasks} totalTasks={totalTasks} />
 
         <div className="space-y-4">
           <div>

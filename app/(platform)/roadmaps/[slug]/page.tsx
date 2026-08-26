@@ -39,13 +39,7 @@ export default async function RoadmapDetailPage({ params }: RoadmapPageProps) {
   return (
     <main className="min-h-screen bg-[#f8f9ff]">
       <section className="border-b bg-white">
-        <Link
-          href="/roadmaps"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 transition-colors hover:text-blue-600"
-        >
-          <span>←</span>
-          Back to Roadmaps
-        </Link>
+        
         <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
           {roadmap.category && (
             <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
