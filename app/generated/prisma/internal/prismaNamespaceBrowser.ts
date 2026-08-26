@@ -91,6 +91,7 @@ export const UserScalarFieldEnum = {
   branch: 'branch',
   currentSemester: 'currentSemester',
   careerGoal: 'careerGoal',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

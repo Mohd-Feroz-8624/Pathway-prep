@@ -43,6 +43,7 @@ export type UserMinAggregateOutputType = {
   branch: string | null
   currentSemester: number | null
   careerGoal: string | null
+  role: $Enums.UserRole | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +57,7 @@ export type UserMaxAggregateOutputType = {
   branch: string | null
   currentSemester: number | null
   careerGoal: string | null
+  role: $Enums.UserRole | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -69,6 +71,7 @@ export type UserCountAggregateOutputType = {
   branch: number
   currentSemester: number
   careerGoal: number
+  role: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,6 +95,7 @@ export type UserMinAggregateInputType = {
   branch?: true
   currentSemester?: true
   careerGoal?: true
+  role?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -105,6 +109,7 @@ export type UserMaxAggregateInputType = {
   branch?: true
   currentSemester?: true
   careerGoal?: true
+  role?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,6 +123,7 @@ export type UserCountAggregateInputType = {
   branch?: true
   currentSemester?: true
   careerGoal?: true
+  role?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -218,6 +224,7 @@ export type UserGroupByOutputType = {
   branch: string | null
   currentSemester: number | null
   careerGoal: string | null
+  role: $Enums.UserRole
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -254,6 +261,7 @@ export type UserWhereInput = {
   branch?: Prisma.StringNullableFilter<"User"> | string | null
   currentSemester?: Prisma.IntNullableFilter<"User"> | number | null
   careerGoal?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
@@ -269,6 +277,7 @@ export type UserOrderByWithRelationInput = {
   branch?: Prisma.SortOrderInput | Prisma.SortOrder
   currentSemester?: Prisma.SortOrderInput | Prisma.SortOrder
   careerGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   profile?: Prisma.ProfileOrderByWithRelationInput
@@ -287,6 +296,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   branch?: Prisma.StringNullableFilter<"User"> | string | null
   currentSemester?: Prisma.IntNullableFilter<"User"> | number | null
   careerGoal?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
@@ -302,6 +312,7 @@ export type UserOrderByWithAggregationInput = {
   branch?: Prisma.SortOrderInput | Prisma.SortOrder
   currentSemester?: Prisma.SortOrderInput | Prisma.SortOrder
   careerGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -323,6 +334,7 @@ export type UserScalarWhereWithAggregatesInput = {
   branch?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   currentSemester?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   careerGoal?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -336,6 +348,7 @@ export type UserCreateInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
@@ -351,6 +364,7 @@ export type UserUncheckedCreateInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
@@ -366,6 +380,7 @@ export type UserUpdateInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
@@ -381,6 +396,7 @@ export type UserUncheckedUpdateInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -396,6 +412,7 @@ export type UserCreateManyInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -409,6 +426,7 @@ export type UserUpdateManyMutationInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -422,6 +440,7 @@ export type UserUncheckedUpdateManyInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -435,6 +454,7 @@ export type UserCountOrderByAggregateInput = {
   branch?: Prisma.SortOrder
   currentSemester?: Prisma.SortOrder
   careerGoal?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -452,6 +472,7 @@ export type UserMaxOrderByAggregateInput = {
   branch?: Prisma.SortOrder
   currentSemester?: Prisma.SortOrder
   careerGoal?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -465,6 +486,7 @@ export type UserMinOrderByAggregateInput = {
   branch?: Prisma.SortOrder
   currentSemester?: Prisma.SortOrder
   careerGoal?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -492,6 +514,10 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type EnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.UserRole
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -535,6 +561,7 @@ export type UserCreateWithoutProfileInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
@@ -549,6 +576,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
@@ -579,6 +607,7 @@ export type UserUpdateWithoutProfileInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
@@ -593,6 +622,7 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
@@ -607,6 +637,7 @@ export type UserCreateWithoutRoadmapProgressInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
@@ -621,6 +652,7 @@ export type UserUncheckedCreateWithoutRoadmapProgressInput = {
   branch?: string | null
   currentSemester?: number | null
   careerGoal?: string | null
+  role?: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
@@ -651,6 +683,7 @@ export type UserUpdateWithoutRoadmapProgressInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
@@ -665,6 +698,7 @@ export type UserUncheckedUpdateWithoutRoadmapProgressInput = {
   branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -710,6 +744,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   branch?: boolean
   currentSemester?: boolean
   careerGoal?: boolean
+  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
@@ -726,6 +761,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   branch?: boolean
   currentSemester?: boolean
   careerGoal?: boolean
+  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -739,6 +775,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   branch?: boolean
   currentSemester?: boolean
   careerGoal?: boolean
+  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -752,11 +789,12 @@ export type UserSelectScalar = {
   branch?: boolean
   currentSemester?: boolean
   careerGoal?: boolean
+  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "name" | "email" | "college" | "branch" | "currentSemester" | "careerGoal" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "name" | "email" | "college" | "branch" | "currentSemester" | "careerGoal" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   roadmapProgress?: boolean | Prisma.User$roadmapProgressArgs<ExtArgs>
@@ -780,6 +818,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     branch: string | null
     currentSemester: number | null
     careerGoal: string | null
+    role: $Enums.UserRole
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1215,6 +1254,7 @@ export interface UserFieldRefs {
   readonly branch: Prisma.FieldRef<"User", 'String'>
   readonly currentSemester: Prisma.FieldRef<"User", 'Int'>
   readonly careerGoal: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
