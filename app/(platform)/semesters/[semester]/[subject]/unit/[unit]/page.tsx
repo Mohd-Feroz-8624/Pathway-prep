@@ -11,6 +11,63 @@ type UnitPageProps = {
   }>;
 };
 
+function getResourceIcon(type: string) {
+  switch (type) {
+    case "HANDWRITTEN":
+      return "✍️";
+
+    case "PDF":
+      return "📄";
+
+    case "EXTERNAL":
+      return "🌐";
+
+    case "YOUTUBE":
+      return "▶️";
+
+    default:
+      return "📚";
+  }
+}
+
+function getResourceLabel(type: string) {
+  switch (type) {
+    case "HANDWRITTEN":
+      return "Handwritten Notes";
+
+    case "PDF":
+      return "PDF Notes";
+
+    case "EXTERNAL":
+      return "External Resource";
+
+    case "YOUTUBE":
+      return "YouTube Video";
+
+    default:
+      return "Learning Resource";
+  }
+}
+
+function getResourceAction(type: string) {
+  switch (type) {
+    case "HANDWRITTEN":
+      return "View Notes";
+
+    case "PDF":
+      return "Open PDF";
+
+    case "EXTERNAL":
+      return "Open Guide";
+
+    case "YOUTUBE":
+      return "Watch Video";
+
+    default:
+      return "Open Resource";
+  }
+}
+
 export default async function UnitPage({ params }: UnitPageProps) {
   const { semester, subject, unit } = await params;
 
@@ -155,47 +212,72 @@ export default async function UnitPage({ params }: UnitPageProps) {
               {unitData.resources.map((resource) => (
                 <article
                   key={resource.id}
-                  className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
+                  className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-xl">
-                    {resource.type === "VIDEO"
-                      ? "🎥"
-                      : resource.type === "PDF"
-                        ? "📑"
-                        : resource.type === "PRACTICE"
-                          ? "💻"
-                          : resource.type === "ARTICLE"
-                            ? "📰"
-                            : "📄"}
+                  {/* Resource Header */}
+                  <div className="flex items-start justify-between gap-4">
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl ${
+                        resource.type === "HANDWRITTEN"
+                          ? "bg-amber-50"
+                          : resource.type === "PDF"
+                            ? "bg-red-50"
+                            : resource.type === "EXTERNAL"
+                              ? "bg-blue-50"
+                              : "bg-rose-50"
+                      }`}
+                    >
+                      {getResourceIcon(resource.type)}
+                    </div>
+
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-bold ${
+                        resource.type === "HANDWRITTEN"
+                          ? "bg-amber-50 text-amber-700"
+                          : resource.type === "PDF"
+                            ? "bg-red-50 text-red-700"
+                            : resource.type === "EXTERNAL"
+                              ? "bg-blue-50 text-blue-700"
+                              : "bg-rose-50 text-rose-700"
+                      }`}
+                    >
+                      {getResourceLabel(resource.type)}
+                    </span>
                   </div>
 
-                  <p className="mt-5 text-xs font-bold uppercase tracking-wider text-blue-600">
-                    {resource.type}
-                  </p>
-
-                  <h3 className="mt-2 text-lg font-bold text-slate-950">
+                  {/* Title */}
+                  <h3 className="mt-5 text-lg font-bold text-slate-950">
                     {resource.title}
                   </h3>
 
-                  {resource.description && (
+                  {/* Description */}
+                  {resource.description ? (
                     <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
                       {resource.description}
                     </p>
+                  ) : (
+                    <p className="mt-2 flex-1 text-sm text-slate-400">
+                      Study material for this unit.
+                    </p>
                   )}
 
+                  {/* Action */}
                   <div className="mt-6">
                     {resource.url ? (
                       <a
                         href={resource.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+                        className="inline-flex w-full items-center justify-center rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
                       >
-                        Open Resource
-                        <span className="ml-2">↗</span>
+                        {getResourceAction(resource.type)}
+
+                        <span className="ml-2 transition-transform group-hover:translate-x-0.5">
+                          ↗
+                        </span>
                       </a>
                     ) : (
-                      <span className="inline-flex items-center rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-500">
+                      <span className="inline-flex w-full items-center justify-center rounded-xl bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-500">
                         Resource coming soon
                       </span>
                     )}
@@ -205,8 +287,6 @@ export default async function UnitPage({ params }: UnitPageProps) {
             </div>
           )}
         </section>
-
-       
       </section>
     </main>
   );

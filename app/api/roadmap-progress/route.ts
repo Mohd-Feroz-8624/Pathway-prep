@@ -43,11 +43,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const task = await prisma.roadmapTask.findUnique({
-      where: {
-        id: taskId,
-      },
-    });
+   const task = await prisma.roadmapTask.findFirst({
+     where: {
+       id: taskId,
+       stage: {
+         roadmap: {
+           isPublished: true,
+         },
+       },
+     },
+   });
 
     if (!task) {
       return NextResponse.json(

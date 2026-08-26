@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
 import { prisma } from "@/lib/prisma";
+import { profileUpdateSchema } from "@/lib/validations/profile";
 
 export async function PATCH(request: Request) {
   try {
-    // 1. Get authenticated Clerk user
+    // 1. Authenticate user
     const { userId: clerkId } = await auth();
 
     if (!clerkId) {
@@ -22,6 +23,21 @@ export async function PATCH(request: Request) {
     // 2. Read request body
     const body = await request.json();
 
+    // 3. Validate request body
+    const result = profileUpdateSchema.safeParse(body);
+
+    if (!result.success) {
+      return NextResponse.json(
+        {
+          error: "Invalid profile data",
+          details: result.error.flatten().fieldErrors,
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
     const {
       name,
       college,
@@ -30,9 +46,9 @@ export async function PATCH(request: Request) {
       careerGoal,
       github,
       linkedin,
-    } = body;
+    } = result.data;
 
-    // 3. Validate semester
+    // 4. Convert semester
     let semester: number | null = null;
 
     if (currentSemester !== undefined && currentSemester !== "") {
@@ -56,7 +72,7 @@ export async function PATCH(request: Request) {
       semester = parsedSemester;
     }
 
-    // 4. Find the database user using Clerk ID
+    // 5. Find database user using Clerk ID
     const user = await prisma.user.findUnique({
       where: {
         clerkId,
@@ -74,7 +90,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    // 5. Update User model
+    // 6. Update User
     await prisma.user.update({
       where: {
         id: user.id,
@@ -88,7 +104,7 @@ export async function PATCH(request: Request) {
       },
     });
 
-    // 6. Update or create Profile model
+    // 7. Update or create Profile
     await prisma.profile.upsert({
       where: {
         userId: user.id,
@@ -104,7 +120,7 @@ export async function PATCH(request: Request) {
       },
     });
 
-    // 7. Return success
+    // 8. Return success
     return NextResponse.json({
       success: true,
       message: "Profile updated successfully",

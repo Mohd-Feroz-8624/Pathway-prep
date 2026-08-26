@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { LogOut } from "lucide-react";
+import {useClerk} from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import UserAvatar from "@/components/dashboard/UserAvatar";
 
 const navigation = [
   {
@@ -27,7 +31,7 @@ const navigation = [
   },
   {
     title: "Resume Builder",
-    href: "/dashboard/resume",
+    href: "/resume",
     icon: "▱",
   },
   {
@@ -64,6 +68,8 @@ export default function DashboardSidebar({
       y: rect.top + rect.height / 2,
     });
   };
+  const { user } = useUser();
+  const { signOut } = useClerk();
 
   return (
     <aside
@@ -158,8 +164,8 @@ export default function DashboardSidebar({
         </nav>
 
         {/* Bottom Account Navigation */}
-        <div className="border-t border-slate-200 p-3">
-          <div className="space-y-2">
+        <div className="border-t border-slate-200 p-3 ">
+          <div className="space-y-2 ">
             {/* Profile */}
             <Link
               href="/profile"
@@ -168,27 +174,21 @@ export default function DashboardSidebar({
                 collapsed ? "justify-center px-3" : "gap-3 px-4"
               }`}
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center text-base">
-                ◉
-              </span>
+              <UserAvatar name={user?.fullName} size="sm" />
 
               {!collapsed && <span>Profile</span>}
             </Link>
 
             {/* Settings */}
-            <Link
-              href="/settings"
-              title={collapsed ? "Settings" : undefined}
-              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
-                collapsed ? "justify-center px-3" : "gap-3 px-4"
-              }`}
+            <button
+              type="button"
+              onClick={() => signOut({ redirectUrl: "/sign-in" })}
+              className="flex w-full items-center  gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 cursor-pointer"
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center text-base">
-                ⚙
-              </span>
-
-              {!collapsed && <span>Settings</span>}
-            </Link>
+              {/* <UserAvatar  /> */}
+              <LogOut className="h-6 w-6 ml-4 shrink-0 " size="sm" />
+              {!collapsed && <span>Logout</span>}
+            </button>
           </div>
         </div>
       </div>
