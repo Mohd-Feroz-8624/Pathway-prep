@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
 type ResumeSummaryProps = {
   resumeId: string;
@@ -16,6 +17,7 @@ export default function ResumeSummary({
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const { updateResumeData } = useResumeEditor();
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setValue(event.target.value);
@@ -29,9 +31,15 @@ export default function ResumeSummary({
       return;
     }
 
-    setIsSaving(true);
     setSuccess("");
     setError("");
+
+    if (!value.trim()) {
+      setError("Please enter a professional summary.");
+      return;
+    }
+
+    setIsSaving(true);
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}`, {
@@ -50,6 +58,7 @@ export default function ResumeSummary({
         setError(data.error || "Failed to save summary.");
         return;
       }
+      updateResumeData({ summary: value });
 
       setIsDirty(false);
       setSuccess("Professional summary saved successfully.");

@@ -1,21 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
-type Experience = {
-  id: string;
-  company: string;
-  position: string;
-  location: string | null;
-  startDate: string | null;
-  endDate: string | null;
-  isCurrent: boolean;
-  description: string | null;
-};
+import type { ResumeExperience as PrismaResumeExperience } from "@/app/generated/prisma/client";
 
 type ResumeExperienceProps = {
   resumeId: string;
-  experience: Experience[];
+  experience: PrismaResumeExperience[];
 };
 
 type ExperienceForm = {
@@ -42,9 +34,13 @@ export default function ResumeExperience({
   resumeId,
   experience,
 }: ResumeExperienceProps) {
-  const [entries, setEntries] = useState<Experience[]>(experience);
+  const { updateResumeData } = useResumeEditor();
+
+  const [entries, setEntries] = useState<PrismaResumeExperience[]>(experience);
+
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState<ExperienceForm>(emptyForm);
+
   const [isAddingExperience, setIsAddingExperience] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
@@ -65,15 +61,24 @@ export default function ResumeExperience({
           ? (event.target as HTMLInputElement).checked
           : value,
     }));
+
+    setError("");
   }
 
   async function handleAdd() {
-    if (!form.company.trim() || !form.position.trim()) {
+    setError("");
+
+    if (!form.position.trim()) {
+      setError("Position is required.");
+      return;
+    }
+
+    if (!form.company.trim()) {
+      setError("Company is required.");
       return;
     }
 
     setIsAddingExperience(true);
-    setError("");
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}/experience`, {
@@ -99,7 +104,13 @@ export default function ResumeExperience({
         return;
       }
 
-      setEntries((current) => [...current, data.data]);
+      const updatedEntries: PrismaResumeExperience[] = [...entries, data.data];
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        experience: updatedEntries,
+      });
 
       setForm(emptyForm);
       setIsAdding(false);
@@ -138,7 +149,13 @@ export default function ResumeExperience({
         return;
       }
 
-      setEntries((current) => current.filter((entry) => entry.id !== id));
+      const updatedEntries = entries.filter((entry) => entry.id !== id);
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        experience: updatedEntries,
+      });
     } catch (error) {
       console.error("Delete experience error:", error);
       setError("Something went wrong. Please try again.");
@@ -147,7 +164,7 @@ export default function ResumeExperience({
     }
   }
 
-  function handleEdit(entry: Experience) {
+  function handleEdit(entry: PrismaResumeExperience) {
     setEditingId(entry.id);
 
     setForm({
@@ -165,12 +182,24 @@ export default function ResumeExperience({
   }
 
   async function handleUpdate() {
-    if (!editingId || !form.company.trim() || !form.position.trim()) {
+    setError("");
+
+    if (!editingId) {
+      setError("Experience entry could not be identified.");
+      return;
+    }
+
+    if (!form.position.trim()) {
+      setError("Position is required.");
+      return;
+    }
+
+    if (!form.company.trim()) {
+      setError("Company is required.");
       return;
     }
 
     setIsUpdating(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -199,9 +228,15 @@ export default function ResumeExperience({
         return;
       }
 
-      setEntries((current) =>
-        current.map((entry) => (entry.id === editingId ? data.data : entry)),
+      const updatedEntries = entries.map((entry) =>
+        entry.id === editingId ? (data.data as PrismaResumeExperience) : entry,
       );
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        experience: updatedEntries,
+      });
 
       setForm(emptyForm);
       setEditingId(null);
@@ -216,7 +251,7 @@ export default function ResumeExperience({
 
   return (
     <section>
-      <div className="flex flex-col mt-4 gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-lg font-bold text-slate-950">Experience</h3>
 
@@ -234,8 +269,9 @@ export default function ResumeExperience({
             if (editingId) {
               setEditingId(null);
               setForm(emptyForm);
-              setError("");
             }
+
+            setError("");
           }}
           className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
@@ -243,6 +279,7 @@ export default function ResumeExperience({
         </button>
       </div>
 
+      {/* Add / Edit Experience Form */}
       {isAdding && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -380,19 +417,13 @@ export default function ResumeExperience({
             </div>
           </div>
 
-          <div className="mt-5 flex justify-end">
+          <div className="mt-5 flex flex-col items-end">
             <button
               type="button"
               onClick={editingId ? handleUpdate : handleAdd}
-              disabled={
-                !form.company.trim() ||
-                !form.position.trim() ||
-                isAddingExperience ||
-                isUpdating
-              }
+              disabled={isAddingExperience || isUpdating}
               className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
               {isUpdating
                 ? "Updating..."
                 : isAddingExperience
@@ -401,10 +432,15 @@ export default function ResumeExperience({
                     ? "Update Experience"
                     : "Add Experience"}
             </button>
+
+            {error && (
+              <p className="mt-2 text-sm font-medium text-red-600">{error}</p>
+            )}
           </div>
         </div>
       )}
 
+      {/* Experience Entries */}
       <div className="mt-6 space-y-4">
         {entries.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center">

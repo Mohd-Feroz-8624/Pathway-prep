@@ -1,18 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
-type Certification = {
-  id: string;
-  name: string;
-  issuer: string | null;
-  issueDate: string | null;
-  credentialUrl: string | null;
-};
+import type { ResumeCertification as PrismaResumeCertification } from "@/app/generated/prisma/client";
 
 type ResumeCertificationsProps = {
   resumeId: string;
-  certifications: Certification[];
+  certifications: PrismaResumeCertification[];
 };
 
 type CertificationForm = {
@@ -33,7 +28,11 @@ export default function ResumeCertifications({
   resumeId,
   certifications,
 }: ResumeCertificationsProps) {
-  const [entries, setEntries] = useState<Certification[]>(certifications);
+  const { updateResumeData } = useResumeEditor();
+
+  const [entries, setEntries] =
+    useState<PrismaResumeCertification[]>(certifications);
+
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState<CertificationForm>(emptyForm);
   const [isAddingCertification, setIsAddingCertification] = useState(false);
@@ -41,6 +40,7 @@ export default function ResumeCertifications({
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
   const [error, setError] = useState("");
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
 
@@ -48,15 +48,19 @@ export default function ResumeCertifications({
       ...current,
       [name]: value,
     }));
+
+    setError("");
   }
 
   async function handleAdd() {
+    setError("");
+
     if (!form.name.trim()) {
+      setError("Certification name is required.");
       return;
     }
 
     setIsAddingCertification(true);
-    setError("");
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}/certifications`, {
@@ -79,13 +83,21 @@ export default function ResumeCertifications({
         return;
       }
 
-      setEntries((current) => [...current, data.data]);
+      const updatedEntries: PrismaResumeCertification[] = [
+        ...entries,
+        data.data,
+      ];
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        certifications: updatedEntries,
+      });
 
       setForm(emptyForm);
       setIsAdding(false);
     } catch (error) {
       console.error("Add certification error:", error);
-
       setError("Something went wrong. Please try again.");
     } finally {
       setIsAddingCertification(false);
@@ -119,16 +131,22 @@ export default function ResumeCertifications({
         return;
       }
 
-      setEntries((current) => current.filter((entry) => entry.id !== id));
+      const updatedEntries = entries.filter((entry) => entry.id !== id);
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        certifications: updatedEntries,
+      });
     } catch (error) {
       console.error("Delete certification error:", error);
-
       setError("Something went wrong. Please try again.");
     } finally {
       setIsDeleting(null);
     }
   }
-  function handleEdit(certification: Certification) {
+
+  function handleEdit(certification: PrismaResumeCertification) {
     setEditingId(certification.id);
 
     setForm({
@@ -141,13 +159,21 @@ export default function ResumeCertifications({
     setIsAdding(true);
     setError("");
   }
+
   async function handleUpdate() {
-    if (!editingId || !form.name.trim()) {
+    setError("");
+
+    if (!editingId) {
+      setError("Certification could not be identified.");
+      return;
+    }
+
+    if (!form.name.trim()) {
+      setError("Certification name is required.");
       return;
     }
 
     setIsUpdating(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -173,25 +199,33 @@ export default function ResumeCertifications({
         return;
       }
 
-      setEntries((current) =>
-        current.map((entry) => (entry.id === editingId ? data.data : entry)),
+      const updatedEntries = entries.map((entry) =>
+        entry.id === editingId
+          ? (data.data as PrismaResumeCertification)
+          : entry,
       );
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        certifications: updatedEntries,
+      });
 
       setForm(emptyForm);
       setEditingId(null);
       setIsAdding(false);
     } catch (error) {
       console.error("Update certification error:", error);
-
       setError("Something went wrong. Please try again.");
     } finally {
       setIsUpdating(false);
     }
   }
+
   return (
     <section>
       {/* Header */}
-      <div className="flex flex-col mt-4 gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-lg font-bold text-slate-950">Certifications</h3>
 
@@ -208,8 +242,9 @@ export default function ResumeCertifications({
             if (editingId) {
               setEditingId(null);
               setForm(emptyForm);
-              setError("");
             }
+
+            setError("");
           }}
           className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
@@ -217,11 +252,10 @@ export default function ResumeCertifications({
         </button>
       </div>
 
-      {/* Add Certification Form */}
+      {/* Add / Edit Form */}
       {isAdding && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <div className="grid gap-4 sm:grid-cols-2">
-            {/* Certification Name */}
             <div className="sm:col-span-2">
               <label
                 htmlFor={`certification-name-${resumeId}`}
@@ -241,7 +275,6 @@ export default function ResumeCertifications({
               />
             </div>
 
-            {/* Issuer */}
             <div>
               <label
                 htmlFor={`certification-issuer-${resumeId}`}
@@ -261,7 +294,6 @@ export default function ResumeCertifications({
               />
             </div>
 
-            {/* Issue Date */}
             <div>
               <label
                 htmlFor={`certification-date-${resumeId}`}
@@ -281,7 +313,6 @@ export default function ResumeCertifications({
               />
             </div>
 
-            {/* Credential URL */}
             <div className="sm:col-span-2">
               <label
                 htmlFor={`credential-url-${resumeId}`}
@@ -302,17 +333,11 @@ export default function ResumeCertifications({
             </div>
           </div>
 
-          {/* Add Button */}
-          <div className="mt-5 flex justify-end">
-            {error && (
-              <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
-            )}
+          <div className="mt-5 flex flex-col items-end">
             <button
               type="button"
               onClick={editingId ? handleUpdate : handleAdd}
-              disabled={
-                !form.name.trim() || isAddingCertification || isUpdating
-              }
+              disabled={isAddingCertification || isUpdating}
               className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isUpdating
@@ -323,6 +348,10 @@ export default function ResumeCertifications({
                     ? "Update Certification"
                     : "Add Certification"}
             </button>
+
+            {error && (
+              <p className="mt-2 text-sm font-medium text-red-600">{error}</p>
+            )}
           </div>
         </div>
       )}

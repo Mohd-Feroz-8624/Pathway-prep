@@ -1,20 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
-type Education = {
-  id: string;
-  institution: string;
-  degree: string | null;
-  field: string | null;
-  startDate: string | null;
-  endDate: string | null;
-  description: string | null;
-};
+import type { ResumeEducation as PrismaResumeEducation } from "@/app/generated/prisma/client";
 
 type ResumeEducationProps = {
   resumeId: string;
-  education: Education[];
+  education: PrismaResumeEducation[];
 };
 
 type EducationForm = {
@@ -39,16 +32,18 @@ export default function ResumeEducation({
   resumeId,
   education,
 }: ResumeEducationProps) {
-  const [entries, setEntries] = useState<Education[]>(education);
+  const { updateResumeData } = useResumeEditor();
+
+  const [entries, setEntries] = useState<PrismaResumeEducation[]>(education);
+
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState<EducationForm>(emptyForm);
 
   const [isAddingEducation, setIsAddingEducation] = useState(false);
-  const [error, setError] = useState("");
-
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [error, setError] = useState("");
 
   function handleChange(
     event:
@@ -61,15 +56,19 @@ export default function ResumeEducation({
       ...current,
       [name]: value,
     }));
+
+    setError("");
   }
 
   async function handleAdd() {
+    setError("");
+
     if (!form.institution.trim()) {
+      setError("Institution is required.");
       return;
     }
 
     setIsAddingEducation(true);
-    setError("");
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}/education`, {
@@ -94,7 +93,13 @@ export default function ResumeEducation({
         return;
       }
 
-      setEntries((current) => [...current, data.data]);
+      const updatedEntries: PrismaResumeEducation[] = [...entries, data.data];
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        education: updatedEntries,
+      });
 
       setForm(emptyForm);
       setIsAdding(false);
@@ -105,6 +110,7 @@ export default function ResumeEducation({
       setIsAddingEducation(false);
     }
   }
+
   async function handleDelete(id: string) {
     const confirmed = window.confirm(
       "Are you sure you want to delete this education entry?",
@@ -129,7 +135,13 @@ export default function ResumeEducation({
         return;
       }
 
-      setEntries((current) => current.filter((entry) => entry.id !== id));
+      const updatedEntries = entries.filter((entry) => entry.id !== id);
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        education: updatedEntries,
+      });
     } catch (error) {
       console.error("Delete education error:", error);
       setError("Something went wrong. Please try again.");
@@ -138,7 +150,7 @@ export default function ResumeEducation({
     }
   }
 
-  function handleEdit(entry: Education) {
+  function handleEdit(entry: PrismaResumeEducation) {
     setEditingId(entry.id);
 
     setForm({
@@ -153,13 +165,21 @@ export default function ResumeEducation({
     setIsAdding(true);
     setError("");
   }
+
   async function handleUpdate() {
-    if (!editingId || !form.institution.trim()) {
+    setError("");
+
+    if (!editingId) {
+      setError("Education entry could not be identified.");
+      return;
+    }
+
+    if (!form.institution.trim()) {
+      setError("Institution is required.");
       return;
     }
 
     setIsUpdating(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -187,9 +207,15 @@ export default function ResumeEducation({
         return;
       }
 
-      setEntries((current) =>
-        current.map((entry) => (entry.id === editingId ? data.data : entry)),
+      const updatedEntries = entries.map((entry) =>
+        entry.id === editingId ? (data.data as PrismaResumeEducation) : entry,
       );
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        education: updatedEntries,
+      });
 
       setForm(emptyForm);
       setEditingId(null);
@@ -204,7 +230,7 @@ export default function ResumeEducation({
 
   return (
     <section>
-      <div className="flex flex-col gap-4 mt-4  sm:flex-row sm:items-start sm:justify-between">
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-lg font-bold text-slate-950">Education</h3>
 
@@ -222,6 +248,8 @@ export default function ResumeEducation({
               setEditingId(null);
               setForm(emptyForm);
             }
+
+            setError("");
           }}
           className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
@@ -229,7 +257,7 @@ export default function ResumeEducation({
         </button>
       </div>
 
-      {/* Add Education Form */}
+      {/* Add / Edit Education Form */}
       {isAdding && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -292,14 +320,14 @@ export default function ResumeEducation({
 
             <div>
               <label
-                htmlFor={`start-date-${resumeId}`}
+                htmlFor={`education-start-${resumeId}`}
                 className="text-sm font-semibold text-slate-700"
               >
                 Start Date
               </label>
 
               <input
-                id={`start-date-${resumeId}`}
+                id={`education-start-${resumeId}`}
                 name="startDate"
                 type="text"
                 value={form.startDate}
@@ -311,14 +339,14 @@ export default function ResumeEducation({
 
             <div>
               <label
-                htmlFor={`end-date-${resumeId}`}
+                htmlFor={`education-end-${resumeId}`}
                 className="text-sm font-semibold text-slate-700"
               >
                 End Date
               </label>
 
               <input
-                id={`end-date-${resumeId}`}
+                id={`education-end-${resumeId}`}
                 name="endDate"
                 type="text"
                 value={form.endDate}
@@ -330,14 +358,14 @@ export default function ResumeEducation({
 
             <div className="sm:col-span-2">
               <label
-                htmlFor={`description-${resumeId}`}
+                htmlFor={`education-description-${resumeId}`}
                 className="text-sm font-semibold text-slate-700"
               >
                 Description
               </label>
 
               <textarea
-                id={`description-${resumeId}`}
+                id={`education-description-${resumeId}`}
                 name="description"
                 rows={4}
                 value={form.description}
@@ -348,18 +376,13 @@ export default function ResumeEducation({
             </div>
           </div>
 
-          <div className="mt-5  flex justify-end">
+          <div className="mt-5 flex flex-col items-end">
             <button
               type="button"
               onClick={editingId ? handleUpdate : handleAdd}
-              disabled={
-                !form.institution.trim() || isAddingEducation || isUpdating
-              }
+              disabled={isAddingEducation || isUpdating}
               className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {error && (
-                <p className="mt-2 text-sm text-red-600">{error}</p>
-              )}
               {isUpdating
                 ? "Updating..."
                 : isAddingEducation
@@ -367,8 +390,11 @@ export default function ResumeEducation({
                   : editingId
                     ? "Update Education"
                     : "Add Education"}
-                    
             </button>
+
+            {error && (
+              <p className="mt-2 text-sm font-medium text-red-600">{error}</p>
+            )}
           </div>
         </div>
       )}

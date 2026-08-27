@@ -62,7 +62,7 @@ export default function ClassicTemplate({ resume }: ClassicTemplateProps) {
   );
 
   return (
-    <article className="mx-auto min-h-[297mm] w-[210mm] bg-white px-[18mm] py-[15mm] text-[11px] leading-[1.45] text-slate-800 shadow-sm print:m-0 print:min-h-[297mm] print:w-[210mm] print:shadow-none">
+    <article className="mx-auto min-h-[297mm] w-full max-w-[210mm] bg-white px-[18mm] py-[15mm] text-[11px] leading-[1.45] text-slate-800 shadow-sm print:m-0 print:min-h-[297mm] print:w-[210mm] print:shadow-none">
       {/* Header */}
       <header className="text-center">
         <h1 className="text-2xl font-bold tracking-tight text-slate-950">
