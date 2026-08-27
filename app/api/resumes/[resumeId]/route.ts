@@ -101,3 +101,87 @@ export async function PATCH(request: Request, { params }: ResumeRouteProps) {
     );
   }
 }
+export async function DELETE(request: Request, { params }: ResumeRouteProps) {
+  try {
+    // 1. Authenticate with Clerk
+    const { userId: clerkId } = await auth();
+
+    if (!clerkId) {
+      return NextResponse.json(
+        {
+          error: "Unauthorized",
+        },
+        { status: 401 },
+      );
+    }
+
+    // 2. Find database user
+    const user = await prisma.user.findUnique({
+      where: {
+        clerkId,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        {
+          error: "User not found",
+        },
+        { status: 404 },
+      );
+    }
+
+    // 3. Get resume ID
+    const { resumeId } = await params;
+
+    if (!resumeId) {
+      return NextResponse.json(
+        {
+          error: "Resume ID is required",
+        },
+        { status: 400 },
+      );
+    }
+
+    // 4. Verify resume ownership
+    const resume = await prisma.resume.findFirst({
+      where: {
+        id: resumeId,
+        userId: user.id,
+      },
+    });
+
+    if (!resume) {
+      return NextResponse.json(
+        {
+          error: "Resume not found",
+        },
+        { status: 404 },
+      );
+    }
+
+    // 5. Delete resume
+    // Related resume data will be deleted automatically
+    // because the Prisma relations use onDelete: Cascade.
+    await prisma.resume.delete({
+      where: {
+        id: resumeId,
+      },
+    });
+
+    // 6. Return success
+    return NextResponse.json({
+      success: true,
+      message: "Resume deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete resume error:", error);
+
+    return NextResponse.json(
+      {
+        error: "Failed to delete resume",
+      },
+      { status: 500 },
+    );
+  }
+}

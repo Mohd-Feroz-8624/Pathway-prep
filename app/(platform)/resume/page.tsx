@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+
 import { getCurrentUser } from "@/lib/current-user";
+import { prisma } from "@/lib/prisma";
+import DeleteResumeButton from "./DeleteResumeButton";
 import CreateResumeButton from "./CreateResumeButton";
 
 export default async function ResumePage() {
@@ -9,6 +12,18 @@ export default async function ResumePage() {
   if (!user) {
     redirect("/sign-in");
   }
+
+  const resumes = await prisma.resume.findMany({
+    where: {
+      userId: user.id,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+    include: {
+      template: true,
+    },
+  });
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -27,9 +42,9 @@ export default async function ResumePage() {
           </p>
         </div>
 
-        {/* Create Resume */}
+        {/* Create Resume / Template / Analysis */}
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-6 print:hidden">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
               📄
             </div>
@@ -99,20 +114,64 @@ export default async function ResumePage() {
             Your saved resumes will appear here.
           </p>
 
-          <div className="mt-6 rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">
-              📄
+          {resumes.length === 0 ? (
+            <div className="mt-6 rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">
+                📄
+              </div>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-950">
+                No resumes yet
+              </h3>
+
+              <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
+                Create your first resume and start building your professional
+                profile.
+              </p>
             </div>
+          ) : (
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {resumes.map((resume) => (
+                <article
+                  key={resume.id}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
+                      📄
+                    </div>
 
-            <h3 className="mt-5 text-lg font-bold text-slate-950">
-              No resumes yet
-            </h3>
+                    {resume.template?.name && (
+                      <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                        {resume.template.name}
+                      </span>
+                    )}
+                  </div>
 
-            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
-              Create your first resume and start building your professional
-              profile.
-            </p>
-          </div>
+                  <h3 className="mt-5 truncate text-lg font-bold text-slate-950">
+                    {resume.title || "Untitled Resume"}
+                  </h3>
+
+                  <p className="mt-2 text-sm text-slate-500">
+                    Last updated{" "}
+                    {new Intl.DateTimeFormat("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    }).format(resume.updatedAt)}
+                  </p>
+
+                  <Link
+                    href={`/resume/${resume.id}`}
+                    className="mt-5 block w-full rounded-xl bg-slate-950 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-blue-700"
+                  >
+                    Edit Resume
+                  </Link>
+                  <DeleteResumeButton resumeId={resume.id} />
+                </article>
+              ))}
+            </div>
+          )}
         </section>
       </section>
     </main>

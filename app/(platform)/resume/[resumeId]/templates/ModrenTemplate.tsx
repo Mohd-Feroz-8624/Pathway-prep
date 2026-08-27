@@ -63,7 +63,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 
 export default function ModernTemplate({ resume }: ModernTemplateProps) {
   return (
-    <article className="w-full max-w-[210mm] min-h-[197mm] bg-white px-12 py-10 font-sans text-slate-800 shadow-xl">
+    <article className="w-full max-w-[210mm] min-h-[297mm] bg-white px-12 py-10 font-sans text-slate-800 shadow-xl">
       {/* Header */}
       <header className="border-b-2 border-blue-600 pb-5">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-950">

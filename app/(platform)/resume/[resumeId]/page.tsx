@@ -11,6 +11,7 @@ import ResumeCertifications from "./ResumeCertifications";
 import ResumePreview from "./ResumePreview";
 import ResumeSectionNav from "./ResumeSectionNav";
 import ResumeEditorShell from "./ResumeEditorShell";
+import ResumeActions from "./ResumeActions";
 
 import { prisma } from "@/lib/prisma";
 import ResumeAchievements from "./ResumeAchievements";
@@ -82,6 +83,7 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
   return (
     <ResumeEditorShell
       initialResume={{
+        id: resume.id,
         title: resume.title,
         summary: resume.summary,
         phone: resume.phone,
@@ -100,7 +102,7 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
       <main className="min-h-screen bg-slate-50">
         <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
           {/* Header */}
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between print:hidden">
             <div>
               <p className="text-sm font-semibold text-blue-600">
                 Resume Builder
@@ -115,27 +117,16 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
               </p>
             </div>
 
-            <div className="flex gap-3">
-              <button
-                type="button"
-                className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-              >
-                Preview
-              </button>
-
-              <button
-                type="button"
-                className="rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
-              >
-                Save
-              </button>
-            </div>
+            <ResumeActions />
           </div>
 
           {/* Editor layout */}
-          <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_420px]">
+          <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_420px] print:block">
             {/* Editor */}
-            <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+            <section
+              id="resume-editor"
+              className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 print:hidden"
+            >
               <ResumeSectionNav />
               <h2 className="text-xl font-bold text-slate-950">
                 Resume Information
@@ -197,7 +188,6 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
                     resumeId={resume.id}
                     certifications={resume.certifications}
                   />
-
                 </div>
                 <div id="achievements">
                   <ResumeAchievements
@@ -249,7 +239,10 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
 
             {/* Preview placeholder */}
             {/* Resume Preview */}
-            <aside className="print-resume rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-6 lg:h-fit">
+            <aside
+              id="resume-print-target"
+              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-6 lg:h-fit"
+            >
               <ResumePreview />
             </aside>
           </div>

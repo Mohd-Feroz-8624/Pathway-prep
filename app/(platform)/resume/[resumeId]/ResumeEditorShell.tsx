@@ -12,6 +12,7 @@ import type {
 } from "@/app/generated/prisma/client";
 
 export type ResumeEditorData = {
+  id:string;
   title: string;
   summary: string | null;
   phone: string | null;

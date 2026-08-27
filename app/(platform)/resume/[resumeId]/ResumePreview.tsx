@@ -21,7 +21,8 @@ export default function ResumePreview() {
 
   return (
     <div className="w-full">
-      <div className="mb-4 flex items-center justify-between">
+      {/* Preview Header */}
+      <div className="mb-4 flex items-center justify-between print:hidden">
         <div>
           <h2 className="text-base font-bold text-slate-950">Resume Preview</h2>
 
@@ -35,8 +36,12 @@ export default function ResumePreview() {
         </span>
       </div>
 
-      <div className="overflow-auto rounded-xl bg-slate-200 p-4 sm:p-6">
-        <div className="mx-auto w-fit">{renderTemplate()}</div>
+      {/* Actual Resume */}
+      <div
+        id="resume-preview-content"
+        className="overflow-auto rounded-xl bg-slate-200 p-4 sm:p-6 print:overflow-visible print:rounded-none print:bg-white print:p-0"
+      >
+        <div className="mx-auto w-fit print:w-[210mm]">{renderTemplate()}</div>
       </div>
     </div>
   );
