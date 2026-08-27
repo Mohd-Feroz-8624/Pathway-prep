@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
-type Achievement = {
-  id: string;
-  title: string;
-  description: string | null;
-};
+import type { ResumeAchievement as PrismaResumeAchievement } from "@/app/generated/prisma/client";
 
 type ResumeAchievementsProps = {
   resumeId: string;
-  achievements: Achievement[];
+  achievements: PrismaResumeAchievement[];
 };
 
 type AchievementForm = {
@@ -27,7 +24,10 @@ export default function ResumeAchievements({
   resumeId,
   achievements,
 }: ResumeAchievementsProps) {
-  const [entries, setEntries] = useState<Achievement[]>(achievements);
+  const { updateResumeData } = useResumeEditor();
+
+  const [entries, setEntries] =
+    useState<PrismaResumeAchievement[]>(achievements);
 
   const [isAdding, setIsAdding] = useState(false);
   const [isAddingAchievement, setIsAddingAchievement] = useState(false);
@@ -47,14 +47,19 @@ export default function ResumeAchievements({
       ...current,
       [name]: value,
     }));
+
+    setError("");
   }
+
   async function handleAdd() {
+    setError("");
+
     if (!form.title.trim()) {
+      setError("Achievement title is required.");
       return;
     }
 
     setIsAddingAchievement(true);
-    setError("");
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}/achievements`, {
@@ -75,19 +80,24 @@ export default function ResumeAchievements({
         return;
       }
 
-      setEntries((current) => [...current, data.data]);
-      window.dispatchEvent(new CustomEvent("resume-data-updated"));
+      const updatedEntries: PrismaResumeAchievement[] = [...entries, data.data];
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        achievements: updatedEntries,
+      });
 
       setForm(emptyForm);
       setIsAdding(false);
     } catch (error) {
       console.error("Add achievement error:", error);
-
       setError("Something went wrong. Please try again.");
     } finally {
       setIsAddingAchievement(false);
     }
   }
+
   async function handleDelete(id: string) {
     const confirmed = window.confirm(
       "Are you sure you want to delete this achievement?",
@@ -115,16 +125,22 @@ export default function ResumeAchievements({
         return;
       }
 
-      setEntries((current) => current.filter((entry) => entry.id !== id));
+      const updatedEntries = entries.filter((entry) => entry.id !== id);
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        achievements: updatedEntries,
+      });
     } catch (error) {
       console.error("Delete achievement error:", error);
-
       setError("Something went wrong. Please try again.");
     } finally {
       setIsDeleting(null);
     }
   }
-  function handleEdit(achievement: Achievement) {
+
+  function handleEdit(achievement: PrismaResumeAchievement) {
     setEditingId(achievement.id);
 
     setForm({
@@ -135,13 +151,21 @@ export default function ResumeAchievements({
     setIsAdding(true);
     setError("");
   }
+
   async function handleUpdate() {
-    if (!editingId || !form.title.trim()) {
+    setError("");
+
+    if (!editingId) {
+      setError("Achievement could not be identified.");
+      return;
+    }
+
+    if (!form.title.trim()) {
+      setError("Achievement title is required.");
       return;
     }
 
     setIsUpdating(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -165,16 +189,21 @@ export default function ResumeAchievements({
         return;
       }
 
-      setEntries((current) =>
-        current.map((entry) => (entry.id === editingId ? data.data : entry)),
+      const updatedEntries = entries.map((entry) =>
+        entry.id === editingId ? (data.data as PrismaResumeAchievement) : entry,
       );
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        achievements: updatedEntries,
+      });
 
       setForm(emptyForm);
       setEditingId(null);
       setIsAdding(false);
     } catch (error) {
       console.error("Update achievement error:", error);
-
       setError("Something went wrong. Please try again.");
     } finally {
       setIsUpdating(false);
@@ -201,8 +230,9 @@ export default function ResumeAchievements({
             if (editingId) {
               setEditingId(null);
               setForm(emptyForm);
-              setError("");
             }
+
+            setError("");
           }}
           className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
@@ -210,11 +240,10 @@ export default function ResumeAchievements({
         </button>
       </div>
 
-      {/* Add Achievement Form */}
+      {/* Add / Edit Form */}
       {isAdding && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <div className="space-y-4">
-            {/* Title */}
             <div>
               <label
                 htmlFor={`achievement-title-${resumeId}`}
@@ -234,7 +263,6 @@ export default function ResumeAchievements({
               />
             </div>
 
-            {/* Description */}
             <div>
               <label
                 htmlFor={`achievement-description-${resumeId}`}
@@ -255,17 +283,13 @@ export default function ResumeAchievements({
             </div>
           </div>
 
-          {/* Add Button */}
-          <div className="mt-5 flex justify-end">
+          <div className="mt-5 flex flex-col items-end">
             <button
               type="button"
               onClick={editingId ? handleUpdate : handleAdd}
-              disabled={!form.title.trim() || isAddingAchievement || isUpdating}
+              disabled={isAddingAchievement || isUpdating}
               className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {error && (
-                <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
-              )}
               {isUpdating
                 ? "Updating..."
                 : isAddingAchievement
@@ -274,6 +298,10 @@ export default function ResumeAchievements({
                     ? "Update Achievement"
                     : "Add Achievement"}
             </button>
+
+            {error && (
+              <p className="mt-2 text-sm font-medium text-red-600">{error}</p>
+            )}
           </div>
         </div>
       )}

@@ -1,19 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
-type Project = {
-  id: string;
-  title: string;
-  description: string | null;
-  technologies: string | null;
-  githubUrl: string | null;
-  liveUrl: string | null;
-};
+import type { ResumeProject as PrismaResumeProject } from "@/app/generated/prisma/client";
 
 type ResumeProjectsProps = {
   resumeId: string;
-  projects: Project[];
+  projects: PrismaResumeProject[];
 };
 
 type ProjectForm = {
@@ -36,7 +30,10 @@ export default function ResumeProjects({
   resumeId,
   projects,
 }: ResumeProjectsProps) {
-  const [entries, setEntries] = useState<Project[]>(projects);
+  const { updateResumeData } = useResumeEditor();
+
+  const [entries, setEntries] = useState<PrismaResumeProject[]>(projects);
+
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState<ProjectForm>(emptyForm);
   const [isAddingProject, setIsAddingProject] = useState(false);
@@ -56,15 +53,19 @@ export default function ResumeProjects({
       ...current,
       [name]: value,
     }));
+
+    setError("");
   }
 
   async function handleAdd() {
+    setError("");
+
     if (!form.title.trim()) {
+      setError("Project title is required.");
       return;
     }
 
     setIsAddingProject(true);
-    setError("");
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}/projects`, {
@@ -88,7 +89,13 @@ export default function ResumeProjects({
         return;
       }
 
-      setEntries((current) => [...current, data.data]);
+      const updatedEntries: PrismaResumeProject[] = [...entries, data.data];
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        projects: updatedEntries,
+      });
 
       setForm(emptyForm);
       setIsAdding(false);
@@ -124,7 +131,13 @@ export default function ResumeProjects({
         return;
       }
 
-      setEntries((current) => current.filter((entry) => entry.id !== id));
+      const updatedEntries = entries.filter((entry) => entry.id !== id);
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        projects: updatedEntries,
+      });
     } catch (error) {
       console.error("Delete project error:", error);
       setError("Something went wrong. Please try again.");
@@ -133,7 +146,7 @@ export default function ResumeProjects({
     }
   }
 
-  function handleEdit(entry: Project) {
+  function handleEdit(entry: PrismaResumeProject) {
     setEditingId(entry.id);
 
     setForm({
@@ -149,12 +162,19 @@ export default function ResumeProjects({
   }
 
   async function handleUpdate() {
-    if (!editingId || !form.title.trim()) {
+    setError("");
+
+    if (!editingId) {
+      setError("Project could not be identified.");
+      return;
+    }
+
+    if (!form.title.trim()) {
+      setError("Project title is required.");
       return;
     }
 
     setIsUpdating(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -181,9 +201,15 @@ export default function ResumeProjects({
         return;
       }
 
-      setEntries((current) =>
-        current.map((entry) => (entry.id === editingId ? data.data : entry)),
+      const updatedEntries = entries.map((entry) =>
+        entry.id === editingId ? (data.data as PrismaResumeProject) : entry,
       );
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        projects: updatedEntries,
+      });
 
       setForm(emptyForm);
       setEditingId(null);
@@ -199,7 +225,7 @@ export default function ResumeProjects({
   return (
     <section>
       {/* Header */}
-      <div className="flex flex-col mt-4 gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-lg font-bold text-slate-950">Projects</h3>
 
@@ -217,19 +243,22 @@ export default function ResumeProjects({
             if (editingId) {
               setEditingId(null);
               setForm(emptyForm);
-              setError("");
             }
+
+            setError("");
           }}
           className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
-          {error && (
-            <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
-          )}
           {isAdding ? "Cancel" : "+ Add Project"}
         </button>
       </div>
 
-      {/* Add Project Form */}
+      {/* Error */}
+      {error && (
+        <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
+      )}
+
+      {/* Add / Edit Project Form */}
       {isAdding && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -338,12 +367,12 @@ export default function ResumeProjects({
             </div>
           </div>
 
-          {/* Add Button */}
-          <div className="mt-5 flex justify-end">
+          {/* Save Button */}
+          <div className="mt-5 flex flex-col items-end">
             <button
               type="button"
               onClick={editingId ? handleUpdate : handleAdd}
-              disabled={!form.title.trim() || isAddingProject || isUpdating}
+              disabled={isAddingProject || isUpdating}
               className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isUpdating
@@ -433,7 +462,7 @@ export default function ResumeProjects({
                   </div>
                 </div>
 
-                {/* Delete */}
+                {/* Actions */}
                 <div className="flex gap-2 self-start">
                   <button
                     type="button"

@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useResumeEditor } from "./ResumeEditorShell";
 
-type Skill = {
-  id: string;
-  name: string;
-  category: string | null;
-};
+import type { ResumeSkill as PrismaResumeSkill } from "@/app/generated/prisma/client";
 
 type ResumeSkillsProps = {
   resumeId: string;
-  skills: Skill[];
+  skills: PrismaResumeSkill[];
 };
 
 type SkillForm = {
@@ -24,7 +21,10 @@ const emptyForm: SkillForm = {
 };
 
 export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
-  const [entries, setEntries] = useState<Skill[]>(skills);
+  const { updateResumeData } = useResumeEditor();
+
+  const [entries, setEntries] = useState<PrismaResumeSkill[]>(skills);
+
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState<SkillForm>(emptyForm);
   const [isAddingSkill, setIsAddingSkill] = useState(false);
@@ -32,6 +32,7 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
 
@@ -39,15 +40,19 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
       ...current,
       [name]: value,
     }));
+
+    setError("");
   }
 
   async function handleAdd() {
+    setError("");
+
     if (!form.name.trim()) {
+      setError("Skill name is required.");
       return;
     }
 
     setIsAddingSkill(true);
-    setError("");
 
     try {
       const response = await fetch(`/api/resumes/${resumeId}/skills`, {
@@ -68,7 +73,13 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
         return;
       }
 
-      setEntries((current) => [...current, data.data]);
+      const updatedEntries: PrismaResumeSkill[] = [...entries, data.data];
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        skills: updatedEntries,
+      });
 
       setForm(emptyForm);
       setIsAdding(false);
@@ -97,6 +108,18 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
         method: "DELETE",
       });
 
+      const contentType = response.headers.get("content-type");
+
+      if (!contentType?.includes("application/json")) {
+        const text = await response.text();
+
+        console.error("Expected JSON but received:", text);
+
+        setError(`Server returned ${response.status} instead of JSON.`);
+
+        return;
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -104,7 +127,13 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
         return;
       }
 
-      setEntries((current) => current.filter((entry) => entry.id !== id));
+      const updatedEntries = entries.filter((entry) => entry.id !== id);
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        skills: updatedEntries,
+      });
     } catch (error) {
       console.error("Delete skill error:", error);
       setError("Something went wrong. Please try again.");
@@ -113,7 +142,7 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
     }
   }
 
-  function handleEdit(skill: Skill) {
+  function handleEdit(skill: PrismaResumeSkill) {
     setEditingId(skill.id);
 
     setForm({
@@ -126,12 +155,19 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
   }
 
   async function handleUpdate() {
-    if (!editingId || !form.name.trim()) {
+    setError("");
+
+    if (!editingId) {
+      setError("Skill could not be identified.");
+      return;
+    }
+
+    if (!form.name.trim()) {
+      setError("Skill name is required.");
       return;
     }
 
     setIsUpdating(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -155,9 +191,15 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
         return;
       }
 
-      setEntries((current) =>
-        current.map((entry) => (entry.id === editingId ? data.data : entry)),
+      const updatedEntries = entries.map((entry) =>
+        entry.id === editingId ? (data.data as PrismaResumeSkill) : entry,
       );
+
+      setEntries(updatedEntries);
+
+      updateResumeData({
+        skills: updatedEntries,
+      });
 
       setForm(emptyForm);
       setEditingId(null);
@@ -173,7 +215,7 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
   return (
     <section>
       {/* Header */}
-      <div className="flex flex-col gap-4 mt-4  sm:flex-row sm:items-start sm:justify-between">
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-lg font-bold text-slate-950">Skills</h3>
 
@@ -181,9 +223,7 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
             Add technical skills and organize them by category.
           </p>
         </div>
-        {error && (
-          <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
-        )}
+
         <button
           type="button"
           onClick={() => {
@@ -192,8 +232,9 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
             if (editingId) {
               setEditingId(null);
               setForm(emptyForm);
-              setError("");
             }
+
+            setError("");
           }}
           className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
@@ -201,7 +242,12 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
         </button>
       </div>
 
-      {/* Add Skill Form */}
+      {/* Error */}
+      {error && (
+        <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
+      )}
+
+      {/* Add / Edit Skill Form */}
       {isAdding && (
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -246,12 +292,12 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
             </div>
           </div>
 
-          {/* Add Button */}
-          <div className="mt-5 flex justify-end">
+          {/* Save Button */}
+          <div className="mt-5 flex flex-col items-end">
             <button
               type="button"
               onClick={editingId ? handleUpdate : handleAdd}
-              disabled={!form.name.trim() || isAddingSkill || isUpdating}
+              disabled={isAddingSkill || isUpdating}
               className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isUpdating
@@ -281,17 +327,20 @@ export default function ResumeSkills({ resumeId, skills }: ResumeSkillsProps) {
         ) : (
           <div className="space-y-6">
             {Object.entries(
-              entries.reduce<Record<string, Skill[]>>((groups, skill) => {
-                const category = skill.category || "Other";
+              entries.reduce<Record<string, PrismaResumeSkill[]>>(
+                (groups, skill) => {
+                  const category = skill.category || "Other";
 
-                if (!groups[category]) {
-                  groups[category] = [];
-                }
+                  if (!groups[category]) {
+                    groups[category] = [];
+                  }
 
-                groups[category].push(skill);
+                  groups[category].push(skill);
 
-                return groups;
-              }, {}),
+                  return groups;
+                },
+                {},
+              ),
             ).map(([category, categorySkills]) => (
               <div key={category}>
                 <h4 className="mb-3 text-sm font-bold text-slate-800">

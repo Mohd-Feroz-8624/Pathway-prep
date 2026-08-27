@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import {useResumeEditor} from "./ResumeEditorShell"
 
 type ResumePersonalInfoProps = {
   resumeId: string;
@@ -34,6 +35,8 @@ export default function ResumePersonalInfo({
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [isDirty, setIsDirty] = useState(false);
+  const { updateResumeData } = useResumeEditor();
+  
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -49,6 +52,21 @@ export default function ResumePersonalInfo({
 
   async function handleSave() {
     if (!isDirty) {
+      return;
+    }
+    if (
+      formData.linkedin.trim() &&
+      !/^https?:\/\/(www\.)?linkedin\.com\/.+/i.test(formData.linkedin.trim())
+    ) {
+      setError("Please enter a valid LinkedIn URL.");
+      return;
+    }
+
+    if (
+      formData.github.trim() &&
+      !/^https?:\/\/(www\.)?github\.com\/.+/i.test(formData.github.trim())
+    ) {
+      setError("Please enter a valid GitHub URL.");
       return;
     }
     setIsSaving(true);
@@ -75,6 +93,12 @@ export default function ResumePersonalInfo({
         setError(data.error || "Failed to save personal information.");
         return;
       }
+      updateResumeData({
+        phone: formData.phone,
+        location: formData.location,
+        linkedin: formData.linkedin,
+        github: formData.github,
+      });
       setIsDirty(false);
       setSuccess("Personal information saved successfully.");
     } catch (error) {
