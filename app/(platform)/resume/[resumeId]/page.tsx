@@ -8,6 +8,8 @@ import ResumeExperience from "./ResumeExperience";
 import ResumeProjects from "./ResumeProjects";
 import ResumeSkills from "./ResumeSkills";
 import ResumeCertifications from "./ResumeCertifications";
+import ResumePreview from "./ResumePreview";
+
 import { prisma } from "@/lib/prisma";
 
 type ResumePageProps = {
@@ -22,7 +24,6 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
   if (!user) {
     redirect("/sign-in");
   }
-
   const { resumeId } = await params;
 
   const resume = await prisma.resume.findFirst({
@@ -31,13 +32,43 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
       userId: user.id,
     },
     include: {
+      education: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+
+      experience: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+
+      projects: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+
+      skills: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+
+      certifications: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+
+      achievements: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+
       template: true,
-      education: true,
-      experience: true,
-      projects: true,
-      skills: true,
-      certifications: true,
-      achievements: true,
     },
   });
 
@@ -84,7 +115,7 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
         {/* Editor layout */}
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_420px]">
           {/* Editor */}
-          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm print-hidden">
             <h2 className="text-xl font-bold text-slate-950">
               Resume Information
             </h2>
@@ -127,7 +158,7 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
                 <ResumeCertifications
                   resumeId={resume.id}
                   certifications={resume.certifications}
-                />  
+                />
               </div>
 
               {/* Sections */}
@@ -172,36 +203,25 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
           </section>
 
           {/* Preview placeholder */}
-          <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-6 lg:h-fit">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="font-bold text-slate-950">Resume Preview</h2>
-
-                <p className="mt-1 text-xs text-slate-500">
-                  Live preview will appear here.
-                </p>
-              </div>
-
-              <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
-                Draft
-              </span>
-            </div>
-
-            <div className="mt-6 aspect-8.5/11 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6">
-              <div className="h-5 w-40 rounded bg-slate-200" />
-
-              <div className="mt-3 h-3 w-56 rounded bg-slate-200" />
-
-              <div className="mt-8 h-3 w-24 rounded bg-slate-200" />
-
-              <div className="mt-3 h-2 w-full rounded bg-slate-200" />
-              <div className="mt-2 h-2 w-5/6 rounded bg-slate-200" />
-
-              <div className="mt-8 h-3 w-28 rounded bg-slate-200" />
-
-              <div className="mt-3 h-2 w-full rounded bg-slate-200" />
-              <div className="mt-2 h-2 w-4/5 rounded bg-slate-200" />
-            </div>
+          {/* Resume Preview */}
+          <aside className="print-resume rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-6 lg:h-fit">
+            <ResumePreview
+              resume={{
+                title: resume.title,
+                summary: resume.summary,
+                phone: resume.phone,
+                location: resume.location,
+                linkedin: resume.linkedin,
+                github: resume.github,
+                education: resume.education,
+                experience: resume.experience,
+                projects: resume.projects,
+                skills: resume.skills,
+                certifications: resume.certifications,
+                achievements: resume.achievements,
+              }}
+              templateSlug={resume.template?.slug}
+            />
           </aside>
         </div>
       </section>
