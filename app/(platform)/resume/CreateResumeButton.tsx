@@ -31,7 +31,7 @@ export default function CreateResumeButton() {
 
       router.push(`/resume/${data.data.id}`);
 
-      router.push(`/resume/${data.data.id}`);
+      
     } catch (error) {
       console.error("Create resume error:", error);
       setError("Something went wrong. Please try again.");

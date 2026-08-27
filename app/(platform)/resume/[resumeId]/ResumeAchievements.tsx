@@ -76,6 +76,7 @@ export default function ResumeAchievements({
       }
 
       setEntries((current) => [...current, data.data]);
+      window.dispatchEvent(new CustomEvent("resume-data-updated"));
 
       setForm(emptyForm);
       setIsAdding(false);

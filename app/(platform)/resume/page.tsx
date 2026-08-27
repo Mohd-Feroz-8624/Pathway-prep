@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-
+import Link from "next/link";
 import { getCurrentUser } from "@/lib/current-user";
 import CreateResumeButton from "./CreateResumeButton";
 
@@ -60,12 +60,12 @@ export default async function ResumePage() {
               templates.
             </p>
 
-            <button
-              type="button"
-              className="mt-6 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+            <Link
+              href="/resume/templates"
+              className="mt-6 block w-full rounded-xl border border-slate-200 px-4 py-3 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
             >
               Browse Templates
-            </button>
+            </Link>
           </article>
 
           <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

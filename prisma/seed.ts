@@ -765,7 +765,45 @@ async function main() {
       }
     }
   }
+  // Seed resume templates
+  const resumeTemplates = [
+    {
+      name: "Classic",
+      slug: "classic",
+      description: "A clean, ATS-friendly classic resume template.",
+      isPublished: true,
+    },
+    {
+      name: "Modern",
+      slug: "modern",
+      description:
+        "A modern professional resume template for students and graduates.",
+      isPublished: true,
+    },
+  ];
 
+  for (const template of resumeTemplates) {
+    await prisma.resumeTemplate.upsert({
+      where: {
+        slug: template.slug,
+      },
+
+      update: {
+        name: template.name,
+        description: template.description,
+        isPublished: template.isPublished,
+      },
+
+      create: {
+        name: template.name,
+        slug: template.slug,
+        description: template.description,
+        isPublished: template.isPublished,
+      },
+    });
+  }
+
+  console.log("✅ Resume templates seeded successfully.");
   console.log("✅ Academic database seed completed successfully.");
 }
 

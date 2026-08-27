@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 
 import { prisma } from "@/lib/prisma";
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
     // 1. Authenticate with Clerk
     const { userId: clerkId } = await auth();
@@ -17,7 +17,7 @@ export async function POST() {
       );
     }
 
-    // 2. Find the database user
+    // 2. Find database user
     const user = await prisma.user.findUnique({
       where: {
         clerkId,
@@ -33,15 +33,71 @@ export async function POST() {
       );
     }
 
-    // 3. Create resume
+    // 3. Read optional template ID
+    let templateId: string | undefined;
+
+    try {
+      const body = await request.json();
+
+      if (
+        body.templateId !== undefined &&
+        typeof body.templateId === "string"
+      ) {
+        templateId = body.templateId;
+      }
+    } catch {
+      // Empty request body is allowed.
+    }
+
+    // 4. Determine template
+    let selectedTemplate;
+
+    if (templateId) {
+      selectedTemplate = await prisma.resumeTemplate.findFirst({
+        where: {
+          id: templateId,
+          isPublished: true,
+        },
+      });
+
+      if (!selectedTemplate) {
+        return NextResponse.json(
+          {
+            error: "Selected template not found",
+          },
+          { status: 404 },
+        );
+      }
+    } else {
+      selectedTemplate = await prisma.resumeTemplate.findUnique({
+        where: {
+          slug: "classic",
+        },
+      });
+
+      if (!selectedTemplate) {
+        return NextResponse.json(
+          {
+            error: "Classic resume template not found",
+          },
+          { status: 404 },
+        );
+      }
+    }
+
+    // 5. Create resume
     const resume = await prisma.resume.create({
       data: {
         userId: user.id,
         title: "My Resume",
+        templateId: selectedTemplate.id,
+      },
+      include: {
+        template: true,
       },
     });
 
-    // 4. Return created resume
+    // 6. Return created resume
     return NextResponse.json(
       {
         success: true,
