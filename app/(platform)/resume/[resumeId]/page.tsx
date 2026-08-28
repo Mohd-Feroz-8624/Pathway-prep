@@ -15,6 +15,7 @@ import ResumeActions from "./ResumeActions";
 
 import { prisma } from "@/lib/prisma";
 import ResumeAchievements from "./ResumeAchievements";
+import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
 
 type ResumePageProps = {
   params: Promise<{
@@ -103,6 +104,13 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
     >
       <main className="min-h-screen bg-slate-50">
         <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+           <PageBreadcrumb
+                    items={[
+                      { label: "Dashboard", href: "/dashboard" },
+                      { label: "Resume Builder", href: "/resume" },
+                      { label: "Edit Resume" },
+                    ]}
+                  />
           {/* Header */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between print:hidden">
             <div>

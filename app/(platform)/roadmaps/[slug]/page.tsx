@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-
+import PageBreadcrumb  from "@/components/dashboard/PageBreadCrump";
 import RoadmapTasks from "./RoadMapTasks";
 
 type RoadmapPageProps = {
@@ -39,8 +39,14 @@ export default async function RoadmapDetailPage({ params }: RoadmapPageProps) {
   return (
     <main className="min-h-screen bg-[#f8f9ff]">
       <section className="border-b bg-white">
-        
         <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+        <PageBreadcrumb
+          items={[
+            { label: "Dashboard", href: "/dashboard" },
+            { label: "Resume Builder", href: "/resume" },
+            { label: "Edit Resume" },
+          ]}
+        />
           {roadmap.category && (
             <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
               {roadmap.category}

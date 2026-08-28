@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import TemplateCard from "./TemplateCard";
+import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
 
 export default async function TemplatesPage() {
   const user = await getCurrentUser();
@@ -23,6 +24,13 @@ export default async function TemplatesPage() {
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <PageBreadcrumb
+          items={[
+            { label: "Dashboard", href: "/dashboard" },
+            { label: "Resume Builder", href: "/resume" },
+            { label: "Templates" },
+          ]}
+        />
         <div className="max-w-3xl">
           <p className="text-sm font-semibold text-blue-600">Resume Builder</p>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
+import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
 
 type SubjectPageProps = {
   params: Promise<{
@@ -55,6 +56,14 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
+         <PageBreadcrumb
+                  items={[
+                    { label: "Dashboard", href: "/dashboard" },
+                    { label: "semesters", href: "/semesters" },
+                    { label: `Semester ${semesterNumber}`, href: `/semesters/${semesterNumber}` },
+                    { label: subjectData.name, href: `/semesters/${semesterNumber}/${subject}` },
+                  ]}
+                />
         {/* Header */}
         <div className="max-w-3xl">
           <p className="text-sm font-semibold text-blue-600">

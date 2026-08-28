@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
-
+import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
 type SemesterPageProps = {
   params: Promise<{
     semester: string;
@@ -48,6 +48,13 @@ export default async function SemesterDetailPage({
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
+         <PageBreadcrumb
+                  items={[
+                    { label: "Dashboard", href: "/dashboard" },
+                    { label: "semesters", href: "/semesters" },
+                    { label: `Semester ${semesterData.number}` },
+                  ]}
+                />
         {/* Header */}
         <div className="max-w-3xl">
           <p className="text-sm font-semibold text-blue-600">

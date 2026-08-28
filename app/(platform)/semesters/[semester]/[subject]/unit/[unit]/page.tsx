@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
+import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
 
 type UnitPageProps = {
   params: Promise<{
@@ -111,29 +111,21 @@ export default async function UnitPage({ params }: UnitPageProps) {
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
         {/* Breadcrumb */}
-        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500">
-          <Link
-            href={`/semesters/${semesterNumber}`}
-            className="transition hover:text-blue-600"
-          >
-            Semester {semesterNumber}
-          </Link>
-
-          <span>/</span>
-
-          <Link
-            href={`/semesters/${semesterNumber}/${subject}`}
-            className="capitalize transition hover:text-blue-600"
-          >
-            {subject.replace(/-/g, " ")}
-          </Link>
-
-          <span>/</span>
-
-          <span className="font-medium text-slate-700">
-            Unit {unitData.number}
-          </span>
-        </div>
+        <PageBreadcrumb
+          items={[
+            { label: "Dashboard", href: "/dashboard" },
+            { label: "semesters", href: "/semesters" },
+            {
+              label: `Semester ${semesterNumber}`,
+              href: `/semesters/${semesterNumber}`,
+            },
+            {
+              label: ` ${subject}`,
+              href: `/semesters/${semesterNumber}/${subject}`,
+            },
+            { label: `Unit ${unitData.number}: ${unitData.title}` },
+          ]}
+        />
 
         {/* Header */}
         <div className="mt-8 max-w-3xl">
