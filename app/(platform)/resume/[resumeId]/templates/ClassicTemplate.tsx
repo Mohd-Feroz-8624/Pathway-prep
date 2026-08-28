@@ -8,6 +8,8 @@ import type {
 } from "@/app/generated/prisma/client";
 
 type ResumeData = {
+  name: string;
+  email: string;
   title: string;
   summary: string | null;
   phone: string | null;
@@ -66,10 +68,11 @@ export default function ClassicTemplate({ resume }: ClassicTemplateProps) {
       {/* Header */}
       <header className="text-center">
         <h1 className="text-2xl font-bold tracking-tight text-slate-950">
-          {resume.title || "Your Name"}
+          {resume.name || "Your Name"}
         </h1>
 
         <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-slate-600">
+          {resume.email && <span>{resume.email}</span>}
           {resume.phone && <span>{resume.phone}</span>}
 
           {resume.location && <span>{resume.location}</span>}

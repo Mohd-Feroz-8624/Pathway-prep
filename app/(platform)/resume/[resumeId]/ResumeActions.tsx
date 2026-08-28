@@ -60,17 +60,26 @@ export default function ResumeActions() {
         >
           Save
         </button>
+        <button
+          type="button"
+          onClick={() =>
+            router.push(`/resume/templates?resumeId=${resumeData.id}`)
+          }
+          className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+        >
+          Change Template
+        </button>
       </div>
 
       {/* Preview Modal */}
       {isPreviewOpen && (
-        <div className="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-md print:hidden">
+        <div className="fixed inset-0 z-100 bg-slate-950/70 backdrop-blur-md print:hidden">
           <div className="relative flex h-screen w-screen items-start justify-center overflow-auto p-6 sm:p-10">
             {/* Close */}
             <button
               type="button"
               onClick={() => setIsPreviewOpen(false)}
-              className="fixed right-5 top-5 z-[110] flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-700 shadow-xl transition hover:bg-slate-100"
+              className="fixed right-5 top-5 z-110 flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-700 shadow-xl transition hover:bg-slate-100"
               aria-label="Close preview"
             >
               ×

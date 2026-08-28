@@ -84,6 +84,8 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
     <ResumeEditorShell
       initialResume={{
         id: resume.id,
+        name: user.name ?? "",
+        email: user.email,
         title: resume.title,
         summary: resume.summary,
         phone: resume.phone,
@@ -109,7 +111,7 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
               </p>
 
               <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-950">
-                {resume.title}
+                {resume.title || "My Resume"}
               </h1>
 
               <p className="mt-2 text-sm text-slate-500">

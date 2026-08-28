@@ -2,7 +2,9 @@ import type { ReactNode } from "react";
 
 type ModernTemplateProps = {
   resume: {
-    title: string;
+    name: string
+    email: string;
+    title:string;
     summary: string | null;
     phone: string | null;
     location: string | null;
@@ -67,10 +69,11 @@ export default function ModernTemplate({ resume }: ModernTemplateProps) {
       {/* Header */}
       <header className="border-b-2 border-blue-600 pb-5">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-950">
-          {resume.title || "My Resume"}
+          {resume.name || "My Resume"}
         </h1>
 
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-500">
+          {resume.email && <span>{resume.email}</span>}
           {resume.phone && <span>{resume.phone}</span>}
           {resume.location && <span>{resume.location}</span>}
 

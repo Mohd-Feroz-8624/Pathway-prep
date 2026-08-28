@@ -13,7 +13,9 @@ import type {
 
 export type ResumeEditorData = {
   id:string;
-  title: string;
+  name: string;
+  email:string;
+  title:string;
   summary: string | null;
   phone: string | null;
   location: string | null;

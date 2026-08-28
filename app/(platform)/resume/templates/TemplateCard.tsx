@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 type TemplateCardProps = {
@@ -16,15 +16,44 @@ type TemplateCardProps = {
 
 export default function TemplateCard({ template }: TemplateCardProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const [isCreating, setIsCreating] = useState(false);
+  const resumeId = searchParams.get("resumeId");
+
+  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState("");
 
   async function handleUseTemplate() {
     setError("");
-    setIsCreating(true);
+    setIsProcessing(true);
 
     try {
+      // Existing resume → change its template
+      if (resumeId) {
+        const response = await fetch(`/api/resumes/${resumeId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            templateId: template.id,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setError(data.error || "Failed to change template.");
+          return;
+        }
+
+        router.push(`/resume/${resumeId}`);
+        router.refresh();
+
+        return;
+      }
+
+      // No resumeId → create a new resume
       const response = await fetch("/api/resumes", {
         method: "POST",
         headers: {
@@ -44,16 +73,16 @@ export default function TemplateCard({ template }: TemplateCardProps) {
 
       router.push(`/resume/${data.data.id}`);
     } catch (error) {
-      console.error("Create resume from template error:", error);
+      console.error("Template selection error:", error);
 
       setError("Something went wrong. Please try again.");
     } finally {
-      setIsCreating(false);
+      setIsProcessing(false);
     }
   }
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       {/* Preview */}
       <div className="relative aspect-8.5/11 bg-slate-100 p-5">
         {template.previewUrl ? (
@@ -90,11 +119,11 @@ export default function TemplateCard({ template }: TemplateCardProps) {
       </div>
 
       {/* Details */}
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <h2 className="text-lg font-bold text-slate-950">{template.name}</h2>
 
         {template.description && (
-          <p className="mt-2 text-sm leading-6 text-slate-500">
+          <p className="mt-2 mb-auto text-sm leading-6 text-slate-500">
             {template.description}
           </p>
         )}
@@ -102,10 +131,16 @@ export default function TemplateCard({ template }: TemplateCardProps) {
         <button
           type="button"
           onClick={handleUseTemplate}
-          disabled={isCreating}
-          className="mt-5 w-full rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={isProcessing}
+          className="mt-auto w-full rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isCreating ? "Creating Resume..." : "Use This Template"}
+          {isProcessing
+            ? resumeId
+              ? "Applying Template..."
+              : "Creating Resume..."
+            : resumeId
+              ? "Use This Template"
+              : "Use This Template"}
         </button>
 
         {error && (
