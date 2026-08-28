@@ -56,14 +56,19 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
-         <PageBreadcrumb
-                  items={[
-                    { label: "Dashboard", href: "/dashboard" },
-                    { label: "semesters", href: "/semesters" },
-                    { label: `Semester ${semesterNumber}`, href: `/semesters/${semesterNumber}` },
-                    { label: subjectData.name, href: `/semesters/${semesterNumber}/${subject}` },
-                  ]}
-                />
+        <PageBreadcrumb
+          items={[
+            { label: "Dashboard", href: "/dashboard" },
+            { label: "Semesters", href: "/semesters" },
+            {
+              label: `Semester ${semesterNumber}`,
+              href: `/semesters/${semesterNumber}`,
+            },
+            {
+              label: subjectData.name
+            },
+          ]}
+        />
         {/* Header */}
         <div className="max-w-3xl">
           <p className="text-sm font-semibold text-blue-600">
