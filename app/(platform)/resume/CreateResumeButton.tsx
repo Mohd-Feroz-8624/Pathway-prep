@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function CreateResumeButton() {
   const router = useRouter();
+
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState("");
 
@@ -15,23 +16,19 @@ export default function CreateResumeButton() {
     try {
       const response = await fetch("/api/resumes", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      const text = await response.text();
-
-      console.log("CREATE RESUME STATUS:", response.status);
-      console.log("CREATE RESUME RESPONSE:", text);
+      const data = await response.json();
 
       if (!response.ok) {
-        setError(`Failed to create resume (${response.status})`);
+        setError(data.error || "Failed to create resume.");
         return;
       }
 
-      const data = JSON.parse(text);
-
       router.push(`/resume/${data.data.id}`);
-
-      
     } catch (error) {
       console.error("Create resume error:", error);
       setError("Something went wrong. Please try again.");

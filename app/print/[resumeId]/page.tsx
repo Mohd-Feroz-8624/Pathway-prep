@@ -73,8 +73,8 @@ export default async function ResumePrintPage({ params }: PrintPageProps) {
 
   const resumeData = {
     id: resume.id,
-    email: user.email,
     name: user.name ?? "",
+    email: user.email,
     title: resume.title,
     summary: resume.summary,
     phone: resume.phone,

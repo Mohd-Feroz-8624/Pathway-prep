@@ -108,7 +108,7 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
                     items={[
                       { label: "Dashboard", href: "/dashboard" },
                       { label: "Resume Builder", href: "/resume" },
-                      { label: "Edit Resume" },
+                      { label: resume.title ||"Edit Resume" },
                     ]}
                   />
           {/* Header */}

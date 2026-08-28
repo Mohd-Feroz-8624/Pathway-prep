@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
+import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
 
 export default async function SemestersPage() {
   const semesters = await prisma.semester.findMany({
@@ -16,6 +17,10 @@ export default async function SemestersPage() {
     <main className="min-h-screen bg-slate-50 ">
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
         <div>
+            <PageBreadcrumb items={[
+              { label: "Dashboard", href: "/dashboard" },
+              { label: "Academic Journey" },
+            ]} />
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             {/* Heading */}
             <div className="max-w-3xl">
