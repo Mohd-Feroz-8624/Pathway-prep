@@ -122,3 +122,23 @@ export type ResumeCertification = Prisma.ResumeCertificationModel
  * 
  */
 export type ResumeAchievement = Prisma.ResumeAchievementModel
+/**
+ * Model InterviewQuestion
+ * 
+ */
+export type InterviewQuestion = Prisma.InterviewQuestionModel
+/**
+ * Model InterviewSession
+ * 
+ */
+export type InterviewSession = Prisma.InterviewSessionModel
+/**
+ * Model InterviewAnswer
+ * 
+ */
+export type InterviewAnswer = Prisma.InterviewAnswerModel
+/**
+ * Model InterviewResult
+ * 
+ */
+export type InterviewResult = Prisma.InterviewResultModel

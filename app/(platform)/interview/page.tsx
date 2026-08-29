@@ -1,16 +1,6 @@
 import Link from "next/link";
+import InterviewSetup from "./InterviewSetup";
 
-const roles = [
-  "Software Engineer",
-  "Frontend Developer",
-  "Backend Developer",
-  "Full Stack Developer",
-  "SDE",
-];
-
-const difficulties = ["Beginner", "Intermediate", "Advanced"];
-
-const interviewTypes = ["Technical", "Behavioral", "Mixed"];
 
 export default function InterviewPage() {
   return (
@@ -60,93 +50,7 @@ export default function InterviewPage() {
               </span>
             </div>
 
-            {/* Configuration */}
-            <div className="mt-8 grid gap-5 lg:grid-cols-3">
-              {/* Role */}
-              <div>
-                <label
-                  htmlFor="role"
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Role
-                </label>
-
-                <select
-                  id="role"
-                  defaultValue="Software Engineer"
-                  disabled
-                  className="mt-2 w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 outline-none"
-                >
-                  {roles.map((role) => (
-                    <option key={role} value={role}>
-                      {role}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Difficulty */}
-              <div>
-                <label
-                  htmlFor="difficulty"
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Difficulty
-                </label>
-
-                <select
-                  id="difficulty"
-                  defaultValue="Intermediate"
-                  disabled
-                  className="mt-2 w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 outline-none"
-                >
-                  {difficulties.map((difficulty) => (
-                    <option key={difficulty} value={difficulty}>
-                      {difficulty}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Interview Type */}
-              <div>
-                <label
-                  htmlFor="interviewType"
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Interview Type
-                </label>
-
-                <select
-                  id="interviewType"
-                  defaultValue="Technical"
-                  disabled
-                  className="mt-2 w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 outline-none"
-                >
-                  {interviewTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Start Button */}
-            <div className="mt-8 flex flex-col gap-3 border-t border-slate-100 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-slate-500">
-                AI-powered interviews will be available soon.
-              </p>
-
-              <button
-                type="button"
-                disabled
-                className="inline-flex items-center justify-center rounded-xl bg-slate-300 px-6 py-3 text-sm font-semibold text-white"
-              >
-                Start Interview
-                <span className="ml-2">→</span>
-              </button>
-            </div>
+           <InterviewSetup/>
           </div>
         </section>
 

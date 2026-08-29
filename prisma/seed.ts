@@ -58,6 +58,13 @@ function createSlug(value: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+type InterviewQuestionSeed = {
+  question: string;
+  role: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  type: "Technical" | "Behavioral" | "Mixed";
+  evaluationGuide?: string;
+};
 
 const semesterData: SemesterSeed[] = [
   {
@@ -629,6 +636,183 @@ const semesterData: SemesterSeed[] = [
     ],
   },
 ];
+const interviewQuestions: InterviewQuestionSeed[] = [
+  // Software Engineer
+  {
+    question: "What is the difference between a process and a thread?",
+    role: "Software Engineer",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "Look for a clear explanation of process isolation, shared memory, resource usage, and execution context.",
+  },
+  {
+    question: "What is the difference between a stack and a queue?",
+    role: "Software Engineer",
+    difficulty: "Intermediate",
+    type: "Technical",
+    evaluationGuide:
+      "Look for understanding of LIFO and FIFO behavior and appropriate examples.",
+  },
+  {
+    question: "What is time complexity and why is it important?",
+    role: "Software Engineer",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "The candidate should explain algorithm efficiency and Big O notation with a simple example.",
+  },
+  {
+    question: "Explain the principles of object-oriented programming.",
+    role: "Software Engineer",
+    difficulty: "Intermediate",
+    type: "Technical",
+    evaluationGuide:
+      "Look for understanding of encapsulation, inheritance, polymorphism, and abstraction.",
+  },
+  {
+    question: "What is the difference between abstraction and encapsulation?",
+    role: "Software Engineer",
+    difficulty: "Intermediate",
+    type: "Technical",
+    evaluationGuide:
+      "Look for a clear distinction between hiding implementation details through abstraction and restricting access to internal state through encapsulation.",
+  },
+
+  // Frontend Developer
+  {
+    question: "What is the difference between state and props in React?",
+    role: "Frontend Developer",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "The candidate should explain that props are passed into components while state is managed by the component or related state system.",
+  },
+  {
+    question: "What is the Virtual DOM in React?",
+    role: "Frontend Developer",
+    difficulty: "Intermediate",
+    type: "Technical",
+    evaluationGuide:
+      "Look for an explanation of React's representation of the UI and how updates are reconciled efficiently.",
+  },
+  {
+    question: "How would you improve the performance of a React application?",
+    role: "Frontend Developer",
+    difficulty: "Advanced",
+    type: "Technical",
+    evaluationGuide:
+      "Good answers may include memoization, code splitting, lazy loading, efficient rendering, caching, and avoiding unnecessary re-renders.",
+  },
+
+  // Backend Developer
+  {
+    question: "What is a REST API?",
+    role: "Backend Developer",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "Look for understanding of resources, HTTP methods, stateless communication, and API endpoints.",
+  },
+  {
+    question:
+      "What is the difference between authentication and authorization?",
+    role: "Backend Developer",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "Authentication verifies identity, while authorization determines what an authenticated user can access.",
+  },
+  {
+    question: "How would you design a scalable backend API?",
+    role: "Backend Developer",
+    difficulty: "Advanced",
+    type: "Technical",
+    evaluationGuide:
+      "Look for discussion of database design, caching, load balancing, stateless services, monitoring, rate limiting, and horizontal scaling.",
+  },
+
+  // Full Stack Developer
+  {
+    question:
+      "Explain how a request travels from a browser to a backend server and back.",
+    role: "Full Stack Developer",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "Look for understanding of browser requests, HTTP, server routing, backend processing, database interaction, and the response.",
+  },
+  {
+    question: "How would you secure a full-stack web application?",
+    role: "Full Stack Developer",
+    difficulty: "Intermediate",
+    type: "Technical",
+    evaluationGuide:
+      "Good answers may include authentication, authorization, input validation, HTTPS, secure cookies, CSRF protection, rate limiting, and secure secrets management.",
+  },
+  {
+    question:
+      "How would you design a full-stack application that needs to handle a large number of users?",
+    role: "Full Stack Developer",
+    difficulty: "Advanced",
+    type: "Technical",
+    evaluationGuide:
+      "Look for scalable architecture, caching, database optimization, horizontal scaling, CDN usage, queues, monitoring, and fault tolerance.",
+  },
+
+  // SDE
+  {
+    question: "How would you find a duplicate element in an array?",
+    role: "SDE",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "The candidate should discuss at least one valid approach and its time and space complexity.",
+  },
+  {
+    question: "What is the difference between an array and a linked list?",
+    role: "SDE",
+    difficulty: "Beginner",
+    type: "Technical",
+    evaluationGuide:
+      "Look for comparison of memory layout, random access, insertion/deletion, and complexity.",
+  },
+  {
+    question: "Explain how you would approach solving a new DSA problem.",
+    role: "SDE",
+    difficulty: "Intermediate",
+    type: "Technical",
+    evaluationGuide:
+      "Look for problem understanding, constraints, examples, brute force, optimization, complexity analysis, and testing.",
+  },
+
+  // Behavioral
+  {
+    question: "Tell me about yourself.",
+    role: "Software Engineer",
+    difficulty: "Beginner",
+    type: "Behavioral",
+    evaluationGuide:
+      "Look for a concise professional introduction covering education, relevant skills, projects, experience, and career goals.",
+  },
+  {
+    question:
+      "Tell me about a challenging project you worked on and how you solved the problem.",
+    role: "Software Engineer",
+    difficulty: "Intermediate",
+    type: "Behavioral",
+    evaluationGuide:
+      "Look for a structured explanation of the situation, challenge, actions taken, technical decisions, and outcome.",
+  },
+  {
+    question: "Why should we hire you?",
+    role: "Software Engineer",
+    difficulty: "Intermediate",
+    type: "Behavioral",
+    evaluationGuide:
+      "Look for a confident answer connecting the candidate's skills, experience, projects, and value to the role.",
+  },
+];
 
 async function main() {
   console.log("🌱 Starting academic database seed...");
@@ -802,6 +986,42 @@ async function main() {
       },
     });
   }
+  // Seed interview questions
+  for (const questionData of interviewQuestions) {
+    const existingQuestion = await prisma.interviewQuestion.findFirst({
+      where: {
+        question: questionData.question,
+        role: questionData.role,
+      },
+    });
+
+    if (existingQuestion) {
+      await prisma.interviewQuestion.update({
+        where: {
+          id: existingQuestion.id,
+        },
+        data: {
+          difficulty: questionData.difficulty,
+          type: questionData.type,
+          evaluationGuide: questionData.evaluationGuide,
+          isActive: true,
+        },
+      });
+    } else {
+      await prisma.interviewQuestion.create({
+        data: {
+          question: questionData.question,
+          role: questionData.role,
+          difficulty: questionData.difficulty,
+          type: questionData.type,
+          evaluationGuide: questionData.evaluationGuide,
+          isActive: true,
+        },
+      });
+    }
+  }
+
+  console.log("✅ Interview questions seeded successfully.");
 
   console.log("✅ Resume templates seeded successfully.");
   console.log("✅ Academic database seed completed successfully.");
