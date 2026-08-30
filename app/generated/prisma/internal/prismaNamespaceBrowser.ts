@@ -103,9 +103,9 @@ export const UserScalarFieldEnum = {
   branch: 'branch',
   currentSemester: 'currentSemester',
   careerGoal: 'careerGoal',
-  role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  role: 'role'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -140,11 +140,11 @@ export type SemesterScalarFieldEnum = (typeof SemesterScalarFieldEnum)[keyof typ
 export const SubjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  slug: 'slug',
   code: 'code',
   semesterId: 'semesterId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  slug: 'slug'
 } as const
 
 export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
@@ -154,12 +154,12 @@ export const UnitScalarFieldEnum = {
   id: 'id',
   number: 'number',
   title: 'title',
-  description: 'description',
-  difficulty: 'difficulty',
-  duration: 'duration',
   subjectId: 'subjectId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  description: 'description',
+  difficulty: 'difficulty',
+  duration: 'duration'
 } as const
 
 export type UnitScalarFieldEnum = (typeof UnitScalarFieldEnum)[keyof typeof UnitScalarFieldEnum]

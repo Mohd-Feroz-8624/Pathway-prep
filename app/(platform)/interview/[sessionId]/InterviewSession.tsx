@@ -33,12 +33,43 @@ export default function InterviewSession({
 
   const isLastQuestion = currentIndex === questions.length - 1;
 
-  function handleNext() {
-    if (!isLastQuestion) {
-      setCurrentIndex((current) => current + 1);
-      setAnswer("");
-    }
-  }
+ async function saveAnswer() {
+  console.log("SAVING ANSWER FOR SESSION:", sessionId);
+  console.log("CURRENT QUESTION:", currentQuestion.id);
+   const response = await fetch(`/api/interview/${sessionId}/answers`, {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify({
+       questionId: currentQuestion.id,
+       answer,
+     }),
+   });
+
+   const data = await response.json();
+
+   if (!response.ok) {
+     throw new Error(data.error || "Failed to save answer.");
+   }
+ }
+
+ async function handleNext() {
+   try {
+     await saveAnswer();
+
+     if (!isLastQuestion) {
+       setCurrentIndex((current) => current + 1);
+       setAnswer("");
+     }
+   } catch (error) {
+     console.error("Save answer error:", error);
+
+     alert(
+       error instanceof Error ? error.message : "Failed to save your answer.",
+     );
+   }
+ }
 
   function handlePrevious() {
     if (currentIndex > 0) {
@@ -46,26 +77,27 @@ export default function InterviewSession({
       setAnswer("");
     }
   }
-  async function handleFinish() {
-    try {
-      const response = await fetch(`/api/interview/${sessionId}/finish`, {
-        method: "POST",
-      });
+ async function handleFinish() {
+   try {
+     await saveAnswer();
 
-      const data = await response.json();
+     const response = await fetch(`/api/interview/${sessionId}/finish`, {
+       method: "POST",
+     });
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to finish interview.");
-      }
+     const data = await response.json();
 
-      alert("Interview completed successfully!");
-    } catch (error) {
-      console.error("Finish interview error:", error);
+     if (!response.ok) {
+       throw new Error(data.error || "Failed to finish interview.");
+     }
 
-      alert(error instanceof Error ? error.message : "Something went wrong.");
-    }
-  }
+     alert("Interview completed successfully!");
+   } catch (error) {
+     console.error("Finish interview error:", error);
 
+     alert(error instanceof Error ? error.message : "Something went wrong.");
+   }
+ }
   return (
     <section className="mt-10">
       {/* Progress */}

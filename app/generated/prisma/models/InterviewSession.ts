@@ -222,9 +222,9 @@ export type InterviewSessionWhereInput = {
   completedAt?: Prisma.DateTimeNullableFilter<"InterviewSession"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InterviewSession"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InterviewSession"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   answers?: Prisma.InterviewAnswerListRelationFilter
   result?: Prisma.XOR<Prisma.InterviewResultNullableScalarRelationFilter, Prisma.InterviewResultWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type InterviewSessionOrderByWithRelationInput = {
@@ -238,9 +238,9 @@ export type InterviewSessionOrderByWithRelationInput = {
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   answers?: Prisma.InterviewAnswerOrderByRelationAggregateInput
   result?: Prisma.InterviewResultOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type InterviewSessionWhereUniqueInput = Prisma.AtLeast<{
@@ -257,9 +257,9 @@ export type InterviewSessionWhereUniqueInput = Prisma.AtLeast<{
   completedAt?: Prisma.DateTimeNullableFilter<"InterviewSession"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InterviewSession"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InterviewSession"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   answers?: Prisma.InterviewAnswerListRelationFilter
   result?: Prisma.XOR<Prisma.InterviewResultNullableScalarRelationFilter, Prisma.InterviewResultWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type InterviewSessionOrderByWithAggregationInput = {
@@ -304,9 +304,9 @@ export type InterviewSessionCreateInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutInterviewSessionsInput
   answers?: Prisma.InterviewAnswerCreateNestedManyWithoutSessionInput
   result?: Prisma.InterviewResultCreateNestedOneWithoutSessionInput
+  user: Prisma.UserCreateNestedOneWithoutInterviewSessionsInput
 }
 
 export type InterviewSessionUncheckedCreateInput = {
@@ -334,9 +334,9 @@ export type InterviewSessionUpdateInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutInterviewSessionsNestedInput
   answers?: Prisma.InterviewAnswerUpdateManyWithoutSessionNestedInput
   result?: Prisma.InterviewResultUpdateOneWithoutSessionNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutInterviewSessionsNestedInput
 }
 
 export type InterviewSessionUncheckedUpdateInput = {
@@ -596,8 +596,8 @@ export type InterviewSessionCreateWithoutAnswersInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutInterviewSessionsInput
   result?: Prisma.InterviewResultCreateNestedOneWithoutSessionInput
+  user: Prisma.UserCreateNestedOneWithoutInterviewSessionsInput
 }
 
 export type InterviewSessionUncheckedCreateWithoutAnswersInput = {
@@ -640,8 +640,8 @@ export type InterviewSessionUpdateWithoutAnswersInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutInterviewSessionsNestedInput
   result?: Prisma.InterviewResultUpdateOneWithoutSessionNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutInterviewSessionsNestedInput
 }
 
 export type InterviewSessionUncheckedUpdateWithoutAnswersInput = {
@@ -668,8 +668,8 @@ export type InterviewSessionCreateWithoutResultInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutInterviewSessionsInput
   answers?: Prisma.InterviewAnswerCreateNestedManyWithoutSessionInput
+  user: Prisma.UserCreateNestedOneWithoutInterviewSessionsInput
 }
 
 export type InterviewSessionUncheckedCreateWithoutResultInput = {
@@ -712,8 +712,8 @@ export type InterviewSessionUpdateWithoutResultInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutInterviewSessionsNestedInput
   answers?: Prisma.InterviewAnswerUpdateManyWithoutSessionNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutInterviewSessionsNestedInput
 }
 
 export type InterviewSessionUncheckedUpdateWithoutResultInput = {
@@ -824,9 +824,9 @@ export type InterviewSessionSelect<ExtArgs extends runtime.Types.Extensions.Inte
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   answers?: boolean | Prisma.InterviewSession$answersArgs<ExtArgs>
   result?: boolean | Prisma.InterviewSession$resultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.InterviewSessionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interviewSession"]>
 
@@ -873,9 +873,9 @@ export type InterviewSessionSelectScalar = {
 
 export type InterviewSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "role" | "difficulty" | "type" | "status" | "startedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interviewSession"]>
 export type InterviewSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   answers?: boolean | Prisma.InterviewSession$answersArgs<ExtArgs>
   result?: boolean | Prisma.InterviewSession$resultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.InterviewSessionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type InterviewSessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -888,9 +888,9 @@ export type InterviewSessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $InterviewSessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InterviewSession"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     answers: Prisma.$InterviewAnswerPayload<ExtArgs>[]
     result: Prisma.$InterviewResultPayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1297,9 +1297,9 @@ readonly fields: InterviewSessionFieldRefs;
  */
 export interface Prisma__InterviewSessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   answers<T extends Prisma.InterviewSession$answersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InterviewSession$answersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   result<T extends Prisma.InterviewSession$resultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InterviewSession$resultArgs<ExtArgs>>): Prisma.Prisma__InterviewResultClient<runtime.Types.Result.GetResult<Prisma.$InterviewResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

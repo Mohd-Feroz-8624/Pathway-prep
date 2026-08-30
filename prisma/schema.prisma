@@ -7,30 +7,22 @@ datasource db {
   provider = "postgresql"
 }
 
-enum UserRole {
-  STUDENT
-  ADMIN
-}
-
 model User {
-  id              String  @id @default(cuid())
-  clerkId         String  @unique
-  name            String?
-  email           String  @unique
-  college         String?
-  branch          String?
-  currentSemester Int?
-  careerGoal      String?
-
-  role UserRole @default(STUDENT)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  profile           Profile?
-  roadmapProgress   RoadmapTaskProgress[]
-  resumes           Resume[]
+  id                String                @id @default(cuid())
+  clerkId           String                @unique
+  name              String?
+  email             String                @unique
+  college           String?
+  branch            String?
+  currentSemester   Int?
+  careerGoal        String?
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  role              UserRole              @default(STUDENT)
   interviewSessions InterviewSession[]
+  profile           Profile?
+  resumes           Resume[]
+  roadmapProgress   RoadmapTaskProgress[]
 }
 
 model Profile {
@@ -43,67 +35,61 @@ model Profile {
   linkedin  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Semester {
   id        String    @id @default(cuid())
   number    Int       @unique
   name      String
-  subjects  Subject[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  subjects  Subject[]
 }
 
 model Subject {
   id         String   @id @default(cuid())
   name       String
-  slug       String
   code       String?
   semesterId String
-  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  units      Unit[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  slug       String
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  units      Unit[]
 
   @@unique([semesterId, slug])
   @@index([semesterId])
 }
 
 model Unit {
-  id          String  @id @default(cuid())
+  id          String         @id @default(cuid())
   number      Int
   title       String
+  subjectId   String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
   description String?
   difficulty  String?
   duration    String?
-
-  subjectId String
-  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-
-  topics    Topic[]
-  resources UnitResource[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  topics      Topic[]
+  subject     Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  resources   UnitResource[]
 
   @@unique([subjectId, number])
   @@index([subjectId])
 }
 
 model UnitResource {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
   description String?
   type        String
   url         String?
-
-  unitId String
-  unit   Unit   @relation(fields: [unitId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  unitId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  unit        Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
 
   @@index([unitId])
 }
@@ -112,10 +98,10 @@ model Topic {
   id        String   @id @default(cuid())
   title     String
   unitId    String
-  unit      Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
-  notes     Note[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  notes     Note[]
+  unit      Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
 
   @@unique([unitId, title])
   @@index([unitId])
@@ -127,89 +113,80 @@ model Note {
   description String?
   fileUrl     String?
   topicId     String
-  topic       Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  topic       Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
 
   @@index([topicId])
 }
 
 model Course {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
-  slug        String  @unique
+  slug        String   @unique
   description String?
   category    String?
   level       String?
-  isPublished Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Roadmap {
-  id          String  @id @default(cuid())
+  id          String         @id @default(cuid())
   title       String
-  slug        String  @unique
+  slug        String         @unique
   description String?
   category    String?
   duration    String?
-  isPublished Boolean @default(false)
-
-  stages RoadmapStage[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isPublished Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  stages      RoadmapStage[]
 }
 
 model RoadmapStage {
-  id          String  @id @default(cuid())
+  id          String        @id @default(cuid())
   title       String
   description String?
   order       Int
   roadmapId   String
-
-  roadmap Roadmap       @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
-  tasks   RoadmapTask[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  roadmap     Roadmap       @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  tasks       RoadmapTask[]
 
   @@unique([roadmapId, order])
   @@index([roadmapId])
 }
 
 model RoadmapTask {
-  id          String  @id @default(cuid())
+  id          String                @id @default(cuid())
   title       String
   description String?
   order       Int
-  isRequired  Boolean @default(true)
+  isRequired  Boolean               @default(true)
   resourceUrl String?
   stageId     String
-
-  stage    RoadmapStage          @relation(fields: [stageId], references: [id], onDelete: Cascade)
-  progress RoadmapTaskProgress[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  stage       RoadmapStage          @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  progress    RoadmapTaskProgress[]
 
   @@unique([stageId, order])
   @@index([stageId])
 }
 
 model RoadmapTaskProgress {
-  id          String    @id @default(cuid())
+  id          String      @id @default(cuid())
   userId      String
   taskId      String
-  completed   Boolean   @default(false)
+  completed   Boolean     @default(false)
   completedAt DateTime?
-
-  user User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  task RoadmapTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  task        RoadmapTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, taskId])
   @@index([userId])
@@ -217,221 +194,191 @@ model RoadmapTaskProgress {
 }
 
 model ResumeTemplate {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
-  slug        String  @unique
+  slug        String   @unique
   description String?
   previewUrl  String?
-  isPublished Boolean @default(false)
-
-  resumes Resume[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resumes     Resume[]
 }
 
 model Resume {
-  id         String  @id @default(cuid())
-  userId     String
-  templateId String?
-
-  title    String  @default("My Resume")
-  summary  String?
-  phone    String?
-  location String?
-  linkedin String?
-  github   String?
-
-  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  template ResumeTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
-
+  id             String                @id @default(cuid())
+  userId         String
+  templateId     String?
+  title          String                @default("My Resume")
+  summary        String?
+  phone          String?
+  location       String?
+  linkedin       String?
+  github         String?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  template       ResumeTemplate?       @relation(fields: [templateId], references: [id])
+  user           User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievements   ResumeAchievement[]
+  certifications ResumeCertification[]
   education      ResumeEducation[]
   experience     ResumeExperience[]
   projects       ResumeProject[]
   skills         ResumeSkill[]
-  certifications ResumeCertification[]
-  achievements   ResumeAchievement[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([templateId])
 }
 
 model ResumeEducation {
-  id       String @id @default(cuid())
-  resumeId String
-
+  id          String   @id @default(cuid())
+  resumeId    String
   institution String
   degree      String?
   field       String?
   startDate   String?
   endDate     String?
   description String?
-
-  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resume      Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   @@index([resumeId])
 }
 
 model ResumeExperience {
-  id       String @id @default(cuid())
-  resumeId String
-
+  id          String   @id @default(cuid())
+  resumeId    String
   company     String
   position    String
   location    String?
   startDate   String?
   endDate     String?
-  isCurrent   Boolean @default(false)
+  isCurrent   Boolean  @default(false)
   description String?
-
-  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resume      Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   @@index([resumeId])
 }
 
 model ResumeProject {
-  id       String @id @default(cuid())
-  resumeId String
-
+  id           String   @id @default(cuid())
+  resumeId     String
   title        String
   description  String?
   technologies String?
   githubUrl    String?
   liveUrl      String?
-
-  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  resume       Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   @@index([resumeId])
 }
 
 model ResumeSkill {
-  id       String @id @default(cuid())
-  resumeId String
-
-  name     String
-  category String?
-
-  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-
+  id        String   @id @default(cuid())
+  resumeId  String
+  name      String
+  category  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   @@index([resumeId])
 }
 
 model ResumeCertification {
-  id       String @id @default(cuid())
-  resumeId String
-
+  id            String   @id @default(cuid())
+  resumeId      String
   name          String
   issuer        String?
   issueDate     String?
   credentialUrl String?
-
-  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  resume        Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   @@index([resumeId])
 }
 
 model ResumeAchievement {
-  id       String @id @default(cuid())
-  resumeId String
-
+  id          String   @id @default(cuid())
+  resumeId    String
   title       String
   description String?
-
-  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resume      Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   @@index([resumeId])
 }
 
 model InterviewQuestion {
-  id              String  @id @default(cuid())
+  id              String            @id @default(cuid())
   question        String
   role            String
   difficulty      String
   type            String
   evaluationGuide String?
-  isActive        Boolean @default(true)
-
-  answers InterviewAnswer[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isActive        Boolean           @default(true)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  answers         InterviewAnswer[]
 
   @@index([role, difficulty, type])
 }
 
 model InterviewSession {
-  id     String @id @default(cuid())
-  userId String
-
-  role       String
-  difficulty String
-  type       String
-  status     String @default("IN_PROGRESS")
-
-  startedAt   DateTime  @default(now())
+  id          String            @id @default(cuid())
+  userId      String
+  role        String
+  difficulty  String
+  type        String
+  status      String            @default("IN_PROGRESS")
+  startedAt   DateTime          @default(now())
   completedAt DateTime?
-
-  user    User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  answers InterviewAnswer[]
-  result  InterviewResult?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  answers     InterviewAnswer[]
+  result      InterviewResult?
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model InterviewAnswer {
-  id         String @id @default(cuid())
+  id         String            @id @default(cuid())
   sessionId  String
   questionId String
-
-  answer   String
-  score    Int?
-  feedback String?
-
-  session  InterviewSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  question InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  answer     String
+  score      Int?
+  feedback   String?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  question   InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  session    InterviewSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId])
   @@index([questionId])
+  @@unique([sessionId, questionId])
 }
 
 model InterviewResult {
-  id        String @id @default(cuid())
-  sessionId String @unique
-
+  id              String           @id @default(cuid())
+  sessionId       String           @unique
   overallScore    Int
   strengths       String?
   weaknesses      String?
   recommendations String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  session         InterviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
 
-  session InterviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum UserRole {
+  STUDENT
+  ADMIN
 }

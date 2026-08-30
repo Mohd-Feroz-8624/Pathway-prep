@@ -240,8 +240,8 @@ export type InterviewAnswerWhereInput = {
   feedback?: Prisma.StringNullableFilter<"InterviewAnswer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"InterviewAnswer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InterviewAnswer"> | Date | string
-  session?: Prisma.XOR<Prisma.InterviewSessionScalarRelationFilter, Prisma.InterviewSessionWhereInput>
   question?: Prisma.XOR<Prisma.InterviewQuestionScalarRelationFilter, Prisma.InterviewQuestionWhereInput>
+  session?: Prisma.XOR<Prisma.InterviewSessionScalarRelationFilter, Prisma.InterviewSessionWhereInput>
 }
 
 export type InterviewAnswerOrderByWithRelationInput = {
@@ -253,12 +253,13 @@ export type InterviewAnswerOrderByWithRelationInput = {
   feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  session?: Prisma.InterviewSessionOrderByWithRelationInput
   question?: Prisma.InterviewQuestionOrderByWithRelationInput
+  session?: Prisma.InterviewSessionOrderByWithRelationInput
 }
 
 export type InterviewAnswerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  sessionId_questionId?: Prisma.InterviewAnswerSessionIdQuestionIdCompoundUniqueInput
   AND?: Prisma.InterviewAnswerWhereInput | Prisma.InterviewAnswerWhereInput[]
   OR?: Prisma.InterviewAnswerWhereInput[]
   NOT?: Prisma.InterviewAnswerWhereInput | Prisma.InterviewAnswerWhereInput[]
@@ -269,9 +270,9 @@ export type InterviewAnswerWhereUniqueInput = Prisma.AtLeast<{
   feedback?: Prisma.StringNullableFilter<"InterviewAnswer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"InterviewAnswer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InterviewAnswer"> | Date | string
-  session?: Prisma.XOR<Prisma.InterviewSessionScalarRelationFilter, Prisma.InterviewSessionWhereInput>
   question?: Prisma.XOR<Prisma.InterviewQuestionScalarRelationFilter, Prisma.InterviewQuestionWhereInput>
-}, "id">
+  session?: Prisma.XOR<Prisma.InterviewSessionScalarRelationFilter, Prisma.InterviewSessionWhereInput>
+}, "id" | "sessionId_questionId">
 
 export type InterviewAnswerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -310,8 +311,8 @@ export type InterviewAnswerCreateInput = {
   feedback?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  session: Prisma.InterviewSessionCreateNestedOneWithoutAnswersInput
   question: Prisma.InterviewQuestionCreateNestedOneWithoutAnswersInput
+  session: Prisma.InterviewSessionCreateNestedOneWithoutAnswersInput
 }
 
 export type InterviewAnswerUncheckedCreateInput = {
@@ -332,8 +333,8 @@ export type InterviewAnswerUpdateInput = {
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.InterviewSessionUpdateOneRequiredWithoutAnswersNestedInput
   question?: Prisma.InterviewQuestionUpdateOneRequiredWithoutAnswersNestedInput
+  session?: Prisma.InterviewSessionUpdateOneRequiredWithoutAnswersNestedInput
 }
 
 export type InterviewAnswerUncheckedUpdateInput = {
@@ -386,6 +387,11 @@ export type InterviewAnswerListRelationFilter = {
 
 export type InterviewAnswerOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type InterviewAnswerSessionIdQuestionIdCompoundUniqueInput = {
+  sessionId: string
+  questionId: string
 }
 
 export type InterviewAnswerCountOrderByAggregateInput = {
@@ -710,8 +716,8 @@ export type InterviewAnswerSelect<ExtArgs extends runtime.Types.Extensions.Inter
   feedback?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
   question?: boolean | Prisma.InterviewQuestionDefaultArgs<ExtArgs>
+  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interviewAnswer"]>
 
 export type InterviewAnswerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -723,8 +729,8 @@ export type InterviewAnswerSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   feedback?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
   question?: boolean | Prisma.InterviewQuestionDefaultArgs<ExtArgs>
+  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interviewAnswer"]>
 
 export type InterviewAnswerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -736,8 +742,8 @@ export type InterviewAnswerSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   feedback?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
   question?: boolean | Prisma.InterviewQuestionDefaultArgs<ExtArgs>
+  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interviewAnswer"]>
 
 export type InterviewAnswerSelectScalar = {
@@ -753,23 +759,23 @@ export type InterviewAnswerSelectScalar = {
 
 export type InterviewAnswerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "questionId" | "answer" | "score" | "feedback" | "createdAt" | "updatedAt", ExtArgs["result"]["interviewAnswer"]>
 export type InterviewAnswerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
   question?: boolean | Prisma.InterviewQuestionDefaultArgs<ExtArgs>
+  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
 }
 export type InterviewAnswerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
   question?: boolean | Prisma.InterviewQuestionDefaultArgs<ExtArgs>
+  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
 }
 export type InterviewAnswerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
   question?: boolean | Prisma.InterviewQuestionDefaultArgs<ExtArgs>
+  session?: boolean | Prisma.InterviewSessionDefaultArgs<ExtArgs>
 }
 
 export type $InterviewAnswerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InterviewAnswer"
   objects: {
-    session: Prisma.$InterviewSessionPayload<ExtArgs>
     question: Prisma.$InterviewQuestionPayload<ExtArgs>
+    session: Prisma.$InterviewSessionPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1174,8 +1180,8 @@ readonly fields: InterviewAnswerFieldRefs;
  */
 export interface Prisma__InterviewAnswerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  session<T extends Prisma.InterviewSessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InterviewSessionDefaultArgs<ExtArgs>>): Prisma.Prisma__InterviewSessionClient<runtime.Types.Result.GetResult<Prisma.$InterviewSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   question<T extends Prisma.InterviewQuestionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InterviewQuestionDefaultArgs<ExtArgs>>): Prisma.Prisma__InterviewQuestionClient<runtime.Types.Result.GetResult<Prisma.$InterviewQuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  session<T extends Prisma.InterviewSessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InterviewSessionDefaultArgs<ExtArgs>>): Prisma.Prisma__InterviewSessionClient<runtime.Types.Result.GetResult<Prisma.$InterviewSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
