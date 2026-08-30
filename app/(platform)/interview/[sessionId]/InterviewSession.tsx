@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Question = {
   id: string;
@@ -16,6 +17,8 @@ export default function InterviewSession({
   sessionId,
   questions,
 }: InterviewSessionProps) {
+  const router  = useRouter(); 
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState("");
 
@@ -33,43 +36,43 @@ export default function InterviewSession({
 
   const isLastQuestion = currentIndex === questions.length - 1;
 
- async function saveAnswer() {
-  console.log("SAVING ANSWER FOR SESSION:", sessionId);
-  console.log("CURRENT QUESTION:", currentQuestion.id);
-   const response = await fetch(`/api/interview/${sessionId}/answers`, {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-     },
-     body: JSON.stringify({
-       questionId: currentQuestion.id,
-       answer,
-     }),
-   });
+  async function saveAnswer() {
+    console.log("SAVING ANSWER FOR SESSION:", sessionId);
+    console.log("CURRENT QUESTION:", currentQuestion.id);
+    const response = await fetch(`/api/interview/${sessionId}/answers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        questionId: currentQuestion.id,
+        answer,
+      }),
+    });
 
-   const data = await response.json();
+    const data = await response.json();
 
-   if (!response.ok) {
-     throw new Error(data.error || "Failed to save answer.");
-   }
- }
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to save answer.");
+    }
+  }
 
- async function handleNext() {
-   try {
-     await saveAnswer();
+  async function handleNext() {
+    try {
+      await saveAnswer();
 
-     if (!isLastQuestion) {
-       setCurrentIndex((current) => current + 1);
-       setAnswer("");
-     }
-   } catch (error) {
-     console.error("Save answer error:", error);
+      if (!isLastQuestion) {
+        setCurrentIndex((current) => current + 1);
+        setAnswer("");
+      }
+    } catch (error) {
+      console.error("Save answer error:", error);
 
-     alert(
-       error instanceof Error ? error.message : "Failed to save your answer.",
-     );
-   }
- }
+      alert(
+        error instanceof Error ? error.message : "Failed to save your answer.",
+      );
+    }
+  }
 
   function handlePrevious() {
     if (currentIndex > 0) {
@@ -79,23 +82,55 @@ export default function InterviewSession({
   }
  async function handleFinish() {
    try {
+     // 1. Save the final answer
      await saveAnswer();
 
-     const response = await fetch(`/api/interview/${sessionId}/finish`, {
+     // 2. Mark interview as completed
+     const finishResponse = await fetch(`/api/interview/${sessionId}/finish`, {
        method: "POST",
      });
 
-     const data = await response.json();
+     const finishData = await finishResponse.json();
 
-     if (!response.ok) {
-       throw new Error(data.error || "Failed to finish interview.");
+     if (!finishResponse.ok) {
+       throw new Error(finishData.error || "Failed to finish interview.");
      }
 
-     alert("Interview completed successfully!");
+     // 3. Evaluate all answers with Gemini
+     const evaluateResponse = await fetch(
+       `/api/interview/${sessionId}/evaluate`,
+       {
+         method: "POST",
+       },
+     );
+
+     const evaluateData = await evaluateResponse.json();
+
+     if (!evaluateResponse.ok) {
+       throw new Error(evaluateData.error || "Failed to evaluate interview.");
+     }
+
+     // 4. Create overall interview result
+     const resultResponse = await fetch(`/api/interview/${sessionId}/result`, {
+       method: "POST",
+     });
+
+     const resultData = await resultResponse.json();
+
+     if (!resultResponse.ok) {
+       throw new Error(
+         resultData.error || "Failed to create interview result.",
+       );
+     }
+
+     // 5. Go to result page
+     router.push(`/interview/${sessionId}/result`);
    } catch (error) {
      console.error("Finish interview error:", error);
 
-     alert(error instanceof Error ? error.message : "Something went wrong.");
+     alert(
+       error instanceof Error ? error.message : "Failed to complete interview.",
+     );
    }
  }
   return (
@@ -172,7 +207,6 @@ export default function InterviewSession({
           <button
             type="button"
             onClick={isLastQuestion ? handleFinish : handleNext}
-          
             className="rounded-xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLastQuestion ? "Finish Interview" : "Next Question →"}
