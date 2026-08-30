@@ -1,18 +1,84 @@
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
 
-const roles = [
-  "Software Engineer",
-  "Frontend Developer",
-  "Backend Developer",
-  "Full Stack Developer",
-  "SDE",
-];
+import InterviewSetup from "./InterviewSetup";
+import { prisma } from "@/lib/prisma";
+import InterviewHistory from "./InterviewHistory";
 
-const difficulties = ["Beginner", "Intermediate", "Advanced"];
+export default async function InterviewPage() {
+  const { userId: clerkId } = await auth();
 
-const interviewTypes = ["Technical", "Behavioral", "Mixed"];
+  let completedInterviews = 0;
+  let averageScore = 0;
+  let bestScore = 0;
+  let hasScores = false;
 
-export default function InterviewPage() {
+  let interviewHistory: {
+    id: string;
+    role: string;
+    difficulty: string;
+    type: string;
+    createdAt: string;
+    overallScore: number | null;
+  }[] = [];
+
+  if (clerkId) {
+    const user = await prisma.user.findUnique({
+      where: {
+        clerkId,
+      },
+    });
+
+    if (user) {
+      const sessions = await prisma.interviewSession.findMany({
+        where: {
+          userId: user.id,
+          status: "COMPLETED",
+        },
+        include: {
+          result: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      completedInterviews = sessions.length;
+
+      const scores = sessions
+        .map((session) => session.result?.overallScore)
+        .filter(
+          (score): score is number =>
+            typeof score === "number" && Number.isFinite(score),
+        );
+
+      hasScores = scores.length > 0;
+
+      if (hasScores) {
+        const total = scores.reduce((sum, score) => sum + score, 0);
+
+        averageScore = Math.round(total / scores.length);
+        bestScore = Math.max(...scores);
+      }
+
+      if (scores.length > 0) {
+        const total = scores.reduce((sum, score) => sum + score, 0);
+
+        averageScore = Math.round(total / scores.length);
+        bestScore = Math.max(...scores);
+      }
+
+      interviewHistory = sessions.map((session) => ({
+        id: session.id,
+        role: session.role,
+        difficulty: session.difficulty,
+        type: session.type,
+        createdAt: session.createdAt.toISOString(),
+        overallScore: session.result?.overallScore ?? null,
+      }));
+    }
+  }
+
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-7xl space-y-10 px-6 py-10 lg:px-8">
@@ -35,7 +101,6 @@ export default function InterviewPage() {
         {/* Main Interview Card */}
         <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <div className="p-6 sm:p-8 lg:p-10">
-            {/* Card Header */}
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex items-start gap-4">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
@@ -55,98 +120,12 @@ export default function InterviewPage() {
                 </div>
               </div>
 
-              <span className="w-fit rounded-full bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700">
-                Coming Soon
+              <span className="w-fit rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+                Available
               </span>
             </div>
 
-            {/* Configuration */}
-            <div className="mt-8 grid gap-5 lg:grid-cols-3">
-              {/* Role */}
-              <div>
-                <label
-                  htmlFor="role"
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Role
-                </label>
-
-                <select
-                  id="role"
-                  defaultValue="Software Engineer"
-                  disabled
-                  className="mt-2 w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 outline-none"
-                >
-                  {roles.map((role) => (
-                    <option key={role} value={role}>
-                      {role}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Difficulty */}
-              <div>
-                <label
-                  htmlFor="difficulty"
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Difficulty
-                </label>
-
-                <select
-                  id="difficulty"
-                  defaultValue="Intermediate"
-                  disabled
-                  className="mt-2 w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 outline-none"
-                >
-                  {difficulties.map((difficulty) => (
-                    <option key={difficulty} value={difficulty}>
-                      {difficulty}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Interview Type */}
-              <div>
-                <label
-                  htmlFor="interviewType"
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Interview Type
-                </label>
-
-                <select
-                  id="interviewType"
-                  defaultValue="Technical"
-                  disabled
-                  className="mt-2 w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 outline-none"
-                >
-                  {interviewTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Start Button */}
-            <div className="mt-8 flex flex-col gap-3 border-t border-slate-100 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-slate-500">
-                AI-powered interviews will be available soon.
-              </p>
-
-              <button
-                type="button"
-                disabled
-                className="inline-flex items-center justify-center rounded-xl bg-slate-300 px-6 py-3 text-sm font-semibold text-white"
-              >
-                Start Interview
-                <span className="ml-2">→</span>
-              </button>
-            </div>
+            <InterviewSetup />
           </div>
         </section>
 
@@ -160,8 +139,7 @@ export default function InterviewPage() {
             </h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              Your interview performance will appear here after you complete
-              your first interview.
+              Track your interview practice and performance over time.
             </p>
           </div>
 
@@ -176,7 +154,9 @@ export default function InterviewPage() {
                 Interviews Completed
               </p>
 
-              <p className="mt-2 text-3xl font-bold text-slate-950">0</p>
+              <p className="mt-2 text-3xl font-bold text-slate-950">
+                {completedInterviews}
+              </p>
             </div>
 
             {/* Average Score */}
@@ -189,7 +169,9 @@ export default function InterviewPage() {
                 Average Score
               </p>
 
-              <p className="mt-2 text-3xl font-bold text-slate-950">--</p>
+              <p className="mt-2 text-3xl font-bold text-slate-950">
+                {hasScores ? `${averageScore}/100` : "--"}
+              </p>
             </div>
 
             {/* Best Score */}
@@ -202,12 +184,32 @@ export default function InterviewPage() {
                 Best Score
               </p>
 
-              <p className="mt-2 text-3xl font-bold text-slate-950">--</p>
+              <p className="mt-2 text-3xl font-bold text-slate-950">
+                {hasScores ? `${bestScore}/100` : "--"}
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Preparation Tips */}
+        {/* Interview History */}
+        <section>
+          <div>
+            <p className="text-sm font-semibold text-blue-600">
+              Previous Interviews
+            </p>
+
+            <h2 className="mt-1 text-2xl font-bold text-slate-950">
+              Interview History
+            </h2>
+
+            <p className="mt-2 text-sm text-slate-500">
+              Review your previous interviews and AI-generated results.
+            </p>
+          </div>
+
+          <InterviewHistory interviews={interviewHistory} />
+        </section>
+
         {/* Career Preparation CTAs */}
         <section className="grid gap-5 md:grid-cols-2">
           {/* Roadmaps */}
@@ -216,9 +218,7 @@ export default function InterviewPage() {
               🧭
             </div>
 
-          
-
-            <h2 className="mt-1 text-xl font-bold text-slate-950">
+            <h2 className="mt-5 text-xl font-bold text-slate-950">
               Follow Your Roadmap
             </h2>
 
@@ -242,26 +242,26 @@ export default function InterviewPage() {
               📄
             </div>
 
-         
-
-            <h2 className="mt-1 text-xl font-bold text-slate-950">
-              Create Your Resume
+            <h2 className="mt-5 text-xl font-bold text-slate-950">
+              Create a Professional Resume
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-slate-500">
-              Build a professional, placement-ready resume using your profile,
-              skills, projects, and experience.
+              Build a compelling resume that showcases your skills and
+              experience.
             </p>
 
             <Link
-              href="/resume"
-              className="mt-6 inline-flex items-center justify-center rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+              href="/resume-builder"
+              className="mt-6 inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
             >
-              Create Resume
+              Build Your Resume
               <span className="ml-2">→</span>
             </Link>
           </div>
         </section>
+
+       
       </section>
     </main>
   );

@@ -230,14 +230,14 @@ export type ResumeWhereInput = {
   github?: Prisma.StringNullableFilter<"Resume"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   template?: Prisma.XOR<Prisma.ResumeTemplateNullableScalarRelationFilter, Prisma.ResumeTemplateWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  achievements?: Prisma.ResumeAchievementListRelationFilter
+  certifications?: Prisma.ResumeCertificationListRelationFilter
   education?: Prisma.ResumeEducationListRelationFilter
   experience?: Prisma.ResumeExperienceListRelationFilter
   projects?: Prisma.ResumeProjectListRelationFilter
   skills?: Prisma.ResumeSkillListRelationFilter
-  certifications?: Prisma.ResumeCertificationListRelationFilter
-  achievements?: Prisma.ResumeAchievementListRelationFilter
 }
 
 export type ResumeOrderByWithRelationInput = {
@@ -252,14 +252,14 @@ export type ResumeOrderByWithRelationInput = {
   github?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   template?: Prisma.ResumeTemplateOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
+  achievements?: Prisma.ResumeAchievementOrderByRelationAggregateInput
+  certifications?: Prisma.ResumeCertificationOrderByRelationAggregateInput
   education?: Prisma.ResumeEducationOrderByRelationAggregateInput
   experience?: Prisma.ResumeExperienceOrderByRelationAggregateInput
   projects?: Prisma.ResumeProjectOrderByRelationAggregateInput
   skills?: Prisma.ResumeSkillOrderByRelationAggregateInput
-  certifications?: Prisma.ResumeCertificationOrderByRelationAggregateInput
-  achievements?: Prisma.ResumeAchievementOrderByRelationAggregateInput
 }
 
 export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -277,14 +277,14 @@ export type ResumeWhereUniqueInput = Prisma.AtLeast<{
   github?: Prisma.StringNullableFilter<"Resume"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   template?: Prisma.XOR<Prisma.ResumeTemplateNullableScalarRelationFilter, Prisma.ResumeTemplateWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  achievements?: Prisma.ResumeAchievementListRelationFilter
+  certifications?: Prisma.ResumeCertificationListRelationFilter
   education?: Prisma.ResumeEducationListRelationFilter
   experience?: Prisma.ResumeExperienceListRelationFilter
   projects?: Prisma.ResumeProjectListRelationFilter
   skills?: Prisma.ResumeSkillListRelationFilter
-  certifications?: Prisma.ResumeCertificationListRelationFilter
-  achievements?: Prisma.ResumeAchievementListRelationFilter
 }, "id">
 
 export type ResumeOrderByWithAggregationInput = {
@@ -331,14 +331,14 @@ export type ResumeCreateInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateInput = {
@@ -353,12 +353,12 @@ export type ResumeUncheckedCreateInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUpdateInput = {
@@ -371,14 +371,14 @@ export type ResumeUpdateInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateInput = {
@@ -393,12 +393,12 @@ export type ResumeUncheckedUpdateInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateManyInput = {
@@ -677,12 +677,12 @@ export type ResumeCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutUserInput = {
@@ -696,12 +696,12 @@ export type ResumeUncheckedCreateWithoutUserInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutUserInput = {
@@ -758,12 +758,12 @@ export type ResumeCreateWithoutTemplateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutTemplateInput = {
@@ -777,12 +777,12 @@ export type ResumeUncheckedCreateWithoutTemplateInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutTemplateInput = {
@@ -821,13 +821,13 @@ export type ResumeCreateWithoutEducationInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutEducationInput = {
@@ -842,11 +842,11 @@ export type ResumeUncheckedCreateWithoutEducationInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutEducationInput = {
@@ -875,13 +875,13 @@ export type ResumeUpdateWithoutEducationInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutEducationInput = {
@@ -896,11 +896,11 @@ export type ResumeUncheckedUpdateWithoutEducationInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutExperienceInput = {
@@ -913,13 +913,13 @@ export type ResumeCreateWithoutExperienceInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutExperienceInput = {
@@ -934,11 +934,11 @@ export type ResumeUncheckedCreateWithoutExperienceInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutExperienceInput = {
@@ -967,13 +967,13 @@ export type ResumeUpdateWithoutExperienceInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutExperienceInput = {
@@ -988,11 +988,11 @@ export type ResumeUncheckedUpdateWithoutExperienceInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutProjectsInput = {
@@ -1005,13 +1005,13 @@ export type ResumeCreateWithoutProjectsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutProjectsInput = {
@@ -1026,11 +1026,11 @@ export type ResumeUncheckedCreateWithoutProjectsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutProjectsInput = {
@@ -1059,13 +1059,13 @@ export type ResumeUpdateWithoutProjectsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutProjectsInput = {
@@ -1080,11 +1080,11 @@ export type ResumeUncheckedUpdateWithoutProjectsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutSkillsInput = {
@@ -1097,13 +1097,13 @@ export type ResumeCreateWithoutSkillsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutSkillsInput = {
@@ -1118,11 +1118,11 @@ export type ResumeUncheckedCreateWithoutSkillsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutSkillsInput = {
@@ -1151,13 +1151,13 @@ export type ResumeUpdateWithoutSkillsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutSkillsInput = {
@@ -1172,11 +1172,11 @@ export type ResumeUncheckedUpdateWithoutSkillsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutCertificationsInput = {
@@ -1189,13 +1189,13 @@ export type ResumeCreateWithoutCertificationsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutCertificationsInput = {
@@ -1210,11 +1210,11 @@ export type ResumeUncheckedCreateWithoutCertificationsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  achievements?: Prisma.ResumeAchievementUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutCertificationsInput = {
@@ -1243,13 +1243,13 @@ export type ResumeUpdateWithoutCertificationsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutCertificationsInput = {
@@ -1264,11 +1264,11 @@ export type ResumeUncheckedUpdateWithoutCertificationsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutAchievementsInput = {
@@ -1281,13 +1281,13 @@ export type ResumeCreateWithoutAchievementsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutResumesInput
   template?: Prisma.ResumeTemplateCreateNestedOneWithoutResumesInput
+  user: Prisma.UserCreateNestedOneWithoutResumesInput
+  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutAchievementsInput = {
@@ -1302,11 +1302,11 @@ export type ResumeUncheckedCreateWithoutAchievementsInput = {
   github?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
   education?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   experience?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
-  certifications?: Prisma.ResumeCertificationUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutAchievementsInput = {
@@ -1335,13 +1335,13 @@ export type ResumeUpdateWithoutAchievementsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutAchievementsInput = {
@@ -1356,11 +1356,11 @@ export type ResumeUncheckedUpdateWithoutAchievementsInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateManyUserInput = {
@@ -1387,12 +1387,12 @@ export type ResumeUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   template?: Prisma.ResumeTemplateUpdateOneWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutUserInput = {
@@ -1406,12 +1406,12 @@ export type ResumeUncheckedUpdateWithoutUserInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateManyWithoutUserInput = {
@@ -1451,12 +1451,12 @@ export type ResumeUpdateWithoutTemplateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutResumesNestedInput
+  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutTemplateInput = {
@@ -1470,12 +1470,12 @@ export type ResumeUncheckedUpdateWithoutTemplateInput = {
   github?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
+  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
   education?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   experience?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
-  certifications?: Prisma.ResumeCertificationUncheckedUpdateManyWithoutResumeNestedInput
-  achievements?: Prisma.ResumeAchievementUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateManyWithoutTemplateInput = {
@@ -1497,21 +1497,21 @@ export type ResumeUncheckedUpdateManyWithoutTemplateInput = {
  */
 
 export type ResumeCountOutputType = {
+  achievements: number
+  certifications: number
   education: number
   experience: number
   projects: number
   skills: number
-  certifications: number
-  achievements: number
 }
 
 export type ResumeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  achievements?: boolean | ResumeCountOutputTypeCountAchievementsArgs
+  certifications?: boolean | ResumeCountOutputTypeCountCertificationsArgs
   education?: boolean | ResumeCountOutputTypeCountEducationArgs
   experience?: boolean | ResumeCountOutputTypeCountExperienceArgs
   projects?: boolean | ResumeCountOutputTypeCountProjectsArgs
   skills?: boolean | ResumeCountOutputTypeCountSkillsArgs
-  certifications?: boolean | ResumeCountOutputTypeCountCertificationsArgs
-  achievements?: boolean | ResumeCountOutputTypeCountAchievementsArgs
 }
 
 /**
@@ -1522,6 +1522,20 @@ export type ResumeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the ResumeCountOutputType
    */
   select?: Prisma.ResumeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ResumeCountOutputType without action
+ */
+export type ResumeCountOutputTypeCountAchievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResumeAchievementWhereInput
+}
+
+/**
+ * ResumeCountOutputType without action
+ */
+export type ResumeCountOutputTypeCountCertificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResumeCertificationWhereInput
 }
 
 /**
@@ -1552,20 +1566,6 @@ export type ResumeCountOutputTypeCountSkillsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ResumeSkillWhereInput
 }
 
-/**
- * ResumeCountOutputType without action
- */
-export type ResumeCountOutputTypeCountCertificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ResumeCertificationWhereInput
-}
-
-/**
- * ResumeCountOutputType without action
- */
-export type ResumeCountOutputTypeCountAchievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ResumeAchievementWhereInput
-}
-
 
 export type ResumeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1579,14 +1579,14 @@ export type ResumeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   github?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   template?: boolean | Prisma.Resume$templateArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  achievements?: boolean | Prisma.Resume$achievementsArgs<ExtArgs>
+  certifications?: boolean | Prisma.Resume$certificationsArgs<ExtArgs>
   education?: boolean | Prisma.Resume$educationArgs<ExtArgs>
   experience?: boolean | Prisma.Resume$experienceArgs<ExtArgs>
   projects?: boolean | Prisma.Resume$projectsArgs<ExtArgs>
   skills?: boolean | Prisma.Resume$skillsArgs<ExtArgs>
-  certifications?: boolean | Prisma.Resume$certificationsArgs<ExtArgs>
-  achievements?: boolean | Prisma.Resume$achievementsArgs<ExtArgs>
   _count?: boolean | Prisma.ResumeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resume"]>
 
@@ -1602,8 +1602,8 @@ export type ResumeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   github?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   template?: boolean | Prisma.Resume$templateArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resume"]>
 
 export type ResumeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1618,8 +1618,8 @@ export type ResumeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   github?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   template?: boolean | Prisma.Resume$templateArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resume"]>
 
 export type ResumeSelectScalar = {
@@ -1638,36 +1638,36 @@ export type ResumeSelectScalar = {
 
 export type ResumeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "templateId" | "title" | "summary" | "phone" | "location" | "linkedin" | "github" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
 export type ResumeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   template?: boolean | Prisma.Resume$templateArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  achievements?: boolean | Prisma.Resume$achievementsArgs<ExtArgs>
+  certifications?: boolean | Prisma.Resume$certificationsArgs<ExtArgs>
   education?: boolean | Prisma.Resume$educationArgs<ExtArgs>
   experience?: boolean | Prisma.Resume$experienceArgs<ExtArgs>
   projects?: boolean | Prisma.Resume$projectsArgs<ExtArgs>
   skills?: boolean | Prisma.Resume$skillsArgs<ExtArgs>
-  certifications?: boolean | Prisma.Resume$certificationsArgs<ExtArgs>
-  achievements?: boolean | Prisma.Resume$achievementsArgs<ExtArgs>
   _count?: boolean | Prisma.ResumeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ResumeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   template?: boolean | Prisma.Resume$templateArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ResumeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   template?: boolean | Prisma.Resume$templateArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $ResumePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Resume"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     template: Prisma.$ResumeTemplatePayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs>
+    achievements: Prisma.$ResumeAchievementPayload<ExtArgs>[]
+    certifications: Prisma.$ResumeCertificationPayload<ExtArgs>[]
     education: Prisma.$ResumeEducationPayload<ExtArgs>[]
     experience: Prisma.$ResumeExperiencePayload<ExtArgs>[]
     projects: Prisma.$ResumeProjectPayload<ExtArgs>[]
     skills: Prisma.$ResumeSkillPayload<ExtArgs>[]
-    certifications: Prisma.$ResumeCertificationPayload<ExtArgs>[]
-    achievements: Prisma.$ResumeAchievementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2075,14 +2075,14 @@ readonly fields: ResumeFieldRefs;
  */
 export interface Prisma__ResumeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   template<T extends Prisma.Resume$templateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$templateArgs<ExtArgs>>): Prisma.Prisma__ResumeTemplateClient<runtime.Types.Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  achievements<T extends Prisma.Resume$achievementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  certifications<T extends Prisma.Resume$certificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$certificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeCertificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   education<T extends Prisma.Resume$educationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$educationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   experience<T extends Prisma.Resume$experienceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$experienceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeExperiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Resume$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   skills<T extends Prisma.Resume$skillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  certifications<T extends Prisma.Resume$certificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$certificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeCertificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  achievements<T extends Prisma.Resume$achievementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2543,6 +2543,54 @@ export type Resume$templateArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Resume.achievements
+ */
+export type Resume$achievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResumeAchievement
+   */
+  select?: Prisma.ResumeAchievementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResumeAchievement
+   */
+  omit?: Prisma.ResumeAchievementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResumeAchievementInclude<ExtArgs> | null
+  where?: Prisma.ResumeAchievementWhereInput
+  orderBy?: Prisma.ResumeAchievementOrderByWithRelationInput | Prisma.ResumeAchievementOrderByWithRelationInput[]
+  cursor?: Prisma.ResumeAchievementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResumeAchievementScalarFieldEnum | Prisma.ResumeAchievementScalarFieldEnum[]
+}
+
+/**
+ * Resume.certifications
+ */
+export type Resume$certificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResumeCertification
+   */
+  select?: Prisma.ResumeCertificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResumeCertification
+   */
+  omit?: Prisma.ResumeCertificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResumeCertificationInclude<ExtArgs> | null
+  where?: Prisma.ResumeCertificationWhereInput
+  orderBy?: Prisma.ResumeCertificationOrderByWithRelationInput | Prisma.ResumeCertificationOrderByWithRelationInput[]
+  cursor?: Prisma.ResumeCertificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResumeCertificationScalarFieldEnum | Prisma.ResumeCertificationScalarFieldEnum[]
+}
+
+/**
  * Resume.education
  */
 export type Resume$educationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2636,54 +2684,6 @@ export type Resume$skillsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ResumeSkillScalarFieldEnum | Prisma.ResumeSkillScalarFieldEnum[]
-}
-
-/**
- * Resume.certifications
- */
-export type Resume$certificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ResumeCertification
-   */
-  select?: Prisma.ResumeCertificationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ResumeCertification
-   */
-  omit?: Prisma.ResumeCertificationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ResumeCertificationInclude<ExtArgs> | null
-  where?: Prisma.ResumeCertificationWhereInput
-  orderBy?: Prisma.ResumeCertificationOrderByWithRelationInput | Prisma.ResumeCertificationOrderByWithRelationInput[]
-  cursor?: Prisma.ResumeCertificationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ResumeCertificationScalarFieldEnum | Prisma.ResumeCertificationScalarFieldEnum[]
-}
-
-/**
- * Resume.achievements
- */
-export type Resume$achievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ResumeAchievement
-   */
-  select?: Prisma.ResumeAchievementSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ResumeAchievement
-   */
-  omit?: Prisma.ResumeAchievementOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ResumeAchievementInclude<ExtArgs> | null
-  where?: Prisma.ResumeAchievementWhereInput
-  orderBy?: Prisma.ResumeAchievementOrderByWithRelationInput | Prisma.ResumeAchievementOrderByWithRelationInput[]
-  cursor?: Prisma.ResumeAchievementWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ResumeAchievementScalarFieldEnum | Prisma.ResumeAchievementScalarFieldEnum[]
 }
 
 /**

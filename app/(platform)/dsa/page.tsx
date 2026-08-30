@@ -1,3 +1,5 @@
+import { Link } from "lucide-react";
+
 const topics = [
   {
     title: "Arrays",
@@ -233,13 +235,13 @@ export default function DsaPage() {
               </p>
             </div>
 
-            <a
+            <Link
               href="/interview"
               className="inline-flex shrink-0 items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
             >
               Practice Interview
               <span className="ml-2">→</span>
-            </a>
+            </Link>
           </div>
         </section>
       </section>
