@@ -390,6 +390,7 @@ model DSAQuestion {
   solution    String?
 
   submissions DSASubmission[]
+  testCases DSATestCase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -418,6 +419,18 @@ model DSASubmission {
   @@index([userId])
   @@index([questionId])
   @@index([userId, questionId])
+}
+model DSATestCase {
+  id           String      @id @default(cuid())
+  questionId   String
+  input        String
+  expectedOutput String
+  isHidden     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+
+  question DSAQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
 }
 
 

@@ -946,6 +946,188 @@ const dsaQuestions: DSAQuestionSeed[] = [
   },
 ];
 
+const dsaTestCases = {
+  "two-sum": [
+    {
+      input: "[2,7,11,15], 9",
+      expectedOutput: "[0,1]",
+      isHidden: false,
+    },
+    {
+      input: "[3,2,4], 6",
+      expectedOutput: "[1,2]",
+      isHidden: false,
+    },
+    {
+      input: "[3,3], 6",
+      expectedOutput: "[0,1]",
+      isHidden: true,
+    },
+  ],
+
+  "valid-anagram": [
+    {
+      input: "anagram, nagaram",
+      expectedOutput: "true",
+      isHidden: false,
+    },
+    {
+      input: "rat, car",
+      expectedOutput: "false",
+      isHidden: false,
+    },
+    {
+      input: "listen, silent",
+      expectedOutput: "true",
+      isHidden: true,
+    },
+  ],
+
+  "contains-duplicate": [
+    {
+      input: "[1,2,3,1]",
+      expectedOutput: "true",
+      isHidden: false,
+    },
+    {
+      input: "[1,2,3,4]",
+      expectedOutput: "false",
+      isHidden: false,
+    },
+    {
+      input: "[1,1,1,3,3,4,3,2,4,2]",
+      expectedOutput: "true",
+      isHidden: true,
+    },
+  ],
+
+  "best-time-to-buy-and-sell-stock": [
+    {
+      input: "[7,1,5,3,6,4]",
+      expectedOutput: "5",
+      isHidden: false,
+    },
+    {
+      input: "[7,6,4,3,1]",
+      expectedOutput: "0",
+      isHidden: false,
+    },
+    {
+      input: "[2,4,1,7]",
+      expectedOutput: "6",
+      isHidden: true,
+    },
+  ],
+
+  "valid-parentheses": [
+    {
+      input: "()[]{}",
+      expectedOutput: "true",
+      isHidden: false,
+    },
+    {
+      input: "(]",
+      expectedOutput: "false",
+      isHidden: false,
+    },
+    {
+      input: "{[]}",
+      expectedOutput: "true",
+      isHidden: true,
+    },
+  ],
+
+  "binary-search": [
+    {
+      input: "[-1,0,3,5,9,12], 9",
+      expectedOutput: "4",
+      isHidden: false,
+    },
+    {
+      input: "[-1,0,3,5,9,12], 2",
+      expectedOutput: "-1",
+      isHidden: false,
+    },
+    {
+      input: "[5], 5",
+      expectedOutput: "0",
+      isHidden: true,
+    },
+  ],
+
+  "reverse-linked-list": [
+    {
+      input: "[1,2,3,4,5]",
+      expectedOutput: "[5,4,3,2,1]",
+      isHidden: false,
+    },
+    {
+      input: "[1,2]",
+      expectedOutput: "[2,1]",
+      isHidden: false,
+    },
+    {
+      input: "[1]",
+      expectedOutput: "[1]",
+      isHidden: true,
+    },
+  ],
+
+  "maximum-depth-of-binary-tree": [
+    {
+      input: "[3,9,20,null,null,15,7]",
+      expectedOutput: "3",
+      isHidden: false,
+    },
+    {
+      input: "[1,null,2]",
+      expectedOutput: "2",
+      isHidden: false,
+    },
+    {
+      input: "[]",
+      expectedOutput: "0",
+      isHidden: true,
+    },
+  ],
+
+  "climbing-stairs": [
+    {
+      input: "3",
+      expectedOutput: "3",
+      isHidden: false,
+    },
+    {
+      input: "5",
+      expectedOutput: "8",
+      isHidden: false,
+    },
+    {
+      input: "1",
+      expectedOutput: "1",
+      isHidden: true,
+    },
+  ],
+
+  "longest-substring-without-repeating-characters": [
+    {
+      input: "abcabcbb",
+      expectedOutput: "3",
+      isHidden: false,
+    },
+    {
+      input: "bbbbb",
+      expectedOutput: "1",
+      isHidden: false,
+    },
+    {
+      input: "pwwkew",
+      expectedOutput: "3",
+      isHidden: true,
+    },
+  ],
+};
+
 async function main() {
   console.log("🌱 Starting academic database seed...");
 
@@ -1181,6 +1363,35 @@ async function main() {
       },
     });
   }
+  for (const [slug, testCases] of Object.entries(dsaTestCases)) {
+    const question = await prisma.dSAQuestion.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (!question) {
+      console.warn(`⚠️ Question not found for test cases: ${slug}`);
+      continue;
+    }
+
+    await prisma.dSATestCase.deleteMany({
+      where: {
+        questionId: question.id,
+      },
+    });
+
+    await prisma.dSATestCase.createMany({
+      data: testCases.map((testCase) => ({
+        questionId: question.id,
+        input: testCase.input,
+        expectedOutput: testCase.expectedOutput,
+        isHidden: testCase.isHidden,
+      })),
+    });
+  }
+
+  console.log("✅ DSA test cases seeded successfully.");
 
   console.log("✅ DSA questions seeded successfully.");
   console.log("✅ Interview questions seeded successfully.");

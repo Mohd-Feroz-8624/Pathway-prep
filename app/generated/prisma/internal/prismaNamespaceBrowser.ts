@@ -78,6 +78,7 @@ export const ModelName = {
   InterviewResult: 'InterviewResult',
   DSAQuestion: 'DSAQuestion',
   DSASubmission: 'DSASubmission',
+  DSATestCase: 'DSATestCase',
   playing_with_neon: 'playing_with_neon'
 } as const
 
@@ -483,6 +484,18 @@ export const DSASubmissionScalarFieldEnum = {
 } as const
 
 export type DSASubmissionScalarFieldEnum = (typeof DSASubmissionScalarFieldEnum)[keyof typeof DSASubmissionScalarFieldEnum]
+
+
+export const DSATestCaseScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  input: 'input',
+  expectedOutput: 'expectedOutput',
+  isHidden: 'isHidden',
+  createdAt: 'createdAt'
+} as const
+
+export type DSATestCaseScalarFieldEnum = (typeof DSATestCaseScalarFieldEnum)[keyof typeof DSATestCaseScalarFieldEnum]
 
 
 export const Playing_with_neonScalarFieldEnum = {

@@ -153,6 +153,11 @@ export type DSAQuestion = Prisma.DSAQuestionModel
  */
 export type DSASubmission = Prisma.DSASubmissionModel
 /**
+ * Model DSATestCase
+ * 
+ */
+export type DSATestCase = Prisma.DSATestCaseModel
+/**
  * Model playing_with_neon
  * 
  */

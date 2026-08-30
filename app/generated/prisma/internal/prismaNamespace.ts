@@ -424,6 +424,7 @@ export const ModelName = {
   InterviewResult: 'InterviewResult',
   DSAQuestion: 'DSAQuestion',
   DSASubmission: 'DSASubmission',
+  DSATestCase: 'DSATestCase',
   playing_with_neon: 'playing_with_neon'
 } as const
 
@@ -440,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSASubmission" | "playing_with_neon"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSASubmission" | "dSATestCase" | "playing_with_neon"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2442,6 +2443,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DSATestCase: {
+      payload: Prisma.$DSATestCasePayload<ExtArgs>
+      fields: Prisma.DSATestCaseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DSATestCaseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DSATestCaseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
+        }
+        findFirst: {
+          args: Prisma.DSATestCaseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DSATestCaseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
+        }
+        findMany: {
+          args: Prisma.DSATestCaseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>[]
+        }
+        create: {
+          args: Prisma.DSATestCaseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
+        }
+        createMany: {
+          args: Prisma.DSATestCaseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DSATestCaseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>[]
+        }
+        delete: {
+          args: Prisma.DSATestCaseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
+        }
+        update: {
+          args: Prisma.DSATestCaseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
+        }
+        deleteMany: {
+          args: Prisma.DSATestCaseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DSATestCaseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DSATestCaseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>[]
+        }
+        upsert: {
+          args: Prisma.DSATestCaseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
+        }
+        aggregate: {
+          args: Prisma.DSATestCaseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDSATestCase>
+        }
+        groupBy: {
+          args: Prisma.DSATestCaseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSATestCaseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DSATestCaseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSATestCaseCountAggregateOutputType> | number
+        }
+      }
+    }
     playing_with_neon: {
       payload: Prisma.$playing_with_neonPayload<ExtArgs>
       fields: Prisma.playing_with_neonFieldRefs
@@ -2943,6 +3018,18 @@ export const DSASubmissionScalarFieldEnum = {
 export type DSASubmissionScalarFieldEnum = (typeof DSASubmissionScalarFieldEnum)[keyof typeof DSASubmissionScalarFieldEnum]
 
 
+export const DSATestCaseScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  input: 'input',
+  expectedOutput: 'expectedOutput',
+  isHidden: 'isHidden',
+  createdAt: 'createdAt'
+} as const
+
+export type DSATestCaseScalarFieldEnum = (typeof DSATestCaseScalarFieldEnum)[keyof typeof DSATestCaseScalarFieldEnum]
+
+
 export const Playing_with_neonScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -3236,6 +3323,7 @@ export type GlobalOmitConfig = {
   interviewResult?: Prisma.InterviewResultOmit
   dSAQuestion?: Prisma.DSAQuestionOmit
   dSASubmission?: Prisma.DSASubmissionOmit
+  dSATestCase?: Prisma.DSATestCaseOmit
   playing_with_neon?: Prisma.playing_with_neonOmit
 }
 

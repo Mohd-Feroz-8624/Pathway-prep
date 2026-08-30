@@ -231,6 +231,7 @@ export type DSAQuestionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
   submissions?: Prisma.DSASubmissionListRelationFilter
+  testCases?: Prisma.DSATestCaseListRelationFilter
 }
 
 export type DSAQuestionOrderByWithRelationInput = {
@@ -246,6 +247,7 @@ export type DSAQuestionOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   submissions?: Prisma.DSASubmissionOrderByRelationAggregateInput
+  testCases?: Prisma.DSATestCaseOrderByRelationAggregateInput
 }
 
 export type DSAQuestionWhereUniqueInput = Prisma.AtLeast<{
@@ -264,6 +266,7 @@ export type DSAQuestionWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
   submissions?: Prisma.DSASubmissionListRelationFilter
+  testCases?: Prisma.DSATestCaseListRelationFilter
 }, "id" | "slug">
 
 export type DSAQuestionOrderByWithAggregationInput = {
@@ -313,6 +316,7 @@ export type DSAQuestionCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   submissions?: Prisma.DSASubmissionCreateNestedManyWithoutQuestionInput
+  testCases?: Prisma.DSATestCaseCreateNestedManyWithoutQuestionInput
 }
 
 export type DSAQuestionUncheckedCreateInput = {
@@ -328,6 +332,7 @@ export type DSAQuestionUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   submissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutQuestionInput
+  testCases?: Prisma.DSATestCaseUncheckedCreateNestedManyWithoutQuestionInput
 }
 
 export type DSAQuestionUpdateInput = {
@@ -343,6 +348,7 @@ export type DSAQuestionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submissions?: Prisma.DSASubmissionUpdateManyWithoutQuestionNestedInput
+  testCases?: Prisma.DSATestCaseUpdateManyWithoutQuestionNestedInput
 }
 
 export type DSAQuestionUncheckedUpdateInput = {
@@ -358,6 +364,7 @@ export type DSAQuestionUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutQuestionNestedInput
+  testCases?: Prisma.DSATestCaseUncheckedUpdateManyWithoutQuestionNestedInput
 }
 
 export type DSAQuestionCreateManyInput = {
@@ -463,6 +470,20 @@ export type DSAQuestionUpdateOneRequiredWithoutSubmissionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DSAQuestionUpdateToOneWithWhereWithoutSubmissionsInput, Prisma.DSAQuestionUpdateWithoutSubmissionsInput>, Prisma.DSAQuestionUncheckedUpdateWithoutSubmissionsInput>
 }
 
+export type DSAQuestionCreateNestedOneWithoutTestCasesInput = {
+  create?: Prisma.XOR<Prisma.DSAQuestionCreateWithoutTestCasesInput, Prisma.DSAQuestionUncheckedCreateWithoutTestCasesInput>
+  connectOrCreate?: Prisma.DSAQuestionCreateOrConnectWithoutTestCasesInput
+  connect?: Prisma.DSAQuestionWhereUniqueInput
+}
+
+export type DSAQuestionUpdateOneRequiredWithoutTestCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.DSAQuestionCreateWithoutTestCasesInput, Prisma.DSAQuestionUncheckedCreateWithoutTestCasesInput>
+  connectOrCreate?: Prisma.DSAQuestionCreateOrConnectWithoutTestCasesInput
+  upsert?: Prisma.DSAQuestionUpsertWithoutTestCasesInput
+  connect?: Prisma.DSAQuestionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DSAQuestionUpdateToOneWithWhereWithoutTestCasesInput, Prisma.DSAQuestionUpdateWithoutTestCasesInput>, Prisma.DSAQuestionUncheckedUpdateWithoutTestCasesInput>
+}
+
 export type DSAQuestionCreateWithoutSubmissionsInput = {
   id?: string
   title: string
@@ -475,6 +496,7 @@ export type DSAQuestionCreateWithoutSubmissionsInput = {
   solution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  testCases?: Prisma.DSATestCaseCreateNestedManyWithoutQuestionInput
 }
 
 export type DSAQuestionUncheckedCreateWithoutSubmissionsInput = {
@@ -489,6 +511,7 @@ export type DSAQuestionUncheckedCreateWithoutSubmissionsInput = {
   solution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  testCases?: Prisma.DSATestCaseUncheckedCreateNestedManyWithoutQuestionInput
 }
 
 export type DSAQuestionCreateOrConnectWithoutSubmissionsInput = {
@@ -519,6 +542,7 @@ export type DSAQuestionUpdateWithoutSubmissionsInput = {
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  testCases?: Prisma.DSATestCaseUpdateManyWithoutQuestionNestedInput
 }
 
 export type DSAQuestionUncheckedUpdateWithoutSubmissionsInput = {
@@ -533,6 +557,83 @@ export type DSAQuestionUncheckedUpdateWithoutSubmissionsInput = {
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  testCases?: Prisma.DSATestCaseUncheckedUpdateManyWithoutQuestionNestedInput
+}
+
+export type DSAQuestionCreateWithoutTestCasesInput = {
+  id?: string
+  title: string
+  slug: string
+  description: string
+  difficulty: string
+  topic: string
+  constraints?: string | null
+  examples?: string | null
+  solution?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submissions?: Prisma.DSASubmissionCreateNestedManyWithoutQuestionInput
+}
+
+export type DSAQuestionUncheckedCreateWithoutTestCasesInput = {
+  id?: string
+  title: string
+  slug: string
+  description: string
+  difficulty: string
+  topic: string
+  constraints?: string | null
+  examples?: string | null
+  solution?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutQuestionInput
+}
+
+export type DSAQuestionCreateOrConnectWithoutTestCasesInput = {
+  where: Prisma.DSAQuestionWhereUniqueInput
+  create: Prisma.XOR<Prisma.DSAQuestionCreateWithoutTestCasesInput, Prisma.DSAQuestionUncheckedCreateWithoutTestCasesInput>
+}
+
+export type DSAQuestionUpsertWithoutTestCasesInput = {
+  update: Prisma.XOR<Prisma.DSAQuestionUpdateWithoutTestCasesInput, Prisma.DSAQuestionUncheckedUpdateWithoutTestCasesInput>
+  create: Prisma.XOR<Prisma.DSAQuestionCreateWithoutTestCasesInput, Prisma.DSAQuestionUncheckedCreateWithoutTestCasesInput>
+  where?: Prisma.DSAQuestionWhereInput
+}
+
+export type DSAQuestionUpdateToOneWithWhereWithoutTestCasesInput = {
+  where?: Prisma.DSAQuestionWhereInput
+  data: Prisma.XOR<Prisma.DSAQuestionUpdateWithoutTestCasesInput, Prisma.DSAQuestionUncheckedUpdateWithoutTestCasesInput>
+}
+
+export type DSAQuestionUpdateWithoutTestCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  difficulty?: Prisma.StringFieldUpdateOperationsInput | string
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.DSASubmissionUpdateManyWithoutQuestionNestedInput
+}
+
+export type DSAQuestionUncheckedUpdateWithoutTestCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  difficulty?: Prisma.StringFieldUpdateOperationsInput | string
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutQuestionNestedInput
 }
 
 
@@ -542,10 +643,12 @@ export type DSAQuestionUncheckedUpdateWithoutSubmissionsInput = {
 
 export type DSAQuestionCountOutputType = {
   submissions: number
+  testCases: number
 }
 
 export type DSAQuestionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   submissions?: boolean | DSAQuestionCountOutputTypeCountSubmissionsArgs
+  testCases?: boolean | DSAQuestionCountOutputTypeCountTestCasesArgs
 }
 
 /**
@@ -565,6 +668,13 @@ export type DSAQuestionCountOutputTypeCountSubmissionsArgs<ExtArgs extends runti
   where?: Prisma.DSASubmissionWhereInput
 }
 
+/**
+ * DSAQuestionCountOutputType without action
+ */
+export type DSAQuestionCountOutputTypeCountTestCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DSATestCaseWhereInput
+}
+
 
 export type DSAQuestionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -579,6 +689,7 @@ export type DSAQuestionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   submissions?: boolean | Prisma.DSAQuestion$submissionsArgs<ExtArgs>
+  testCases?: boolean | Prisma.DSAQuestion$testCasesArgs<ExtArgs>
   _count?: boolean | Prisma.DSAQuestionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dSAQuestion"]>
 
@@ -627,6 +738,7 @@ export type DSAQuestionSelectScalar = {
 export type DSAQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "difficulty" | "topic" | "constraints" | "examples" | "solution" | "createdAt" | "updatedAt", ExtArgs["result"]["dSAQuestion"]>
 export type DSAQuestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   submissions?: boolean | Prisma.DSAQuestion$submissionsArgs<ExtArgs>
+  testCases?: boolean | Prisma.DSAQuestion$testCasesArgs<ExtArgs>
   _count?: boolean | Prisma.DSAQuestionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DSAQuestionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -636,6 +748,7 @@ export type $DSAQuestionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "DSAQuestion"
   objects: {
     submissions: Prisma.$DSASubmissionPayload<ExtArgs>[]
+    testCases: Prisma.$DSATestCasePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1044,6 +1157,7 @@ readonly fields: DSAQuestionFieldRefs;
 export interface Prisma__DSAQuestionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   submissions<T extends Prisma.DSAQuestion$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DSAQuestion$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DSASubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  testCases<T extends Prisma.DSAQuestion$testCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DSAQuestion$testCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DSATestCasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1498,6 +1612,30 @@ export type DSAQuestion$submissionsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.DSASubmissionScalarFieldEnum | Prisma.DSASubmissionScalarFieldEnum[]
+}
+
+/**
+ * DSAQuestion.testCases
+ */
+export type DSAQuestion$testCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DSATestCase
+   */
+  select?: Prisma.DSATestCaseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DSATestCase
+   */
+  omit?: Prisma.DSATestCaseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DSATestCaseInclude<ExtArgs> | null
+  where?: Prisma.DSATestCaseWhereInput
+  orderBy?: Prisma.DSATestCaseOrderByWithRelationInput | Prisma.DSATestCaseOrderByWithRelationInput[]
+  cursor?: Prisma.DSATestCaseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DSATestCaseScalarFieldEnum | Prisma.DSATestCaseScalarFieldEnum[]
 }
 
 /**
