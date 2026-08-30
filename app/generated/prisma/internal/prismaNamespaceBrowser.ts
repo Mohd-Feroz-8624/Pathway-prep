@@ -75,7 +75,10 @@ export const ModelName = {
   InterviewQuestion: 'InterviewQuestion',
   InterviewSession: 'InterviewSession',
   InterviewAnswer: 'InterviewAnswer',
-  InterviewResult: 'InterviewResult'
+  InterviewResult: 'InterviewResult',
+  DSAQuestion: 'DSAQuestion',
+  DSASubmission: 'DSASubmission',
+  playing_with_neon: 'playing_with_neon'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -448,6 +451,47 @@ export const InterviewResultScalarFieldEnum = {
 } as const
 
 export type InterviewResultScalarFieldEnum = (typeof InterviewResultScalarFieldEnum)[keyof typeof InterviewResultScalarFieldEnum]
+
+
+export const DSAQuestionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  difficulty: 'difficulty',
+  topic: 'topic',
+  constraints: 'constraints',
+  examples: 'examples',
+  solution: 'solution',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]
+
+
+export const DSASubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  questionId: 'questionId',
+  code: 'code',
+  language: 'language',
+  status: 'status',
+  score: 'score',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DSASubmissionScalarFieldEnum = (typeof DSASubmissionScalarFieldEnum)[keyof typeof DSASubmissionScalarFieldEnum]
+
+
+export const Playing_with_neonScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  value: 'value'
+} as const
+
+export type Playing_with_neonScalarFieldEnum = (typeof Playing_with_neonScalarFieldEnum)[keyof typeof Playing_with_neonScalarFieldEnum]
 
 
 export const SortOrder = {

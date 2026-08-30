@@ -421,7 +421,10 @@ export const ModelName = {
   InterviewQuestion: 'InterviewQuestion',
   InterviewSession: 'InterviewSession',
   InterviewAnswer: 'InterviewAnswer',
-  InterviewResult: 'InterviewResult'
+  InterviewResult: 'InterviewResult',
+  DSAQuestion: 'DSAQuestion',
+  DSASubmission: 'DSASubmission',
+  playing_with_neon: 'playing_with_neon'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -437,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSASubmission" | "playing_with_neon"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2291,6 +2294,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DSAQuestion: {
+      payload: Prisma.$DSAQuestionPayload<ExtArgs>
+      fields: Prisma.DSAQuestionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DSAQuestionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DSAQuestionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>
+        }
+        findFirst: {
+          args: Prisma.DSAQuestionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DSAQuestionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>
+        }
+        findMany: {
+          args: Prisma.DSAQuestionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>[]
+        }
+        create: {
+          args: Prisma.DSAQuestionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>
+        }
+        createMany: {
+          args: Prisma.DSAQuestionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DSAQuestionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>[]
+        }
+        delete: {
+          args: Prisma.DSAQuestionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>
+        }
+        update: {
+          args: Prisma.DSAQuestionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>
+        }
+        deleteMany: {
+          args: Prisma.DSAQuestionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DSAQuestionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DSAQuestionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>[]
+        }
+        upsert: {
+          args: Prisma.DSAQuestionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAQuestionPayload>
+        }
+        aggregate: {
+          args: Prisma.DSAQuestionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDSAQuestion>
+        }
+        groupBy: {
+          args: Prisma.DSAQuestionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSAQuestionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DSAQuestionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSAQuestionCountAggregateOutputType> | number
+        }
+      }
+    }
+    DSASubmission: {
+      payload: Prisma.$DSASubmissionPayload<ExtArgs>
+      fields: Prisma.DSASubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DSASubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DSASubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.DSASubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DSASubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.DSASubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.DSASubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.DSASubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DSASubmissionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>[]
+        }
+        delete: {
+          args: Prisma.DSASubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+        }
+        update: {
+          args: Prisma.DSASubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.DSASubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DSASubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DSASubmissionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>[]
+        }
+        upsert: {
+          args: Prisma.DSASubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.DSASubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDSASubmission>
+        }
+        groupBy: {
+          args: Prisma.DSASubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSASubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DSASubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSASubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    playing_with_neon: {
+      payload: Prisma.$playing_with_neonPayload<ExtArgs>
+      fields: Prisma.playing_with_neonFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.playing_with_neonFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.playing_with_neonFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>
+        }
+        findFirst: {
+          args: Prisma.playing_with_neonFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.playing_with_neonFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>
+        }
+        findMany: {
+          args: Prisma.playing_with_neonFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>[]
+        }
+        create: {
+          args: Prisma.playing_with_neonCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>
+        }
+        createMany: {
+          args: Prisma.playing_with_neonCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.playing_with_neonCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>[]
+        }
+        delete: {
+          args: Prisma.playing_with_neonDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>
+        }
+        update: {
+          args: Prisma.playing_with_neonUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>
+        }
+        deleteMany: {
+          args: Prisma.playing_with_neonDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.playing_with_neonUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.playing_with_neonUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>[]
+        }
+        upsert: {
+          args: Prisma.playing_with_neonUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$playing_with_neonPayload>
+        }
+        aggregate: {
+          args: Prisma.Playing_with_neonAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlaying_with_neon>
+        }
+        groupBy: {
+          args: Prisma.playing_with_neonGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Playing_with_neonGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.playing_with_neonCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Playing_with_neonCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2686,6 +2911,47 @@ export const InterviewResultScalarFieldEnum = {
 export type InterviewResultScalarFieldEnum = (typeof InterviewResultScalarFieldEnum)[keyof typeof InterviewResultScalarFieldEnum]
 
 
+export const DSAQuestionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  difficulty: 'difficulty',
+  topic: 'topic',
+  constraints: 'constraints',
+  examples: 'examples',
+  solution: 'solution',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]
+
+
+export const DSASubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  questionId: 'questionId',
+  code: 'code',
+  language: 'language',
+  status: 'status',
+  score: 'score',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DSASubmissionScalarFieldEnum = (typeof DSASubmissionScalarFieldEnum)[keyof typeof DSASubmissionScalarFieldEnum]
+
+
+export const Playing_with_neonScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  value: 'value'
+} as const
+
+export type Playing_with_neonScalarFieldEnum = (typeof Playing_with_neonScalarFieldEnum)[keyof typeof Playing_with_neonScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2968,6 +3234,9 @@ export type GlobalOmitConfig = {
   interviewSession?: Prisma.InterviewSessionOmit
   interviewAnswer?: Prisma.InterviewAnswerOmit
   interviewResult?: Prisma.InterviewResultOmit
+  dSAQuestion?: Prisma.DSAQuestionOmit
+  dSASubmission?: Prisma.DSASubmissionOmit
+  playing_with_neon?: Prisma.playing_with_neonOmit
 }
 
 /* Types for Logging */

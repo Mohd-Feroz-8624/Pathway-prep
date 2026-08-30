@@ -813,6 +813,138 @@ const interviewQuestions: InterviewQuestionSeed[] = [
       "Look for a confident answer connecting the candidate's skills, experience, projects, and value to the role.",
   },
 ];
+type DSAQuestionSeed = {
+  title: string;
+  slug: string;
+  description: string;
+  difficulty: "Easy" | "Medium" | "Hard";
+  topic: string;
+  constraints?: string;
+  examples?: string;
+  solution?: string;
+};
+const dsaQuestions: DSAQuestionSeed[] = [
+  {
+    title: "Two Sum",
+    slug: "two-sum",
+    description:
+      "Given an array of integers and a target value, return the indices of the two numbers that add up to the target.",
+    difficulty: "Easy",
+    topic: "Arrays",
+    constraints:
+      "Each input has exactly one solution. You may not use the same element twice.",
+    examples: "Input: nums = [2,7,11,15], target = 9\nOutput: [0,1]",
+    solution:
+      "Use a hash map to store previously seen values and their indices. For each number, check whether target - number already exists.",
+  },
+  {
+    title: "Valid Anagram",
+    slug: "valid-anagram",
+    description:
+      "Given two strings, determine whether they are anagrams of each other.",
+    difficulty: "Easy",
+    topic: "Strings",
+    constraints: "The strings contain lowercase English letters.",
+    examples: "Input: s = 'anagram', t = 'nagaram'\nOutput: true",
+    solution:
+      "Count the frequency of each character in both strings and compare the frequencies.",
+  },
+  {
+    title: "Contains Duplicate",
+    slug: "contains-duplicate",
+    description:
+      "Given an integer array, determine whether any value appears at least twice.",
+    difficulty: "Easy",
+    topic: "Hashing",
+    constraints: "The array may contain positive, negative, and zero values.",
+    examples: "Input: nums = [1,2,3,1]\nOutput: true",
+    solution:
+      "Use a hash set. If a number is already present in the set, a duplicate exists.",
+  },
+  {
+    title: "Best Time to Buy and Sell Stock",
+    slug: "best-time-to-buy-and-sell-stock",
+    description:
+      "Given an array where prices[i] represents the price of a stock on day i, find the maximum profit from buying and selling once.",
+    difficulty: "Easy",
+    topic: "Arrays",
+    constraints: "You must buy before selling.",
+    examples: "Input: prices = [7,1,5,3,6,4]\nOutput: 5",
+    solution:
+      "Track the minimum price seen so far and calculate the maximum profit at each position.",
+  },
+  {
+    title: "Valid Parentheses",
+    slug: "valid-parentheses",
+    description:
+      "Given a string containing brackets, determine whether every opening bracket has the correct closing bracket.",
+    difficulty: "Easy",
+    topic: "Stack",
+    constraints: "The input contains only parentheses, brackets, and braces.",
+    examples: "Input: s = '()[]{}'\nOutput: true",
+    solution:
+      "Use a stack. Push opening brackets and verify each closing bracket matches the most recent opening bracket.",
+  },
+  {
+    title: "Binary Search",
+    slug: "binary-search",
+    description:
+      "Given a sorted array and a target value, return the index of the target or -1 if it does not exist.",
+    difficulty: "Easy",
+    topic: "Binary Search",
+    constraints: "The array is sorted in ascending order.",
+    examples: "Input: nums = [-1,0,3,5,9,12], target = 9\nOutput: 4",
+    solution:
+      "Use two pointers representing the search range and repeatedly check the middle element.",
+  },
+  {
+    title: "Reverse Linked List",
+    slug: "reverse-linked-list",
+    description:
+      "Given the head of a singly linked list, reverse the list and return the new head.",
+    difficulty: "Medium",
+    topic: "Linked List",
+    constraints: "The linked list may contain zero or more nodes.",
+    examples: "Input: 1 -> 2 -> 3 -> 4 -> 5\nOutput: 5 -> 4 -> 3 -> 2 -> 1",
+    solution:
+      "Iterate through the list while maintaining previous, current, and next pointers.",
+  },
+  {
+    title: "Maximum Depth of Binary Tree",
+    slug: "maximum-depth-of-binary-tree",
+    description: "Given the root of a binary tree, return its maximum depth.",
+    difficulty: "Easy",
+    topic: "Trees",
+    constraints: "The number of nodes can vary from zero to many nodes.",
+    examples: "Input: root = [3,9,20,null,null,15,7]\nOutput: 3",
+    solution:
+      "Use recursion: the depth of a node is one plus the maximum depth of its left and right subtrees.",
+  },
+  {
+    title: "Climbing Stairs",
+    slug: "climbing-stairs",
+    description:
+      "You can climb either one or two steps at a time. Calculate the number of distinct ways to reach the top of a staircase with n steps.",
+    difficulty: "Easy",
+    topic: "Dynamic Programming",
+    constraints: "1 <= n <= 45",
+    examples: "Input: n = 3\nOutput: 3",
+    solution:
+      "Use dynamic programming. The number of ways to reach step n is the sum of the ways to reach n-1 and n-2.",
+  },
+  {
+    title: "Longest Substring Without Repeating Characters",
+    slug: "longest-substring-without-repeating-characters",
+    description:
+      "Given a string, find the length of the longest substring without repeating characters.",
+    difficulty: "Medium",
+    topic: "Sliding Window",
+    constraints: "The string may contain letters, digits, symbols, and spaces.",
+    examples: "Input: s = 'abcabcbb'\nOutput: 3",
+    solution:
+      "Use a sliding window with a hash set or map to maintain the current substring without duplicate characters.",
+  },
+];
 
 async function main() {
   console.log("🌱 Starting academic database seed...");
@@ -1020,7 +1152,37 @@ async function main() {
       });
     }
   }
+  // Seed DSA questions
+  for (const questionData of dsaQuestions) {
+    await prisma.dSAQuestion.upsert({
+      where: {
+        slug: questionData.slug,
+      },
 
+      update: {
+        title: questionData.title,
+        description: questionData.description,
+        difficulty: questionData.difficulty,
+        topic: questionData.topic,
+        constraints: questionData.constraints,
+        examples: questionData.examples,
+        solution: questionData.solution,
+      },
+
+      create: {
+        title: questionData.title,
+        slug: questionData.slug,
+        description: questionData.description,
+        difficulty: questionData.difficulty,
+        topic: questionData.topic,
+        constraints: questionData.constraints,
+        examples: questionData.examples,
+        solution: questionData.solution,
+      },
+    });
+  }
+
+  console.log("✅ DSA questions seeded successfully.");
   console.log("✅ Interview questions seeded successfully.");
 
   console.log("✅ Resume templates seeded successfully.");

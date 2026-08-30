@@ -268,6 +268,7 @@ export type UserWhereInput = {
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
   resumes?: Prisma.ResumeListRelationFilter
   roadmapProgress?: Prisma.RoadmapTaskProgressListRelationFilter
+  dsaSubmissions?: Prisma.DSASubmissionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -286,6 +287,7 @@ export type UserOrderByWithRelationInput = {
   profile?: Prisma.ProfileOrderByWithRelationInput
   resumes?: Prisma.ResumeOrderByRelationAggregateInput
   roadmapProgress?: Prisma.RoadmapTaskProgressOrderByRelationAggregateInput
+  dsaSubmissions?: Prisma.DSASubmissionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -307,6 +309,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
   resumes?: Prisma.ResumeListRelationFilter
   roadmapProgress?: Prisma.RoadmapTaskProgressListRelationFilter
+  dsaSubmissions?: Prisma.DSASubmissionListRelationFilter
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -361,6 +364,7 @@ export type UserCreateInput = {
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -379,6 +383,7 @@ export type UserUncheckedCreateInput = {
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -397,6 +402,7 @@ export type UserUpdateInput = {
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -415,6 +421,7 @@ export type UserUncheckedUpdateInput = {
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -594,6 +601,20 @@ export type UserUpdateOneRequiredWithoutInterviewSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInterviewSessionsInput, Prisma.UserUpdateWithoutInterviewSessionsInput>, Prisma.UserUncheckedUpdateWithoutInterviewSessionsInput>
 }
 
+export type UserCreateNestedOneWithoutDsaSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDsaSubmissionsInput, Prisma.UserUncheckedCreateWithoutDsaSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDsaSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDsaSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDsaSubmissionsInput, Prisma.UserUncheckedCreateWithoutDsaSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDsaSubmissionsInput
+  upsert?: Prisma.UserUpsertWithoutDsaSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDsaSubmissionsInput, Prisma.UserUpdateWithoutDsaSubmissionsInput>, Prisma.UserUncheckedUpdateWithoutDsaSubmissionsInput>
+}
+
 export type UserCreateWithoutProfileInput = {
   id?: string
   clerkId: string
@@ -609,6 +630,7 @@ export type UserCreateWithoutProfileInput = {
   interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
   resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -626,6 +648,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
   resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -659,6 +682,7 @@ export type UserUpdateWithoutProfileInput = {
   interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
   resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -676,6 +700,7 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
   resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRoadmapProgressInput = {
@@ -693,6 +718,7 @@ export type UserCreateWithoutRoadmapProgressInput = {
   interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoadmapProgressInput = {
@@ -710,6 +736,7 @@ export type UserUncheckedCreateWithoutRoadmapProgressInput = {
   interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoadmapProgressInput = {
@@ -743,6 +770,7 @@ export type UserUpdateWithoutRoadmapProgressInput = {
   interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoadmapProgressInput = {
@@ -760,6 +788,7 @@ export type UserUncheckedUpdateWithoutRoadmapProgressInput = {
   interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutResumesInput = {
@@ -777,6 +806,7 @@ export type UserCreateWithoutResumesInput = {
   interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutResumesInput = {
@@ -794,6 +824,7 @@ export type UserUncheckedCreateWithoutResumesInput = {
   interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutResumesInput = {
@@ -827,6 +858,7 @@ export type UserUpdateWithoutResumesInput = {
   interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResumesInput = {
@@ -844,6 +876,7 @@ export type UserUncheckedUpdateWithoutResumesInput = {
   interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInterviewSessionsInput = {
@@ -861,6 +894,7 @@ export type UserCreateWithoutInterviewSessionsInput = {
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInterviewSessionsInput = {
@@ -878,6 +912,7 @@ export type UserUncheckedCreateWithoutInterviewSessionsInput = {
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInterviewSessionsInput = {
@@ -911,6 +946,7 @@ export type UserUpdateWithoutInterviewSessionsInput = {
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInterviewSessionsInput = {
@@ -928,6 +964,95 @@ export type UserUncheckedUpdateWithoutInterviewSessionsInput = {
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  dsaSubmissions?: Prisma.DSASubmissionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDsaSubmissionsInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDsaSubmissionsInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDsaSubmissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDsaSubmissionsInput, Prisma.UserUncheckedCreateWithoutDsaSubmissionsInput>
+}
+
+export type UserUpsertWithoutDsaSubmissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDsaSubmissionsInput, Prisma.UserUncheckedUpdateWithoutDsaSubmissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDsaSubmissionsInput, Prisma.UserUncheckedCreateWithoutDsaSubmissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDsaSubmissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDsaSubmissionsInput, Prisma.UserUncheckedUpdateWithoutDsaSubmissionsInput>
+}
+
+export type UserUpdateWithoutDsaSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDsaSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -939,12 +1064,14 @@ export type UserCountOutputType = {
   interviewSessions: number
   resumes: number
   roadmapProgress: number
+  dsaSubmissions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   interviewSessions?: boolean | UserCountOutputTypeCountInterviewSessionsArgs
   resumes?: boolean | UserCountOutputTypeCountResumesArgs
   roadmapProgress?: boolean | UserCountOutputTypeCountRoadmapProgressArgs
+  dsaSubmissions?: boolean | UserCountOutputTypeCountDsaSubmissionsArgs
 }
 
 /**
@@ -978,6 +1105,13 @@ export type UserCountOutputTypeCountRoadmapProgressArgs<ExtArgs extends runtime.
   where?: Prisma.RoadmapTaskProgressWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDsaSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DSASubmissionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -995,6 +1129,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   resumes?: boolean | Prisma.User$resumesArgs<ExtArgs>
   roadmapProgress?: boolean | Prisma.User$roadmapProgressArgs<ExtArgs>
+  dsaSubmissions?: boolean | Prisma.User$dsaSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1046,6 +1181,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   resumes?: boolean | Prisma.User$resumesArgs<ExtArgs>
   roadmapProgress?: boolean | Prisma.User$roadmapProgressArgs<ExtArgs>
+  dsaSubmissions?: boolean | Prisma.User$dsaSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1058,6 +1194,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     profile: Prisma.$ProfilePayload<ExtArgs> | null
     resumes: Prisma.$ResumePayload<ExtArgs>[]
     roadmapProgress: Prisma.$RoadmapTaskProgressPayload<ExtArgs>[]
+    dsaSubmissions: Prisma.$DSASubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1469,6 +1606,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.Prisma__ProfileClient<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   resumes<T extends Prisma.User$resumesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resumesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roadmapProgress<T extends Prisma.User$roadmapProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roadmapProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoadmapTaskProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dsaSubmissions<T extends Prisma.User$dsaSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dsaSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DSASubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1990,6 +2128,30 @@ export type User$roadmapProgressArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.RoadmapTaskProgressScalarFieldEnum | Prisma.RoadmapTaskProgressScalarFieldEnum[]
+}
+
+/**
+ * User.dsaSubmissions
+ */
+export type User$dsaSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DSASubmission
+   */
+  select?: Prisma.DSASubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DSASubmission
+   */
+  omit?: Prisma.DSASubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DSASubmissionInclude<ExtArgs> | null
+  where?: Prisma.DSASubmissionWhereInput
+  orderBy?: Prisma.DSASubmissionOrderByWithRelationInput | Prisma.DSASubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.DSASubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DSASubmissionScalarFieldEnum | Prisma.DSASubmissionScalarFieldEnum[]
 }
 
 /**

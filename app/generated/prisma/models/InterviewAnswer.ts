@@ -259,7 +259,6 @@ export type InterviewAnswerOrderByWithRelationInput = {
 
 export type InterviewAnswerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  sessionId_questionId?: Prisma.InterviewAnswerSessionIdQuestionIdCompoundUniqueInput
   AND?: Prisma.InterviewAnswerWhereInput | Prisma.InterviewAnswerWhereInput[]
   OR?: Prisma.InterviewAnswerWhereInput[]
   NOT?: Prisma.InterviewAnswerWhereInput | Prisma.InterviewAnswerWhereInput[]
@@ -272,7 +271,7 @@ export type InterviewAnswerWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"InterviewAnswer"> | Date | string
   question?: Prisma.XOR<Prisma.InterviewQuestionScalarRelationFilter, Prisma.InterviewQuestionWhereInput>
   session?: Prisma.XOR<Prisma.InterviewSessionScalarRelationFilter, Prisma.InterviewSessionWhereInput>
-}, "id" | "sessionId_questionId">
+}, "id">
 
 export type InterviewAnswerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -387,11 +386,6 @@ export type InterviewAnswerListRelationFilter = {
 
 export type InterviewAnswerOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type InterviewAnswerSessionIdQuestionIdCompoundUniqueInput = {
-  sessionId: string
-  questionId: string
 }
 
 export type InterviewAnswerCountOrderByAggregateInput = {
