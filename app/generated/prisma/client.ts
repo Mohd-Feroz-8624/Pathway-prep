@@ -172,15 +172,10 @@ export type InterviewResult = Prisma.InterviewResultModel
  */
 export type DSAQuestion = Prisma.DSAQuestionModel
 /**
- * Model DSASubmission
+ * Model DSAProgress
  * 
  */
-export type DSASubmission = Prisma.DSASubmissionModel
-/**
- * Model DSATestCase
- * 
- */
-export type DSATestCase = Prisma.DSATestCaseModel
+export type DSAProgress = Prisma.DSAProgressModel
 /**
  * Model playing_with_neon
  * 

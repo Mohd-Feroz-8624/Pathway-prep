@@ -77,8 +77,7 @@ export const ModelName = {
   InterviewAnswer: 'InterviewAnswer',
   InterviewResult: 'InterviewResult',
   DSAQuestion: 'DSAQuestion',
-  DSASubmission: 'DSASubmission',
-  DSATestCase: 'DSATestCase',
+  DSAProgress: 'DSAProgress',
   playing_with_neon: 'playing_with_neon'
 } as const
 
@@ -464,6 +463,14 @@ export const DSAQuestionScalarFieldEnum = {
   constraints: 'constraints',
   examples: 'examples',
   solution: 'solution',
+  concept: 'concept',
+  approach: 'approach',
+  timeComplexity: 'timeComplexity',
+  spaceComplexity: 'spaceComplexity',
+  javaSolution: 'javaSolution',
+  pythonSolution: 'pythonSolution',
+  javascriptSolution: 'javascriptSolution',
+  cppSolution: 'cppSolution',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -471,31 +478,16 @@ export const DSAQuestionScalarFieldEnum = {
 export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]
 
 
-export const DSASubmissionScalarFieldEnum = {
+export const DSAProgressScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   questionId: 'questionId',
-  code: 'code',
-  language: 'language',
-  status: 'status',
-  score: 'score',
+  solved: 'solved',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type DSASubmissionScalarFieldEnum = (typeof DSASubmissionScalarFieldEnum)[keyof typeof DSASubmissionScalarFieldEnum]
-
-
-export const DSATestCaseScalarFieldEnum = {
-  id: 'id',
-  questionId: 'questionId',
-  input: 'input',
-  expectedOutput: 'expectedOutput',
-  isHidden: 'isHidden',
-  createdAt: 'createdAt'
-} as const
-
-export type DSATestCaseScalarFieldEnum = (typeof DSATestCaseScalarFieldEnum)[keyof typeof DSATestCaseScalarFieldEnum]
+export type DSAProgressScalarFieldEnum = (typeof DSAProgressScalarFieldEnum)[keyof typeof DSAProgressScalarFieldEnum]
 
 
 export const Playing_with_neonScalarFieldEnum = {

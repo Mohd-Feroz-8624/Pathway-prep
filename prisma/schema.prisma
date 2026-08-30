@@ -23,7 +23,7 @@ model User {
   profile           Profile?
   resumes           Resume[]
   roadmapProgress   RoadmapTaskProgress[]
-  dsaSubmissions    DSASubmission[]
+  dsaProgress DSAProgress[]
 }
 
 model Profile {
@@ -389,8 +389,17 @@ model DSAQuestion {
   examples    String?
   solution    String?
 
-  submissions DSASubmission[]
-  testCases DSATestCase[]
+  concept         String?
+  approach        String?
+  timeComplexity  String?
+  spaceComplexity String?
+  javaSolution    String?
+  pythonSolution  String?
+  javascriptSolution String?
+  cppSolution     String?
+
+
+  progress DSAProgress[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -400,38 +409,24 @@ model DSAQuestion {
   @@index([topic, difficulty])
 }
 
-model DSASubmission {
-  id         String   @id @default(cuid())
+
+
+model DSAProgress {
+  id         String      @id @default(cuid())
   userId     String
   questionId String
+  solved     Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 
-  code       String
-  language   String
-  status     String
-  score      Int?
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   DSAQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  question DSAQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
-
+  @@unique([userId, questionId])
   @@index([userId])
   @@index([questionId])
-  @@index([userId, questionId])
 }
-model DSATestCase {
-  id           String      @id @default(cuid())
-  questionId   String
-  input        String
-  expectedOutput String
-  isHidden     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
 
-  question DSAQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
-
-  @@index([questionId])
-}
 
 
 

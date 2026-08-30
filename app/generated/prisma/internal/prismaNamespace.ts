@@ -423,8 +423,7 @@ export const ModelName = {
   InterviewAnswer: 'InterviewAnswer',
   InterviewResult: 'InterviewResult',
   DSAQuestion: 'DSAQuestion',
-  DSASubmission: 'DSASubmission',
-  DSATestCase: 'DSATestCase',
+  DSAProgress: 'DSAProgress',
   playing_with_neon: 'playing_with_neon'
 } as const
 
@@ -441,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSASubmission" | "dSATestCase" | "playing_with_neon"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSAProgress" | "playing_with_neon"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2369,151 +2368,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    DSASubmission: {
-      payload: Prisma.$DSASubmissionPayload<ExtArgs>
-      fields: Prisma.DSASubmissionFieldRefs
+    DSAProgress: {
+      payload: Prisma.$DSAProgressPayload<ExtArgs>
+      fields: Prisma.DSAProgressFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.DSASubmissionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload> | null
+          args: Prisma.DSAProgressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.DSASubmissionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+          args: Prisma.DSAProgressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>
         }
         findFirst: {
-          args: Prisma.DSASubmissionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload> | null
+          args: Prisma.DSAProgressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.DSASubmissionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+          args: Prisma.DSAProgressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>
         }
         findMany: {
-          args: Prisma.DSASubmissionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>[]
+          args: Prisma.DSAProgressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>[]
         }
         create: {
-          args: Prisma.DSASubmissionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+          args: Prisma.DSAProgressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>
         }
         createMany: {
-          args: Prisma.DSASubmissionCreateManyArgs<ExtArgs>
+          args: Prisma.DSAProgressCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.DSASubmissionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>[]
+          args: Prisma.DSAProgressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>[]
         }
         delete: {
-          args: Prisma.DSASubmissionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+          args: Prisma.DSAProgressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>
         }
         update: {
-          args: Prisma.DSASubmissionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+          args: Prisma.DSAProgressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>
         }
         deleteMany: {
-          args: Prisma.DSASubmissionDeleteManyArgs<ExtArgs>
+          args: Prisma.DSAProgressDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.DSASubmissionUpdateManyArgs<ExtArgs>
+          args: Prisma.DSAProgressUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.DSASubmissionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>[]
+          args: Prisma.DSAProgressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>[]
         }
         upsert: {
-          args: Prisma.DSASubmissionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSASubmissionPayload>
+          args: Prisma.DSAProgressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSAProgressPayload>
         }
         aggregate: {
-          args: Prisma.DSASubmissionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDSASubmission>
+          args: Prisma.DSAProgressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDSAProgress>
         }
         groupBy: {
-          args: Prisma.DSASubmissionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DSASubmissionGroupByOutputType>[]
+          args: Prisma.DSAProgressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSAProgressGroupByOutputType>[]
         }
         count: {
-          args: Prisma.DSASubmissionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DSASubmissionCountAggregateOutputType> | number
-        }
-      }
-    }
-    DSATestCase: {
-      payload: Prisma.$DSATestCasePayload<ExtArgs>
-      fields: Prisma.DSATestCaseFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.DSATestCaseFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.DSATestCaseFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
-        }
-        findFirst: {
-          args: Prisma.DSATestCaseFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.DSATestCaseFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
-        }
-        findMany: {
-          args: Prisma.DSATestCaseFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>[]
-        }
-        create: {
-          args: Prisma.DSATestCaseCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
-        }
-        createMany: {
-          args: Prisma.DSATestCaseCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.DSATestCaseCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>[]
-        }
-        delete: {
-          args: Prisma.DSATestCaseDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
-        }
-        update: {
-          args: Prisma.DSATestCaseUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
-        }
-        deleteMany: {
-          args: Prisma.DSATestCaseDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.DSATestCaseUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.DSATestCaseUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>[]
-        }
-        upsert: {
-          args: Prisma.DSATestCaseUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DSATestCasePayload>
-        }
-        aggregate: {
-          args: Prisma.DSATestCaseAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDSATestCase>
-        }
-        groupBy: {
-          args: Prisma.DSATestCaseGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DSATestCaseGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.DSATestCaseCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DSATestCaseCountAggregateOutputType> | number
+          args: Prisma.DSAProgressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DSAProgressCountAggregateOutputType> | number
         }
       }
     }
@@ -2996,6 +2921,14 @@ export const DSAQuestionScalarFieldEnum = {
   constraints: 'constraints',
   examples: 'examples',
   solution: 'solution',
+  concept: 'concept',
+  approach: 'approach',
+  timeComplexity: 'timeComplexity',
+  spaceComplexity: 'spaceComplexity',
+  javaSolution: 'javaSolution',
+  pythonSolution: 'pythonSolution',
+  javascriptSolution: 'javascriptSolution',
+  cppSolution: 'cppSolution',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3003,31 +2936,16 @@ export const DSAQuestionScalarFieldEnum = {
 export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]
 
 
-export const DSASubmissionScalarFieldEnum = {
+export const DSAProgressScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   questionId: 'questionId',
-  code: 'code',
-  language: 'language',
-  status: 'status',
-  score: 'score',
+  solved: 'solved',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type DSASubmissionScalarFieldEnum = (typeof DSASubmissionScalarFieldEnum)[keyof typeof DSASubmissionScalarFieldEnum]
-
-
-export const DSATestCaseScalarFieldEnum = {
-  id: 'id',
-  questionId: 'questionId',
-  input: 'input',
-  expectedOutput: 'expectedOutput',
-  isHidden: 'isHidden',
-  createdAt: 'createdAt'
-} as const
-
-export type DSATestCaseScalarFieldEnum = (typeof DSATestCaseScalarFieldEnum)[keyof typeof DSATestCaseScalarFieldEnum]
+export type DSAProgressScalarFieldEnum = (typeof DSAProgressScalarFieldEnum)[keyof typeof DSAProgressScalarFieldEnum]
 
 
 export const Playing_with_neonScalarFieldEnum = {
@@ -3322,8 +3240,7 @@ export type GlobalOmitConfig = {
   interviewAnswer?: Prisma.InterviewAnswerOmit
   interviewResult?: Prisma.InterviewResultOmit
   dSAQuestion?: Prisma.DSAQuestionOmit
-  dSASubmission?: Prisma.DSASubmissionOmit
-  dSATestCase?: Prisma.DSATestCaseOmit
+  dSAProgress?: Prisma.DSAProgressOmit
   playing_with_neon?: Prisma.playing_with_neonOmit
 }
 
