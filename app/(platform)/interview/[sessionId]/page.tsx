@@ -21,11 +21,27 @@ export default async function InterviewSessionPage({
 
   const { sessionId } = await params;
 
-  // Get the interview session
+  // Get the interview session and the exact questions
+  // that were assigned when the session was created.
   const session = await prisma.interviewSession.findFirst({
     where: {
       id: sessionId,
       userId: user.id,
+    },
+    include: {
+      answers: {
+        orderBy: {
+          createdAt: "asc",
+        },
+        include: {
+          question: {
+            select: {
+              id: true,
+              question: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -33,27 +49,31 @@ export default async function InterviewSessionPage({
     notFound();
   }
 
-  // Get questions directly from the question bank
-  const questions = await prisma.interviewQuestion.findMany({
-    where: {
-      role: session.role,
-      difficulty: session.difficulty,
-      isActive: true,
-      ...(session.type === "Mixed"
-        ? {}
-        : {
-            type: session.type,
-          }),
-    },
-    orderBy: {
-      createdAt: "asc",
-    },
-    take: 5,
-    select: {
-      id: true,
-      question: true,
-    },
-  });
+  // The InterviewAnswer records were created when
+  // the interview session started. Therefore, they
+  // represent the exact questions assigned to this session.
+  const questions = session.answers.map((answer) => ({
+    id: answer.question.id,
+    question: answer.question.question,
+  }));
+
+  if (questions.length === 0) {
+    return (
+      <main className="min-h-screen bg-slate-50">
+        <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+            <h1 className="text-2xl font-bold text-slate-950">
+              No questions available
+            </h1>
+
+            <p className="mt-2 text-sm text-slate-500">
+              This interview session does not contain any questions.
+            </p>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-50">

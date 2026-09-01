@@ -23,6 +23,7 @@ model User {
   profile           Profile?
   resumes           Resume[]
   roadmapProgress   RoadmapTaskProgress[]
+  dsaProgress DSAProgress[]
 }
 
 model Profile {
@@ -363,7 +364,6 @@ model InterviewAnswer {
 
   @@index([sessionId])
   @@index([questionId])
-  @@unique([sessionId, questionId])
 }
 
 model InterviewResult {
@@ -376,6 +376,64 @@ model InterviewResult {
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   session         InterviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model DSAQuestion {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  difficulty  String
+  topic       String
+  constraints String?
+  examples    String?
+  solution    String?
+
+  concept         String?
+  approach        String?
+  timeComplexity  String?
+  spaceComplexity String?
+  javaSolution    String?
+  pythonSolution  String?
+  javascriptSolution String?
+  cppSolution     String?
+
+
+  progress DSAProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([topic])
+  @@index([difficulty])
+  @@index([topic, difficulty])
+}
+
+
+
+model DSAProgress {
+  id         String      @id @default(cuid())
+  userId     String
+  questionId String
+  solved     Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   DSAQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@index([userId])
+  @@index([questionId])
+}
+
+
+
+
+model playing_with_neon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
 }
 
 enum UserRole {

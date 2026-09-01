@@ -166,3 +166,18 @@ export type InterviewAnswer = Prisma.InterviewAnswerModel
  * 
  */
 export type InterviewResult = Prisma.InterviewResultModel
+/**
+ * Model DSAQuestion
+ * 
+ */
+export type DSAQuestion = Prisma.DSAQuestionModel
+/**
+ * Model DSAProgress
+ * 
+ */
+export type DSAProgress = Prisma.DSAProgressModel
+/**
+ * Model playing_with_neon
+ * 
+ */
+export type playing_with_neon = Prisma.playing_with_neonModel
