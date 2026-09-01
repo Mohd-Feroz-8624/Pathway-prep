@@ -17,12 +17,12 @@ export default function InterviewSession({
   sessionId,
   questions,
 }: InterviewSessionProps) {
-  const router  = useRouter(); 
-
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answer, setAnswer] = useState("");
-
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const currentQuestion = questions[currentIndex];
+  const [isSaving, setIsSaving] = useState(false);
+  const [isFinishing, setIsFinishing] = useState(false);
 
   if (!currentQuestion) {
     return (
@@ -34,19 +34,26 @@ export default function InterviewSession({
     );
   }
 
+  const currentAnswer = answers[currentQuestion.id] ?? "";
+
   const isLastQuestion = currentIndex === questions.length - 1;
 
-  async function saveAnswer() {
-    console.log("SAVING ANSWER FOR SESSION:", sessionId);
-    console.log("CURRENT QUESTION:", currentQuestion.id);
+  function updateCurrentAnswer(value: string) {
+    setAnswers((previous) => ({
+      ...previous,
+      [currentQuestion.id]: value,
+    }));
+  }
+
+  async function saveAnswer(questionId: string, answerText: string) {
     const response = await fetch(`/api/interview/${sessionId}/answers`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        questionId: currentQuestion.id,
-        answer,
+        questionId,
+        answer: answerText,
       }),
     });
 
@@ -58,12 +65,15 @@ export default function InterviewSession({
   }
 
   async function handleNext() {
+    if (isSaving || isFinishing) return;
+
     try {
-      await saveAnswer();
+      setIsSaving(true);
+
+      await saveAnswer(currentQuestion.id, currentAnswer);
 
       if (!isLastQuestion) {
         setCurrentIndex((current) => current + 1);
-        setAnswer("");
       }
     } catch (error) {
       console.error("Save answer error:", error);
@@ -71,68 +81,74 @@ export default function InterviewSession({
       alert(
         error instanceof Error ? error.message : "Failed to save your answer.",
       );
+    } finally {
+      setIsSaving(false);
     }
   }
 
   function handlePrevious() {
     if (currentIndex > 0) {
       setCurrentIndex((current) => current - 1);
-      setAnswer("");
     }
   }
- async function handleFinish() {
-   try {
-     // 1. Save the final answer
-     await saveAnswer();
 
-     // 2. Mark interview as completed
-     const finishResponse = await fetch(`/api/interview/${sessionId}/finish`, {
-       method: "POST",
-     });
+  async function handleFinish() {
+    if (isSaving || isFinishing) return;
 
-     const finishData = await finishResponse.json();
+    try {
+      setIsFinishing(true);
 
-     if (!finishResponse.ok) {
-       throw new Error(finishData.error || "Failed to finish interview.");
-     }
+      await saveAnswer(currentQuestion.id, currentAnswer);
 
-     // 3. Evaluate all answers with Gemini
-     const evaluateResponse = await fetch(
-       `/api/interview/${sessionId}/evaluate`,
-       {
-         method: "POST",
-       },
-     );
+      const finishResponse = await fetch(`/api/interview/${sessionId}/finish`, {
+        method: "POST",
+      });
 
-     const evaluateData = await evaluateResponse.json();
+      const finishData = await finishResponse.json();
 
-     if (!evaluateResponse.ok) {
-       throw new Error(evaluateData.error || "Failed to evaluate interview.");
-     }
+      if (!finishResponse.ok) {
+        throw new Error(finishData.error || "Failed to finish interview.");
+      }
 
-     // 4. Create overall interview result
-     const resultResponse = await fetch(`/api/interview/${sessionId}/result`, {
-       method: "POST",
-     });
+      const evaluateResponse = await fetch(
+        `/api/interview/${sessionId}/evaluate`,
+        {
+          method: "POST",
+        },
+      );
 
-     const resultData = await resultResponse.json();
+      const evaluateData = await evaluateResponse.json();
 
-     if (!resultResponse.ok) {
-       throw new Error(
-         resultData.error || "Failed to create interview result.",
-       );
-     }
+      if (!evaluateResponse.ok) {
+        throw new Error(evaluateData.error || "Failed to evaluate interview.");
+      }
 
-     // 5. Go to result page
-     router.push(`/interview/${sessionId}/result`);
-   } catch (error) {
-     console.error("Finish interview error:", error);
+      const resultResponse = await fetch(`/api/interview/${sessionId}/result`, {
+        method: "POST",
+      });
 
-     alert(
-       error instanceof Error ? error.message : "Failed to complete interview.",
-     );
-   }
- }
+      const resultData = await resultResponse.json();
+
+      if (!resultResponse.ok) {
+        throw new Error(
+          resultData.error || "Failed to create interview result.",
+        );
+      }
+
+      router.push(`/interview/${sessionId}/result`);
+    } catch (error) {
+      console.error("Finish interview error:", error);
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Failed to complete interview.",
+      );
+
+      setIsFinishing(false);
+    }
+  }
+
   return (
     <section className="mt-10">
       {/* Progress */}
@@ -185,8 +201,8 @@ export default function InterviewSession({
 
           <textarea
             id="answer"
-            value={answer}
-            onChange={(event) => setAnswer(event.target.value)}
+            value={currentAnswer}
+            onChange={(event) => updateCurrentAnswer(event.target.value)}
             placeholder="Type your answer here..."
             rows={8}
             className="mt-2 w-full resize-none rounded-2xl border border-slate-200 px-4 py-4 text-sm leading-6 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
@@ -198,7 +214,7 @@ export default function InterviewSession({
           <button
             type="button"
             onClick={handlePrevious}
-            disabled={currentIndex === 0}
+            disabled={currentIndex === 0 || isSaving || isFinishing}
             className="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
           >
             ← Previous
@@ -207,9 +223,15 @@ export default function InterviewSession({
           <button
             type="button"
             onClick={isLastQuestion ? handleFinish : handleNext}
-            className="rounded-xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex min-w-48 items-center justify-center rounded-xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {isLastQuestion ? "Finish Interview" : "Next Question →"}
+            {isFinishing
+              ? "Evaluating Interview..."
+              : isSaving
+                ? "Saving..."
+                : isLastQuestion
+                  ? "Finish Interview"
+                  : "Next Question →"}
           </button>
         </div>
       </article>
