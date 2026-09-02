@@ -72,6 +72,8 @@ export const ModelName = {
   ResumeSkill: 'ResumeSkill',
   ResumeCertification: 'ResumeCertification',
   ResumeAchievement: 'ResumeAchievement',
+  ResumeAnalysis: 'ResumeAnalysis',
+  UploadedResume: 'UploadedResume',
   InterviewQuestion: 'InterviewQuestion',
   InterviewSession: 'InterviewSession',
   InterviewAnswer: 'InterviewAnswer',
@@ -394,6 +396,40 @@ export const ResumeAchievementScalarFieldEnum = {
 export type ResumeAchievementScalarFieldEnum = (typeof ResumeAchievementScalarFieldEnum)[keyof typeof ResumeAchievementScalarFieldEnum]
 
 
+export const ResumeAnalysisScalarFieldEnum = {
+  id: 'id',
+  uploadedResumeId: 'uploadedResumeId',
+  targetRole: 'targetRole',
+  overallScore: 'overallScore',
+  completenessScore: 'completenessScore',
+  keywordScore: 'keywordScore',
+  experienceScore: 'experienceScore',
+  atsStructureScore: 'atsStructureScore',
+  impactScore: 'impactScore',
+  readabilityScore: 'readabilityScore',
+  strengths: 'strengths',
+  weaknesses: 'weaknesses',
+  missingKeywords: 'missingKeywords',
+  recommendations: 'recommendations',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeAnalysisScalarFieldEnum = (typeof ResumeAnalysisScalarFieldEnum)[keyof typeof ResumeAnalysisScalarFieldEnum]
+
+
+export const UploadedResumeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fileName: 'fileName',
+  fileType: 'fileType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UploadedResumeScalarFieldEnum = (typeof UploadedResumeScalarFieldEnum)[keyof typeof UploadedResumeScalarFieldEnum]
+
+
 export const InterviewQuestionScalarFieldEnum = {
   id: 'id',
   question: 'question',
@@ -463,16 +499,16 @@ export const DSAQuestionScalarFieldEnum = {
   constraints: 'constraints',
   examples: 'examples',
   solution: 'solution',
-  concept: 'concept',
-  approach: 'approach',
-  timeComplexity: 'timeComplexity',
-  spaceComplexity: 'spaceComplexity',
-  javaSolution: 'javaSolution',
-  pythonSolution: 'pythonSolution',
-  javascriptSolution: 'javascriptSolution',
-  cppSolution: 'cppSolution',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  approach: 'approach',
+  concept: 'concept',
+  cppSolution: 'cppSolution',
+  javaSolution: 'javaSolution',
+  javascriptSolution: 'javascriptSolution',
+  pythonSolution: 'pythonSolution',
+  spaceComplexity: 'spaceComplexity',
+  timeComplexity: 'timeComplexity'
 } as const
 
 export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]

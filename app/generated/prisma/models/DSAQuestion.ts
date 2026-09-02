@@ -34,16 +34,16 @@ export type DSAQuestionMinAggregateOutputType = {
   constraints: string | null
   examples: string | null
   solution: string | null
-  concept: string | null
-  approach: string | null
-  timeComplexity: string | null
-  spaceComplexity: string | null
-  javaSolution: string | null
-  pythonSolution: string | null
-  javascriptSolution: string | null
-  cppSolution: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  approach: string | null
+  concept: string | null
+  cppSolution: string | null
+  javaSolution: string | null
+  javascriptSolution: string | null
+  pythonSolution: string | null
+  spaceComplexity: string | null
+  timeComplexity: string | null
 }
 
 export type DSAQuestionMaxAggregateOutputType = {
@@ -56,16 +56,16 @@ export type DSAQuestionMaxAggregateOutputType = {
   constraints: string | null
   examples: string | null
   solution: string | null
-  concept: string | null
-  approach: string | null
-  timeComplexity: string | null
-  spaceComplexity: string | null
-  javaSolution: string | null
-  pythonSolution: string | null
-  javascriptSolution: string | null
-  cppSolution: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  approach: string | null
+  concept: string | null
+  cppSolution: string | null
+  javaSolution: string | null
+  javascriptSolution: string | null
+  pythonSolution: string | null
+  spaceComplexity: string | null
+  timeComplexity: string | null
 }
 
 export type DSAQuestionCountAggregateOutputType = {
@@ -78,16 +78,16 @@ export type DSAQuestionCountAggregateOutputType = {
   constraints: number
   examples: number
   solution: number
-  concept: number
-  approach: number
-  timeComplexity: number
-  spaceComplexity: number
-  javaSolution: number
-  pythonSolution: number
-  javascriptSolution: number
-  cppSolution: number
   createdAt: number
   updatedAt: number
+  approach: number
+  concept: number
+  cppSolution: number
+  javaSolution: number
+  javascriptSolution: number
+  pythonSolution: number
+  spaceComplexity: number
+  timeComplexity: number
   _all: number
 }
 
@@ -102,16 +102,16 @@ export type DSAQuestionMinAggregateInputType = {
   constraints?: true
   examples?: true
   solution?: true
-  concept?: true
-  approach?: true
-  timeComplexity?: true
-  spaceComplexity?: true
-  javaSolution?: true
-  pythonSolution?: true
-  javascriptSolution?: true
-  cppSolution?: true
   createdAt?: true
   updatedAt?: true
+  approach?: true
+  concept?: true
+  cppSolution?: true
+  javaSolution?: true
+  javascriptSolution?: true
+  pythonSolution?: true
+  spaceComplexity?: true
+  timeComplexity?: true
 }
 
 export type DSAQuestionMaxAggregateInputType = {
@@ -124,16 +124,16 @@ export type DSAQuestionMaxAggregateInputType = {
   constraints?: true
   examples?: true
   solution?: true
-  concept?: true
-  approach?: true
-  timeComplexity?: true
-  spaceComplexity?: true
-  javaSolution?: true
-  pythonSolution?: true
-  javascriptSolution?: true
-  cppSolution?: true
   createdAt?: true
   updatedAt?: true
+  approach?: true
+  concept?: true
+  cppSolution?: true
+  javaSolution?: true
+  javascriptSolution?: true
+  pythonSolution?: true
+  spaceComplexity?: true
+  timeComplexity?: true
 }
 
 export type DSAQuestionCountAggregateInputType = {
@@ -146,16 +146,16 @@ export type DSAQuestionCountAggregateInputType = {
   constraints?: true
   examples?: true
   solution?: true
-  concept?: true
-  approach?: true
-  timeComplexity?: true
-  spaceComplexity?: true
-  javaSolution?: true
-  pythonSolution?: true
-  javascriptSolution?: true
-  cppSolution?: true
   createdAt?: true
   updatedAt?: true
+  approach?: true
+  concept?: true
+  cppSolution?: true
+  javaSolution?: true
+  javascriptSolution?: true
+  pythonSolution?: true
+  spaceComplexity?: true
+  timeComplexity?: true
   _all?: true
 }
 
@@ -241,16 +241,16 @@ export type DSAQuestionGroupByOutputType = {
   constraints: string | null
   examples: string | null
   solution: string | null
-  concept: string | null
-  approach: string | null
-  timeComplexity: string | null
-  spaceComplexity: string | null
-  javaSolution: string | null
-  pythonSolution: string | null
-  javascriptSolution: string | null
-  cppSolution: string | null
   createdAt: Date
   updatedAt: Date
+  approach: string | null
+  concept: string | null
+  cppSolution: string | null
+  javaSolution: string | null
+  javascriptSolution: string | null
+  pythonSolution: string | null
+  spaceComplexity: string | null
+  timeComplexity: string | null
   _count: DSAQuestionCountAggregateOutputType | null
   _min: DSAQuestionMinAggregateOutputType | null
   _max: DSAQuestionMaxAggregateOutputType | null
@@ -284,16 +284,16 @@ export type DSAQuestionWhereInput = {
   constraints?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   examples?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   solution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  concept?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  approach?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  timeComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  spaceComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  javaSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  pythonSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  javascriptSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  cppSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
+  approach?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  concept?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  cppSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  javaSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  javascriptSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  pythonSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  spaceComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  timeComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   progress?: Prisma.DSAProgressListRelationFilter
 }
 
@@ -307,16 +307,16 @@ export type DSAQuestionOrderByWithRelationInput = {
   constraints?: Prisma.SortOrderInput | Prisma.SortOrder
   examples?: Prisma.SortOrderInput | Prisma.SortOrder
   solution?: Prisma.SortOrderInput | Prisma.SortOrder
-  concept?: Prisma.SortOrderInput | Prisma.SortOrder
-  approach?: Prisma.SortOrderInput | Prisma.SortOrder
-  timeComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
-  spaceComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
-  javaSolution?: Prisma.SortOrderInput | Prisma.SortOrder
-  pythonSolution?: Prisma.SortOrderInput | Prisma.SortOrder
-  javascriptSolution?: Prisma.SortOrderInput | Prisma.SortOrder
-  cppSolution?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  approach?: Prisma.SortOrderInput | Prisma.SortOrder
+  concept?: Prisma.SortOrderInput | Prisma.SortOrder
+  cppSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  javaSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  javascriptSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  pythonSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  spaceComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
+  timeComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
   progress?: Prisma.DSAProgressOrderByRelationAggregateInput
 }
 
@@ -333,16 +333,16 @@ export type DSAQuestionWhereUniqueInput = Prisma.AtLeast<{
   constraints?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   examples?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   solution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  concept?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  approach?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  timeComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  spaceComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  javaSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  pythonSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  javascriptSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
-  cppSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DSAQuestion"> | Date | string
+  approach?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  concept?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  cppSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  javaSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  javascriptSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  pythonSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  spaceComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  timeComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   progress?: Prisma.DSAProgressListRelationFilter
 }, "id" | "slug">
 
@@ -356,16 +356,16 @@ export type DSAQuestionOrderByWithAggregationInput = {
   constraints?: Prisma.SortOrderInput | Prisma.SortOrder
   examples?: Prisma.SortOrderInput | Prisma.SortOrder
   solution?: Prisma.SortOrderInput | Prisma.SortOrder
-  concept?: Prisma.SortOrderInput | Prisma.SortOrder
-  approach?: Prisma.SortOrderInput | Prisma.SortOrder
-  timeComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
-  spaceComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
-  javaSolution?: Prisma.SortOrderInput | Prisma.SortOrder
-  pythonSolution?: Prisma.SortOrderInput | Prisma.SortOrder
-  javascriptSolution?: Prisma.SortOrderInput | Prisma.SortOrder
-  cppSolution?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  approach?: Prisma.SortOrderInput | Prisma.SortOrder
+  concept?: Prisma.SortOrderInput | Prisma.SortOrder
+  cppSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  javaSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  javascriptSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  pythonSolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  spaceComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
+  timeComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DSAQuestionCountOrderByAggregateInput
   _max?: Prisma.DSAQuestionMaxOrderByAggregateInput
   _min?: Prisma.DSAQuestionMinOrderByAggregateInput
@@ -384,16 +384,16 @@ export type DSAQuestionScalarWhereWithAggregatesInput = {
   constraints?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
   examples?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
   solution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  concept?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  approach?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  timeComplexity?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  spaceComplexity?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  javaSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  pythonSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  javascriptSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
-  cppSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DSAQuestion"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DSAQuestion"> | Date | string
+  approach?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  concept?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  cppSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  javaSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  javascriptSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  pythonSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  spaceComplexity?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  timeComplexity?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
 }
 
 export type DSAQuestionCreateInput = {
@@ -406,16 +406,16 @@ export type DSAQuestionCreateInput = {
   constraints?: string | null
   examples?: string | null
   solution?: string | null
-  concept?: string | null
-  approach?: string | null
-  timeComplexity?: string | null
-  spaceComplexity?: string | null
-  javaSolution?: string | null
-  pythonSolution?: string | null
-  javascriptSolution?: string | null
-  cppSolution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  approach?: string | null
+  concept?: string | null
+  cppSolution?: string | null
+  javaSolution?: string | null
+  javascriptSolution?: string | null
+  pythonSolution?: string | null
+  spaceComplexity?: string | null
+  timeComplexity?: string | null
   progress?: Prisma.DSAProgressCreateNestedManyWithoutQuestionInput
 }
 
@@ -429,16 +429,16 @@ export type DSAQuestionUncheckedCreateInput = {
   constraints?: string | null
   examples?: string | null
   solution?: string | null
-  concept?: string | null
-  approach?: string | null
-  timeComplexity?: string | null
-  spaceComplexity?: string | null
-  javaSolution?: string | null
-  pythonSolution?: string | null
-  javascriptSolution?: string | null
-  cppSolution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  approach?: string | null
+  concept?: string | null
+  cppSolution?: string | null
+  javaSolution?: string | null
+  javascriptSolution?: string | null
+  pythonSolution?: string | null
+  spaceComplexity?: string | null
+  timeComplexity?: string | null
   progress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutQuestionInput
 }
 
@@ -452,16 +452,16 @@ export type DSAQuestionUpdateInput = {
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progress?: Prisma.DSAProgressUpdateManyWithoutQuestionNestedInput
 }
 
@@ -475,16 +475,16 @@ export type DSAQuestionUncheckedUpdateInput = {
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progress?: Prisma.DSAProgressUncheckedUpdateManyWithoutQuestionNestedInput
 }
 
@@ -498,16 +498,16 @@ export type DSAQuestionCreateManyInput = {
   constraints?: string | null
   examples?: string | null
   solution?: string | null
-  concept?: string | null
-  approach?: string | null
-  timeComplexity?: string | null
-  spaceComplexity?: string | null
-  javaSolution?: string | null
-  pythonSolution?: string | null
-  javascriptSolution?: string | null
-  cppSolution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  approach?: string | null
+  concept?: string | null
+  cppSolution?: string | null
+  javaSolution?: string | null
+  javascriptSolution?: string | null
+  pythonSolution?: string | null
+  spaceComplexity?: string | null
+  timeComplexity?: string | null
 }
 
 export type DSAQuestionUpdateManyMutationInput = {
@@ -520,16 +520,16 @@ export type DSAQuestionUpdateManyMutationInput = {
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DSAQuestionUncheckedUpdateManyInput = {
@@ -542,16 +542,16 @@ export type DSAQuestionUncheckedUpdateManyInput = {
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DSAQuestionCountOrderByAggregateInput = {
@@ -564,16 +564,16 @@ export type DSAQuestionCountOrderByAggregateInput = {
   constraints?: Prisma.SortOrder
   examples?: Prisma.SortOrder
   solution?: Prisma.SortOrder
-  concept?: Prisma.SortOrder
-  approach?: Prisma.SortOrder
-  timeComplexity?: Prisma.SortOrder
-  spaceComplexity?: Prisma.SortOrder
-  javaSolution?: Prisma.SortOrder
-  pythonSolution?: Prisma.SortOrder
-  javascriptSolution?: Prisma.SortOrder
-  cppSolution?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  approach?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
+  cppSolution?: Prisma.SortOrder
+  javaSolution?: Prisma.SortOrder
+  javascriptSolution?: Prisma.SortOrder
+  pythonSolution?: Prisma.SortOrder
+  spaceComplexity?: Prisma.SortOrder
+  timeComplexity?: Prisma.SortOrder
 }
 
 export type DSAQuestionMaxOrderByAggregateInput = {
@@ -586,16 +586,16 @@ export type DSAQuestionMaxOrderByAggregateInput = {
   constraints?: Prisma.SortOrder
   examples?: Prisma.SortOrder
   solution?: Prisma.SortOrder
-  concept?: Prisma.SortOrder
-  approach?: Prisma.SortOrder
-  timeComplexity?: Prisma.SortOrder
-  spaceComplexity?: Prisma.SortOrder
-  javaSolution?: Prisma.SortOrder
-  pythonSolution?: Prisma.SortOrder
-  javascriptSolution?: Prisma.SortOrder
-  cppSolution?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  approach?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
+  cppSolution?: Prisma.SortOrder
+  javaSolution?: Prisma.SortOrder
+  javascriptSolution?: Prisma.SortOrder
+  pythonSolution?: Prisma.SortOrder
+  spaceComplexity?: Prisma.SortOrder
+  timeComplexity?: Prisma.SortOrder
 }
 
 export type DSAQuestionMinOrderByAggregateInput = {
@@ -608,16 +608,16 @@ export type DSAQuestionMinOrderByAggregateInput = {
   constraints?: Prisma.SortOrder
   examples?: Prisma.SortOrder
   solution?: Prisma.SortOrder
-  concept?: Prisma.SortOrder
-  approach?: Prisma.SortOrder
-  timeComplexity?: Prisma.SortOrder
-  spaceComplexity?: Prisma.SortOrder
-  javaSolution?: Prisma.SortOrder
-  pythonSolution?: Prisma.SortOrder
-  javascriptSolution?: Prisma.SortOrder
-  cppSolution?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  approach?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
+  cppSolution?: Prisma.SortOrder
+  javaSolution?: Prisma.SortOrder
+  javascriptSolution?: Prisma.SortOrder
+  pythonSolution?: Prisma.SortOrder
+  spaceComplexity?: Prisma.SortOrder
+  timeComplexity?: Prisma.SortOrder
 }
 
 export type DSAQuestionScalarRelationFilter = {
@@ -649,16 +649,16 @@ export type DSAQuestionCreateWithoutProgressInput = {
   constraints?: string | null
   examples?: string | null
   solution?: string | null
-  concept?: string | null
-  approach?: string | null
-  timeComplexity?: string | null
-  spaceComplexity?: string | null
-  javaSolution?: string | null
-  pythonSolution?: string | null
-  javascriptSolution?: string | null
-  cppSolution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  approach?: string | null
+  concept?: string | null
+  cppSolution?: string | null
+  javaSolution?: string | null
+  javascriptSolution?: string | null
+  pythonSolution?: string | null
+  spaceComplexity?: string | null
+  timeComplexity?: string | null
 }
 
 export type DSAQuestionUncheckedCreateWithoutProgressInput = {
@@ -671,16 +671,16 @@ export type DSAQuestionUncheckedCreateWithoutProgressInput = {
   constraints?: string | null
   examples?: string | null
   solution?: string | null
-  concept?: string | null
-  approach?: string | null
-  timeComplexity?: string | null
-  spaceComplexity?: string | null
-  javaSolution?: string | null
-  pythonSolution?: string | null
-  javascriptSolution?: string | null
-  cppSolution?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  approach?: string | null
+  concept?: string | null
+  cppSolution?: string | null
+  javaSolution?: string | null
+  javascriptSolution?: string | null
+  pythonSolution?: string | null
+  spaceComplexity?: string | null
+  timeComplexity?: string | null
 }
 
 export type DSAQuestionCreateOrConnectWithoutProgressInput = {
@@ -709,16 +709,16 @@ export type DSAQuestionUpdateWithoutProgressInput = {
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DSAQuestionUncheckedUpdateWithoutProgressInput = {
@@ -731,16 +731,16 @@ export type DSAQuestionUncheckedUpdateWithoutProgressInput = {
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   examples?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approach?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  concept?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cppSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javaSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  javascriptSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -784,16 +784,16 @@ export type DSAQuestionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   constraints?: boolean
   examples?: boolean
   solution?: boolean
-  concept?: boolean
-  approach?: boolean
-  timeComplexity?: boolean
-  spaceComplexity?: boolean
-  javaSolution?: boolean
-  pythonSolution?: boolean
-  javascriptSolution?: boolean
-  cppSolution?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  approach?: boolean
+  concept?: boolean
+  cppSolution?: boolean
+  javaSolution?: boolean
+  javascriptSolution?: boolean
+  pythonSolution?: boolean
+  spaceComplexity?: boolean
+  timeComplexity?: boolean
   progress?: boolean | Prisma.DSAQuestion$progressArgs<ExtArgs>
   _count?: boolean | Prisma.DSAQuestionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dSAQuestion"]>
@@ -808,16 +808,16 @@ export type DSAQuestionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   constraints?: boolean
   examples?: boolean
   solution?: boolean
-  concept?: boolean
-  approach?: boolean
-  timeComplexity?: boolean
-  spaceComplexity?: boolean
-  javaSolution?: boolean
-  pythonSolution?: boolean
-  javascriptSolution?: boolean
-  cppSolution?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  approach?: boolean
+  concept?: boolean
+  cppSolution?: boolean
+  javaSolution?: boolean
+  javascriptSolution?: boolean
+  pythonSolution?: boolean
+  spaceComplexity?: boolean
+  timeComplexity?: boolean
 }, ExtArgs["result"]["dSAQuestion"]>
 
 export type DSAQuestionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -830,16 +830,16 @@ export type DSAQuestionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   constraints?: boolean
   examples?: boolean
   solution?: boolean
-  concept?: boolean
-  approach?: boolean
-  timeComplexity?: boolean
-  spaceComplexity?: boolean
-  javaSolution?: boolean
-  pythonSolution?: boolean
-  javascriptSolution?: boolean
-  cppSolution?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  approach?: boolean
+  concept?: boolean
+  cppSolution?: boolean
+  javaSolution?: boolean
+  javascriptSolution?: boolean
+  pythonSolution?: boolean
+  spaceComplexity?: boolean
+  timeComplexity?: boolean
 }, ExtArgs["result"]["dSAQuestion"]>
 
 export type DSAQuestionSelectScalar = {
@@ -852,19 +852,19 @@ export type DSAQuestionSelectScalar = {
   constraints?: boolean
   examples?: boolean
   solution?: boolean
-  concept?: boolean
-  approach?: boolean
-  timeComplexity?: boolean
-  spaceComplexity?: boolean
-  javaSolution?: boolean
-  pythonSolution?: boolean
-  javascriptSolution?: boolean
-  cppSolution?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  approach?: boolean
+  concept?: boolean
+  cppSolution?: boolean
+  javaSolution?: boolean
+  javascriptSolution?: boolean
+  pythonSolution?: boolean
+  spaceComplexity?: boolean
+  timeComplexity?: boolean
 }
 
-export type DSAQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "difficulty" | "topic" | "constraints" | "examples" | "solution" | "concept" | "approach" | "timeComplexity" | "spaceComplexity" | "javaSolution" | "pythonSolution" | "javascriptSolution" | "cppSolution" | "createdAt" | "updatedAt", ExtArgs["result"]["dSAQuestion"]>
+export type DSAQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "difficulty" | "topic" | "constraints" | "examples" | "solution" | "createdAt" | "updatedAt" | "approach" | "concept" | "cppSolution" | "javaSolution" | "javascriptSolution" | "pythonSolution" | "spaceComplexity" | "timeComplexity", ExtArgs["result"]["dSAQuestion"]>
 export type DSAQuestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   progress?: boolean | Prisma.DSAQuestion$progressArgs<ExtArgs>
   _count?: boolean | Prisma.DSAQuestionCountOutputTypeDefaultArgs<ExtArgs>
@@ -887,16 +887,16 @@ export type $DSAQuestionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     constraints: string | null
     examples: string | null
     solution: string | null
-    concept: string | null
-    approach: string | null
-    timeComplexity: string | null
-    spaceComplexity: string | null
-    javaSolution: string | null
-    pythonSolution: string | null
-    javascriptSolution: string | null
-    cppSolution: string | null
     createdAt: Date
     updatedAt: Date
+    approach: string | null
+    concept: string | null
+    cppSolution: string | null
+    javaSolution: string | null
+    javascriptSolution: string | null
+    pythonSolution: string | null
+    spaceComplexity: string | null
+    timeComplexity: string | null
   }, ExtArgs["result"]["dSAQuestion"]>
   composites: {}
 }
@@ -1330,16 +1330,16 @@ export interface DSAQuestionFieldRefs {
   readonly constraints: Prisma.FieldRef<"DSAQuestion", 'String'>
   readonly examples: Prisma.FieldRef<"DSAQuestion", 'String'>
   readonly solution: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly concept: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly approach: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly timeComplexity: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly spaceComplexity: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly javaSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly pythonSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly javascriptSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
-  readonly cppSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
   readonly createdAt: Prisma.FieldRef<"DSAQuestion", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"DSAQuestion", 'DateTime'>
+  readonly approach: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly concept: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly cppSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly javaSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly javascriptSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly pythonSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly spaceComplexity: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly timeComplexity: Prisma.FieldRef<"DSAQuestion", 'String'>
 }
     
 

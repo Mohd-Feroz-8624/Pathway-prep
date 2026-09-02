@@ -147,6 +147,16 @@ export type ResumeCertification = Prisma.ResumeCertificationModel
  */
 export type ResumeAchievement = Prisma.ResumeAchievementModel
 /**
+ * Model ResumeAnalysis
+ * 
+ */
+export type ResumeAnalysis = Prisma.ResumeAnalysisModel
+/**
+ * Model UploadedResume
+ * 
+ */
+export type UploadedResume = Prisma.UploadedResumeModel
+/**
  * Model InterviewQuestion
  * 
  */

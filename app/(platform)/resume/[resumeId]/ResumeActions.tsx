@@ -12,6 +12,7 @@ export default function ResumeActions() {
   const { resumeData } = useResumeEditor();
 
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const router = useRouter();
 
@@ -27,13 +28,30 @@ export default function ResumeActions() {
   }
 
   function handleExport() {
-    window.open(`/print/${resumeData.id}/`, "_blank");
+    window.open(`/print/${resumeData.id}`, "_blank");
+  }
+
+  async function handleSave() {
+    if (isSaving) {
+      return;
+    }
+
+    setIsSaving(true);
+
+    try {
+      // Resume sections are already saved individually.
+      // The Save button acts as the final confirmation
+      // and returns the user to the resume list.
+      router.push("/resume");
+    } finally {
+      setIsSaving(false);
+    }
   }
 
   return (
     <>
       {/* Actions */}
-      <div className="flex gap-3 print:hidden">
+      <div className="flex flex-wrap gap-3 print:hidden">
         {/* Preview */}
         <button
           type="button"
@@ -55,11 +73,14 @@ export default function ResumeActions() {
         {/* Save */}
         <button
           type="button"
-          onClick={() => router.push("/resume")}
-          className="rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+          onClick={handleSave}
+          disabled={isSaving}
+          className="rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Save
+          {isSaving ? "Saving..." : "Save"}
         </button>
+
+        {/* Change Template */}
         <button
           type="button"
           onClick={() =>
