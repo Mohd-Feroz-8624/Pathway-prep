@@ -1,8 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut } from "lucide-react";
-import {useClerk} from "@clerk/nextjs";
+import {
+  LayoutDashboard,
+  BookOpen,
+  Code2,
+  Map,
+  FileText,
+  MessagesSquare,
+  
+  ChevronLeft,
+  LogOut,
+} from "lucide-react";
+import { useClerk } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
@@ -12,32 +22,32 @@ const navigation = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: "⌂",
+    icon: LayoutDashboard,
   },
   {
     title: "Semesters",
     href: "/semesters",
-    icon: "▣",
+    icon: BookOpen,
   },
   {
     title: "DSA",
     href: "/dsa",
-    icon: "◇",
+    icon: Code2,
   },
   {
     title: "Roadmaps",
     href: "/roadmaps",
-    icon: "◈",
+    icon: Map,
   },
   {
     title: "Resume Builder",
     href: "/resume",
-    icon: "▱",
+    icon: FileText,
   },
   {
     title: "Interview Practice",
     href: "/interview",
-    icon: "◎",
+    icon: MessagesSquare,
   },
 ];
 
@@ -106,13 +116,11 @@ export default function DashboardSidebar({
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           className="group absolute -right-5 top-10 z-100 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-xl font-medium text-slate-700 shadow-md transition-all duration-200 hover:scale-105 hover:bg-slate-50 hover:text-slate-950"
         >
-          <span
-            className={`transition-transform duration-300 ${
+          <ChevronLeft
+            className={`h-5 w-5 transition-transform duration-300 ${
               collapsed ? "rotate-180" : ""
             }`}
-          >
-            ←
-          </span>
+          />
 
           {/* Premium hover tooltip */}
           <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 translate-x-1 whitespace-nowrap rounded-md bg-slate-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 ">
@@ -151,7 +159,7 @@ export default function DashboardSidebar({
                   }`}
                 >
                   <span className="relative flex h-6 shrink-0 text-base">
-                    {item.icon}
+                    <item.icon className="h-5 w-5 strokeWidth={2}" />
                   </span>
 
                   {!collapsed && (

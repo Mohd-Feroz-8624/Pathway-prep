@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { SignOutButton, useUser } from "@clerk/nextjs";
+import UserAvatar from "./UserAvatar";
 
 const navigation = [
   { title: "Dashboard", href: "/dashboard" },
@@ -10,12 +12,12 @@ const navigation = [
   { title: "Roadmaps", href: "/roadmaps" },
   { title: "Resume Builder", href: "/resume" },
   { title: "Interview Practice", href: "/interview" },
-
-  
 ];
 
 export default function DashboardHeaderBar() {
   const [open, setOpen] = useState(false);
+  const { user } = useUser();
+  
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function DashboardHeaderBar() {
             className="rounded-lg p-2 text-slate-700 hover:bg-slate-100"
             aria-label="Profile"
           >
-            ◉
+              <UserAvatar name={user?.fullName} size="sm" />
           </Link>
         </div>
       </header>
@@ -84,6 +86,17 @@ export default function DashboardHeaderBar() {
                   {item.title}
                 </Link>
               ))}
+              <div className="mt-4 border-t border-slate-200 pt-4">
+                <SignOutButton>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="w-full rounded-xl px-4 py-3 text-left text-sm font-medium text-red-600 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                </SignOutButton>
+              </div>
             </nav>
           </aside>
         </div>
