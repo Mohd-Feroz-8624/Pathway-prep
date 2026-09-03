@@ -32,9 +32,9 @@ export default async function RoadmapsPage() {
   return (
     <main className="min-h-screen bg-[#f8f9ff]">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b bg-white">
-        <div className="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-blue-100 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-purple-100 blur-3xl" />
+      <section className="relative overflow-hidden  ">
+        <div className="absolute -right-32 -top-32 h-80 w-80 rounded-full " />
+        <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-20 text-center lg:px-8">
           <div className="mx-auto mb-5 inline-flex items-center rounded-full border bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm">

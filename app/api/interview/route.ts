@@ -99,11 +99,7 @@ export async function POST(request: Request) {
       },
       take: 5,
     });
-    console.log(
-      "MATCHING INTERVIEW QUESTIONS:",
-      questions.length,
-      questions.map((question) => question.question),
-    );
+   
 
     // 8. Make sure questions are available
     if (questions.length === 0) {

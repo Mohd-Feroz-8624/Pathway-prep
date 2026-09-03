@@ -28,8 +28,6 @@ export async function POST(request: Request, { params }: RouteProps) {
     }
 
     const { sessionId } = await params;
-    console.log("Session ID:", sessionId);
-    console.log("User ID:", user.id);
 
     const session = await prisma.interviewSession.findFirst({
       where: {
@@ -37,7 +35,6 @@ export async function POST(request: Request, { params }: RouteProps) {
         userId: user.id,
       },
     });
-    console.log("Answwer Session:", session);
 
     if (!session) {
       return NextResponse.json(
@@ -122,10 +119,7 @@ export async function POST(request: Request, { params }: RouteProps) {
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to save interview answer",
+        error: "Failed to save interview answer",
       },
       { status: 500 },
     );

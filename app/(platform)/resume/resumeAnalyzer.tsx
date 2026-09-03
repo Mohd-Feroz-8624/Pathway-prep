@@ -112,8 +112,6 @@ export default function ResumeAnalyzer() {
       });
       const responseText = await response.text();
 
-      console.log("ANALYZE API STATUS:", response.status);
-      console.log("ANALYZE API RESPONSE:", responseText);
 
       let data;
 

@@ -77,10 +77,7 @@ export async function GET(request: Request, { params }: RouteProps) {
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to load resume analysis.",
+        error: "Failed to load resume analysis.",
       },
       { status: 500 },
     );

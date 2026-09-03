@@ -136,55 +136,57 @@ Do not use code fences.
 `;
 
     // 7. Send resume to Gemini
-   let response;
+    let response;
 
-   for (let attempt = 1; attempt <= 3; attempt++) {
-     try {
-       response = await ai.models.generateContent({
-         model: "gemini-3.6-flash",
-         contents: [
-           {
-             role: "user",
-             parts: [
-               {
-                 text: prompt,
-               },
-               {
-                 inlineData: {
-                   mimeType: file.type,
-                   data: base64File,
-                 },
-               },
-             ],
-           },
-         ],
-       });
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        response = await ai.models.generateContent({
+          model: "gemini-3.6-flash",
+          contents: [
+            {
+              role: "user",
+              parts: [
+                {
+                  text: prompt,
+                },
+                {
+                  inlineData: {
+                    mimeType: file.type,
+                    data: base64File,
+                  },
+                },
+              ],
+            },
+          ],
+        });
 
-       break;
-     } catch (error) {
-       const errorMessage =
-         error instanceof Error ? error.message : String(error);
+        break;
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
 
-       const isTemporaryError =
-         errorMessage.includes("503") ||
-         errorMessage.includes("UNAVAILABLE") ||
-         errorMessage.includes("high demand");
+        const isTemporaryError =
+          errorMessage.includes("503") ||
+          errorMessage.includes("UNAVAILABLE") ||
+          errorMessage.includes("high demand");
 
-       if (!isTemporaryError || attempt === 3) {
-         throw error;
-       }
+        if (!isTemporaryError || attempt === 3) {
+          throw error;
+        }
 
-       const delay = attempt * 2000;
+        const delay = attempt * 2000;
 
-       console.log(`Gemini temporarily unavailable. Retrying in ${delay}ms...`);
+        console.log(
+          `Gemini temporarily unavailable. Retrying in ${delay}ms...`,
+        );
 
-       await new Promise((resolve) => setTimeout(resolve, delay));
-     }
-   }
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    }
 
-   if (!response) {
-     throw new Error("Gemini analysis failed after multiple attempts.");
-   }
+    if (!response) {
+      throw new Error("Gemini analysis failed after multiple attempts.");
+    }
 
     const text = response.text?.trim();
 
@@ -294,8 +296,7 @@ Do not use code fences.
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error ? error.message : "Failed to analyze resume.",
+        error: "Failed to analyze resume.",
       },
       { status: 500 },
     );

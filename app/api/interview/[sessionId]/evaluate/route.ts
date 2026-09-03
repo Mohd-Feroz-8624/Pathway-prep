@@ -143,10 +143,7 @@ Return ONLY valid JSON in this exact format:
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to evaluate interview",
+        error: "Failed to evaluate interview",
       },
       { status: 500 },
     );
