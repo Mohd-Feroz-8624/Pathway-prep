@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardHeaderBar from "@/components/dashboard/DashboardHeaderBar";
+import FloatingAssistantButton from "@/components/assistant/FloatingAssistantButton";
 
 export default function PlatformLayoutClient({
   children,
@@ -24,6 +25,7 @@ export default function PlatformLayoutClient({
         <DashboardHeaderBar />
 
         {children}
+        <FloatingAssistantButton/>
       </div>
     </div>
   );
