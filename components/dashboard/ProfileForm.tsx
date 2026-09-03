@@ -93,7 +93,6 @@ export default function ProfileForm({
       if (!response.ok) {
         throw new Error(data.error || "Failed to update profile");
       }
-      console.log("Profile updated successfully:", data);
       setOriginalData(formData);
       setMessage("Profile saved successfully.");
       router.refresh();

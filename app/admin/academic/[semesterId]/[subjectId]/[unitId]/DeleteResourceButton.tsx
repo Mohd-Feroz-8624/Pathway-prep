@@ -27,9 +27,6 @@ export default function DeleteResourceButton({
 
       const text = await response.text();
 
-      console.log("DELETE status:", response.status);
-      console.log("DELETE response:", text);
-
       if (!response.ok) {
         window.alert(`Delete failed (${response.status}): ${text}`);
         return;

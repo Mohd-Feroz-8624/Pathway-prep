@@ -42,10 +42,7 @@ export async function GET() {
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to load interview history",
+        error: "Failed to load interview history",
       },
       { status: 500 },
     );

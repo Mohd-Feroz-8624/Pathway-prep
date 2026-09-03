@@ -185,10 +185,7 @@ Return ONLY valid JSON in this exact format:
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to create interview result",
+        error: "Failed to create interview result",
       },
       { status: 500 },
     );

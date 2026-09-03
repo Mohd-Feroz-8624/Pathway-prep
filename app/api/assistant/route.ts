@@ -305,8 +305,7 @@ Rules:
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error ? error.message : "Failed to get AI response.",
+        error: "Failed to get AI response.",
       },
       { status: 500 },
     );

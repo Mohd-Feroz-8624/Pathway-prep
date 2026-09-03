@@ -7,6 +7,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RoadmapProgress from "@/components/dashboard/RoadmapProgress";
 import ProfileCompleteness from "@/components/dashboard/ProfileCompleteness";
+import UnifiedProgress from "@/components/dashboard/UnifiedProgress";
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -14,42 +15,155 @@ export default async function DashboardPage() {
   if (!user) {
     redirect("/sign-in");
   }
- 
-  const completedProgress = await prisma.roadmapTaskProgress.findMany({
-    where: {
-      userId: user.id,
-      completed: true,
-    },
-    select: {
-      taskId: true,
-    },
-  });
-  const completedTaskIds = new Set(
-    completedProgress.map((progress) => progress.taskId),
-  );
-  const roadmaps = await prisma.roadmap.findMany({
-    where: {
-      isPublished: true,
-    },
-    orderBy: {
-      createdAt: "asc",
-    },
-    include: {
-      stages: {
-        orderBy: {
-          order: "asc",
-        },
-        include: {
-          tasks: {
-            orderBy: {
-              order: "asc",
+
+  const [
+    completedProgress,
+    roadmaps,
+    dsaSolved,
+    dsaTotal,
+    latestInterviewResult,
+    latestResumeAnalysis,
+  ] = await Promise.all([
+    prisma.roadmapTaskProgress.findMany({
+      where: {
+        userId: user.id,
+        completed: true,
+        task: {
+          stage: {
+            roadmap: {
+              isPublished: true,
             },
           },
         },
       },
+      select: {
+        taskId: true,
+      },
+    }),
+
+    prisma.roadmap.findMany({
+      where: {
+        isPublished: true,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+      include: {
+        stages: {
+          orderBy: {
+            order: "asc",
+          },
+          include: {
+            tasks: {
+              orderBy: {
+                order: "asc",
+              },
+            },
+          },
+        },
+      },
+    }),
+
+    prisma.dSAProgress.count({
+      where: {
+        userId: user.id,
+        solved: true,
+      },
+    }),
+
+    prisma.dSAQuestion.count(),
+
+    prisma.interviewResult.findFirst({
+      where: {
+        session: {
+          userId: user.id,
+          status: "COMPLETED",
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        overallScore: true,
+      },
+    }),
+
+    prisma.resumeAnalysis.findFirst({
+      where: {
+        uploadedResume: {
+          userId: user.id,
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        overallScore: true,
+      },
+    }),
+  ]);
+
+  const completedTaskIds = new Set(
+    completedProgress.map((progress) => progress.taskId),
+  );
+
+  const roadmapTasks = roadmaps.flatMap((roadmap) =>
+    roadmap.stages.flatMap((stage) => stage.tasks),
+  );
+
+  const completedRoadmapTasks = roadmapTasks.filter((task) =>
+    completedTaskIds.has(task.id),
+  ).length;
+
+  const roadmapPercentage =
+    roadmapTasks.length > 0
+      ? Math.round((completedRoadmapTasks / roadmapTasks.length) * 100)
+      : null;
+
+  const dsaPercentage =
+    dsaTotal > 0 ? Math.round((dsaSolved / dsaTotal) * 100) : null;
+
+  const interviewPercentage = latestInterviewResult?.overallScore ?? null;
+
+  const resumePercentage = latestResumeAnalysis?.overallScore ?? null;
+
+  const progressComponents = [
+    {
+      score: roadmapPercentage,
+      weight: 30,
     },
-  });
-  
+    {
+      score: dsaPercentage,
+      weight: 25,
+    },
+    {
+      score: interviewPercentage,
+      weight: 25,
+    },
+    {
+      score: resumePercentage,
+      weight: 20,
+    },
+  ].filter(
+    (component): component is { score: number; weight: number } =>
+      component.score !== null,
+  );
+
+  const totalWeight = progressComponents.reduce(
+    (total, component) => total + component.weight,
+    0,
+  );
+
+  const unifiedProgress =
+    totalWeight > 0
+      ? Math.round(
+          progressComponents.reduce(
+            (total, component) => total + component.score * component.weight,
+            0,
+          ) / totalWeight,
+        )
+      : 0;
+
   const roadmapProgress = roadmaps.map((roadmap) => {
     const tasks = roadmap.stages.flatMap((stage) => stage.tasks);
 
@@ -86,6 +200,7 @@ export default async function DashboardPage() {
     <main className="min-h-screen bg-slate-50">
       <section className="mx-auto max-w-7xl space-y-8 px-6 py-12 lg:px-8">
         <DashboardHeader name={user.name} />
+
         <ProfileCompleteness
           name={user.name}
           college={user.college}
@@ -95,7 +210,13 @@ export default async function DashboardPage() {
           github={user.profile?.github ?? null}
           linkedin={user.profile?.linkedin ?? null}
         />
-
+        <UnifiedProgress
+          progress={unifiedProgress}
+          roadmapPercentage={roadmapPercentage}
+          dsaPercentage={dsaPercentage}
+          interviewPercentage={interviewPercentage}
+          resumePercentage={resumePercentage}
+        />
 
         <div className="space-y-4">
           <div>
@@ -120,21 +241,22 @@ export default async function DashboardPage() {
             ))}
           </div>
         </div>
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-2">
+        <div className="grid w-full min-w-0 gap-8 items-stretch lg:grid-cols-3">
+          <div className="h-full min-w-0 lg:col-span-2">
             <QuickActions />
           </div>
-
-          <ProfileCard
-            name={user.name}
-            email={user.email}
-            college={user.college}
-            branch={user.branch}
-            currentSemester={user.currentSemester}
-            careerGoal={user.careerGoal}
-            github={user.profile?.github ?? null}
-            linkedin={user.profile?.linkedin ?? null}
-          />
+          <div className=" min-w-0">
+            <ProfileCard
+              name={user.name}
+              email={user.email}
+              college={user.college}
+              branch={user.branch}
+              currentSemester={user.currentSemester}
+              careerGoal={user.careerGoal}
+              github={user.profile?.github ?? null}
+              linkedin={user.profile?.linkedin ?? null}
+            />
+          </div>
         </div>
       </section>
     </main>

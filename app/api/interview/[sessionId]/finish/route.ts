@@ -28,8 +28,7 @@ export async function POST(request: Request, { params }: RouteProps) {
     }
 
     const { sessionId } = await params;
-    console.log("finish sessionId", sessionId);
-    console.log("finish userId", user.id);
+    
 
     const session = await prisma.interviewSession.findFirst({
       where: {

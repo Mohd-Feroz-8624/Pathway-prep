@@ -30,7 +30,6 @@ export async function POST() {
     return NextResponse.json(
       {
         error: "Failed to create template",
-        details: error instanceof Error ? error.message : String(error),
       },
       { status: 500 },
     );
