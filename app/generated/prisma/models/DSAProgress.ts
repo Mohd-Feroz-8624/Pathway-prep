@@ -190,8 +190,8 @@ export type DSAProgressWhereInput = {
   solved?: Prisma.BoolFilter<"DSAProgress"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DSAProgress"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DSAProgress"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   question?: Prisma.XOR<Prisma.DSAQuestionScalarRelationFilter, Prisma.DSAQuestionWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type DSAProgressOrderByWithRelationInput = {
@@ -201,8 +201,8 @@ export type DSAProgressOrderByWithRelationInput = {
   solved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   question?: Prisma.DSAQuestionOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type DSAProgressWhereUniqueInput = Prisma.AtLeast<{
@@ -216,8 +216,8 @@ export type DSAProgressWhereUniqueInput = Prisma.AtLeast<{
   solved?: Prisma.BoolFilter<"DSAProgress"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DSAProgress"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DSAProgress"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   question?: Prisma.XOR<Prisma.DSAQuestionScalarRelationFilter, Prisma.DSAQuestionWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_questionId">
 
 export type DSAProgressOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type DSAProgressCreateInput = {
   solved?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutDsaProgressInput
   question: Prisma.DSAQuestionCreateNestedOneWithoutProgressInput
+  user: Prisma.UserCreateNestedOneWithoutDsaProgressInput
 }
 
 export type DSAProgressUncheckedCreateInput = {
@@ -267,8 +267,8 @@ export type DSAProgressUpdateInput = {
   solved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutDsaProgressNestedInput
   question?: Prisma.DSAQuestionUpdateOneRequiredWithoutProgressNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutDsaProgressNestedInput
 }
 
 export type DSAProgressUncheckedUpdateInput = {
@@ -600,8 +600,8 @@ export type DSAProgressSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   solved?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   question?: boolean | Prisma.DSAQuestionDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dSAProgress"]>
 
 export type DSAProgressSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -611,8 +611,8 @@ export type DSAProgressSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   solved?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   question?: boolean | Prisma.DSAQuestionDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dSAProgress"]>
 
 export type DSAProgressSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -622,8 +622,8 @@ export type DSAProgressSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   solved?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   question?: boolean | Prisma.DSAQuestionDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dSAProgress"]>
 
 export type DSAProgressSelectScalar = {
@@ -637,23 +637,23 @@ export type DSAProgressSelectScalar = {
 
 export type DSAProgressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "questionId" | "solved" | "createdAt" | "updatedAt", ExtArgs["result"]["dSAProgress"]>
 export type DSAProgressInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   question?: boolean | Prisma.DSAQuestionDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type DSAProgressIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   question?: boolean | Prisma.DSAQuestionDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type DSAProgressIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   question?: boolean | Prisma.DSAQuestionDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $DSAProgressPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DSAProgress"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     question: Prisma.$DSAQuestionPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1056,8 +1056,8 @@ readonly fields: DSAProgressFieldRefs;
  */
 export interface Prisma__DSAProgressClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   question<T extends Prisma.DSAQuestionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DSAQuestionDefaultArgs<ExtArgs>>): Prisma.Prisma__DSAQuestionClient<runtime.Types.Result.GetResult<Prisma.$DSAQuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -71,20 +71,60 @@ export async function PATCH(request: Request, { params }: ResumeRouteProps) {
     // 5. Read request body
     const body = await request.json();
 
-    // 6. Update resume
+    // 6. Build partial update object
+    const data: {
+      title?: string;
+      summary?: string | null;
+      phone?: string | null;
+      location?: string | null;
+      linkedin?: string | null;
+      github?: string | null;
+    } = {};
+
+    if (body.title !== undefined) {
+      data.title =
+        typeof body.title === "string" ? body.title.trim() : resume.title;
+    }
+
+    if (body.summary !== undefined) {
+      data.summary = typeof body.summary === "string" ? body.summary : null;
+    }
+
+    if (body.phone !== undefined) {
+      data.phone = typeof body.phone === "string" ? body.phone : null;
+    }
+
+    if (body.location !== undefined) {
+      data.location = typeof body.location === "string" ? body.location : null;
+    }
+
+    if (body.linkedin !== undefined) {
+      data.linkedin = typeof body.linkedin === "string" ? body.linkedin : null;
+    }
+
+    if (body.github !== undefined) {
+      data.github = typeof body.github === "string" ? body.github : null;
+    }
+
+    // 7. Make sure there is something to update
+    if (Object.keys(data).length === 0) {
+      return NextResponse.json(
+        {
+          error: "No resume fields provided for update",
+        },
+        { status: 400 },
+      );
+    }
+
+    // 8. Update only the fields provided by the client
     const updatedResume = await prisma.resume.update({
       where: {
         id: resumeId,
       },
-      data: {
-        phone: body.phone ?? null,
-        location: body.location ?? null,
-        linkedin: body.linkedin ?? null,
-        github: body.github ?? null,
-      },
+      data,
     });
 
-    // 7. Return updated resume
+    // 9. Return updated resume
     return NextResponse.json({
       success: true,
       message: "Resume updated successfully",
@@ -101,6 +141,7 @@ export async function PATCH(request: Request, { params }: ResumeRouteProps) {
     );
   }
 }
+
 export async function DELETE(request: Request, { params }: ResumeRouteProps) {
   try {
     // 1. Authenticate with Clerk
@@ -161,8 +202,6 @@ export async function DELETE(request: Request, { params }: ResumeRouteProps) {
     }
 
     // 5. Delete resume
-    // Related resume data will be deleted automatically
-    // because the Prisma relations use onDelete: Cascade.
     await prisma.resume.delete({
       where: {
         id: resumeId,

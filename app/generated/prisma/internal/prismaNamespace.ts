@@ -418,6 +418,8 @@ export const ModelName = {
   ResumeSkill: 'ResumeSkill',
   ResumeCertification: 'ResumeCertification',
   ResumeAchievement: 'ResumeAchievement',
+  ResumeAnalysis: 'ResumeAnalysis',
+  UploadedResume: 'UploadedResume',
   InterviewQuestion: 'InterviewQuestion',
   InterviewSession: 'InterviewSession',
   InterviewAnswer: 'InterviewAnswer',
@@ -440,7 +442,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSAProgress" | "playing_with_neon"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "resumeAnalysis" | "uploadedResume" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSAProgress" | "playing_with_neon"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1998,6 +2000,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ResumeAnalysis: {
+      payload: Prisma.$ResumeAnalysisPayload<ExtArgs>
+      fields: Prisma.ResumeAnalysisFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ResumeAnalysisFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ResumeAnalysisFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>
+        }
+        findFirst: {
+          args: Prisma.ResumeAnalysisFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ResumeAnalysisFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>
+        }
+        findMany: {
+          args: Prisma.ResumeAnalysisFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>[]
+        }
+        create: {
+          args: Prisma.ResumeAnalysisCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>
+        }
+        createMany: {
+          args: Prisma.ResumeAnalysisCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ResumeAnalysisCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>[]
+        }
+        delete: {
+          args: Prisma.ResumeAnalysisDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>
+        }
+        update: {
+          args: Prisma.ResumeAnalysisUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>
+        }
+        deleteMany: {
+          args: Prisma.ResumeAnalysisDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ResumeAnalysisUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ResumeAnalysisUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>[]
+        }
+        upsert: {
+          args: Prisma.ResumeAnalysisUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResumeAnalysisPayload>
+        }
+        aggregate: {
+          args: Prisma.ResumeAnalysisAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateResumeAnalysis>
+        }
+        groupBy: {
+          args: Prisma.ResumeAnalysisGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResumeAnalysisGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ResumeAnalysisCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResumeAnalysisCountAggregateOutputType> | number
+        }
+      }
+    }
+    UploadedResume: {
+      payload: Prisma.$UploadedResumePayload<ExtArgs>
+      fields: Prisma.UploadedResumeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UploadedResumeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UploadedResumeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>
+        }
+        findFirst: {
+          args: Prisma.UploadedResumeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UploadedResumeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>
+        }
+        findMany: {
+          args: Prisma.UploadedResumeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>[]
+        }
+        create: {
+          args: Prisma.UploadedResumeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>
+        }
+        createMany: {
+          args: Prisma.UploadedResumeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UploadedResumeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>[]
+        }
+        delete: {
+          args: Prisma.UploadedResumeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>
+        }
+        update: {
+          args: Prisma.UploadedResumeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>
+        }
+        deleteMany: {
+          args: Prisma.UploadedResumeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UploadedResumeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UploadedResumeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>[]
+        }
+        upsert: {
+          args: Prisma.UploadedResumeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UploadedResumePayload>
+        }
+        aggregate: {
+          args: Prisma.UploadedResumeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUploadedResume>
+        }
+        groupBy: {
+          args: Prisma.UploadedResumeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UploadedResumeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UploadedResumeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UploadedResumeCountAggregateOutputType> | number
+        }
+      }
+    }
     InterviewQuestion: {
       payload: Prisma.$InterviewQuestionPayload<ExtArgs>
       fields: Prisma.InterviewQuestionFieldRefs
@@ -2852,6 +3002,40 @@ export const ResumeAchievementScalarFieldEnum = {
 export type ResumeAchievementScalarFieldEnum = (typeof ResumeAchievementScalarFieldEnum)[keyof typeof ResumeAchievementScalarFieldEnum]
 
 
+export const ResumeAnalysisScalarFieldEnum = {
+  id: 'id',
+  uploadedResumeId: 'uploadedResumeId',
+  targetRole: 'targetRole',
+  overallScore: 'overallScore',
+  completenessScore: 'completenessScore',
+  keywordScore: 'keywordScore',
+  experienceScore: 'experienceScore',
+  atsStructureScore: 'atsStructureScore',
+  impactScore: 'impactScore',
+  readabilityScore: 'readabilityScore',
+  strengths: 'strengths',
+  weaknesses: 'weaknesses',
+  missingKeywords: 'missingKeywords',
+  recommendations: 'recommendations',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeAnalysisScalarFieldEnum = (typeof ResumeAnalysisScalarFieldEnum)[keyof typeof ResumeAnalysisScalarFieldEnum]
+
+
+export const UploadedResumeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fileName: 'fileName',
+  fileType: 'fileType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UploadedResumeScalarFieldEnum = (typeof UploadedResumeScalarFieldEnum)[keyof typeof UploadedResumeScalarFieldEnum]
+
+
 export const InterviewQuestionScalarFieldEnum = {
   id: 'id',
   question: 'question',
@@ -2921,16 +3105,16 @@ export const DSAQuestionScalarFieldEnum = {
   constraints: 'constraints',
   examples: 'examples',
   solution: 'solution',
-  concept: 'concept',
-  approach: 'approach',
-  timeComplexity: 'timeComplexity',
-  spaceComplexity: 'spaceComplexity',
-  javaSolution: 'javaSolution',
-  pythonSolution: 'pythonSolution',
-  javascriptSolution: 'javascriptSolution',
-  cppSolution: 'cppSolution',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  approach: 'approach',
+  concept: 'concept',
+  cppSolution: 'cppSolution',
+  javaSolution: 'javaSolution',
+  javascriptSolution: 'javascriptSolution',
+  pythonSolution: 'pythonSolution',
+  spaceComplexity: 'spaceComplexity',
+  timeComplexity: 'timeComplexity'
 } as const
 
 export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]
@@ -3235,6 +3419,8 @@ export type GlobalOmitConfig = {
   resumeSkill?: Prisma.ResumeSkillOmit
   resumeCertification?: Prisma.ResumeCertificationOmit
   resumeAchievement?: Prisma.ResumeAchievementOmit
+  resumeAnalysis?: Prisma.ResumeAnalysisOmit
+  uploadedResume?: Prisma.UploadedResumeOmit
   interviewQuestion?: Prisma.InterviewQuestionOmit
   interviewSession?: Prisma.InterviewSessionOmit
   interviewAnswer?: Prisma.InterviewAnswerOmit

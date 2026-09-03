@@ -19,11 +19,12 @@ model User {
   createdAt         DateTime              @default(now())
   updatedAt         DateTime              @updatedAt
   role              UserRole              @default(STUDENT)
+  dsaProgress       DSAProgress[]
   interviewSessions InterviewSession[]
   profile           Profile?
   resumes           Resume[]
   roadmapProgress   RoadmapTaskProgress[]
-  dsaProgress DSAProgress[]
+  uploadedResumes   UploadedResume[]
 }
 
 model Profile {
@@ -317,6 +318,43 @@ model ResumeAchievement {
   @@index([resumeId])
 }
 
+model ResumeAnalysis {
+  id                String   @id @default(cuid())
+  uploadedResumeId  String
+  targetRole        String
+  overallScore      Int
+  completenessScore Int
+  keywordScore      Int
+  experienceScore   Int
+  atsStructureScore Int
+  impactScore       Int
+  readabilityScore  Int
+  strengths         String?
+  weaknesses        String?
+  missingKeywords   String?
+  recommendations   String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  uploadedResume UploadedResume @relation(fields: [uploadedResumeId], references: [id], onDelete: Cascade)
+
+  @@index([uploadedResumeId])
+}
+
+model UploadedResume {
+  id        String   @id @default(cuid())
+  userId    String
+  fileName  String
+  fileType  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analyses ResumeAnalysis[]
+
+  @@index([userId])
+}
+
 model InterviewQuestion {
   id              String            @id @default(cuid())
   question        String
@@ -379,37 +417,31 @@ model InterviewResult {
 }
 
 model DSAQuestion {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  description String
-  difficulty  String
-  topic       String
-  constraints String?
-  examples    String?
-  solution    String?
-
-  concept         String?
-  approach        String?
-  timeComplexity  String?
-  spaceComplexity String?
-  javaSolution    String?
-  pythonSolution  String?
+  id                 String        @id @default(cuid())
+  title              String
+  slug               String        @unique
+  description        String
+  difficulty         String
+  topic              String
+  constraints        String?
+  examples           String?
+  solution           String?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  approach           String?
+  concept            String?
+  cppSolution        String?
+  javaSolution       String?
   javascriptSolution String?
-  cppSolution     String?
-
-
-  progress DSAProgress[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  pythonSolution     String?
+  spaceComplexity    String?
+  timeComplexity     String?
+  progress           DSAProgress[]
 
   @@index([topic])
   @@index([difficulty])
   @@index([topic, difficulty])
 }
-
-
 
 model DSAProgress {
   id         String      @id @default(cuid())
@@ -418,17 +450,13 @@ model DSAProgress {
   solved     Boolean     @default(false)
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-
-  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   question   DSAQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, questionId])
   @@index([userId])
   @@index([questionId])
 }
-
-
-
 
 model playing_with_neon {
   id    Int    @id @default(autoincrement())

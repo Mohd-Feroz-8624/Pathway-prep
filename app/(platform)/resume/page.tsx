@@ -6,6 +6,9 @@ import { prisma } from "@/lib/prisma";
 import DeleteResumeButton from "./DeleteResumeButton";
 import CreateResumeButton from "./CreateResumeButton";
 import PageBreadcrumb from "@/components/dashboard/PageBreadCrump";
+import ResumeAnalyzer from "./resumeAnalyzer";
+
+
 
 export default async function ResumePage() {
   const user = await getCurrentUser();
@@ -102,12 +105,7 @@ export default async function ResumePage() {
               can be improved.
             </p>
 
-            <button
-              type="button"
-              className="mt-6 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-            >
-              Analyze Resume
-            </button>
+<ResumeAnalyzer/>
           </article>
         </div>
 
