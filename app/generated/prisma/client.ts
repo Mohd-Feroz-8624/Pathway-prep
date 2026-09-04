@@ -191,3 +191,8 @@ export type DSAProgress = Prisma.DSAProgressModel
  * 
  */
 export type playing_with_neon = Prisma.playing_with_neonModel
+/**
+ * Model ContactReport
+ * 
+ */
+export type ContactReport = Prisma.ContactReportModel

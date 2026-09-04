@@ -426,7 +426,8 @@ export const ModelName = {
   InterviewResult: 'InterviewResult',
   DSAQuestion: 'DSAQuestion',
   DSAProgress: 'DSAProgress',
-  playing_with_neon: 'playing_with_neon'
+  playing_with_neon: 'playing_with_neon',
+  ContactReport: 'ContactReport'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -442,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "resumeAnalysis" | "uploadedResume" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSAProgress" | "playing_with_neon"
+    modelProps: "user" | "profile" | "semester" | "subject" | "unit" | "unitResource" | "topic" | "note" | "course" | "roadmap" | "roadmapStage" | "roadmapTask" | "roadmapTaskProgress" | "resumeTemplate" | "resume" | "resumeEducation" | "resumeExperience" | "resumeProject" | "resumeSkill" | "resumeCertification" | "resumeAchievement" | "resumeAnalysis" | "uploadedResume" | "interviewQuestion" | "interviewSession" | "interviewAnswer" | "interviewResult" | "dSAQuestion" | "dSAProgress" | "playing_with_neon" | "contactReport"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2666,6 +2667,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ContactReport: {
+      payload: Prisma.$ContactReportPayload<ExtArgs>
+      fields: Prisma.ContactReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>
+        }
+        findMany: {
+          args: Prisma.ContactReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>[]
+        }
+        create: {
+          args: Prisma.ContactReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>
+        }
+        createMany: {
+          args: Prisma.ContactReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>[]
+        }
+        delete: {
+          args: Prisma.ContactReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>
+        }
+        update: {
+          args: Prisma.ContactReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactReportPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactReport>
+        }
+        groupBy: {
+          args: Prisma.ContactReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactReportCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3141,6 +3216,20 @@ export const Playing_with_neonScalarFieldEnum = {
 export type Playing_with_neonScalarFieldEnum = (typeof Playing_with_neonScalarFieldEnum)[keyof typeof Playing_with_neonScalarFieldEnum]
 
 
+export const ContactReportScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  subject: 'subject',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactReportScalarFieldEnum = (typeof ContactReportScalarFieldEnum)[keyof typeof ContactReportScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3245,6 +3334,34 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactReportType'
+ */
+export type EnumContactReportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactReportType'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactReportType[]'
+ */
+export type ListEnumContactReportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactReportType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactReportStatus'
+ */
+export type EnumContactReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactReportStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactReportStatus[]'
+ */
+export type ListEnumContactReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactReportStatus[]'>
     
 
 /**
@@ -3428,6 +3545,7 @@ export type GlobalOmitConfig = {
   dSAQuestion?: Prisma.DSAQuestionOmit
   dSAProgress?: Prisma.DSAProgressOmit
   playing_with_neon?: Prisma.playing_with_neonOmit
+  contactReport?: Prisma.ContactReportOmit
 }
 
 /* Types for Logging */

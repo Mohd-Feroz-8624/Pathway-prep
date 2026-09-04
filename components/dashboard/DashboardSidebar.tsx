@@ -1,8 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut } from "lucide-react";
-import {useClerk} from "@clerk/nextjs";
+import {
+  LayoutDashboard,
+  BookOpen,
+  Code2,
+  Map,
+  FileText,
+  MessagesSquare,
+  CircleHelp,
+  ChevronLeft,
+  LogOut,
+} from "lucide-react";
+import { useClerk } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
@@ -12,32 +22,32 @@ const navigation = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: "⌂",
+    icon: LayoutDashboard,
   },
   {
     title: "Semesters",
     href: "/semesters",
-    icon: "▣",
+    icon: BookOpen,
   },
   {
     title: "DSA",
     href: "/dsa",
-    icon: "◇",
+    icon: Code2,
   },
   {
     title: "Roadmaps",
     href: "/roadmaps",
-    icon: "◈",
+    icon: Map,
   },
   {
     title: "Resume Builder",
     href: "/resume",
-    icon: "▱",
+    icon: FileText,
   },
   {
     title: "Interview Practice",
     href: "/interview",
-    icon: "◎",
+    icon: MessagesSquare,
   },
 ];
 
@@ -51,6 +61,7 @@ export default function DashboardSidebar({
   setCollapsed,
 }: DashboardSidebarProps) {
   const pathname = usePathname();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<{
     title: string;
     x: number;
@@ -106,13 +117,11 @@ export default function DashboardSidebar({
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           className="group absolute -right-5 top-10 z-100 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-xl font-medium text-slate-700 shadow-md transition-all duration-200 hover:scale-105 hover:bg-slate-50 hover:text-slate-950"
         >
-          <span
-            className={`transition-transform duration-300 ${
+          <ChevronLeft
+            className={`h-5 w-5 transition-transform duration-300 ${
               collapsed ? "rotate-180" : ""
             }`}
-          >
-            ←
-          </span>
+          />
 
           {/* Premium hover tooltip */}
           <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 translate-x-1 whitespace-nowrap rounded-md bg-slate-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 ">
@@ -151,7 +160,7 @@ export default function DashboardSidebar({
                   }`}
                 >
                   <span className="relative flex h-6 shrink-0 text-base">
-                    {item.icon}
+                    <item.icon className="h-5 w-5 strokeWidth={2}" />
                   </span>
 
                   {!collapsed && (
@@ -178,15 +187,27 @@ export default function DashboardSidebar({
 
               {!collapsed && <span>Profile</span>}
             </Link>
+            <Link
+              href="/contact"
+              title={collapsed ? "Contact" : undefined}
+              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
+            >
+              <CircleHelp className="h-5 w-5 shrink-0" />
 
-            {/* Settings */}
+              {!collapsed && <span>Contact</span>}
+            </Link>
+            {/* LogOut */}
             <button
               type="button"
-              onClick={() => signOut({ redirectUrl: "/sign-in" })}
-              className="flex w-full items-center  gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 cursor-pointer"
+              onClick={() => setShowLogoutConfirm(true)}
+              className={`flex w-full items-center rounded-xl py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
             >
-              {/* <UserAvatar  /> */}
-              <LogOut className="h-6 w-6 ml-4 shrink-0 " />
+              <LogOut className="h-5 w-5 shrink-0" />
+
               {!collapsed && <span>Logout</span>}
             </button>
           </div>
@@ -200,6 +221,38 @@ export default function DashboardSidebar({
         >
           {hoveredItem.title}
           <span className="absolute right-full top-1/2 -translate-y-1/2 border-y-4 border-r-4 border-y-transparent border-r-slate-900" />
+        </div>
+      )}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-200 flex items-center justify-center bg-slate-950/40 p-4">
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+            <h2 className="text-lg font-bold text-slate-950">
+              Are you sure you want to log out?
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              You will need to sign in again to access your Pathway Prep
+              account.
+            </p>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={() => signOut({ redirectUrl: "/sign-in" })}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </aside>

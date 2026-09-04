@@ -80,7 +80,8 @@ export const ModelName = {
   InterviewResult: 'InterviewResult',
   DSAQuestion: 'DSAQuestion',
   DSAProgress: 'DSAProgress',
-  playing_with_neon: 'playing_with_neon'
+  playing_with_neon: 'playing_with_neon',
+  ContactReport: 'ContactReport'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -533,6 +534,20 @@ export const Playing_with_neonScalarFieldEnum = {
 } as const
 
 export type Playing_with_neonScalarFieldEnum = (typeof Playing_with_neonScalarFieldEnum)[keyof typeof Playing_with_neonScalarFieldEnum]
+
+
+export const ContactReportScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  subject: 'subject',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactReportScalarFieldEnum = (typeof ContactReportScalarFieldEnum)[keyof typeof ContactReportScalarFieldEnum]
 
 
 export const SortOrder = {
