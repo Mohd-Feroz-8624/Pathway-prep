@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 import CreateStageForm from "./CreateStageForm";
 import StageActions from "./StageActions";
 import TaskForm from "./TaskForm";
+import TaskActions from "./TaskActions";
+import RoadmapActions from "../RoadmapActions";
 
 type Props = {
   params: Promise<{
@@ -31,9 +33,17 @@ export default async function AdminRoadmapDetailPage({ params }: Props) {
           title: true,
           description: true,
           order: true,
-          _count: {
+          tasks: {
+            orderBy: {
+              order: "asc",
+            },
             select: {
-              tasks: true,
+              id: true,
+              title: true,
+              description: true,
+              order: true,
+              isRequired: true,
+              resourceUrl: true,
             },
           },
         },
@@ -74,20 +84,49 @@ export default async function AdminRoadmapDetailPage({ params }: Props) {
 
         <div className="mt-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-semibold text-blue-600">
                 Roadmap Management
               </p>
 
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              <h1 className="mt-2 wrap-break-words text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
                 {roadmap.title}
               </h1>
 
               {roadmap.description && (
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+                <p className="mt-3 max-w-2xl wrap-break-words text-sm leading-6 text-slate-600 sm:text-base">
                   {roadmap.description}
                 </p>
               )}
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {roadmap.category && (
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                    {roadmap.category}
+                  </span>
+                )}
+
+                {roadmap.duration && (
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                    {roadmap.duration}
+                  </span>
+                )}
+
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                  {roadmap.stages.length}{" "}
+                  {roadmap.stages.length === 1 ? "Stage" : "Stages"}
+                </span>
+              </div>
+
+              <RoadmapActions
+                roadmapId={roadmap.id}
+                initialTitle={roadmap.title}
+                initialSlug={roadmap.slug}
+                initialDescription={roadmap.description}
+                initialCategory={roadmap.category}
+                initialDuration={roadmap.duration}
+                initialPublished={roadmap.isPublished}
+              />
             </div>
 
             <span
@@ -138,7 +177,7 @@ export default async function AdminRoadmapDetailPage({ params }: Props) {
                         {stage.order}
                       </div>
 
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <h3 className="wrap-break-words text-lg font-bold text-slate-950">
                           {stage.title}
                         </h3>
@@ -150,30 +189,88 @@ export default async function AdminRoadmapDetailPage({ params }: Props) {
                         )}
 
                         <p className="mt-3 text-xs font-semibold text-slate-400">
-                          {stage._count.tasks}{" "}
-                          {stage._count.tasks === 1 ? "Task" : "Tasks"}
+                          {stage.tasks.length}{" "}
+                          {stage.tasks.length === 1 ? "Task" : "Tasks"}
                         </p>
+
                         <StageActions
                           roadmapId={roadmap.id}
                           stageId={stage.id}
                           initialTitle={stage.title}
                           initialDescription={stage.description}
                         />
+
                         <div className="mt-5 border-t border-slate-100 pt-5">
                           <h4 className="text-sm font-bold text-slate-900">
                             Tasks
                           </h4>
 
-                          {stage._count.tasks === 0 ? (
+                          {stage.tasks.length === 0 ? (
                             <p className="mt-2 text-sm text-slate-500">
                               No tasks added yet.
                             </p>
                           ) : (
-                            <p className="mt-2 text-sm font-medium text-slate-600">
-                              {stage._count.tasks}{" "}
-                              {stage._count.tasks === 1 ? "task" : "tasks"}{" "}
-                              added.
-                            </p>
+                            <div className="mt-4 space-y-3">
+                              {stage.tasks.map((task) => (
+                                <div
+                                  key={task.id}
+                                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-slate-600">
+                                      {task.order}
+                                    </div>
+
+                                    <div className="min-w-0 flex-1">
+                                      <div className="flex flex-wrap items-center gap-2">
+                                        <h5 className="wrap-break-words text-sm font-bold text-slate-900">
+                                          {task.title}
+                                        </h5>
+
+                                        <span
+                                          className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                                            task.isRequired
+                                              ? "bg-blue-50 text-blue-700"
+                                              : "bg-slate-100 text-slate-500"
+                                          }`}
+                                        >
+                                          {task.isRequired
+                                            ? "Required"
+                                            : "Optional"}
+                                        </span>
+                                      </div>
+
+                                      {task.description && (
+                                        <p className="mt-1 wrap-break-words text-sm leading-5 text-slate-500">
+                                          {task.description}
+                                        </p>
+                                      )}
+
+                                      {task.resourceUrl && (
+                                        <a
+                                          href={task.resourceUrl}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="mt-2 inline-block max-w-full truncate text-xs font-semibold text-blue-600 hover:text-blue-700"
+                                        >
+                                          {task.resourceUrl}
+                                        </a>
+                                      )}
+
+                                      <TaskActions
+                                        roadmapId={roadmap.id}
+                                        stageId={stage.id}
+                                        taskId={task.id}
+                                        initialTitle={task.title}
+                                        initialDescription={task.description}
+                                        initialResourceUrl={task.resourceUrl}
+                                        initialRequired={task.isRequired}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
                           )}
 
                           <div className="mt-4">
