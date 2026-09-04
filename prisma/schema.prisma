@@ -25,6 +25,7 @@ model User {
   resumes           Resume[]
   roadmapProgress   RoadmapTaskProgress[]
   uploadedResumes   UploadedResume[]
+  contactReports    ContactReport[]
 }
 
 model Profile {
@@ -462,6 +463,38 @@ model playing_with_neon {
   id    Int    @id @default(autoincrement())
   name  String
   value Float? @db.Real
+}
+
+model ContactReport {
+  id        String              @id @default(cuid())
+  userId    String
+  type      ContactReportType
+  subject   String?
+  message   String
+  status    ContactReportStatus @default(PENDING)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum ContactReportType {
+  MISSING_SUBJECT
+  CONTENT_ISSUE
+  TECHNICAL_ISSUE
+  ROADMAP_ISSUE
+  FEATURE_REQUEST
+  OTHER
+}
+
+enum ContactReportStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
 }
 
 enum UserRole {

@@ -246,6 +246,40 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
+export type EnumContactReportTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportType | Prisma.EnumContactReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportTypeFilter<$PrismaModel> | $Enums.ContactReportType
+}
+
+export type EnumContactReportStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportStatus | Prisma.EnumContactReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportStatusFilter<$PrismaModel> | $Enums.ContactReportStatus
+}
+
+export type EnumContactReportTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportType | Prisma.EnumContactReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContactReportType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumContactReportTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumContactReportTypeFilter<$PrismaModel>
+}
+
+export type EnumContactReportStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportStatus | Prisma.EnumContactReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportStatusWithAggregatesFilter<$PrismaModel> | $Enums.ContactReportStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumContactReportStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumContactReportStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -478,6 +512,40 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumContactReportTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportType | Prisma.EnumContactReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportTypeFilter<$PrismaModel> | $Enums.ContactReportType
+}
+
+export type NestedEnumContactReportStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportStatus | Prisma.EnumContactReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportStatusFilter<$PrismaModel> | $Enums.ContactReportStatus
+}
+
+export type NestedEnumContactReportTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportType | Prisma.EnumContactReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportType[] | Prisma.ListEnumContactReportTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContactReportType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumContactReportTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumContactReportTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumContactReportStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactReportStatus | Prisma.EnumContactReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactReportStatus[] | Prisma.ListEnumContactReportStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactReportStatusWithAggregatesFilter<$PrismaModel> | $Enums.ContactReportStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumContactReportStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumContactReportStatusFilter<$PrismaModel>
 }
 
 

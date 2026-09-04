@@ -8,7 +8,7 @@ import {
   Map,
   FileText,
   MessagesSquare,
-  
+  CircleHelp,
   ChevronLeft,
   LogOut,
 } from "lucide-react";
@@ -61,6 +61,7 @@ export default function DashboardSidebar({
   setCollapsed,
 }: DashboardSidebarProps) {
   const pathname = usePathname();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<{
     title: string;
     x: number;
@@ -186,15 +187,27 @@ export default function DashboardSidebar({
 
               {!collapsed && <span>Profile</span>}
             </Link>
+            <Link
+              href="/contact"
+              title={collapsed ? "Contact" : undefined}
+              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
+            >
+              <CircleHelp className="h-5 w-5 shrink-0" />
 
-            {/* Settings */}
+              {!collapsed && <span>Contact</span>}
+            </Link>
+            {/* LogOut */}
             <button
               type="button"
-              onClick={() => signOut({ redirectUrl: "/sign-in" })}
-              className="flex w-full items-center  gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 cursor-pointer"
+              onClick={() => setShowLogoutConfirm(true)}
+              className={`flex w-full items-center rounded-xl py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
             >
-              {/* <UserAvatar  /> */}
-              <LogOut className="h-6 w-6 ml-4 shrink-0 " />
+              <LogOut className="h-5 w-5 shrink-0" />
+
               {!collapsed && <span>Logout</span>}
             </button>
           </div>
@@ -208,6 +221,38 @@ export default function DashboardSidebar({
         >
           {hoveredItem.title}
           <span className="absolute right-full top-1/2 -translate-y-1/2 border-y-4 border-r-4 border-y-transparent border-r-slate-900" />
+        </div>
+      )}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-200 flex items-center justify-center bg-slate-950/40 p-4">
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+            <h2 className="text-lg font-bold text-slate-950">
+              Are you sure you want to log out?
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              You will need to sign in again to access your Pathway Prep
+              account.
+            </p>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={() => signOut({ redirectUrl: "/sign-in" })}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </aside>

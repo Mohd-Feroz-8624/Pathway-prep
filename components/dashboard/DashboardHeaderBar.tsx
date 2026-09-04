@@ -17,7 +17,6 @@ const navigation = [
 export default function DashboardHeaderBar() {
   const [open, setOpen] = useState(false);
   const { user } = useUser();
-  
 
   return (
     <>
@@ -41,7 +40,7 @@ export default function DashboardHeaderBar() {
             className="rounded-lg p-2 text-slate-700 hover:bg-slate-100"
             aria-label="Profile"
           >
-              <UserAvatar name={user?.fullName} size="sm" />
+            <UserAvatar name={user?.fullName} size="sm" />
           </Link>
         </div>
       </header>
@@ -96,6 +95,12 @@ export default function DashboardHeaderBar() {
                     Logout
                   </button>
                 </SignOutButton>
+                <Link
+                  href="/contact"
+                  className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                >
+                  <span>Contact</span>
+                </Link>
               </div>
             </nav>
           </aside>
