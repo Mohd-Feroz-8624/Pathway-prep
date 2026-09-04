@@ -41,12 +41,7 @@ export default async function AdminAcademicPage() {
             </p>
           </div>
 
-          <button
-            type="button"
-            className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-          >
-            + Add Semester
-          </button>
+          
         </div>
 
         {/* Semesters */}

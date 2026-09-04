@@ -190,8 +190,8 @@ export type UploadedResumeWhereInput = {
   fileType?: Prisma.StringFilter<"UploadedResume"> | string
   createdAt?: Prisma.DateTimeFilter<"UploadedResume"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UploadedResume"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   analyses?: Prisma.ResumeAnalysisListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type UploadedResumeOrderByWithRelationInput = {
@@ -201,8 +201,8 @@ export type UploadedResumeOrderByWithRelationInput = {
   fileType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   analyses?: Prisma.ResumeAnalysisOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type UploadedResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -215,8 +215,8 @@ export type UploadedResumeWhereUniqueInput = Prisma.AtLeast<{
   fileType?: Prisma.StringFilter<"UploadedResume"> | string
   createdAt?: Prisma.DateTimeFilter<"UploadedResume"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UploadedResume"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   analyses?: Prisma.ResumeAnalysisListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type UploadedResumeOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type UploadedResumeCreateInput = {
   fileType: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutUploadedResumesInput
   analyses?: Prisma.ResumeAnalysisCreateNestedManyWithoutUploadedResumeInput
+  user: Prisma.UserCreateNestedOneWithoutUploadedResumesInput
 }
 
 export type UploadedResumeUncheckedCreateInput = {
@@ -269,8 +269,8 @@ export type UploadedResumeUpdateInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutUploadedResumesNestedInput
   analyses?: Prisma.ResumeAnalysisUpdateManyWithoutUploadedResumeNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutUploadedResumesNestedInput
 }
 
 export type UploadedResumeUncheckedUpdateInput = {
@@ -587,8 +587,8 @@ export type UploadedResumeSelect<ExtArgs extends runtime.Types.Extensions.Intern
   fileType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   analyses?: boolean | Prisma.UploadedResume$analysesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UploadedResumeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["uploadedResume"]>
 
@@ -623,8 +623,8 @@ export type UploadedResumeSelectScalar = {
 
 export type UploadedResumeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "fileName" | "fileType" | "createdAt" | "updatedAt", ExtArgs["result"]["uploadedResume"]>
 export type UploadedResumeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   analyses?: boolean | Prisma.UploadedResume$analysesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UploadedResumeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UploadedResumeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -637,8 +637,8 @@ export type UploadedResumeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type $UploadedResumePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UploadedResume"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     analyses: Prisma.$ResumeAnalysisPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1041,8 +1041,8 @@ readonly fields: UploadedResumeFieldRefs;
  */
 export interface Prisma__UploadedResumeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   analyses<T extends Prisma.UploadedResume$analysesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UploadedResume$analysesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

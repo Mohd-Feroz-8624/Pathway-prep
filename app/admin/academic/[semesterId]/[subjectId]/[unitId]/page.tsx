@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-
 import ResourceManager from "./ResourceManager";
 import DeleteResourceButton from "./DeleteResourceButton";
 import { requireAdmin } from "@/lib/admin";
 import { prisma } from "@/lib/prisma";
 import EditResourceButton from "./EditResponceButton";
+import UnitHeader from "./UnitHeader";
+import DeleteUnitButton from "./DeleteUnitButton";
 
 type UnitPageProps = {
   params: Promise<{
@@ -119,24 +120,21 @@ export default async function AdminUnitPage({ params }: UnitPageProps) {
         </div>
 
         {/* Header */}
-        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold text-blue-600">
-              Unit {unit.number}
-            </p>
+        <div className="mt-6 flex w-full flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <UnitHeader
+            unitId={unit.id}
+            number={unit.number}
+            title={unit.title}
+            description={unit.description}
+            difficulty={unit.difficulty}
+            duration={unit.duration}
+          />
+        </div>
 
-            <h1 className="mt-2 text-4xl font-bold tracking-tight text-slate-950">
-              {unit.title}
-            </h1>
-
-            {unit.description && (
-              <p className="mt-3 max-w-2xl text-lg leading-8 text-slate-600">
-                {unit.description}
-              </p>
-            )}
-          </div>
-
+        <div className="mt-6 flex flex-wrap items-start gap-3">
           <ResourceManager unitId={unit.id} />
+
+          <DeleteUnitButton unitId={unit.id} unitTitle={unit.title} />
         </div>
 
         {/* Resources */}

@@ -12,10 +12,10 @@ import type {
 } from "@/app/generated/prisma/client";
 
 export type ResumeEditorData = {
-  id:string;
+  id: string;
   name: string;
-  email:string;
-  title:string;
+  email: string;
+  title: string;
   summary: string | null;
   phone: string | null;
   location: string | null;
@@ -28,8 +28,16 @@ export type ResumeEditorData = {
   skills: ResumeSkill[];
   certifications: ResumeCertification[];
   achievements: ResumeAchievement[];
-
+  
   templateSlug: string | null;
+
+  templateDesign: {
+    headerAlignment: string;
+    layout: string;
+    accentColor: string;
+    sectionStyle: string;
+    nameSize: string;
+  };
 };
 
 type ResumeEditorContextValue = {

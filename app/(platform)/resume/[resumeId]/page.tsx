@@ -100,17 +100,24 @@ export default async function ResumeEditorPage({ params }: ResumePageProps) {
         certifications: resume.certifications,
         achievements: resume.achievements,
         templateSlug: resume.template?.slug ?? null,
+        templateDesign: {
+          headerAlignment: resume.template?.headerAlignment ?? "CENTER",
+          layout: resume.template?.layout ?? "ONE_COLUMN",
+          accentColor: resume.template?.accentColor ?? "BLACK",
+          sectionStyle: resume.template?.sectionStyle ?? "SIMPLE",
+          nameSize: resume.template?.nameSize ?? "LARGE",
+        },
       }}
     >
       <main className="min-h-screen bg-slate-50">
         <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-           <PageBreadcrumb
-                    items={[
-                      { label: "Dashboard", href: "/dashboard" },
-                      { label: "Resume Builder", href: "/resume" },
-                      { label: resume.title ||"Edit Resume" },
-                    ]}
-                  />
+          <PageBreadcrumb
+            items={[
+              { label: "Dashboard", href: "/dashboard" },
+              { label: "Resume Builder", href: "/resume" },
+              { label: resume.title || "Edit Resume" },
+            ]}
+          />
           {/* Header */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between print:hidden">
             <div>

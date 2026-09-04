@@ -7,15 +7,20 @@ import ModernTemplate from "./templates/ModrenTemplate";
 
 export default function ResumePreview() {
   const { resumeData } = useResumeEditor();
-
   function renderTemplate() {
     switch (resumeData.templateSlug) {
       case "modern":
-        return <ModernTemplate resume={resumeData} />;
+        return <ModernTemplate resume={resumeData}
+         templateDesign={resumeData.templateDesign} />;
 
       case "classic":
       default:
-        return <ClassicTemplate resume={resumeData} />;
+        return (
+          <ClassicTemplate
+            resume={resumeData}
+            templateDesign={resumeData.templateDesign}
+          />
+        );
     }
   }
 
