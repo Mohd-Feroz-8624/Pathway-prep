@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
+import CreateUnitForm from "./CreateUnitForm";
 
 type SubjectPageProps = {
   params: Promise<{
@@ -83,12 +84,7 @@ export default async function AdminSubjectPage({ params }: SubjectPageProps) {
             </p>
           </div>
 
-          <button
-            type="button"
-            className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-          >
-            + Add Unit
-          </button>
+          <CreateUnitForm semesterId={semesterId} subjectId={subjectId} />
         </div>
 
         {/* Units */}

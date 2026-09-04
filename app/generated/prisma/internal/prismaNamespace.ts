@@ -2966,6 +2966,11 @@ export const ResumeTemplateScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   previewUrl: 'previewUrl',
+  headerAlignment: 'headerAlignment',
+  layout: 'layout',
+  accentColor: 'accentColor',
+  sectionStyle: 'sectionStyle',
+  nameSize: 'nameSize',
   isPublished: 'isPublished',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -3079,7 +3084,6 @@ export type ResumeAchievementScalarFieldEnum = (typeof ResumeAchievementScalarFi
 
 export const ResumeAnalysisScalarFieldEnum = {
   id: 'id',
-  uploadedResumeId: 'uploadedResumeId',
   targetRole: 'targetRole',
   overallScore: 'overallScore',
   completenessScore: 'completenessScore',
@@ -3093,7 +3097,8 @@ export const ResumeAnalysisScalarFieldEnum = {
   missingKeywords: 'missingKeywords',
   recommendations: 'recommendations',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  uploadedResumeId: 'uploadedResumeId'
 } as const
 
 export type ResumeAnalysisScalarFieldEnum = (typeof ResumeAnalysisScalarFieldEnum)[keyof typeof ResumeAnalysisScalarFieldEnum]

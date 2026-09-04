@@ -48,7 +48,6 @@ export type ResumeAnalysisSumAggregateOutputType = {
 
 export type ResumeAnalysisMinAggregateOutputType = {
   id: string | null
-  uploadedResumeId: string | null
   targetRole: string | null
   overallScore: number | null
   completenessScore: number | null
@@ -63,11 +62,11 @@ export type ResumeAnalysisMinAggregateOutputType = {
   recommendations: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  uploadedResumeId: string | null
 }
 
 export type ResumeAnalysisMaxAggregateOutputType = {
   id: string | null
-  uploadedResumeId: string | null
   targetRole: string | null
   overallScore: number | null
   completenessScore: number | null
@@ -82,11 +81,11 @@ export type ResumeAnalysisMaxAggregateOutputType = {
   recommendations: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  uploadedResumeId: string | null
 }
 
 export type ResumeAnalysisCountAggregateOutputType = {
   id: number
-  uploadedResumeId: number
   targetRole: number
   overallScore: number
   completenessScore: number
@@ -101,6 +100,7 @@ export type ResumeAnalysisCountAggregateOutputType = {
   recommendations: number
   createdAt: number
   updatedAt: number
+  uploadedResumeId: number
   _all: number
 }
 
@@ -127,7 +127,6 @@ export type ResumeAnalysisSumAggregateInputType = {
 
 export type ResumeAnalysisMinAggregateInputType = {
   id?: true
-  uploadedResumeId?: true
   targetRole?: true
   overallScore?: true
   completenessScore?: true
@@ -142,11 +141,11 @@ export type ResumeAnalysisMinAggregateInputType = {
   recommendations?: true
   createdAt?: true
   updatedAt?: true
+  uploadedResumeId?: true
 }
 
 export type ResumeAnalysisMaxAggregateInputType = {
   id?: true
-  uploadedResumeId?: true
   targetRole?: true
   overallScore?: true
   completenessScore?: true
@@ -161,11 +160,11 @@ export type ResumeAnalysisMaxAggregateInputType = {
   recommendations?: true
   createdAt?: true
   updatedAt?: true
+  uploadedResumeId?: true
 }
 
 export type ResumeAnalysisCountAggregateInputType = {
   id?: true
-  uploadedResumeId?: true
   targetRole?: true
   overallScore?: true
   completenessScore?: true
@@ -180,6 +179,7 @@ export type ResumeAnalysisCountAggregateInputType = {
   recommendations?: true
   createdAt?: true
   updatedAt?: true
+  uploadedResumeId?: true
   _all?: true
 }
 
@@ -271,7 +271,6 @@ export type ResumeAnalysisGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type ResumeAnalysisGroupByOutputType = {
   id: string
-  uploadedResumeId: string
   targetRole: string
   overallScore: number
   completenessScore: number
@@ -286,6 +285,7 @@ export type ResumeAnalysisGroupByOutputType = {
   recommendations: string | null
   createdAt: Date
   updatedAt: Date
+  uploadedResumeId: string
   _count: ResumeAnalysisCountAggregateOutputType | null
   _avg: ResumeAnalysisAvgAggregateOutputType | null
   _sum: ResumeAnalysisSumAggregateOutputType | null
@@ -313,7 +313,6 @@ export type ResumeAnalysisWhereInput = {
   OR?: Prisma.ResumeAnalysisWhereInput[]
   NOT?: Prisma.ResumeAnalysisWhereInput | Prisma.ResumeAnalysisWhereInput[]
   id?: Prisma.StringFilter<"ResumeAnalysis"> | string
-  uploadedResumeId?: Prisma.StringFilter<"ResumeAnalysis"> | string
   targetRole?: Prisma.StringFilter<"ResumeAnalysis"> | string
   overallScore?: Prisma.IntFilter<"ResumeAnalysis"> | number
   completenessScore?: Prisma.IntFilter<"ResumeAnalysis"> | number
@@ -328,12 +327,12 @@ export type ResumeAnalysisWhereInput = {
   recommendations?: Prisma.StringNullableFilter<"ResumeAnalysis"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ResumeAnalysis"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResumeAnalysis"> | Date | string
+  uploadedResumeId?: Prisma.StringFilter<"ResumeAnalysis"> | string
   uploadedResume?: Prisma.XOR<Prisma.UploadedResumeScalarRelationFilter, Prisma.UploadedResumeWhereInput>
 }
 
 export type ResumeAnalysisOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  uploadedResumeId?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
   completenessScore?: Prisma.SortOrder
@@ -348,6 +347,7 @@ export type ResumeAnalysisOrderByWithRelationInput = {
   recommendations?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  uploadedResumeId?: Prisma.SortOrder
   uploadedResume?: Prisma.UploadedResumeOrderByWithRelationInput
 }
 
@@ -356,7 +356,6 @@ export type ResumeAnalysisWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ResumeAnalysisWhereInput | Prisma.ResumeAnalysisWhereInput[]
   OR?: Prisma.ResumeAnalysisWhereInput[]
   NOT?: Prisma.ResumeAnalysisWhereInput | Prisma.ResumeAnalysisWhereInput[]
-  uploadedResumeId?: Prisma.StringFilter<"ResumeAnalysis"> | string
   targetRole?: Prisma.StringFilter<"ResumeAnalysis"> | string
   overallScore?: Prisma.IntFilter<"ResumeAnalysis"> | number
   completenessScore?: Prisma.IntFilter<"ResumeAnalysis"> | number
@@ -371,12 +370,12 @@ export type ResumeAnalysisWhereUniqueInput = Prisma.AtLeast<{
   recommendations?: Prisma.StringNullableFilter<"ResumeAnalysis"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ResumeAnalysis"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResumeAnalysis"> | Date | string
+  uploadedResumeId?: Prisma.StringFilter<"ResumeAnalysis"> | string
   uploadedResume?: Prisma.XOR<Prisma.UploadedResumeScalarRelationFilter, Prisma.UploadedResumeWhereInput>
 }, "id">
 
 export type ResumeAnalysisOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  uploadedResumeId?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
   completenessScore?: Prisma.SortOrder
@@ -391,6 +390,7 @@ export type ResumeAnalysisOrderByWithAggregationInput = {
   recommendations?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  uploadedResumeId?: Prisma.SortOrder
   _count?: Prisma.ResumeAnalysisCountOrderByAggregateInput
   _avg?: Prisma.ResumeAnalysisAvgOrderByAggregateInput
   _max?: Prisma.ResumeAnalysisMaxOrderByAggregateInput
@@ -403,7 +403,6 @@ export type ResumeAnalysisScalarWhereWithAggregatesInput = {
   OR?: Prisma.ResumeAnalysisScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ResumeAnalysisScalarWhereWithAggregatesInput | Prisma.ResumeAnalysisScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ResumeAnalysis"> | string
-  uploadedResumeId?: Prisma.StringWithAggregatesFilter<"ResumeAnalysis"> | string
   targetRole?: Prisma.StringWithAggregatesFilter<"ResumeAnalysis"> | string
   overallScore?: Prisma.IntWithAggregatesFilter<"ResumeAnalysis"> | number
   completenessScore?: Prisma.IntWithAggregatesFilter<"ResumeAnalysis"> | number
@@ -418,6 +417,7 @@ export type ResumeAnalysisScalarWhereWithAggregatesInput = {
   recommendations?: Prisma.StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ResumeAnalysis"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ResumeAnalysis"> | Date | string
+  uploadedResumeId?: Prisma.StringWithAggregatesFilter<"ResumeAnalysis"> | string
 }
 
 export type ResumeAnalysisCreateInput = {
@@ -441,7 +441,6 @@ export type ResumeAnalysisCreateInput = {
 
 export type ResumeAnalysisUncheckedCreateInput = {
   id?: string
-  uploadedResumeId: string
   targetRole: string
   overallScore: number
   completenessScore: number
@@ -456,6 +455,7 @@ export type ResumeAnalysisUncheckedCreateInput = {
   recommendations?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  uploadedResumeId: string
 }
 
 export type ResumeAnalysisUpdateInput = {
@@ -479,7 +479,6 @@ export type ResumeAnalysisUpdateInput = {
 
 export type ResumeAnalysisUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedResumeId?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   overallScore?: Prisma.IntFieldUpdateOperationsInput | number
   completenessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -494,11 +493,11 @@ export type ResumeAnalysisUncheckedUpdateInput = {
   recommendations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  uploadedResumeId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ResumeAnalysisCreateManyInput = {
   id?: string
-  uploadedResumeId: string
   targetRole: string
   overallScore: number
   completenessScore: number
@@ -513,6 +512,7 @@ export type ResumeAnalysisCreateManyInput = {
   recommendations?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  uploadedResumeId: string
 }
 
 export type ResumeAnalysisUpdateManyMutationInput = {
@@ -535,7 +535,6 @@ export type ResumeAnalysisUpdateManyMutationInput = {
 
 export type ResumeAnalysisUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedResumeId?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   overallScore?: Prisma.IntFieldUpdateOperationsInput | number
   completenessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -550,11 +549,11 @@ export type ResumeAnalysisUncheckedUpdateManyInput = {
   recommendations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  uploadedResumeId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ResumeAnalysisCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  uploadedResumeId?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
   completenessScore?: Prisma.SortOrder
@@ -569,6 +568,7 @@ export type ResumeAnalysisCountOrderByAggregateInput = {
   recommendations?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  uploadedResumeId?: Prisma.SortOrder
 }
 
 export type ResumeAnalysisAvgOrderByAggregateInput = {
@@ -583,7 +583,6 @@ export type ResumeAnalysisAvgOrderByAggregateInput = {
 
 export type ResumeAnalysisMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  uploadedResumeId?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
   completenessScore?: Prisma.SortOrder
@@ -598,11 +597,11 @@ export type ResumeAnalysisMaxOrderByAggregateInput = {
   recommendations?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  uploadedResumeId?: Prisma.SortOrder
 }
 
 export type ResumeAnalysisMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  uploadedResumeId?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
   completenessScore?: Prisma.SortOrder
@@ -617,6 +616,7 @@ export type ResumeAnalysisMinOrderByAggregateInput = {
   recommendations?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  uploadedResumeId?: Prisma.SortOrder
 }
 
 export type ResumeAnalysisSumOrderByAggregateInput = {
@@ -748,7 +748,6 @@ export type ResumeAnalysisScalarWhereInput = {
   OR?: Prisma.ResumeAnalysisScalarWhereInput[]
   NOT?: Prisma.ResumeAnalysisScalarWhereInput | Prisma.ResumeAnalysisScalarWhereInput[]
   id?: Prisma.StringFilter<"ResumeAnalysis"> | string
-  uploadedResumeId?: Prisma.StringFilter<"ResumeAnalysis"> | string
   targetRole?: Prisma.StringFilter<"ResumeAnalysis"> | string
   overallScore?: Prisma.IntFilter<"ResumeAnalysis"> | number
   completenessScore?: Prisma.IntFilter<"ResumeAnalysis"> | number
@@ -763,6 +762,7 @@ export type ResumeAnalysisScalarWhereInput = {
   recommendations?: Prisma.StringNullableFilter<"ResumeAnalysis"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ResumeAnalysis"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResumeAnalysis"> | Date | string
+  uploadedResumeId?: Prisma.StringFilter<"ResumeAnalysis"> | string
 }
 
 export type ResumeAnalysisCreateManyUploadedResumeInput = {
@@ -841,7 +841,6 @@ export type ResumeAnalysisUncheckedUpdateManyWithoutUploadedResumeInput = {
 
 export type ResumeAnalysisSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  uploadedResumeId?: boolean
   targetRole?: boolean
   overallScore?: boolean
   completenessScore?: boolean
@@ -856,12 +855,12 @@ export type ResumeAnalysisSelect<ExtArgs extends runtime.Types.Extensions.Intern
   recommendations?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  uploadedResumeId?: boolean
   uploadedResume?: boolean | Prisma.UploadedResumeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resumeAnalysis"]>
 
 export type ResumeAnalysisSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  uploadedResumeId?: boolean
   targetRole?: boolean
   overallScore?: boolean
   completenessScore?: boolean
@@ -876,12 +875,12 @@ export type ResumeAnalysisSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   recommendations?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  uploadedResumeId?: boolean
   uploadedResume?: boolean | Prisma.UploadedResumeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resumeAnalysis"]>
 
 export type ResumeAnalysisSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  uploadedResumeId?: boolean
   targetRole?: boolean
   overallScore?: boolean
   completenessScore?: boolean
@@ -896,12 +895,12 @@ export type ResumeAnalysisSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   recommendations?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  uploadedResumeId?: boolean
   uploadedResume?: boolean | Prisma.UploadedResumeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resumeAnalysis"]>
 
 export type ResumeAnalysisSelectScalar = {
   id?: boolean
-  uploadedResumeId?: boolean
   targetRole?: boolean
   overallScore?: boolean
   completenessScore?: boolean
@@ -916,9 +915,10 @@ export type ResumeAnalysisSelectScalar = {
   recommendations?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  uploadedResumeId?: boolean
 }
 
-export type ResumeAnalysisOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uploadedResumeId" | "targetRole" | "overallScore" | "completenessScore" | "keywordScore" | "experienceScore" | "atsStructureScore" | "impactScore" | "readabilityScore" | "strengths" | "weaknesses" | "missingKeywords" | "recommendations" | "createdAt" | "updatedAt", ExtArgs["result"]["resumeAnalysis"]>
+export type ResumeAnalysisOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "targetRole" | "overallScore" | "completenessScore" | "keywordScore" | "experienceScore" | "atsStructureScore" | "impactScore" | "readabilityScore" | "strengths" | "weaknesses" | "missingKeywords" | "recommendations" | "createdAt" | "updatedAt" | "uploadedResumeId", ExtArgs["result"]["resumeAnalysis"]>
 export type ResumeAnalysisInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   uploadedResume?: boolean | Prisma.UploadedResumeDefaultArgs<ExtArgs>
 }
@@ -936,7 +936,6 @@ export type $ResumeAnalysisPayload<ExtArgs extends runtime.Types.Extensions.Inte
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    uploadedResumeId: string
     targetRole: string
     overallScore: number
     completenessScore: number
@@ -951,6 +950,7 @@ export type $ResumeAnalysisPayload<ExtArgs extends runtime.Types.Extensions.Inte
     recommendations: string | null
     createdAt: Date
     updatedAt: Date
+    uploadedResumeId: string
   }, ExtArgs["result"]["resumeAnalysis"]>
   composites: {}
 }
@@ -1376,7 +1376,6 @@ export interface Prisma__ResumeAnalysisClient<T, Null = never, ExtArgs extends r
  */
 export interface ResumeAnalysisFieldRefs {
   readonly id: Prisma.FieldRef<"ResumeAnalysis", 'String'>
-  readonly uploadedResumeId: Prisma.FieldRef<"ResumeAnalysis", 'String'>
   readonly targetRole: Prisma.FieldRef<"ResumeAnalysis", 'String'>
   readonly overallScore: Prisma.FieldRef<"ResumeAnalysis", 'Int'>
   readonly completenessScore: Prisma.FieldRef<"ResumeAnalysis", 'Int'>
@@ -1391,6 +1390,7 @@ export interface ResumeAnalysisFieldRefs {
   readonly recommendations: Prisma.FieldRef<"ResumeAnalysis", 'String'>
   readonly createdAt: Prisma.FieldRef<"ResumeAnalysis", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ResumeAnalysis", 'DateTime'>
+  readonly uploadedResumeId: Prisma.FieldRef<"ResumeAnalysis", 'String'>
 }
     
 

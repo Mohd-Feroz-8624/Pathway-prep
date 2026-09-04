@@ -52,6 +52,7 @@ export default async function AdminPage() {
               Manage notes, PDFs, guides, and YouTube videos.
             </p>
           </Link>
+          
           <Link
             href="/admin/roadmaps"
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -95,7 +96,10 @@ export default async function AdminPage() {
             </span>
           </Link>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <Link
+            href="/admin/templates"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          >
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-50 text-xl">
               📄
             </div>
@@ -105,13 +109,13 @@ export default async function AdminPage() {
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-slate-500">
-              Manage resume templates available to students.
+              Create, edit, publish, and manage resume templates for students.
             </p>
 
-            <span className="mt-5 inline-block rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-500">
-              Coming Soon
+            <span className="mt-5 inline-block rounded-full bg-purple-50 px-3 py-1.5 text-xs font-semibold text-purple-700">
+              Manage Templates →
             </span>
-          </div>
+          </Link>
         </div>
       </section>
     </main>

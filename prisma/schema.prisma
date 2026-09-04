@@ -19,13 +19,13 @@ model User {
   createdAt         DateTime              @default(now())
   updatedAt         DateTime              @updatedAt
   role              UserRole              @default(STUDENT)
+  contactReports    ContactReport[]
   dsaProgress       DSAProgress[]
   interviewSessions InterviewSession[]
   profile           Profile?
   resumes           Resume[]
   roadmapProgress   RoadmapTaskProgress[]
   uploadedResumes   UploadedResume[]
-  contactReports    ContactReport[]
 }
 
 model Profile {
@@ -202,10 +202,19 @@ model ResumeTemplate {
   slug        String   @unique
   description String?
   previewUrl  String?
+
+  // Visual design configuration
+  headerAlignment String @default("CENTER")
+  layout          String @default("ONE_COLUMN")
+  accentColor     String @default("BLACK")
+  sectionStyle    String @default("SIMPLE")
+  nameSize        String @default("LARGE")
+
   isPublished Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  resumes     Resume[]
+
+  resumes Resume[]
 }
 
 model Resume {
@@ -320,8 +329,7 @@ model ResumeAchievement {
 }
 
 model ResumeAnalysis {
-  id                String   @id @default(cuid())
-  uploadedResumeId  String
+  id                String         @id @default(cuid())
   targetRole        String
   overallScore      Int
   completenessScore Int
@@ -334,24 +342,23 @@ model ResumeAnalysis {
   weaknesses        String?
   missingKeywords   String?
   recommendations   String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  uploadedResume UploadedResume @relation(fields: [uploadedResumeId], references: [id], onDelete: Cascade)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  uploadedResumeId  String
+  uploadedResume    UploadedResume @relation(fields: [uploadedResumeId], references: [id], onDelete: Cascade)
 
   @@index([uploadedResumeId])
 }
 
 model UploadedResume {
-  id        String   @id @default(cuid())
+  id        String           @id @default(cuid())
   userId    String
   fileName  String
   fileType  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  analyses ResumeAnalysis[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  analyses  ResumeAnalysis[]
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -474,8 +481,7 @@ model ContactReport {
   status    ContactReportStatus @default(PENDING)
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
