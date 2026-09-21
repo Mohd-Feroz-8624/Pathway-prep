@@ -67,6 +67,7 @@ export type ResumeTemplateCountAggregateOutputType = {
   accentColor: number
   sectionStyle: number
   nameSize: number
+  designConfig: number
   isPublished: number
   createdAt: number
   updatedAt: number
@@ -117,6 +118,7 @@ export type ResumeTemplateCountAggregateInputType = {
   accentColor?: true
   sectionStyle?: true
   nameSize?: true
+  designConfig?: true
   isPublished?: true
   createdAt?: true
   updatedAt?: true
@@ -206,6 +208,7 @@ export type ResumeTemplateGroupByOutputType = {
   accentColor: string
   sectionStyle: string
   nameSize: string
+  designConfig: runtime.JsonValue | null
   isPublished: boolean
   createdAt: Date
   updatedAt: Date
@@ -243,6 +246,7 @@ export type ResumeTemplateWhereInput = {
   accentColor?: Prisma.StringFilter<"ResumeTemplate"> | string
   sectionStyle?: Prisma.StringFilter<"ResumeTemplate"> | string
   nameSize?: Prisma.StringFilter<"ResumeTemplate"> | string
+  designConfig?: Prisma.JsonNullableFilter<"ResumeTemplate">
   isPublished?: Prisma.BoolFilter<"ResumeTemplate"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ResumeTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResumeTemplate"> | Date | string
@@ -260,6 +264,7 @@ export type ResumeTemplateOrderByWithRelationInput = {
   accentColor?: Prisma.SortOrder
   sectionStyle?: Prisma.SortOrder
   nameSize?: Prisma.SortOrder
+  designConfig?: Prisma.SortOrderInput | Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -280,6 +285,7 @@ export type ResumeTemplateWhereUniqueInput = Prisma.AtLeast<{
   accentColor?: Prisma.StringFilter<"ResumeTemplate"> | string
   sectionStyle?: Prisma.StringFilter<"ResumeTemplate"> | string
   nameSize?: Prisma.StringFilter<"ResumeTemplate"> | string
+  designConfig?: Prisma.JsonNullableFilter<"ResumeTemplate">
   isPublished?: Prisma.BoolFilter<"ResumeTemplate"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ResumeTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResumeTemplate"> | Date | string
@@ -297,6 +303,7 @@ export type ResumeTemplateOrderByWithAggregationInput = {
   accentColor?: Prisma.SortOrder
   sectionStyle?: Prisma.SortOrder
   nameSize?: Prisma.SortOrder
+  designConfig?: Prisma.SortOrderInput | Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -319,6 +326,7 @@ export type ResumeTemplateScalarWhereWithAggregatesInput = {
   accentColor?: Prisma.StringWithAggregatesFilter<"ResumeTemplate"> | string
   sectionStyle?: Prisma.StringWithAggregatesFilter<"ResumeTemplate"> | string
   nameSize?: Prisma.StringWithAggregatesFilter<"ResumeTemplate"> | string
+  designConfig?: Prisma.JsonNullableWithAggregatesFilter<"ResumeTemplate">
   isPublished?: Prisma.BoolWithAggregatesFilter<"ResumeTemplate"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ResumeTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ResumeTemplate"> | Date | string
@@ -335,6 +343,7 @@ export type ResumeTemplateCreateInput = {
   accentColor?: string
   sectionStyle?: string
   nameSize?: string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -352,6 +361,7 @@ export type ResumeTemplateUncheckedCreateInput = {
   accentColor?: string
   sectionStyle?: string
   nameSize?: string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -369,6 +379,7 @@ export type ResumeTemplateUpdateInput = {
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
   sectionStyle?: Prisma.StringFieldUpdateOperationsInput | string
   nameSize?: Prisma.StringFieldUpdateOperationsInput | string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -386,6 +397,7 @@ export type ResumeTemplateUncheckedUpdateInput = {
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
   sectionStyle?: Prisma.StringFieldUpdateOperationsInput | string
   nameSize?: Prisma.StringFieldUpdateOperationsInput | string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -403,6 +415,7 @@ export type ResumeTemplateCreateManyInput = {
   accentColor?: string
   sectionStyle?: string
   nameSize?: string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -419,6 +432,7 @@ export type ResumeTemplateUpdateManyMutationInput = {
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
   sectionStyle?: Prisma.StringFieldUpdateOperationsInput | string
   nameSize?: Prisma.StringFieldUpdateOperationsInput | string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -435,6 +449,7 @@ export type ResumeTemplateUncheckedUpdateManyInput = {
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
   sectionStyle?: Prisma.StringFieldUpdateOperationsInput | string
   nameSize?: Prisma.StringFieldUpdateOperationsInput | string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -451,6 +466,7 @@ export type ResumeTemplateCountOrderByAggregateInput = {
   accentColor?: Prisma.SortOrder
   sectionStyle?: Prisma.SortOrder
   nameSize?: Prisma.SortOrder
+  designConfig?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -520,6 +536,7 @@ export type ResumeTemplateCreateWithoutResumesInput = {
   accentColor?: string
   sectionStyle?: string
   nameSize?: string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -536,6 +553,7 @@ export type ResumeTemplateUncheckedCreateWithoutResumesInput = {
   accentColor?: string
   sectionStyle?: string
   nameSize?: string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -568,6 +586,7 @@ export type ResumeTemplateUpdateWithoutResumesInput = {
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
   sectionStyle?: Prisma.StringFieldUpdateOperationsInput | string
   nameSize?: Prisma.StringFieldUpdateOperationsInput | string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -584,6 +603,7 @@ export type ResumeTemplateUncheckedUpdateWithoutResumesInput = {
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
   sectionStyle?: Prisma.StringFieldUpdateOperationsInput | string
   nameSize?: Prisma.StringFieldUpdateOperationsInput | string
+  designConfig?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -631,6 +651,7 @@ export type ResumeTemplateSelect<ExtArgs extends runtime.Types.Extensions.Intern
   accentColor?: boolean
   sectionStyle?: boolean
   nameSize?: boolean
+  designConfig?: boolean
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -649,6 +670,7 @@ export type ResumeTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   accentColor?: boolean
   sectionStyle?: boolean
   nameSize?: boolean
+  designConfig?: boolean
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -665,6 +687,7 @@ export type ResumeTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   accentColor?: boolean
   sectionStyle?: boolean
   nameSize?: boolean
+  designConfig?: boolean
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -681,12 +704,13 @@ export type ResumeTemplateSelectScalar = {
   accentColor?: boolean
   sectionStyle?: boolean
   nameSize?: boolean
+  designConfig?: boolean
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ResumeTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "previewUrl" | "headerAlignment" | "layout" | "accentColor" | "sectionStyle" | "nameSize" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["resumeTemplate"]>
+export type ResumeTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "previewUrl" | "headerAlignment" | "layout" | "accentColor" | "sectionStyle" | "nameSize" | "designConfig" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["resumeTemplate"]>
 export type ResumeTemplateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resumes?: boolean | Prisma.ResumeTemplate$resumesArgs<ExtArgs>
   _count?: boolean | Prisma.ResumeTemplateCountOutputTypeDefaultArgs<ExtArgs>
@@ -710,6 +734,7 @@ export type $ResumeTemplatePayload<ExtArgs extends runtime.Types.Extensions.Inte
     accentColor: string
     sectionStyle: string
     nameSize: string
+    designConfig: runtime.JsonValue | null
     isPublished: boolean
     createdAt: Date
     updatedAt: Date
@@ -1147,6 +1172,7 @@ export interface ResumeTemplateFieldRefs {
   readonly accentColor: Prisma.FieldRef<"ResumeTemplate", 'String'>
   readonly sectionStyle: Prisma.FieldRef<"ResumeTemplate", 'String'>
   readonly nameSize: Prisma.FieldRef<"ResumeTemplate", 'String'>
+  readonly designConfig: Prisma.FieldRef<"ResumeTemplate", 'Json'>
   readonly isPublished: Prisma.FieldRef<"ResumeTemplate", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"ResumeTemplate", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ResumeTemplate", 'DateTime'>

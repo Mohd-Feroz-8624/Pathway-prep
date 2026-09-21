@@ -76,6 +76,7 @@ export default async function AdminTemplateDetailPage({
               accentColor: template.accentColor,
               sectionStyle: template.sectionStyle,
               nameSize: template.nameSize,
+              designConfig: template.designConfig,
             }}
           />
         </div>

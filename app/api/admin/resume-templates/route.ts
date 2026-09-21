@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
 import { prisma } from "@/lib/prisma";
+import {DEFAULT_TEMPLATE_CONFIG} from "@/lib/resume-template-config";
 
 export async function POST(request: Request) {
   try {
@@ -97,6 +98,7 @@ export async function POST(request: Request) {
         accentColor,
         sectionStyle,
         nameSize,
+        designConfig: DEFAULT_TEMPLATE_CONFIG,
         isPublished,
       },
       select: {

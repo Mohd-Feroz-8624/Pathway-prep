@@ -36,22 +36,7 @@ export default async function AdminPage() {
             </p>
           </Link>
 
-          <Link
-            href="/admin/resources"
-            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-xl">
-              📖
-            </div>
-
-            <h2 className="mt-5 text-lg font-bold text-slate-950">
-              Learning Resources
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              Manage notes, PDFs, guides, and YouTube videos.
-            </p>
-          </Link>
+         
           
           <Link
             href="/admin/roadmaps"
@@ -74,27 +59,6 @@ export default async function AdminPage() {
             </span>
           </Link>
 
-          <Link
-            href="/admin/reports"
-            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-xl">
-              ⚠️
-            </div>
-
-            <h2 className="mt-5 text-lg font-bold text-slate-950">
-              Reports & Issues
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              Review student reports, missing content, technical issues, and
-              feature requests.
-            </p>
-
-            <span className="mt-5 inline-block rounded-full bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700">
-              View Reports →
-            </span>
-          </Link>
 
           <Link
             href="/admin/templates"
@@ -116,6 +80,29 @@ export default async function AdminPage() {
               Manage Templates →
             </span>
           </Link>
+          
+          <Link
+            href="/admin/reports"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-xl">
+              ⚠️
+            </div>
+
+            <h2 className="mt-5 text-lg font-bold text-slate-950">
+              Reports & Issues
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              Review student reports, missing content, technical issues, and
+              feature requests.
+            </p>
+
+            <span className="mt-5 inline-block rounded-full bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700">
+              View Reports →
+            </span>
+          </Link>
+          
         </div>
       </section>
     </main>

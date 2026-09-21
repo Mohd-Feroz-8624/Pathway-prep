@@ -58,13 +58,19 @@ export async function PATCH(
 
     const body = await request.json();
 
+    const hasDesignConfigUpdate =
+      body.designConfig !== undefined &&
+      body.designConfig !== null &&
+      typeof body.designConfig === "object";
+
     const hasPublishUpdate = typeof body.isPublished === "boolean";
 
     const hasContentUpdate =
       typeof body.name === "string" ||
       typeof body.slug === "string" ||
       typeof body.description === "string" ||
-      typeof body.previewUrl === "string";
+      typeof body.previewUrl === "string" ||
+      hasDesignConfigUpdate;
 
     // Publish/unpublish only
     if (hasPublishUpdate && !hasContentUpdate) {
@@ -80,6 +86,33 @@ export async function PATCH(
           name: true,
           slug: true,
           isPublished: true,
+          updatedAt: true,
+        },
+      });
+
+      return NextResponse.json({
+        success: true,
+        data: template,
+      });
+    }
+
+    // Design configuration only
+    if (hasDesignConfigUpdate && !hasPublishUpdate) {
+      const template = await prisma.resumeTemplate.update({
+        where: {
+          id: templateId,
+        },
+        data: {
+          designConfig: body.designConfig,
+        },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          description: true,
+          previewUrl: true,
+          isPublished: true,
+          designConfig: true,
           updatedAt: true,
         },
       });
@@ -144,6 +177,11 @@ export async function PATCH(
         slug,
         description: description || null,
         previewUrl: previewUrl || null,
+
+        ...(hasDesignConfigUpdate && {
+          designConfig: body.designConfig,
+        }),
+
         ...(hasPublishUpdate && {
           isPublished: body.isPublished,
         }),

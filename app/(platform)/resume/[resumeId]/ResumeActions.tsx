@@ -17,13 +17,28 @@ export default function ResumeActions() {
   const router = useRouter();
 
   function renderTemplate() {
+    const templateDesign = resumeData.templateDesign ?? {
+      headerAlignment: "CENTER",
+      layout: "ONE_COLUMN",
+      accentColor: "BLACK",
+      sectionStyle: "SIMPLE",
+      nameSize: "MEDIUM",
+    };
+
     switch (resumeData.templateSlug) {
       case "modern":
-        return <ModernTemplate resume={resumeData} />;
+        return (
+          <ModernTemplate resume={resumeData} templateDesign={templateDesign} />
+        );
 
       case "classic":
       default:
-        return <ClassicTemplate resume={resumeData} />;
+        return (
+          <ClassicTemplate
+            resume={resumeData}
+            templateDesign={templateDesign}
+          />
+        );
     }
   }
 
