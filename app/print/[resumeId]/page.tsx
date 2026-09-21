@@ -87,15 +87,28 @@ export default async function ResumePrintPage({ params }: PrintPageProps) {
     skills: resume.skills,
     certifications: resume.certifications,
     achievements: resume.achievements,
+    templateDesign: {
+      headerAlignment: "CENTER",
+      layout: "ONE_COLUMN",
+      accentColor: "BLACK",
+      sectionStyle: "SIMPLE",
+      nameSize: "MEDIUM",
+    },
   };
 
   return (
     <main className="resume-print-page">
-      <PrintButton  />
+      <PrintButton />
       {resume.template?.slug === "modern" ? (
-        <ModernTemplate resume={resumeData} />
+        <ModernTemplate
+          resume={resumeData}
+          templateDesign={resumeData.templateDesign}
+        />
       ) : (
-        <ClassicTemplate resume={resumeData} />
+        <ClassicTemplate
+          resume={resumeData}
+          templateDesign={resumeData.templateDesign}
+        />
       )}
     </main>
   );

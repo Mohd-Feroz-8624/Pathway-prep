@@ -210,6 +210,8 @@ model ResumeTemplate {
   sectionStyle    String @default("SIMPLE")
   nameSize        String @default("LARGE")
 
+  designConfig    Json?
+
   isPublished Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

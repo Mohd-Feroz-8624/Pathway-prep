@@ -1,40 +1,52 @@
 "use client";
 
-import ClassicTemplate, {
-  type ResumeData,
-} from "@/app/(platform)/resume/[resumeId]/templates/ClassicTemplate";
-import ModernTemplate from "@/app/(platform)/resume/[resumeId]/templates/ModrenTemplate";
+import type { ResumeData } from "@/app/(platform)/resume/[resumeId]/templates/ClassicTemplate";
 
-type TemplateDesign = {
-  headerAlignment: string;
-  layout: string;
-  accentColor: string;
-  sectionStyle: string;
-  nameSize: string;
-};
+import type { ResumeTemplateConfig } from "@/lib/resume-template-config";
+
+import ClassicTemplate from "@/app/(platform)/resume/[resumeId]/templates/ClassicTemplate";
+import ModernTemplate from "@/app/(platform)/resume/[resumeId]/templates/ModrenTemplate";
 
 type TemplatePreviewProps = {
   slug: string;
-  design: TemplateDesign;
+
+  design: {
+    headerAlignment: string;
+    layout: string;
+    accentColor: string;
+    sectionStyle: string;
+    nameSize: string;
+  };
+
+  designConfig: ResumeTemplateConfig;
 };
 
-const sampleResume = {
+/*
+ * Preview-only sample resume.
+ *
+ * The explicit ResumeData type prevents
+ * TypeScript inference errors when passing
+ * the object into the template renderers.
+ */
+const previewResume = {
   name: "Mohd Feroz",
   email: "feroz@example.com",
   title: "Full Stack Developer",
+
   summary:
-    "Computer Science engineering student passionate about building modern web applications and solving real-world problems.",
+    "Computer Science student focused on full-stack development, scalable web applications, and problem solving.",
+
   phone: "+91 98765 43210",
   location: "Hyderabad, India",
-  linkedin: "linkedin.com/in/mohdferoz",
-  github: "github.com/mohd-feroz",
+
+  linkedin: "https://linkedin.com",
+  github: "https://github.com",
 
   education: [
     {
       id: "preview-education-1",
-      resumeId: "preview-resume",
       institution: "Muffakham Jah College of Engineering and Technology",
-      degree: "B.E.",
+      degree: "Bachelor of Engineering",
       field: "Computer Science and Engineering",
       startDate: "2023",
       endDate: "2027",
@@ -45,53 +57,52 @@ const sampleResume = {
   experience: [
     {
       id: "preview-experience-1",
-      resumeId: "preview-resume",
-      company: "Software Company",
-      position: "Full Stack Developer Intern",
+      company: "Pathway Prep",
+      position: "Full Stack Developer",
       location: "Hyderabad",
       startDate: "2026",
       endDate: null,
       isCurrent: true,
       description:
-        "Built responsive web applications using React, Next.js, TypeScript, and PostgreSQL.",
+        "Built full-stack features using Next.js, TypeScript, Prisma and PostgreSQL.",
     },
   ],
 
   projects: [
     {
       id: "preview-project-1",
-      resumeId: "preview-resume",
       title: "Pathway Prep",
       description:
-        "Career preparation platform with roadmaps, DSA practice, resume analysis, interviews, and AI assistance.",
-      technologies: "Next.js · TypeScript · Prisma · PostgreSQL",
-      githubUrl: null,
-      liveUrl: null,
+        "Career preparation platform for students with roadmaps, DSA, resume building and AI-powered interview preparation.",
+      technologies: "Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL",
+      githubUrl: "https://github.com",
+      liveUrl: "https://example.com",
     },
   ],
 
   skills: [
     {
       id: "preview-skill-1",
-      resumeId: "preview-resume",
+      name: "JavaScript",
+      category: "Programming",
+    },
+    {
+      id: "preview-skill-2",
+      name: "TypeScript",
+      category: "Programming",
+    },
+    {
+      id: "preview-skill-3",
       name: "React",
       category: "Frontend",
     },
     {
-      id: "preview-skill-2",
-      resumeId: "preview-resume",
+      id: "preview-skill-4",
       name: "Next.js",
       category: "Frontend",
     },
     {
-      id: "preview-skill-3",
-      resumeId: "preview-resume",
-      name: "TypeScript",
-      category: "Languages",
-    },
-    {
-      id: "preview-skill-4",
-      resumeId: "preview-resume",
+      id: "preview-skill-5",
       name: "Prisma",
       category: "Backend",
     },
@@ -100,9 +111,8 @@ const sampleResume = {
   certifications: [
     {
       id: "preview-certification-1",
-      resumeId: "preview-resume",
-      name: "Full Stack Development",
-      issuer: "Online Certification",
+      name: "Full Stack Web Development",
+      issuer: "Udemy",
       issueDate: "2026",
       credentialUrl: null,
     },
@@ -111,27 +121,58 @@ const sampleResume = {
   achievements: [
     {
       id: "preview-achievement-1",
-      resumeId: "preview-resume",
-      title: "Solved 160+ coding problems",
+      title: "160+ LeetCode Problems",
       description:
-        "Consistently practiced data structures and algorithms on coding platforms.",
+        "Solved more than 160 programming problems across multiple DSA topics.",
     },
   ],
-};
-const previewResume = sampleResume as unknown as ResumeData;
+} as ResumeData;
 
 export default function TemplatePreview({
   slug,
   design,
+  designConfig,
 }: TemplatePreviewProps) {
+  /*
+   * Keep old design properties synchronized
+   * with the new full configuration.
+   */
+  const templateDesign = {
+    ...design,
+
+    headerAlignment: designConfig.header.alignment,
+
+    layout: designConfig.layout.type,
+
+    accentColor: designConfig.style.accentColor,
+
+    sectionStyle: designConfig.style.sectionStyle,
+
+    nameSize: designConfig.header.nameSize,
+  };
+
+  if (slug === "modern") {
+    return (
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+        <div className="overflow-auto p-4 sm:p-6">
+          <ModernTemplate
+            resume={previewResume}
+            templateDesign={templateDesign}
+            designConfig={designConfig}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="overflow-auto rounded-2xl border border-slate-200 bg-slate-200 p-4">
-      <div className="mx-auto w-fit origin-top scale-[0.65] sm:scale-[0.75] lg:scale-[0.8]">
-        {slug === "modern" ? (
-          <ModernTemplate resume={previewResume} templateDesign={design} />
-        ) : (
-          <ClassicTemplate resume={previewResume} templateDesign={design} />
-        )}
+    <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+      <div className="overflow-auto p-4 sm:p-6">
+        <ClassicTemplate
+          resume={previewResume}
+          templateDesign={templateDesign}
+          designConfig={designConfig}
+        />
       </div>
     </div>
   );
