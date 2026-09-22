@@ -36,8 +36,6 @@ export default async function AdminPage() {
             </p>
           </Link>
 
-         
-          
           <Link
             href="/admin/roadmaps"
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -59,7 +57,6 @@ export default async function AdminPage() {
             </span>
           </Link>
 
-
           <Link
             href="/admin/templates"
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -80,7 +77,7 @@ export default async function AdminPage() {
               Manage Templates →
             </span>
           </Link>
-          
+
           <Link
             href="/admin/reports"
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -102,7 +99,28 @@ export default async function AdminPage() {
               View Reports →
             </span>
           </Link>
-          
+
+          <Link
+            href="/admin/dsa"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-50 text-xl">
+              ✒️
+            </div>
+
+            <h2 className="mt-5 text-lg font-bold text-slate-950">
+              DSA Management
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              Create, edit, publish, and manage DSA questions for students.
+            </p>
+
+            <span className="mt-5 inline-block rounded-full bg-zinc-50 px-3 py-1.5 text-xs  font-semibold text-zinc-700">
+              Manage DSA Questions →
+            </span>
+          </Link>
+     
         </div>
       </section>
     </main>

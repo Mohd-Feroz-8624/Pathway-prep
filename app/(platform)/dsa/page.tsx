@@ -24,6 +24,9 @@ export default async function DsaPage() {
   }
 
   const questions = await prisma.dSAQuestion.findMany({
+    where: {
+      isPublished: true,
+    },
     orderBy: {
       createdAt: "asc",
     },

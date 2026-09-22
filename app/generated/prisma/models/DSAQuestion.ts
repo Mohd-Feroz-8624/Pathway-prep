@@ -44,6 +44,7 @@ export type DSAQuestionMinAggregateOutputType = {
   pythonSolution: string | null
   spaceComplexity: string | null
   timeComplexity: string | null
+  isPublished: boolean | null
 }
 
 export type DSAQuestionMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type DSAQuestionMaxAggregateOutputType = {
   pythonSolution: string | null
   spaceComplexity: string | null
   timeComplexity: string | null
+  isPublished: boolean | null
 }
 
 export type DSAQuestionCountAggregateOutputType = {
@@ -88,6 +90,7 @@ export type DSAQuestionCountAggregateOutputType = {
   pythonSolution: number
   spaceComplexity: number
   timeComplexity: number
+  isPublished: number
   _all: number
 }
 
@@ -112,6 +115,7 @@ export type DSAQuestionMinAggregateInputType = {
   pythonSolution?: true
   spaceComplexity?: true
   timeComplexity?: true
+  isPublished?: true
 }
 
 export type DSAQuestionMaxAggregateInputType = {
@@ -134,6 +138,7 @@ export type DSAQuestionMaxAggregateInputType = {
   pythonSolution?: true
   spaceComplexity?: true
   timeComplexity?: true
+  isPublished?: true
 }
 
 export type DSAQuestionCountAggregateInputType = {
@@ -156,6 +161,7 @@ export type DSAQuestionCountAggregateInputType = {
   pythonSolution?: true
   spaceComplexity?: true
   timeComplexity?: true
+  isPublished?: true
   _all?: true
 }
 
@@ -251,6 +257,7 @@ export type DSAQuestionGroupByOutputType = {
   pythonSolution: string | null
   spaceComplexity: string | null
   timeComplexity: string | null
+  isPublished: boolean
   _count: DSAQuestionCountAggregateOutputType | null
   _min: DSAQuestionMinAggregateOutputType | null
   _max: DSAQuestionMaxAggregateOutputType | null
@@ -294,6 +301,7 @@ export type DSAQuestionWhereInput = {
   pythonSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   spaceComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   timeComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  isPublished?: Prisma.BoolFilter<"DSAQuestion"> | boolean
   progress?: Prisma.DSAProgressListRelationFilter
 }
 
@@ -317,6 +325,7 @@ export type DSAQuestionOrderByWithRelationInput = {
   pythonSolution?: Prisma.SortOrderInput | Prisma.SortOrder
   spaceComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
   timeComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   progress?: Prisma.DSAProgressOrderByRelationAggregateInput
 }
 
@@ -343,6 +352,7 @@ export type DSAQuestionWhereUniqueInput = Prisma.AtLeast<{
   pythonSolution?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   spaceComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
   timeComplexity?: Prisma.StringNullableFilter<"DSAQuestion"> | string | null
+  isPublished?: Prisma.BoolFilter<"DSAQuestion"> | boolean
   progress?: Prisma.DSAProgressListRelationFilter
 }, "id" | "slug">
 
@@ -366,6 +376,7 @@ export type DSAQuestionOrderByWithAggregationInput = {
   pythonSolution?: Prisma.SortOrderInput | Prisma.SortOrder
   spaceComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
   timeComplexity?: Prisma.SortOrderInput | Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   _count?: Prisma.DSAQuestionCountOrderByAggregateInput
   _max?: Prisma.DSAQuestionMaxOrderByAggregateInput
   _min?: Prisma.DSAQuestionMinOrderByAggregateInput
@@ -394,6 +405,7 @@ export type DSAQuestionScalarWhereWithAggregatesInput = {
   pythonSolution?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
   spaceComplexity?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
   timeComplexity?: Prisma.StringNullableWithAggregatesFilter<"DSAQuestion"> | string | null
+  isPublished?: Prisma.BoolWithAggregatesFilter<"DSAQuestion"> | boolean
 }
 
 export type DSAQuestionCreateInput = {
@@ -416,6 +428,7 @@ export type DSAQuestionCreateInput = {
   pythonSolution?: string | null
   spaceComplexity?: string | null
   timeComplexity?: string | null
+  isPublished?: boolean
   progress?: Prisma.DSAProgressCreateNestedManyWithoutQuestionInput
 }
 
@@ -439,6 +452,7 @@ export type DSAQuestionUncheckedCreateInput = {
   pythonSolution?: string | null
   spaceComplexity?: string | null
   timeComplexity?: string | null
+  isPublished?: boolean
   progress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutQuestionInput
 }
 
@@ -462,6 +476,7 @@ export type DSAQuestionUpdateInput = {
   pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   progress?: Prisma.DSAProgressUpdateManyWithoutQuestionNestedInput
 }
 
@@ -485,6 +500,7 @@ export type DSAQuestionUncheckedUpdateInput = {
   pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   progress?: Prisma.DSAProgressUncheckedUpdateManyWithoutQuestionNestedInput
 }
 
@@ -508,6 +524,7 @@ export type DSAQuestionCreateManyInput = {
   pythonSolution?: string | null
   spaceComplexity?: string | null
   timeComplexity?: string | null
+  isPublished?: boolean
 }
 
 export type DSAQuestionUpdateManyMutationInput = {
@@ -530,6 +547,7 @@ export type DSAQuestionUpdateManyMutationInput = {
   pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type DSAQuestionUncheckedUpdateManyInput = {
@@ -552,6 +570,7 @@ export type DSAQuestionUncheckedUpdateManyInput = {
   pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type DSAQuestionCountOrderByAggregateInput = {
@@ -574,6 +593,7 @@ export type DSAQuestionCountOrderByAggregateInput = {
   pythonSolution?: Prisma.SortOrder
   spaceComplexity?: Prisma.SortOrder
   timeComplexity?: Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
 }
 
 export type DSAQuestionMaxOrderByAggregateInput = {
@@ -596,6 +616,7 @@ export type DSAQuestionMaxOrderByAggregateInput = {
   pythonSolution?: Prisma.SortOrder
   spaceComplexity?: Prisma.SortOrder
   timeComplexity?: Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
 }
 
 export type DSAQuestionMinOrderByAggregateInput = {
@@ -618,6 +639,7 @@ export type DSAQuestionMinOrderByAggregateInput = {
   pythonSolution?: Prisma.SortOrder
   spaceComplexity?: Prisma.SortOrder
   timeComplexity?: Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
 }
 
 export type DSAQuestionScalarRelationFilter = {
@@ -659,6 +681,7 @@ export type DSAQuestionCreateWithoutProgressInput = {
   pythonSolution?: string | null
   spaceComplexity?: string | null
   timeComplexity?: string | null
+  isPublished?: boolean
 }
 
 export type DSAQuestionUncheckedCreateWithoutProgressInput = {
@@ -681,6 +704,7 @@ export type DSAQuestionUncheckedCreateWithoutProgressInput = {
   pythonSolution?: string | null
   spaceComplexity?: string | null
   timeComplexity?: string | null
+  isPublished?: boolean
 }
 
 export type DSAQuestionCreateOrConnectWithoutProgressInput = {
@@ -719,6 +743,7 @@ export type DSAQuestionUpdateWithoutProgressInput = {
   pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type DSAQuestionUncheckedUpdateWithoutProgressInput = {
@@ -741,6 +766,7 @@ export type DSAQuestionUncheckedUpdateWithoutProgressInput = {
   pythonSolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeComplexity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -794,6 +820,7 @@ export type DSAQuestionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   pythonSolution?: boolean
   spaceComplexity?: boolean
   timeComplexity?: boolean
+  isPublished?: boolean
   progress?: boolean | Prisma.DSAQuestion$progressArgs<ExtArgs>
   _count?: boolean | Prisma.DSAQuestionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dSAQuestion"]>
@@ -818,6 +845,7 @@ export type DSAQuestionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   pythonSolution?: boolean
   spaceComplexity?: boolean
   timeComplexity?: boolean
+  isPublished?: boolean
 }, ExtArgs["result"]["dSAQuestion"]>
 
 export type DSAQuestionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -840,6 +868,7 @@ export type DSAQuestionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   pythonSolution?: boolean
   spaceComplexity?: boolean
   timeComplexity?: boolean
+  isPublished?: boolean
 }, ExtArgs["result"]["dSAQuestion"]>
 
 export type DSAQuestionSelectScalar = {
@@ -862,9 +891,10 @@ export type DSAQuestionSelectScalar = {
   pythonSolution?: boolean
   spaceComplexity?: boolean
   timeComplexity?: boolean
+  isPublished?: boolean
 }
 
-export type DSAQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "difficulty" | "topic" | "constraints" | "examples" | "solution" | "createdAt" | "updatedAt" | "approach" | "concept" | "cppSolution" | "javaSolution" | "javascriptSolution" | "pythonSolution" | "spaceComplexity" | "timeComplexity", ExtArgs["result"]["dSAQuestion"]>
+export type DSAQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "difficulty" | "topic" | "constraints" | "examples" | "solution" | "createdAt" | "updatedAt" | "approach" | "concept" | "cppSolution" | "javaSolution" | "javascriptSolution" | "pythonSolution" | "spaceComplexity" | "timeComplexity" | "isPublished", ExtArgs["result"]["dSAQuestion"]>
 export type DSAQuestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   progress?: boolean | Prisma.DSAQuestion$progressArgs<ExtArgs>
   _count?: boolean | Prisma.DSAQuestionCountOutputTypeDefaultArgs<ExtArgs>
@@ -897,6 +927,7 @@ export type $DSAQuestionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     pythonSolution: string | null
     spaceComplexity: string | null
     timeComplexity: string | null
+    isPublished: boolean
   }, ExtArgs["result"]["dSAQuestion"]>
   composites: {}
 }
@@ -1340,6 +1371,7 @@ export interface DSAQuestionFieldRefs {
   readonly pythonSolution: Prisma.FieldRef<"DSAQuestion", 'String'>
   readonly spaceComplexity: Prisma.FieldRef<"DSAQuestion", 'String'>
   readonly timeComplexity: Prisma.FieldRef<"DSAQuestion", 'String'>
+  readonly isPublished: Prisma.FieldRef<"DSAQuestion", 'Boolean'>
 }
     
 

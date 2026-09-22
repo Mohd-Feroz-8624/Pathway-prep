@@ -3195,7 +3195,8 @@ export const DSAQuestionScalarFieldEnum = {
   javascriptSolution: 'javascriptSolution',
   pythonSolution: 'pythonSolution',
   spaceComplexity: 'spaceComplexity',
-  timeComplexity: 'timeComplexity'
+  timeComplexity: 'timeComplexity',
+  isPublished: 'isPublished'
 } as const
 
 export type DSAQuestionScalarFieldEnum = (typeof DSAQuestionScalarFieldEnum)[keyof typeof DSAQuestionScalarFieldEnum]
