@@ -45,6 +45,7 @@ export type UserMinAggregateOutputType = {
   careerGoal: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  role: $Enums.UserRole | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -58,6 +59,7 @@ export type UserMaxAggregateOutputType = {
   careerGoal: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  role: $Enums.UserRole | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -71,6 +73,7 @@ export type UserCountAggregateOutputType = {
   careerGoal: number
   createdAt: number
   updatedAt: number
+  role: number
   _all: number
 }
 
@@ -94,6 +97,7 @@ export type UserMinAggregateInputType = {
   careerGoal?: true
   createdAt?: true
   updatedAt?: true
+  role?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -107,6 +111,7 @@ export type UserMaxAggregateInputType = {
   careerGoal?: true
   createdAt?: true
   updatedAt?: true
+  role?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -120,6 +125,7 @@ export type UserCountAggregateInputType = {
   careerGoal?: true
   createdAt?: true
   updatedAt?: true
+  role?: true
   _all?: true
 }
 
@@ -220,6 +226,7 @@ export type UserGroupByOutputType = {
   careerGoal: string | null
   createdAt: Date
   updatedAt: Date
+  role: $Enums.UserRole
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -256,8 +263,14 @@ export type UserWhereInput = {
   careerGoal?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  contactReports?: Prisma.ContactReportListRelationFilter
+  dsaProgress?: Prisma.DSAProgressListRelationFilter
+  interviewSessions?: Prisma.InterviewSessionListRelationFilter
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
+  resumes?: Prisma.ResumeListRelationFilter
   roadmapProgress?: Prisma.RoadmapTaskProgressListRelationFilter
+  uploadedResumes?: Prisma.UploadedResumeListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -271,8 +284,14 @@ export type UserOrderByWithRelationInput = {
   careerGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  contactReports?: Prisma.ContactReportOrderByRelationAggregateInput
+  dsaProgress?: Prisma.DSAProgressOrderByRelationAggregateInput
+  interviewSessions?: Prisma.InterviewSessionOrderByRelationAggregateInput
   profile?: Prisma.ProfileOrderByWithRelationInput
+  resumes?: Prisma.ResumeOrderByRelationAggregateInput
   roadmapProgress?: Prisma.RoadmapTaskProgressOrderByRelationAggregateInput
+  uploadedResumes?: Prisma.UploadedResumeOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -289,8 +308,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   careerGoal?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  contactReports?: Prisma.ContactReportListRelationFilter
+  dsaProgress?: Prisma.DSAProgressListRelationFilter
+  interviewSessions?: Prisma.InterviewSessionListRelationFilter
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
+  resumes?: Prisma.ResumeListRelationFilter
   roadmapProgress?: Prisma.RoadmapTaskProgressListRelationFilter
+  uploadedResumes?: Prisma.UploadedResumeListRelationFilter
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -304,6 +329,7 @@ export type UserOrderByWithAggregationInput = {
   careerGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -325,6 +351,7 @@ export type UserScalarWhereWithAggregatesInput = {
   careerGoal?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
 }
 
 export type UserCreateInput = {
@@ -338,8 +365,14 @@ export type UserCreateInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -353,8 +386,14 @@ export type UserUncheckedCreateInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -368,8 +407,14 @@ export type UserUpdateInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -383,8 +428,14 @@ export type UserUncheckedUpdateInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -398,6 +449,7 @@ export type UserCreateManyInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
 }
 
 export type UserUpdateManyMutationInput = {
@@ -411,6 +463,7 @@ export type UserUpdateManyMutationInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -424,6 +477,7 @@ export type UserUncheckedUpdateManyInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -437,6 +491,7 @@ export type UserCountOrderByAggregateInput = {
   careerGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -454,6 +509,7 @@ export type UserMaxOrderByAggregateInput = {
   careerGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -467,6 +523,7 @@ export type UserMinOrderByAggregateInput = {
   careerGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -498,6 +555,10 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type EnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.UserRole
+}
+
 export type UserCreateNestedOneWithoutProfileInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfileInput
@@ -526,6 +587,76 @@ export type UserUpdateOneRequiredWithoutRoadmapProgressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoadmapProgressInput, Prisma.UserUpdateWithoutRoadmapProgressInput>, Prisma.UserUncheckedUpdateWithoutRoadmapProgressInput>
 }
 
+export type UserCreateNestedOneWithoutResumesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResumesInput, Prisma.UserUncheckedCreateWithoutResumesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResumesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutResumesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResumesInput, Prisma.UserUncheckedCreateWithoutResumesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResumesInput
+  upsert?: Prisma.UserUpsertWithoutResumesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResumesInput, Prisma.UserUpdateWithoutResumesInput>, Prisma.UserUncheckedUpdateWithoutResumesInput>
+}
+
+export type UserCreateNestedOneWithoutUploadedResumesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUploadedResumesInput, Prisma.UserUncheckedCreateWithoutUploadedResumesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUploadedResumesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUploadedResumesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUploadedResumesInput, Prisma.UserUncheckedCreateWithoutUploadedResumesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUploadedResumesInput
+  upsert?: Prisma.UserUpsertWithoutUploadedResumesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUploadedResumesInput, Prisma.UserUpdateWithoutUploadedResumesInput>, Prisma.UserUncheckedUpdateWithoutUploadedResumesInput>
+}
+
+export type UserCreateNestedOneWithoutInterviewSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterviewSessionsInput, Prisma.UserUncheckedCreateWithoutInterviewSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterviewSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInterviewSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterviewSessionsInput, Prisma.UserUncheckedCreateWithoutInterviewSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterviewSessionsInput
+  upsert?: Prisma.UserUpsertWithoutInterviewSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInterviewSessionsInput, Prisma.UserUpdateWithoutInterviewSessionsInput>, Prisma.UserUncheckedUpdateWithoutInterviewSessionsInput>
+}
+
+export type UserCreateNestedOneWithoutDsaProgressInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDsaProgressInput, Prisma.UserUncheckedCreateWithoutDsaProgressInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDsaProgressInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDsaProgressNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDsaProgressInput, Prisma.UserUncheckedCreateWithoutDsaProgressInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDsaProgressInput
+  upsert?: Prisma.UserUpsertWithoutDsaProgressInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDsaProgressInput, Prisma.UserUpdateWithoutDsaProgressInput>, Prisma.UserUncheckedUpdateWithoutDsaProgressInput>
+}
+
+export type UserCreateNestedOneWithoutContactReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContactReportsInput, Prisma.UserUncheckedCreateWithoutContactReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutContactReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContactReportsInput, Prisma.UserUncheckedCreateWithoutContactReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactReportsInput
+  upsert?: Prisma.UserUpsertWithoutContactReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutContactReportsInput, Prisma.UserUpdateWithoutContactReportsInput>, Prisma.UserUncheckedUpdateWithoutContactReportsInput>
+}
+
 export type UserCreateWithoutProfileInput = {
   id?: string
   clerkId: string
@@ -537,7 +668,13 @@ export type UserCreateWithoutProfileInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -551,7 +688,13 @@ export type UserUncheckedCreateWithoutProfileInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -581,7 +724,13 @@ export type UserUpdateWithoutProfileInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -595,7 +744,13 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
   roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRoadmapProgressInput = {
@@ -609,7 +764,13 @@ export type UserCreateWithoutRoadmapProgressInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoadmapProgressInput = {
@@ -623,7 +784,13 @@ export type UserUncheckedCreateWithoutRoadmapProgressInput = {
   careerGoal?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoadmapProgressInput = {
@@ -653,7 +820,13 @@ export type UserUpdateWithoutRoadmapProgressInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoadmapProgressInput = {
@@ -667,7 +840,493 @@ export type UserUncheckedUpdateWithoutRoadmapProgressInput = {
   careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutResumesInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutResumesInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutResumesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutResumesInput, Prisma.UserUncheckedCreateWithoutResumesInput>
+}
+
+export type UserUpsertWithoutResumesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResumesInput, Prisma.UserUncheckedUpdateWithoutResumesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResumesInput, Prisma.UserUncheckedCreateWithoutResumesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutResumesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResumesInput, Prisma.UserUncheckedUpdateWithoutResumesInput>
+}
+
+export type UserUpdateWithoutResumesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutResumesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUploadedResumesInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUploadedResumesInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUploadedResumesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUploadedResumesInput, Prisma.UserUncheckedCreateWithoutUploadedResumesInput>
+}
+
+export type UserUpsertWithoutUploadedResumesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUploadedResumesInput, Prisma.UserUncheckedUpdateWithoutUploadedResumesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUploadedResumesInput, Prisma.UserUncheckedCreateWithoutUploadedResumesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUploadedResumesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUploadedResumesInput, Prisma.UserUncheckedUpdateWithoutUploadedResumesInput>
+}
+
+export type UserUpdateWithoutUploadedResumesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUploadedResumesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutInterviewSessionsInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutInterviewSessionsInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutInterviewSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterviewSessionsInput, Prisma.UserUncheckedCreateWithoutInterviewSessionsInput>
+}
+
+export type UserUpsertWithoutInterviewSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInterviewSessionsInput, Prisma.UserUncheckedUpdateWithoutInterviewSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterviewSessionsInput, Prisma.UserUncheckedCreateWithoutInterviewSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInterviewSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInterviewSessionsInput, Prisma.UserUncheckedUpdateWithoutInterviewSessionsInput>
+}
+
+export type UserUpdateWithoutInterviewSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInterviewSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDsaProgressInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDsaProgressInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDsaProgressInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDsaProgressInput, Prisma.UserUncheckedCreateWithoutDsaProgressInput>
+}
+
+export type UserUpsertWithoutDsaProgressInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDsaProgressInput, Prisma.UserUncheckedUpdateWithoutDsaProgressInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDsaProgressInput, Prisma.UserUncheckedCreateWithoutDsaProgressInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDsaProgressInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDsaProgressInput, Prisma.UserUncheckedUpdateWithoutDsaProgressInput>
+}
+
+export type UserUpdateWithoutDsaProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDsaProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  contactReports?: Prisma.ContactReportUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutContactReportsInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  dsaProgress?: Prisma.DSAProgressCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutContactReportsInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  college?: string | null
+  branch?: string | null
+  currentSemester?: number | null
+  careerGoal?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  dsaProgress?: Prisma.DSAProgressUncheckedCreateNestedManyWithoutUserInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  resumes?: Prisma.ResumeUncheckedCreateNestedManyWithoutUserInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedCreateNestedManyWithoutUserInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutContactReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutContactReportsInput, Prisma.UserUncheckedCreateWithoutContactReportsInput>
+}
+
+export type UserUpsertWithoutContactReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutContactReportsInput, Prisma.UserUncheckedUpdateWithoutContactReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutContactReportsInput, Prisma.UserUncheckedCreateWithoutContactReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutContactReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutContactReportsInput, Prisma.UserUncheckedUpdateWithoutContactReportsInput>
+}
+
+export type UserUpdateWithoutContactReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  dsaProgress?: Prisma.DSAProgressUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutContactReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  college?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSemester?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  careerGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  dsaProgress?: Prisma.DSAProgressUncheckedUpdateManyWithoutUserNestedInput
+  interviewSessions?: Prisma.InterviewSessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  resumes?: Prisma.ResumeUncheckedUpdateManyWithoutUserNestedInput
+  roadmapProgress?: Prisma.RoadmapTaskProgressUncheckedUpdateManyWithoutUserNestedInput
+  uploadedResumes?: Prisma.UploadedResumeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -676,11 +1335,21 @@ export type UserUncheckedUpdateWithoutRoadmapProgressInput = {
  */
 
 export type UserCountOutputType = {
+  contactReports: number
+  dsaProgress: number
+  interviewSessions: number
+  resumes: number
   roadmapProgress: number
+  uploadedResumes: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contactReports?: boolean | UserCountOutputTypeCountContactReportsArgs
+  dsaProgress?: boolean | UserCountOutputTypeCountDsaProgressArgs
+  interviewSessions?: boolean | UserCountOutputTypeCountInterviewSessionsArgs
+  resumes?: boolean | UserCountOutputTypeCountResumesArgs
   roadmapProgress?: boolean | UserCountOutputTypeCountRoadmapProgressArgs
+  uploadedResumes?: boolean | UserCountOutputTypeCountUploadedResumesArgs
 }
 
 /**
@@ -696,8 +1365,43 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountContactReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDsaProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DSAProgressWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInterviewSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountResumesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResumeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountRoadmapProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RoadmapTaskProgressWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUploadedResumesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UploadedResumeWhereInput
 }
 
 
@@ -712,8 +1416,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   careerGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
+  contactReports?: boolean | Prisma.User$contactReportsArgs<ExtArgs>
+  dsaProgress?: boolean | Prisma.User$dsaProgressArgs<ExtArgs>
+  interviewSessions?: boolean | Prisma.User$interviewSessionsArgs<ExtArgs>
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  resumes?: boolean | Prisma.User$resumesArgs<ExtArgs>
   roadmapProgress?: boolean | Prisma.User$roadmapProgressArgs<ExtArgs>
+  uploadedResumes?: boolean | Prisma.User$uploadedResumesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -728,6 +1438,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   careerGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -741,6 +1452,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   careerGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -754,12 +1466,18 @@ export type UserSelectScalar = {
   careerGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "name" | "email" | "college" | "branch" | "currentSemester" | "careerGoal" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "name" | "email" | "college" | "branch" | "currentSemester" | "careerGoal" | "createdAt" | "updatedAt" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contactReports?: boolean | Prisma.User$contactReportsArgs<ExtArgs>
+  dsaProgress?: boolean | Prisma.User$dsaProgressArgs<ExtArgs>
+  interviewSessions?: boolean | Prisma.User$interviewSessionsArgs<ExtArgs>
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  resumes?: boolean | Prisma.User$resumesArgs<ExtArgs>
   roadmapProgress?: boolean | Prisma.User$roadmapProgressArgs<ExtArgs>
+  uploadedResumes?: boolean | Prisma.User$uploadedResumesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -768,8 +1486,13 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    contactReports: Prisma.$ContactReportPayload<ExtArgs>[]
+    dsaProgress: Prisma.$DSAProgressPayload<ExtArgs>[]
+    interviewSessions: Prisma.$InterviewSessionPayload<ExtArgs>[]
     profile: Prisma.$ProfilePayload<ExtArgs> | null
+    resumes: Prisma.$ResumePayload<ExtArgs>[]
     roadmapProgress: Prisma.$RoadmapTaskProgressPayload<ExtArgs>[]
+    uploadedResumes: Prisma.$UploadedResumePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -782,6 +1505,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     careerGoal: string | null
     createdAt: Date
     updatedAt: Date
+    role: $Enums.UserRole
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1176,8 +1900,13 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  contactReports<T extends Prisma.User$contactReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contactReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dsaProgress<T extends Prisma.User$dsaProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dsaProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DSAProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interviewSessions<T extends Prisma.User$interviewSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$interviewSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.Prisma__ProfileClient<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  resumes<T extends Prisma.User$resumesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resumesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roadmapProgress<T extends Prisma.User$roadmapProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roadmapProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoadmapTaskProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  uploadedResumes<T extends Prisma.User$uploadedResumesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedResumesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UploadedResumePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1217,6 +1946,7 @@ export interface UserFieldRefs {
   readonly careerGoal: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly role: Prisma.FieldRef<"User", 'UserRole'>
 }
     
 
@@ -1610,6 +2340,78 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.contactReports
+ */
+export type User$contactReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContactReport
+   */
+  select?: Prisma.ContactReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContactReport
+   */
+  omit?: Prisma.ContactReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactReportInclude<ExtArgs> | null
+  where?: Prisma.ContactReportWhereInput
+  orderBy?: Prisma.ContactReportOrderByWithRelationInput | Prisma.ContactReportOrderByWithRelationInput[]
+  cursor?: Prisma.ContactReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactReportScalarFieldEnum | Prisma.ContactReportScalarFieldEnum[]
+}
+
+/**
+ * User.dsaProgress
+ */
+export type User$dsaProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DSAProgress
+   */
+  select?: Prisma.DSAProgressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DSAProgress
+   */
+  omit?: Prisma.DSAProgressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DSAProgressInclude<ExtArgs> | null
+  where?: Prisma.DSAProgressWhereInput
+  orderBy?: Prisma.DSAProgressOrderByWithRelationInput | Prisma.DSAProgressOrderByWithRelationInput[]
+  cursor?: Prisma.DSAProgressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DSAProgressScalarFieldEnum | Prisma.DSAProgressScalarFieldEnum[]
+}
+
+/**
+ * User.interviewSessions
+ */
+export type User$interviewSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterviewSession
+   */
+  select?: Prisma.InterviewSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterviewSession
+   */
+  omit?: Prisma.InterviewSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewSessionInclude<ExtArgs> | null
+  where?: Prisma.InterviewSessionWhereInput
+  orderBy?: Prisma.InterviewSessionOrderByWithRelationInput | Prisma.InterviewSessionOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewSessionScalarFieldEnum | Prisma.InterviewSessionScalarFieldEnum[]
+}
+
+/**
  * User.profile
  */
 export type User$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1626,6 +2428,30 @@ export type User$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ProfileInclude<ExtArgs> | null
   where?: Prisma.ProfileWhereInput
+}
+
+/**
+ * User.resumes
+ */
+export type User$resumesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Resume
+   */
+  select?: Prisma.ResumeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Resume
+   */
+  omit?: Prisma.ResumeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResumeInclude<ExtArgs> | null
+  where?: Prisma.ResumeWhereInput
+  orderBy?: Prisma.ResumeOrderByWithRelationInput | Prisma.ResumeOrderByWithRelationInput[]
+  cursor?: Prisma.ResumeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResumeScalarFieldEnum | Prisma.ResumeScalarFieldEnum[]
 }
 
 /**
@@ -1650,6 +2476,30 @@ export type User$roadmapProgressArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.RoadmapTaskProgressScalarFieldEnum | Prisma.RoadmapTaskProgressScalarFieldEnum[]
+}
+
+/**
+ * User.uploadedResumes
+ */
+export type User$uploadedResumesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UploadedResume
+   */
+  select?: Prisma.UploadedResumeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UploadedResume
+   */
+  omit?: Prisma.UploadedResumeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UploadedResumeInclude<ExtArgs> | null
+  where?: Prisma.UploadedResumeWhereInput
+  orderBy?: Prisma.UploadedResumeOrderByWithRelationInput | Prisma.UploadedResumeOrderByWithRelationInput[]
+  cursor?: Prisma.UploadedResumeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UploadedResumeScalarFieldEnum | Prisma.UploadedResumeScalarFieldEnum[]
 }
 
 /**

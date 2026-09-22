@@ -198,8 +198,8 @@ export type RoadmapTaskProgressWhereInput = {
   completedAt?: Prisma.DateTimeNullableFilter<"RoadmapTaskProgress"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"RoadmapTaskProgress"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoadmapTaskProgress"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   task?: Prisma.XOR<Prisma.RoadmapTaskScalarRelationFilter, Prisma.RoadmapTaskWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type RoadmapTaskProgressOrderByWithRelationInput = {
@@ -210,8 +210,8 @@ export type RoadmapTaskProgressOrderByWithRelationInput = {
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   task?: Prisma.RoadmapTaskOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type RoadmapTaskProgressWhereUniqueInput = Prisma.AtLeast<{
@@ -226,8 +226,8 @@ export type RoadmapTaskProgressWhereUniqueInput = Prisma.AtLeast<{
   completedAt?: Prisma.DateTimeNullableFilter<"RoadmapTaskProgress"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"RoadmapTaskProgress"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoadmapTaskProgress"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   task?: Prisma.XOR<Prisma.RoadmapTaskScalarRelationFilter, Prisma.RoadmapTaskWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_taskId">
 
 export type RoadmapTaskProgressOrderByWithAggregationInput = {
@@ -262,8 +262,8 @@ export type RoadmapTaskProgressCreateInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutRoadmapProgressInput
   task: Prisma.RoadmapTaskCreateNestedOneWithoutProgressInput
+  user: Prisma.UserCreateNestedOneWithoutRoadmapProgressInput
 }
 
 export type RoadmapTaskProgressUncheckedCreateInput = {
@@ -282,8 +282,8 @@ export type RoadmapTaskProgressUpdateInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutRoadmapProgressNestedInput
   task?: Prisma.RoadmapTaskUpdateOneRequiredWithoutProgressNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutRoadmapProgressNestedInput
 }
 
 export type RoadmapTaskProgressUncheckedUpdateInput = {
@@ -640,8 +640,8 @@ export type RoadmapTaskProgressSelect<ExtArgs extends runtime.Types.Extensions.I
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   task?: boolean | Prisma.RoadmapTaskDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roadmapTaskProgress"]>
 
 export type RoadmapTaskProgressSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -652,8 +652,8 @@ export type RoadmapTaskProgressSelectCreateManyAndReturn<ExtArgs extends runtime
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   task?: boolean | Prisma.RoadmapTaskDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roadmapTaskProgress"]>
 
 export type RoadmapTaskProgressSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -664,8 +664,8 @@ export type RoadmapTaskProgressSelectUpdateManyAndReturn<ExtArgs extends runtime
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   task?: boolean | Prisma.RoadmapTaskDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roadmapTaskProgress"]>
 
 export type RoadmapTaskProgressSelectScalar = {
@@ -680,23 +680,23 @@ export type RoadmapTaskProgressSelectScalar = {
 
 export type RoadmapTaskProgressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "taskId" | "completed" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["roadmapTaskProgress"]>
 export type RoadmapTaskProgressInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   task?: boolean | Prisma.RoadmapTaskDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type RoadmapTaskProgressIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   task?: boolean | Prisma.RoadmapTaskDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type RoadmapTaskProgressIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   task?: boolean | Prisma.RoadmapTaskDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $RoadmapTaskProgressPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RoadmapTaskProgress"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     task: Prisma.$RoadmapTaskPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1100,8 +1100,8 @@ readonly fields: RoadmapTaskProgressFieldRefs;
  */
 export interface Prisma__RoadmapTaskProgressClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   task<T extends Prisma.RoadmapTaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoadmapTaskDefaultArgs<ExtArgs>>): Prisma.Prisma__RoadmapTaskClient<runtime.Types.Result.GetResult<Prisma.$RoadmapTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

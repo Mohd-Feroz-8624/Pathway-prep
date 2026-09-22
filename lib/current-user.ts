@@ -12,6 +12,9 @@ export async function getCurrentUser() {
     where: {
       clerkId: userId,
     },
+    include:{
+      profile: true,
+    },
   });
 
   return user;

@@ -43,6 +43,11 @@ export type Subject = Prisma.SubjectModel
  */
 export type Unit = Prisma.UnitModel
 /**
+ * Model UnitResource
+ * 
+ */
+export type UnitResource = Prisma.UnitResourceModel
+/**
  * Model Topic
  * 
  */
@@ -77,3 +82,93 @@ export type RoadmapTask = Prisma.RoadmapTaskModel
  * 
  */
 export type RoadmapTaskProgress = Prisma.RoadmapTaskProgressModel
+/**
+ * Model ResumeTemplate
+ * 
+ */
+export type ResumeTemplate = Prisma.ResumeTemplateModel
+/**
+ * Model Resume
+ * 
+ */
+export type Resume = Prisma.ResumeModel
+/**
+ * Model ResumeEducation
+ * 
+ */
+export type ResumeEducation = Prisma.ResumeEducationModel
+/**
+ * Model ResumeExperience
+ * 
+ */
+export type ResumeExperience = Prisma.ResumeExperienceModel
+/**
+ * Model ResumeProject
+ * 
+ */
+export type ResumeProject = Prisma.ResumeProjectModel
+/**
+ * Model ResumeSkill
+ * 
+ */
+export type ResumeSkill = Prisma.ResumeSkillModel
+/**
+ * Model ResumeCertification
+ * 
+ */
+export type ResumeCertification = Prisma.ResumeCertificationModel
+/**
+ * Model ResumeAchievement
+ * 
+ */
+export type ResumeAchievement = Prisma.ResumeAchievementModel
+/**
+ * Model ResumeAnalysis
+ * 
+ */
+export type ResumeAnalysis = Prisma.ResumeAnalysisModel
+/**
+ * Model UploadedResume
+ * 
+ */
+export type UploadedResume = Prisma.UploadedResumeModel
+/**
+ * Model InterviewQuestion
+ * 
+ */
+export type InterviewQuestion = Prisma.InterviewQuestionModel
+/**
+ * Model InterviewSession
+ * 
+ */
+export type InterviewSession = Prisma.InterviewSessionModel
+/**
+ * Model InterviewAnswer
+ * 
+ */
+export type InterviewAnswer = Prisma.InterviewAnswerModel
+/**
+ * Model InterviewResult
+ * 
+ */
+export type InterviewResult = Prisma.InterviewResultModel
+/**
+ * Model DSAQuestion
+ * 
+ */
+export type DSAQuestion = Prisma.DSAQuestionModel
+/**
+ * Model DSAProgress
+ * 
+ */
+export type DSAProgress = Prisma.DSAProgressModel
+/**
+ * Model playing_with_neon
+ * 
+ */
+export type playing_with_neon = Prisma.playing_with_neonModel
+/**
+ * Model ContactReport
+ * 
+ */
+export type ContactReport = Prisma.ContactReportModel
