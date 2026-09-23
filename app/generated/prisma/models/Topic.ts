@@ -182,8 +182,8 @@ export type TopicWhereInput = {
   unitId?: Prisma.StringFilter<"Topic"> | string
   createdAt?: Prisma.DateTimeFilter<"Topic"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Topic"> | Date | string
-  unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>
   notes?: Prisma.NoteListRelationFilter
+  unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>
 }
 
 export type TopicOrderByWithRelationInput = {
@@ -192,12 +192,13 @@ export type TopicOrderByWithRelationInput = {
   unitId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  unit?: Prisma.UnitOrderByWithRelationInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
+  unit?: Prisma.UnitOrderByWithRelationInput
 }
 
 export type TopicWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  unitId_title?: Prisma.TopicUnitIdTitleCompoundUniqueInput
   AND?: Prisma.TopicWhereInput | Prisma.TopicWhereInput[]
   OR?: Prisma.TopicWhereInput[]
   NOT?: Prisma.TopicWhereInput | Prisma.TopicWhereInput[]
@@ -205,9 +206,9 @@ export type TopicWhereUniqueInput = Prisma.AtLeast<{
   unitId?: Prisma.StringFilter<"Topic"> | string
   createdAt?: Prisma.DateTimeFilter<"Topic"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Topic"> | Date | string
-  unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>
   notes?: Prisma.NoteListRelationFilter
-}, "id">
+  unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>
+}, "id" | "unitId_title">
 
 export type TopicOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -236,8 +237,8 @@ export type TopicCreateInput = {
   title: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  unit: Prisma.UnitCreateNestedOneWithoutTopicsInput
   notes?: Prisma.NoteCreateNestedManyWithoutTopicInput
+  unit: Prisma.UnitCreateNestedOneWithoutTopicsInput
 }
 
 export type TopicUncheckedCreateInput = {
@@ -254,8 +255,8 @@ export type TopicUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit?: Prisma.UnitUpdateOneRequiredWithoutTopicsNestedInput
   notes?: Prisma.NoteUpdateManyWithoutTopicNestedInput
+  unit?: Prisma.UnitUpdateOneRequiredWithoutTopicsNestedInput
 }
 
 export type TopicUncheckedUpdateInput = {
@@ -298,6 +299,11 @@ export type TopicListRelationFilter = {
 
 export type TopicOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type TopicUnitIdTitleCompoundUniqueInput = {
+  unitId: string
+  title: string
 }
 
 export type TopicCountOrderByAggregateInput = {
@@ -553,8 +559,8 @@ export type TopicSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   unitId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Topic$notesArgs<ExtArgs>
+  unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TopicCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["topic"]>
 
@@ -586,8 +592,8 @@ export type TopicSelectScalar = {
 
 export type TopicOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "unitId" | "createdAt" | "updatedAt", ExtArgs["result"]["topic"]>
 export type TopicInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Topic$notesArgs<ExtArgs>
+  unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TopicCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TopicIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -600,8 +606,8 @@ export type TopicIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $TopicPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Topic"
   objects: {
-    unit: Prisma.$UnitPayload<ExtArgs>
     notes: Prisma.$NotePayload<ExtArgs>[]
+    unit: Prisma.$UnitPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1003,8 +1009,8 @@ readonly fields: TopicFieldRefs;
  */
 export interface Prisma__TopicClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  unit<T extends Prisma.UnitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitDefaultArgs<ExtArgs>>): Prisma.Prisma__UnitClient<runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   notes<T extends Prisma.Topic$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Topic$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  unit<T extends Prisma.UnitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitDefaultArgs<ExtArgs>>): Prisma.Prisma__UnitClient<runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -1,0 +1,260 @@
+"use client";
+
+import Link from "next/link";
+import {
+  LayoutDashboard,
+  BookOpen,
+  Code2,
+  Map,
+  FileText,
+  MessagesSquare,
+  CircleHelp,
+  ChevronLeft,
+  LogOut,
+} from "lucide-react";
+import { useClerk } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import UserAvatar from "@/components/dashboard/UserAvatar";
+
+const navigation = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    title: "Semesters",
+    href: "/semesters",
+    icon: BookOpen,
+  },
+  {
+    title: "DSA",
+    href: "/dsa",
+    icon: Code2,
+  },
+  {
+    title: "Roadmaps",
+    href: "/roadmaps",
+    icon: Map,
+  },
+  {
+    title: "Resume Builder",
+    href: "/resume",
+    icon: FileText,
+  },
+  {
+    title: "Interview Practice",
+    href: "/interview",
+    icon: MessagesSquare,
+  },
+];
+
+type DashboardSidebarProps = {
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function DashboardSidebar({
+  collapsed,
+  setCollapsed,
+}: DashboardSidebarProps) {
+  const pathname = usePathname();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<{
+    title: string;
+    x: number;
+    y: number;
+  } | null>(null);
+
+  const showItemTooltip = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    title: string,
+  ) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setHoveredItem({
+      title,
+      x: rect.right + 12,
+      y: rect.top + rect.height / 2,
+    });
+  };
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
+  return (
+    <aside
+      className={`fixed inset-y-0 left-0 z-40 hidden border-r border-slate-200 bg-white transition-all duration-300 lg:block ${
+        collapsed ? "w-20" : "w-64"
+      }`}
+    >
+      <div className="relative flex h-screen flex-col">
+        {/* Logo */}
+        <div
+          className={`flex h-20 items-center border-b border-slate-200 ${
+            collapsed ? "justify-center px-3" : "px-6"
+          }`}
+        >
+          <Link
+            href="/dashboard"
+            className="text-xl font-bold tracking-tight text-slate-950"
+            title={collapsed ? "Pathway Prep" : undefined}
+          >
+            {collapsed ? (
+              <span className="text-blue-600">P</span>
+            ) : (
+              <>
+                Pathway<span className="text-blue-600">Prep</span>
+              </>
+            )}
+          </Link>
+        </div>
+
+        {/* Collapse Button */}
+        <button
+          type="button"
+          onClick={() => setCollapsed((value) => !value)}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          className="group absolute -right-5 top-10 z-100 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-xl font-medium text-slate-700 shadow-md transition-all duration-200 hover:scale-105 hover:bg-slate-50 hover:text-slate-950"
+        >
+          <ChevronLeft
+            className={`h-5 w-5 transition-transform duration-300 ${
+              collapsed ? "rotate-180" : ""
+            }`}
+          />
+
+          {/* Premium hover tooltip */}
+          <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 translate-x-1 whitespace-nowrap rounded-md bg-slate-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 ">
+            {collapsed ? "Expand" : "Collapse"}
+
+            {/* Arrow on the left side */}
+            <span className="absolute right-full top-1/2 -translate-y-1/2 border-y-4 border-r-4 border-y-transparent border-r-slate-900 " />
+          </span>
+        </button>
+
+        {/* Main Navigation */}
+        <nav className="flex-1 overflow-y-auto px-3 py-6">
+          <div className="space-y-2">
+            {navigation.map((item) => {
+              const isActive =
+                item.href === "/dashboard"
+                  ? pathname === "/dashboard"
+                  : pathname.startsWith(item.href);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  title={collapsed ? item.title : undefined}
+                  onMouseEnter={(event) => {
+                    if (!collapsed) return;
+                    showItemTooltip(event, item.title);
+                  }}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  className={`flex items-center rounded-xl py-3 text-sm font-medium transition-all duration-200 ${
+                    collapsed ? "justify-center px-3" : "gap-3 px-4"
+                  } ${
+                    isActive
+                      ? "bg-blue-50 text-blue-700"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                  }`}
+                >
+                  <span className="relative flex h-6 shrink-0 text-base">
+                    <item.icon className="h-5 w-5 strokeWidth={2}" />
+                  </span>
+
+                  {!collapsed && (
+                    <span className="whitespace-nowrap">{item.title}</span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+
+        {/* Bottom Account Navigation */}
+        <div className="border-t border-slate-200 p-3 ">
+          <div className="space-y-2 ">
+            {/* Profile */}
+            <Link
+              href="/profile"
+              title={collapsed ? "Profile" : undefined}
+              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
+            >
+              <UserAvatar name={user?.fullName} size="sm" />
+
+              {!collapsed && <span>Profile</span>}
+            </Link>
+            <Link
+              href="/contact"
+              title={collapsed ? "Contact" : undefined}
+              className={`flex items-center rounded-xl py-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-950 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
+            >
+              <CircleHelp className="h-5 w-5 shrink-0" />
+
+              {!collapsed && <span>Contact</span>}
+            </Link>
+            {/* LogOut */}
+            <button
+              type="button"
+              onClick={() => setShowLogoutConfirm(true)}
+              className={`flex w-full items-center rounded-xl py-3 text-sm font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600 ${
+                collapsed ? "justify-center px-3" : "gap-3 px-4"
+              }`}
+            >
+              <LogOut className="h-5 w-5 shrink-0" />
+
+              {!collapsed && <span>Logout</span>}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {collapsed && hoveredItem && (
+        <div
+          className="pointer-events-none fixed z-120 -translate-y-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-100 shadow-lg"
+          style={{ left: hoveredItem.x, top: hoveredItem.y }}
+        >
+          {hoveredItem.title}
+          <span className="absolute right-full top-1/2 -translate-y-1/2 border-y-4 border-r-4 border-y-transparent border-r-slate-900" />
+        </div>
+      )}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-200 flex items-center justify-center bg-slate-950/40 p-4">
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+            <h2 className="text-lg font-bold text-slate-950">
+              Are you sure you want to log out?
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              You will need to sign in again to access your Pathway Prep
+              account.
+            </p>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={() => signOut({ redirectUrl: "/sign-in" })}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </aside>
+  );
+}

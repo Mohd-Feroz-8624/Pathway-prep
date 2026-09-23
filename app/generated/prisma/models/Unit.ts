@@ -41,6 +41,9 @@ export type UnitMinAggregateOutputType = {
   subjectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  description: string | null
+  difficulty: string | null
+  duration: string | null
 }
 
 export type UnitMaxAggregateOutputType = {
@@ -50,6 +53,9 @@ export type UnitMaxAggregateOutputType = {
   subjectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  description: string | null
+  difficulty: string | null
+  duration: string | null
 }
 
 export type UnitCountAggregateOutputType = {
@@ -59,6 +65,9 @@ export type UnitCountAggregateOutputType = {
   subjectId: number
   createdAt: number
   updatedAt: number
+  description: number
+  difficulty: number
+  duration: number
   _all: number
 }
 
@@ -78,6 +87,9 @@ export type UnitMinAggregateInputType = {
   subjectId?: true
   createdAt?: true
   updatedAt?: true
+  description?: true
+  difficulty?: true
+  duration?: true
 }
 
 export type UnitMaxAggregateInputType = {
@@ -87,6 +99,9 @@ export type UnitMaxAggregateInputType = {
   subjectId?: true
   createdAt?: true
   updatedAt?: true
+  description?: true
+  difficulty?: true
+  duration?: true
 }
 
 export type UnitCountAggregateInputType = {
@@ -96,6 +111,9 @@ export type UnitCountAggregateInputType = {
   subjectId?: true
   createdAt?: true
   updatedAt?: true
+  description?: true
+  difficulty?: true
+  duration?: true
   _all?: true
 }
 
@@ -192,6 +210,9 @@ export type UnitGroupByOutputType = {
   subjectId: string
   createdAt: Date
   updatedAt: Date
+  description: string | null
+  difficulty: string | null
+  duration: string | null
   _count: UnitCountAggregateOutputType | null
   _avg: UnitAvgAggregateOutputType | null
   _sum: UnitSumAggregateOutputType | null
@@ -224,8 +245,12 @@ export type UnitWhereInput = {
   subjectId?: Prisma.StringFilter<"Unit"> | string
   createdAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
-  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
+  description?: Prisma.StringNullableFilter<"Unit"> | string | null
+  difficulty?: Prisma.StringNullableFilter<"Unit"> | string | null
+  duration?: Prisma.StringNullableFilter<"Unit"> | string | null
   topics?: Prisma.TopicListRelationFilter
+  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
+  resources?: Prisma.UnitResourceListRelationFilter
 }
 
 export type UnitOrderByWithRelationInput = {
@@ -235,8 +260,12 @@ export type UnitOrderByWithRelationInput = {
   subjectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  subject?: Prisma.SubjectOrderByWithRelationInput
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  difficulty?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
   topics?: Prisma.TopicOrderByRelationAggregateInput
+  subject?: Prisma.SubjectOrderByWithRelationInput
+  resources?: Prisma.UnitResourceOrderByRelationAggregateInput
 }
 
 export type UnitWhereUniqueInput = Prisma.AtLeast<{
@@ -250,8 +279,12 @@ export type UnitWhereUniqueInput = Prisma.AtLeast<{
   subjectId?: Prisma.StringFilter<"Unit"> | string
   createdAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
-  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
+  description?: Prisma.StringNullableFilter<"Unit"> | string | null
+  difficulty?: Prisma.StringNullableFilter<"Unit"> | string | null
+  duration?: Prisma.StringNullableFilter<"Unit"> | string | null
   topics?: Prisma.TopicListRelationFilter
+  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
+  resources?: Prisma.UnitResourceListRelationFilter
 }, "id" | "subjectId_number">
 
 export type UnitOrderByWithAggregationInput = {
@@ -261,6 +294,9 @@ export type UnitOrderByWithAggregationInput = {
   subjectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  difficulty?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UnitCountOrderByAggregateInput
   _avg?: Prisma.UnitAvgOrderByAggregateInput
   _max?: Prisma.UnitMaxOrderByAggregateInput
@@ -278,6 +314,9 @@ export type UnitScalarWhereWithAggregatesInput = {
   subjectId?: Prisma.StringWithAggregatesFilter<"Unit"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Unit"> | Date | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Unit"> | string | null
+  difficulty?: Prisma.StringNullableWithAggregatesFilter<"Unit"> | string | null
+  duration?: Prisma.StringNullableWithAggregatesFilter<"Unit"> | string | null
 }
 
 export type UnitCreateInput = {
@@ -286,8 +325,12 @@ export type UnitCreateInput = {
   title: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  subject: Prisma.SubjectCreateNestedOneWithoutUnitsInput
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
   topics?: Prisma.TopicCreateNestedManyWithoutUnitInput
+  subject: Prisma.SubjectCreateNestedOneWithoutUnitsInput
+  resources?: Prisma.UnitResourceCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateInput = {
@@ -297,7 +340,11 @@ export type UnitUncheckedCreateInput = {
   subjectId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
   topics?: Prisma.TopicUncheckedCreateNestedManyWithoutUnitInput
+  resources?: Prisma.UnitResourceUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUpdateInput = {
@@ -306,8 +353,12 @@ export type UnitUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subject?: Prisma.SubjectUpdateOneRequiredWithoutUnitsNestedInput
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   topics?: Prisma.TopicUpdateManyWithoutUnitNestedInput
+  subject?: Prisma.SubjectUpdateOneRequiredWithoutUnitsNestedInput
+  resources?: Prisma.UnitResourceUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateInput = {
@@ -317,7 +368,11 @@ export type UnitUncheckedUpdateInput = {
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   topics?: Prisma.TopicUncheckedUpdateManyWithoutUnitNestedInput
+  resources?: Prisma.UnitResourceUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateManyInput = {
@@ -327,6 +382,9 @@ export type UnitCreateManyInput = {
   subjectId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
 }
 
 export type UnitUpdateManyMutationInput = {
@@ -335,6 +393,9 @@ export type UnitUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UnitUncheckedUpdateManyInput = {
@@ -344,6 +405,9 @@ export type UnitUncheckedUpdateManyInput = {
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UnitListRelationFilter = {
@@ -368,6 +432,9 @@ export type UnitCountOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  difficulty?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type UnitAvgOrderByAggregateInput = {
@@ -381,6 +448,9 @@ export type UnitMaxOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  difficulty?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type UnitMinOrderByAggregateInput = {
@@ -390,6 +460,9 @@ export type UnitMinOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  difficulty?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type UnitSumOrderByAggregateInput = {
@@ -443,6 +516,20 @@ export type UnitUncheckedUpdateManyWithoutSubjectNestedInput = {
   deleteMany?: Prisma.UnitScalarWhereInput | Prisma.UnitScalarWhereInput[]
 }
 
+export type UnitCreateNestedOneWithoutResourcesInput = {
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutResourcesInput, Prisma.UnitUncheckedCreateWithoutResourcesInput>
+  connectOrCreate?: Prisma.UnitCreateOrConnectWithoutResourcesInput
+  connect?: Prisma.UnitWhereUniqueInput
+}
+
+export type UnitUpdateOneRequiredWithoutResourcesNestedInput = {
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutResourcesInput, Prisma.UnitUncheckedCreateWithoutResourcesInput>
+  connectOrCreate?: Prisma.UnitCreateOrConnectWithoutResourcesInput
+  upsert?: Prisma.UnitUpsertWithoutResourcesInput
+  connect?: Prisma.UnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnitUpdateToOneWithWhereWithoutResourcesInput, Prisma.UnitUpdateWithoutResourcesInput>, Prisma.UnitUncheckedUpdateWithoutResourcesInput>
+}
+
 export type UnitCreateNestedOneWithoutTopicsInput = {
   create?: Prisma.XOR<Prisma.UnitCreateWithoutTopicsInput, Prisma.UnitUncheckedCreateWithoutTopicsInput>
   connectOrCreate?: Prisma.UnitCreateOrConnectWithoutTopicsInput
@@ -463,7 +550,11 @@ export type UnitCreateWithoutSubjectInput = {
   title: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
   topics?: Prisma.TopicCreateNestedManyWithoutUnitInput
+  resources?: Prisma.UnitResourceCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateWithoutSubjectInput = {
@@ -472,7 +563,11 @@ export type UnitUncheckedCreateWithoutSubjectInput = {
   title: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
   topics?: Prisma.TopicUncheckedCreateNestedManyWithoutUnitInput
+  resources?: Prisma.UnitResourceUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitCreateOrConnectWithoutSubjectInput = {
@@ -511,6 +606,77 @@ export type UnitScalarWhereInput = {
   subjectId?: Prisma.StringFilter<"Unit"> | string
   createdAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
+  description?: Prisma.StringNullableFilter<"Unit"> | string | null
+  difficulty?: Prisma.StringNullableFilter<"Unit"> | string | null
+  duration?: Prisma.StringNullableFilter<"Unit"> | string | null
+}
+
+export type UnitCreateWithoutResourcesInput = {
+  id?: string
+  number: number
+  title: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
+  topics?: Prisma.TopicCreateNestedManyWithoutUnitInput
+  subject: Prisma.SubjectCreateNestedOneWithoutUnitsInput
+}
+
+export type UnitUncheckedCreateWithoutResourcesInput = {
+  id?: string
+  number: number
+  title: string
+  subjectId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
+  topics?: Prisma.TopicUncheckedCreateNestedManyWithoutUnitInput
+}
+
+export type UnitCreateOrConnectWithoutResourcesInput = {
+  where: Prisma.UnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnitCreateWithoutResourcesInput, Prisma.UnitUncheckedCreateWithoutResourcesInput>
+}
+
+export type UnitUpsertWithoutResourcesInput = {
+  update: Prisma.XOR<Prisma.UnitUpdateWithoutResourcesInput, Prisma.UnitUncheckedUpdateWithoutResourcesInput>
+  create: Prisma.XOR<Prisma.UnitCreateWithoutResourcesInput, Prisma.UnitUncheckedCreateWithoutResourcesInput>
+  where?: Prisma.UnitWhereInput
+}
+
+export type UnitUpdateToOneWithWhereWithoutResourcesInput = {
+  where?: Prisma.UnitWhereInput
+  data: Prisma.XOR<Prisma.UnitUpdateWithoutResourcesInput, Prisma.UnitUncheckedUpdateWithoutResourcesInput>
+}
+
+export type UnitUpdateWithoutResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topics?: Prisma.TopicUpdateManyWithoutUnitNestedInput
+  subject?: Prisma.SubjectUpdateOneRequiredWithoutUnitsNestedInput
+}
+
+export type UnitUncheckedUpdateWithoutResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topics?: Prisma.TopicUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateWithoutTopicsInput = {
@@ -519,7 +685,11 @@ export type UnitCreateWithoutTopicsInput = {
   title: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
   subject: Prisma.SubjectCreateNestedOneWithoutUnitsInput
+  resources?: Prisma.UnitResourceCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateWithoutTopicsInput = {
@@ -529,6 +699,10 @@ export type UnitUncheckedCreateWithoutTopicsInput = {
   subjectId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
+  resources?: Prisma.UnitResourceUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitCreateOrConnectWithoutTopicsInput = {
@@ -553,7 +727,11 @@ export type UnitUpdateWithoutTopicsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.SubjectUpdateOneRequiredWithoutUnitsNestedInput
+  resources?: Prisma.UnitResourceUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateWithoutTopicsInput = {
@@ -563,6 +741,10 @@ export type UnitUncheckedUpdateWithoutTopicsInput = {
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resources?: Prisma.UnitResourceUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateManySubjectInput = {
@@ -571,6 +753,9 @@ export type UnitCreateManySubjectInput = {
   title: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  description?: string | null
+  difficulty?: string | null
+  duration?: string | null
 }
 
 export type UnitUpdateWithoutSubjectInput = {
@@ -579,7 +764,11 @@ export type UnitUpdateWithoutSubjectInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   topics?: Prisma.TopicUpdateManyWithoutUnitNestedInput
+  resources?: Prisma.UnitResourceUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateWithoutSubjectInput = {
@@ -588,7 +777,11 @@ export type UnitUncheckedUpdateWithoutSubjectInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   topics?: Prisma.TopicUncheckedUpdateManyWithoutUnitNestedInput
+  resources?: Prisma.UnitResourceUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateManyWithoutSubjectInput = {
@@ -597,6 +790,9 @@ export type UnitUncheckedUpdateManyWithoutSubjectInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -606,10 +802,12 @@ export type UnitUncheckedUpdateManyWithoutSubjectInput = {
 
 export type UnitCountOutputType = {
   topics: number
+  resources: number
 }
 
 export type UnitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   topics?: boolean | UnitCountOutputTypeCountTopicsArgs
+  resources?: boolean | UnitCountOutputTypeCountResourcesArgs
 }
 
 /**
@@ -629,6 +827,13 @@ export type UnitCountOutputTypeCountTopicsArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.TopicWhereInput
 }
 
+/**
+ * UnitCountOutputType without action
+ */
+export type UnitCountOutputTypeCountResourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UnitResourceWhereInput
+}
+
 
 export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -637,8 +842,12 @@ export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   subjectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
+  description?: boolean
+  difficulty?: boolean
+  duration?: boolean
   topics?: boolean | Prisma.Unit$topicsArgs<ExtArgs>
+  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
+  resources?: boolean | Prisma.Unit$resourcesArgs<ExtArgs>
   _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unit"]>
 
@@ -649,6 +858,9 @@ export type UnitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   subjectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  description?: boolean
+  difficulty?: boolean
+  duration?: boolean
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unit"]>
 
@@ -659,6 +871,9 @@ export type UnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   subjectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  description?: boolean
+  difficulty?: boolean
+  duration?: boolean
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unit"]>
 
@@ -669,12 +884,16 @@ export type UnitSelectScalar = {
   subjectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  description?: boolean
+  difficulty?: boolean
+  duration?: boolean
 }
 
-export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "subjectId" | "createdAt" | "updatedAt", ExtArgs["result"]["unit"]>
+export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "subjectId" | "createdAt" | "updatedAt" | "description" | "difficulty" | "duration", ExtArgs["result"]["unit"]>
 export type UnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   topics?: boolean | Prisma.Unit$topicsArgs<ExtArgs>
+  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
+  resources?: boolean | Prisma.Unit$resourcesArgs<ExtArgs>
   _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UnitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -687,8 +906,9 @@ export type UnitIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Unit"
   objects: {
-    subject: Prisma.$SubjectPayload<ExtArgs>
     topics: Prisma.$TopicPayload<ExtArgs>[]
+    subject: Prisma.$SubjectPayload<ExtArgs>
+    resources: Prisma.$UnitResourcePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -697,6 +917,9 @@ export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     subjectId: string
     createdAt: Date
     updatedAt: Date
+    description: string | null
+    difficulty: string | null
+    duration: string | null
   }, ExtArgs["result"]["unit"]>
   composites: {}
 }
@@ -1091,8 +1314,9 @@ readonly fields: UnitFieldRefs;
  */
 export interface Prisma__UnitClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  subject<T extends Prisma.SubjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubjectDefaultArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   topics<T extends Prisma.Unit$topicsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$topicsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subject<T extends Prisma.SubjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubjectDefaultArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  resources<T extends Prisma.Unit$resourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnitResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1128,6 +1352,9 @@ export interface UnitFieldRefs {
   readonly subjectId: Prisma.FieldRef<"Unit", 'String'>
   readonly createdAt: Prisma.FieldRef<"Unit", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Unit", 'DateTime'>
+  readonly description: Prisma.FieldRef<"Unit", 'String'>
+  readonly difficulty: Prisma.FieldRef<"Unit", 'String'>
+  readonly duration: Prisma.FieldRef<"Unit", 'String'>
 }
     
 
@@ -1550,6 +1777,30 @@ export type Unit$topicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.TopicScalarFieldEnum | Prisma.TopicScalarFieldEnum[]
+}
+
+/**
+ * Unit.resources
+ */
+export type Unit$resourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UnitResource
+   */
+  select?: Prisma.UnitResourceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UnitResource
+   */
+  omit?: Prisma.UnitResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UnitResourceInclude<ExtArgs> | null
+  where?: Prisma.UnitResourceWhereInput
+  orderBy?: Prisma.UnitResourceOrderByWithRelationInput | Prisma.UnitResourceOrderByWithRelationInput[]
+  cursor?: Prisma.UnitResourceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UnitResourceScalarFieldEnum | Prisma.UnitResourceScalarFieldEnum[]
 }
 
 /**

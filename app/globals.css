@@ -181,3 +181,37 @@ a {
     @apply font-sans;
   }
 }
+/* Resume PDF Export */
+.resume-print-only {
+  display: none;
+}
+.resume-print-page {
+  min-height: 297mm;
+  width: 210mm;
+  margin: 0 auto;
+  background: white;
+}
+
+
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .resume-print-page {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+}
