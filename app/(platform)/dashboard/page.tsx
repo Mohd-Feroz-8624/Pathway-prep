@@ -7,7 +7,6 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RoadmapProgress from "@/components/dashboard/RoadmapProgress";
 import ProfileCompleteness from "@/components/dashboard/ProfileCompleteness";
-import UnifiedProgress from "@/components/dashboard/UnifiedProgress";
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -19,10 +18,6 @@ export default async function DashboardPage() {
   const [
     completedProgress,
     roadmaps,
-    dsaSolved,
-    dsaTotal,
-    latestInterviewResult,
-    latestResumeAnalysis,
   ] = await Promise.all([
     prisma.roadmapTaskProgress.findMany({
       where: {
@@ -107,62 +102,9 @@ export default async function DashboardPage() {
     completedProgress.map((progress) => progress.taskId),
   );
 
-  const roadmapTasks = roadmaps.flatMap((roadmap) =>
-    roadmap.stages.flatMap((stage) => stage.tasks),
-  );
+  
 
-  const completedRoadmapTasks = roadmapTasks.filter((task) =>
-    completedTaskIds.has(task.id),
-  ).length;
-
-  const roadmapPercentage =
-    roadmapTasks.length > 0
-      ? Math.round((completedRoadmapTasks / roadmapTasks.length) * 100)
-      : null;
-
-  const dsaPercentage =
-    dsaTotal > 0 ? Math.round((dsaSolved / dsaTotal) * 100) : null;
-
-  const interviewPercentage = latestInterviewResult?.overallScore ?? null;
-
-  const resumePercentage = latestResumeAnalysis?.overallScore ?? null;
-
-  const progressComponents = [
-    {
-      score: roadmapPercentage,
-      weight: 30,
-    },
-    {
-      score: dsaPercentage,
-      weight: 25,
-    },
-    {
-      score: interviewPercentage,
-      weight: 25,
-    },
-    {
-      score: resumePercentage,
-      weight: 20,
-    },
-  ].filter(
-    (component): component is { score: number; weight: number } =>
-      component.score !== null,
-  );
-
-  const totalWeight = progressComponents.reduce(
-    (total, component) => total + component.weight,
-    0,
-  );
-
-  const unifiedProgress =
-    totalWeight > 0
-      ? Math.round(
-          progressComponents.reduce(
-            (total, component) => total + component.score * component.weight,
-            0,
-          ) / totalWeight,
-        )
-      : 0;
+ 
 
   const roadmapProgress = roadmaps.map((roadmap) => {
     const tasks = roadmap.stages.flatMap((stage) => stage.tasks);
@@ -210,13 +152,7 @@ export default async function DashboardPage() {
           github={user.profile?.github ?? null}
           linkedin={user.profile?.linkedin ?? null}
         />
-        <UnifiedProgress
-          progress={unifiedProgress}
-          roadmapPercentage={roadmapPercentage}
-          dsaPercentage={dsaPercentage}
-          interviewPercentage={interviewPercentage}
-          resumePercentage={resumePercentage}
-        />
+      
 
         <div className="space-y-4">
           <div>
